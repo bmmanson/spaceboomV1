@@ -7,22 +7,6 @@ import { store } from './../store.js';
 class MessagesMasterView extends Component {
 	
 	_getMessages() {
-
-		let currentState = store.getState();
-		let messageList = currentState.discoveredMessages;
-
-		return messageList.map(message => {
-	    	return ( 
-	    	<MessageInList author={message.author} 
-	    					body={message.body}
-	    					locationName={message.locationName}
-	    					key={message.id} 
-	    					id={message.id}/>
-			);
-	    })
-	}
-
-	getInitialState() {
 		let currentState = store.getState();
 		let messageList = currentState.discoveredMessages;
 		var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -32,13 +16,15 @@ class MessagesMasterView extends Component {
 	render() {
 	  return (
 	    <ListView
-	    	dataSource={this.getInitialState()}
+	    	dataSource={this._getMessages()}
 	    	renderRow={ 
 	    		(message) => <MessageInList author={message.author} 
 	    		body={message.body}
 	    		locationName={message.locationName}
-	    		key={message.id} 
-	    		id={message.id}/>} />
+	    		city={message.city}
+	    		key={message.id}
+	    		unread={message.unread} 
+	    		authorPic={message.authorPic} />} />
 		);
 	}
 }
