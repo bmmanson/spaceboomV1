@@ -3,6 +3,7 @@ import {
   AppRegistry,
   NavigatorIOS
 } from 'react-native';
+
 import { LaunchPage } from './components/launch-page';
 import { styles } from './styles/main';
 
@@ -19,3 +20,5 @@ class SpaceboomV1 extends Component {
 }
 
 AppRegistry.registerComponent('SpaceboomV1', () => SpaceboomV1);
+
+
