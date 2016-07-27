@@ -10,7 +10,7 @@ import { MenuButton } from './menu-button';
 import { styles } from './../styles/main';
 import { TitleBar } from './title-bar';
 import { NewMessageView } from './new-message-view';
-import { MessagesMasterView } from './messages-master-view';
+import { MessageMasterView } from './message-master-view';
 
 class LaunchPage extends Component {
 
@@ -25,8 +25,8 @@ class LaunchPage extends Component {
 			title: "Post a Message"
 		}
 
-		const viewMessagesRoute = {
-			component: MessagesMasterView,
+		const viewMessageRoute = {
+			component: MessageMasterView,
 			title: "Messsages"
 		}
 
@@ -40,7 +40,7 @@ class LaunchPage extends Component {
 	        	
 	        	<MenuButton buttonText={"Discovered Messages"} 
 	        	buttonColor={"steelblue"}
-	        	buttonAction={() => this._handleNextPress(viewMessagesRoute)} />
+	        	buttonAction={() => this._handleNextPress(viewMessageRoute)} />
 	    	</View>
 	    );
 	}

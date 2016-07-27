@@ -11,6 +11,7 @@ class Map extends Component {
 		style={{flex: this.props.height, justifyContent: 'center', alignItems: 'center'}}
         showsUserLocation={true}
         followUserLocation={true}
+        scrollEnabled={false}
         rotateEnabled={false}
         pitchEnabled={false} />
 		);
