@@ -1,5 +1,5 @@
 import { createStore } from 'redux';
-import { App } from './reducers/';
+import reducer from './reducers/';
 
 let model = {
 	messages: [
@@ -124,7 +124,7 @@ let model = {
 		unread: false,
 		currentUser: true},
 		{id: 13,
-		body: "Okay, actually, I like Chris Hayes. But no one else is bringing their A-game right now.",
+		body: "I stll like Chris Hayes, because still no one else is bringing their A-game.",
 		author: "Ben Manson",
 		locationName: "East Village",
 		locationCoords: [40.73126701752318, -73.98654699325562],
@@ -137,6 +137,7 @@ let model = {
 	visibilityFilter: 'DISCOVERED'
 }
 
-let store = createStore(App, model);
+let store = createStore(reducer, model);
+console.log(store.getState());
 
 export { store };
