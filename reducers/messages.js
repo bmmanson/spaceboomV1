@@ -1,21 +1,26 @@
-const messages = function(state = {}, action) {
-  console.log("I GET TO THE REDUCER");
-  switch (action.type) {  
+const message = (state, action) => {
+  switch (action.type) {
     case 'MARK_AS_UNREAD':
-      console.log("I GET TO THE SWITCH STATEMENT");
+      if (state.id !== action.id) {
+        return state
+      }
+
       return Object.assign({}, state, {
-        messages: state.messages.map( (message) => {
-          if (message.id === action.id) {
-            return Object.assign({}, message, {
-              unread: false
-            })
-            console.log("I GET TO CHANGING THE MESSAGE TO UNREAD", message);
-          }
-        })
+        unread: false
       })
+
     default:
       return state
   }
 }
 
-export { messages };
+export const messages = (state = [], action) => {
+  switch (action.type) {
+    case 'MARK_AS_UNREAD':
+      return state.map(m =>
+        message(m, action)
+      )
+    default:
+      return state
+  }
+}

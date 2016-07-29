@@ -22,8 +22,6 @@ class MessageMasterView extends Component {
 		let messages = currentState.messages;
 		let currentMessage = messages.find( (message) => message.id === route.passProps.id)
 		if (currentMessage.unread === true) {
-			console.log("I GET TO DISPATCHING");
-			console.log("THIS IS THE ID:", currentMessage.id);
 			store.dispatch(markAsUnread(currentMessage.id));
 		}
 		this.props.navigator.push(route);
