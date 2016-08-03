@@ -14,12 +14,17 @@ import { store } from './store';
 //use thunk for async? http://stackoverflow.com/questions/35411423/how-to-dispatch-a-redux-action-with-a-timeout/35415559#35415559
 
 class SpaceboomV1 extends Component {
+
   render() {
+
     return (
+      <Provider store={store} >
         <App />
+      </Provider>
     );
   }
 }
+
 
 AppRegistry.registerComponent('SpaceboomV1', () => SpaceboomV1);
 
