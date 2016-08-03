@@ -12,15 +12,7 @@ import { setVisibility, VisibilityFilters } from './../actions/';
 
 class MessageMaster extends Component {
 
-	_getFilter() {
-		let currentState = store.getState();
-		return currentState.visibilityFilter;
-	}
-
 	render() {
-		let state = store.getState();
-		let messages = state.messages;
-		let filterStatus = this._getFilter();
 
 		return (
 	  	<View style={{flex: 1}}>
