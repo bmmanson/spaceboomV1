@@ -4,6 +4,7 @@ import {
 	View,
 	NavigatorIOS
 } from 'react-native';
+import { Actions } from 'react-native-router-flux';
 
 import { Map } from './map';
 import { MenuButton } from './menu-button';
@@ -14,21 +15,16 @@ import { MessageMasterView } from './message-master-view';
 
 class LaunchPage extends Component {
 
-	_handleNextPress(route){
-		this.props.navigator.push(route);
-	}
-
 	render() {
-
-		const postMessageRoute = {
-			component: NewMessageView,
-			title: "Post a Message"
-		}
 
 		const viewMessageRoute = {
 			component: MessageMasterView,
 			title: "Messsages"
 		}
+
+		const goToPostMessage = () => Actions.newMessage();
+
+		const goToMessageMaster = () => Actions.messageMaster();
 
 	    return (
 	    	<View style={styles.container}>
@@ -36,11 +32,11 @@ class LaunchPage extends Component {
 	    		<Map height={10} />
 	        	<MenuButton buttonText={"Post a Message"} 
 	        	buttonColor={"skyblue"}
-	        	buttonAction={() => this._handleNextPress(postMessageRoute)} />
+	        	buttonAction={goToPostMessage} />
 	        	
 	        	<MenuButton buttonText={"Discovered Messages"} 
 	        	buttonColor={"steelblue"}
-	        	buttonAction={() => this._handleNextPress(viewMessageRoute)} />
+	        	buttonAction={goToMessageMaster} />
 	    	</View>
 	    );
 	}

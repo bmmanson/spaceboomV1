@@ -13,16 +13,16 @@ class MessageDetailView extends Component {
 						showUsersLocation={false}
 						scrollEnabled={false}
 						zoomEnabled={false} 
-						region={{latitude: this.props.locationCoords[0], 
-								longitude: this.props.locationCoords[1],
+						region={{latitude: this.props.message.locationCoords[0], 
+								longitude: this.props.message.locationCoords[1],
 								latitudeDelta: 0.005,
 								longitudeDelta: 0.005}} />
 				<MessageHeader 
-					author={this.props.author} 
-					locationName={this.props.locationName}
-					authorPic={this.props.authorPic} />
+					author={this.props.message.author} 
+					locationName={this.props.message.locationName}
+					authorPic={this.props.message.authorPic} />
 					<Text style={{flex: 6, fontSize: 16, marginHorizontal: 10}}>
-						{this.props.body}
+						{this.props.message.body}
 					</Text>
 			</View>
 		);

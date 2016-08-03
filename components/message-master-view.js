@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ListView, Text, View } from 'react-native';
 import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux'; 
 
 import { MessageInList } from './message-in-list';
 import { store } from './../store.js';
@@ -9,22 +10,23 @@ import { MenuButton } from './menu-button';
 import { setVisibility, VisibilityFilters, markAsUnread } from './../actions/';
 
 class MessageMasterView extends Component {
-	
+
 	_getMessages() {
 		let currentState = store.getState();
-		let messageList = currentState.messages;
+		let messageList = currentState.messages.filter(m =>
+			m.currentUser === false);
 		var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 		return ds.cloneWithRows(messageList);
 	}
 
-	_seeDetailView(route){
+	_seeDetailView(message){
 		let currentState = store.getState();
 		let messages = currentState.messages;
-		let currentMessage = messages.find( (message) => message.id === route.passProps.id)
+		let currentMessage = messages.find((m) => m.id === message.id)
 		if (currentMessage.unread === true) {
 			store.dispatch(markAsUnread(currentMessage.id));
 		}
-		this.props.navigator.push(route);
+		Actions.messageDetail({message});
 	}
 
 	_getFilter() {
@@ -33,6 +35,8 @@ class MessageMasterView extends Component {
 	}
 
 	render() {
+
+		let filterStatus = this._getFilter();
 
 		return (
 	  	<View style={{flex: 1}}>
@@ -47,8 +51,8 @@ class MessageMasterView extends Component {
 	    		key={message.id}
 	    		unread={message.unread} 
 	    		authorPic={message.authorPic}
-	    		buttonAction={() => this._seeDetailView({component: MessageDetailView, title: "A Message", passProps: message})} />} />
-	    	<Text>{this._getFilter()}</Text>
+	    		buttonAction={() => this._seeDetailView(message)} />} />
+	    	<Text>{this.props.store}</Text>
 	    	<View style={{flex: 1, flexDirection: 'row'}}>
 	    		<MenuButton 
 	    			buttonText={"Discovered"} 
@@ -58,8 +62,6 @@ class MessageMasterView extends Component {
 	    			buttonText={"Sent"} 
 	        		buttonColor={"orange"}
 	        		buttonAction={() => {store.dispatch(setVisibility(VisibilityFilters.SENT))}} />
-
-
 	    	</View>
 	    </View>
 		);
