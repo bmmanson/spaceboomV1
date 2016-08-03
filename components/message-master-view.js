@@ -10,7 +10,7 @@ import { MessageDetailView } from './message-detail-view';
 import { MenuButton } from './menu-button';
 import { setVisibility, VisibilityFilters } from './../actions/';
 
-class MessageMasterView extends Component {
+class MessageMaster extends Component {
 
 	_getFilter() {
 		let currentState = store.getState();
@@ -25,7 +25,7 @@ class MessageMasterView extends Component {
 		return (
 	  	<View style={{flex: 1}}>
 	  		<View style={{flex: 1}} />
-	    	<MessageList messages={messages} />
+	    	<MessageList messages={this.props.messages} />
 	    	<View style={{flex: 1, flexDirection: 'row'}}>
 	    		<MenuButton 
 	    			buttonText={"Discovered"} 
@@ -40,6 +40,30 @@ class MessageMasterView extends Component {
 		);
 	}
 }
+
+const getVisibleMessages = (messages, filter) => {
+	let currentFilter;
+	filter === "SENT" ? currentFilter = true : currentFilter = false; 
+	let messageList = messages.filter(m => m.currentUser === currentFilter);
+	return messageList;
+}
+
+const mapStateToProps = (state) => {
+	return {
+		messages: getVisibleMessages(state.messages, state.visibilityFilter)
+	};
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		buttonAction: (filter) => {dispatch(setVisibility(filter))}
+	}
+}
+
+const MessageMasterView = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(MessageMaster);
 
 export { MessageMasterView };
 

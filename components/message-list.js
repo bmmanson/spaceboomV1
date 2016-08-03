@@ -11,10 +11,8 @@ import { markAsUnread } from './../actions/';
 class MessageList extends Component {
 
 	_getMessages(messages) {
-		let messageList = messages.filter(m =>
-			m.currentUser === false);
 		var ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-		return ds.cloneWithRows(messageList);
+		return ds.cloneWithRows(messages);
 	}
 
 	_seeDetailView(message, messages){
