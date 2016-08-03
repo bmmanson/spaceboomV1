@@ -7,6 +7,8 @@ router.get('/', function (req, res, next) {
 
 //get all messages -- for admin console
 
+//user checks to see if new message
+
 //get messages for user
 //should get all discovered messages and all sent messages
 

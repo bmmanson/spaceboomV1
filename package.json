@@ -7,11 +7,13 @@
   },
   "dependencies": {
     "express": "^4.14.0",
+    "pg": "^6.0.3",
     "react": "^15.2.1",
     "react-native": "0.30.0",
     "react-native-router-flux": "^3.32.0",
     "react-redux": "^4.4.5",
-    "redux": "^3.5.2"
+    "redux": "^3.5.2",
+    "sequelize": "^3.23.6"
   },
   "devDependencies": {
     "redux-devtools": "^3.3.1"
