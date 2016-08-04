@@ -17,7 +17,12 @@ router.put('/unread/:id', function (req, res, next) {
 		{id: readMessageId}
 	})
 	.then(function (message) {
-		return message.update({unread: false})
+		if (message.unread === true) {
+			return message.update({unread: false});
+		} else {
+			//perhaps something better to send to client if the message was already marked unread?
+			res.send(null);
+		}
 	})
 	.then(function (message) {
 		res.json({message});
@@ -28,12 +33,30 @@ router.put('/unread/:id', function (req, res, next) {
 //hide message (users has decided to delete message. we keep the discovery in the database, but to user it will appear hidden)
 router.put('/hide/:id', function (req, res, next) {
 //id must be the id of the discovery, not the message
-
+	var hiddenMessageId = req.params.id;
+	Discovery.findOne({where: 
+		{id: hiddenMessageId}
+	})
+	.then(function (message) {
+		return message.update({hidden: true})
+	})
+	.then(function (message) {
+		res.json({message});
+	}).catch(next);
 });
 
-//report message -- allow users to flag a message as  inappropriate
+//report message -- allow users to flag a message as inappropriate
 router.put('/report/:id', function (req, res, next) {
-
+	var reportedMessageId = req.params.id;
+	Discovery.findOne({where: 
+		{id: reportedMessageId}
+	})
+	.then(function (message) {
+		return message.update({reported: true})
+	})
+	.then(function (message) {
+		res.json({message});
+	}).catch(next);
 });
 
 router.get('/', function (req, res, next) {
