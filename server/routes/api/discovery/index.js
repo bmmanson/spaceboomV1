@@ -10,9 +10,18 @@ router.post('/new', function (req, res, next) {
 });
 
 //mark a discovered message as unread
-router.get('/unread/:id', function (req, res, next) {
+router.put('/unread/:id', function (req, res, next) {
 //id must be the id of the discovery, not the message
-
+	var readMessageId = req.params.id;
+	Discovery.findOne({where: 
+		{id: readMessageId}
+	})
+	.then(function (message) {
+		return message.update({unread: false})
+	})
+	.then(function (message) {
+		res.json({message});
+	}).catch(next);
 
 });
 
@@ -21,5 +30,17 @@ router.put('/hide/:id', function (req, res, next) {
 //id must be the id of the discovery, not the message
 
 });
+
+//report message -- allow users to flag a message as  inappropriate
+router.put('/report/:id', function (req, res, next) {
+
+});
+
+router.get('/', function (req, res, next) {
+	Discovery.findAll()
+	.then(function (discoveries) {
+		res.json(discoveries);
+	})
+})
 
 module.exports = router;

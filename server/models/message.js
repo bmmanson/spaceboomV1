@@ -18,10 +18,6 @@ var Message = db.define('message', {
 	},
 	city: {
 		type: Sequelize.STRING
-	},
-	reported: {
-		type: Sequelize.BOOLEAN,
-		defaultValue: false
 	}
 });
 
