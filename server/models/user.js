@@ -15,6 +15,6 @@ var User = db.define('user', {
 		type: Sequelize.STRING,
 		allowNull: false
 	}
-})
+});
 
 module.exports = User;
