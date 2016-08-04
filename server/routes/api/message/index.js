@@ -27,7 +27,7 @@ router.get('/unread/:id', function (req, res, next) {
 
 //get all messages (for admin console)
 router.get('/', function (req, res, next) {
-
+	
 });
 
 //post message -- when user submits a message

@@ -14,6 +14,10 @@ var User = db.define('user', {
 	authorPic: {
 		type: Sequelize.STRING,
 		allowNull: false
+	},
+	banned: {
+		type: Sequelize.BOOLEAN,
+		defaultValue: false
 	}
 });
 
