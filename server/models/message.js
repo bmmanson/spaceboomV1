@@ -2,7 +2,7 @@ var Sequelize = require('sequelize');
 var db = require('./_db');
 
 var Message = db.define('message', {
-	body: {
+	text: {
 		type: Sequelize.STRING(1200)
 	},
 	locationName: {
@@ -20,10 +20,6 @@ var Message = db.define('message', {
 		type: Sequelize.STRING
 	},
 	reported: {
-		type: Sequelize.BOOLEAN,
-		defaultValue: false
-	},
-	removed: {
 		type: Sequelize.BOOLEAN,
 		defaultValue: false
 	}

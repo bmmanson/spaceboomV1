@@ -7,6 +7,8 @@ router.get('/', function (req, res, next) {
 
 //add user when a new user joins
 
+//ban user
+
 //delete user -- for admin console
 
 module.exports = router;

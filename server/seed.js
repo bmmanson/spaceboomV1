@@ -19,7 +19,7 @@ var data = {
 		email: "Gus@email.com"}
 	],
 	message: [
-		{body: "I am a message that was created at a specific location. I am written in English, I'm legible, I convey meaning, and I'm composed of letters and words.",
+		{text: "I am a message that was created at a specific location. I am written in English, I'm legible, I convey meaning, and I'm composed of letters and words.",
 		authorId: 1,
 		locationName: "Financial District",
 		latitude: 40.70790519856078, 
@@ -27,7 +27,7 @@ var data = {
 		city: "New York, NY",
 		reported: false},
 
-		{body: "I'm another message that was created in a particular place. To expand on what I  mean by that, I was written, and when I was written, the person who wrote me was in a place... and a particular place at that! Look at me! I'm a message! I was written in a place!",
+		{text: "I'm another message that was created in a particular place. To expand on what I  mean by that, I was written, and when I was written, the person who wrote me was in a place... and a particular place at that! Look at me! I'm a message! I was written in a place!",
 		authorId: 3,
 		locationName: "Upper East Side",
 		latitude: 40.761658441958225, 
@@ -35,7 +35,7 @@ var data = {
 		city: "New York, NY",
 		reported: false},
 
-		{body: "What's up?! I'm another message! How are you?! I don't have feelings (because I am a message, and messages don't have feelings). But I *can* be understood. If only I too could understand myself!! (OR DO I? Ominous!)",
+		{text: "What's up?! I'm another message! How are you?! I don't have feelings (because I am a message, and messages don't have feelings). But I *can* be understood. If only I too could understand myself!! (OR DO I? Ominous!)",
 		authorId: 1,
 		locationName: "Hell's Kitchen",
 		latitude: 40.767281648876688, 
@@ -43,7 +43,7 @@ var data = {
 		city: "New York, NY",
 		reported: false},
 
-		{body: "I don't live here anymore but I used to live here and it was a nice place to live but I'm glad I don't live here anymore because I live somewhere else now and I'm glad that I live there.",
+		{text: "I don't live here anymore but I used to live here and it was a nice place to live but I'm glad I don't live here anymore because I live somewhere else now and I'm glad that I live there.",
 		authorId: 4,
 		locationName: "Kips Bay",
 		latitude: 40.73766508272807, 
@@ -51,7 +51,7 @@ var data = {
 		city: "New York, NY",
 		reported: false},
 
-		{body: "I know that I *just* posted a message, but I've got to know. What does it look like if there are five messages? Let me tell you: I don't know.",
+		{text: "I know that I *just* posted a message, but I've got to know. What does it look like if there are five messages? Let me tell you: I don't know.",
 		authorId: 4,
 		locationName: "Kips Bay",
 		latitude: 40.73766508272807, 
@@ -59,7 +59,7 @@ var data = {
 		city: "New York, NY",
 		reported: false},
 
-		{body: "This is another message because I want to see what it looks like if there are six messages. It'd be great if I could see too how the app would look if there were seven messages. But a seventh message? I didn't know there could be so many messages!",
+		{text: "This is another message because I want to see what it looks like if there are six messages. It'd be great if I could see too how the app would look if there were seven messages. But a seventh message? I didn't know there could be so many messages!",
 		authorId: 3,
 		locationName: "Upper East Side",
 		latitude: 40.761658441958225, 
@@ -67,7 +67,7 @@ var data = {
 		city: "New York, NY",
 		reported: false},
 
-		{body: "I did it! Seven messages. But this one's short.",
+		{text: "I did it! Seven messages. But this one's short.",
 		authorId: 3,
 		locationName: "Upper East Side",
 		latitude: 40.761658441958225, 
@@ -75,7 +75,7 @@ var data = {
 		city: "New York, NY",
 		reported: false},
 
-		{body: "Ok, only one more. Now I can see what it looks like when you scroll. Now we can ALL see what it looks like!",
+		{text: "Ok, only one more. Now I can see what it looks like when you scroll. Now we can ALL see what it looks like!",
 		authorId: 1,
 		locationName: "Hell's Kitchen",
 		latitude: 40.767281648876688, 
@@ -83,7 +83,7 @@ var data = {
 		city: "New York, NY",
 		reported: false},
 
-		{body: "Yes!",
+		{text: "Yes!",
 		authorId: 1,
 		locationName: "Hell's Kitchen",
 		latitude: 40.767281648876688, 
@@ -91,7 +91,7 @@ var data = {
 		city: "New York, NY",
 		reported: false},
 
-		{body: "I'm getting so tired of coming up with these new messages, but here we go. I'm writing another message. Woo. Message.",
+		{text: "I'm getting so tired of coming up with these new messages, but here we go. I'm writing another message. Woo. Message.",
 		authorId: 2,
 		locationName: "East Village",
 		latitude: 40.73126701752318, 
@@ -99,7 +99,7 @@ var data = {
 		city: "New York, NY",
 		reported: false},
 
-		{body: "I'm listening to MSNBC's coverage of the 2016 DNC right now and I'll tell you what. It's annoying! It's very annoying! The speeches, those were good! But these pundits, I tell ya... I might have to turn off the tube!",
+		{text: "I'm listening to MSNBC's coverage of the 2016 DNC right now and I'll tell you what. It's annoying! It's very annoying! The speeches, those were good! But these pundits, I tell ya... I might have to turn off the tube!",
 		authorId: 2,
 		locationName: "East Village",
 		latitude: 40.73126701752318,
@@ -107,7 +107,7 @@ var data = {
 		city: "New York, NY",
 		reported: false},
 
-		{body: "Okay, actually, I like Chris Hayes. But no one else is bringing their A-game right now.",
+		{text: "Okay, actually, I like Chris Hayes. But no one else is bringing their A-game right now.",
 		authorId: 2,
 		locationName: "East Village",
 		latitude: 40.73126701752318, 
@@ -115,7 +115,7 @@ var data = {
 		city: "New York, NY",
 		reported: false},
 
-		{body: "I still like Chris Hayes, because still no one else is bringing their A-game.",
+		{text: "I still like Chris Hayes, because still no one else is bringing their A-game.",
 		authorId: 2,
 		locationName: "East Village",
 		latitude: 40.73126701752318, 

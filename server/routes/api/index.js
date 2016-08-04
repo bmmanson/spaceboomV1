@@ -8,5 +8,6 @@ router.get('/', function (req, res, next) {
 //mount message router
 router.use('/message', require('./message/'));
 router.use('/user', require('./user/'));
+router.use('/discovery', require('./discovery/'));
 
 module.exports = router;
