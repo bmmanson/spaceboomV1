@@ -9,11 +9,11 @@ var Message = db.define('message', {
 		type: Sequelize.STRING,
 	},
 	latitude: {
-		type: Sequelize.STRING,
+		type: Sequelize.DOUBLE,
 		allowNull: false
 	},
 	longitude: {
-		type: Sequelize.STRING,
+		type: Sequelize.DOUBLE,
 		allowNull: false
 	},
 	city: {
