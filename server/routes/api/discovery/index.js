@@ -1,6 +1,7 @@
 var express = require('express');
 var Message = require('./../../../models/message');
 var Discovery = require('./../../../models/discovery');
+var User = require('./../../../models/user');
 
 var router = express.Router();
 

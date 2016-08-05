@@ -4,8 +4,6 @@ var Discovery = require('./../../../models/discovery');
 
 var router = express.Router();
 
-
-
 //get messages for user
 router.get('/user/:id', function (req, res, next) {
 	var currentUserId = req.params.id;
@@ -44,7 +42,7 @@ router.delete('/:id', function (req, res, next) {
 
 });
 
-//edit message (user who posted a message can change its body)
+//edit message (only user who posted a message is permitted to change its body)
 router.put('/:id', function (req, res, next) {
 
 });
