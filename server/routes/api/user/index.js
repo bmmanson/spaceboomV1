@@ -35,7 +35,10 @@ router.post('/', function (req, res, next) {
 	var name = req.body.name;
 	var authorPic = req.body.authorPic;
 
-	User.create({email, name, authorPic})
+	User.create({
+		email, 
+		name, 
+		authorPic})
 	.then(function (success){
 		res.json(success);
 	}).catch(next);

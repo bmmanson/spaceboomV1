@@ -7,7 +7,7 @@ var router = express.Router();
 
 //user checks to see if new message
 router.post('/new', function (req, res, next) {
-//it's a post -- if there's a match, we're creating a new row in the discovery table
+//it makes sense for this to be a post request -- if there's a match, we're creating a new row in the discovery table
 });
 
 //mark a discovered message as unread
@@ -22,7 +22,7 @@ router.put('/unread/:id', function (req, res, next) {
 			return message.update({unread: false});
 		} else {
 			//perhaps something better to send to client if the message was already marked unread?
-			res.send(null);
+			res.send({alreadyRead: true});
 		}
 	})
 	.then(function (message) {
@@ -47,6 +47,7 @@ router.put('/hide/:id', function (req, res, next) {
 });
 
 //report message -- allow users to flag a message as inappropriate
+//consider adding another table called reports. that way, people can submit a reason why they're reporting a message, and we can keep track of it
 router.put('/report/:id', function (req, res, next) {
 	var reportedMessageId = req.params.id;
 	Discovery.findOne({where: 

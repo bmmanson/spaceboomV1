@@ -17,7 +17,10 @@ router.get('/user/:id', function (req, res, next) {
 		}})
 		//still need to include the actual info for messages, authors and discoverers, and not just the id numbers
 		.then(function (discoveredMessages) {
-			res.json({sentMessages, discoveredMessages});
+			res.json({
+				sentMessages, 
+				discoveredMessages
+			});
 		})
 	}).catch(next);
 });
@@ -32,7 +35,7 @@ router.get('/', function (req, res, next) {
 
 //post message -- when user submits a message
 router.post('/', function (req, res, next) {
-
+//may need to contact another API which will give names to locations based on latitude and longitude
 });
 
 //
