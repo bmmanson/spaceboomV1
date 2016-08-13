@@ -26,6 +26,13 @@ class LaunchPage extends Component {
 
 		const goToMessageMaster = () => Actions.messageMaster();
 
+		navigator.geolocation.watchPosition(
+			(lastPosition) => 
+			{console.log(lastPosition),
+			(error) => alert(error.message),
+			{enableHighAccuracy: true}
+		});
+
 	    return (
 	    	<View style={styles.container}>
 	    		<TitleBar text={"Spaceboom"} />

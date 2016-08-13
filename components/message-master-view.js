@@ -3,6 +3,7 @@ import { ListView, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux'; 
 
+import { addDiscoveredMessage } from './../actions/';
 import { MessageInList } from './message-in-list';
 import { MessageList } from './message-list';
 import { store } from './../store.js';
@@ -11,6 +12,27 @@ import { MenuButton } from './menu-button';
 import { setVisibility, VisibilityFilters } from './../actions/';
 
 class MessageMaster extends Component {
+
+	componentWillMount() {
+
+		function fetchNewMessage(){
+			return fetch('http://localhost:1337/api/message/test');
+		}
+
+		fetchNewMessage()
+		.then(function(m){
+			let message = JSON.parse(m._bodyText);
+			store.dispatch(addDiscoveredMessage(
+				message.body,
+				message.author,
+				message.authorPic,
+				message.locationCoords,
+				message.locationName,
+				message.city
+			))
+		})
+
+	}
 
 	render() {
 

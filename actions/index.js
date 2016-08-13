@@ -24,6 +24,18 @@ export const addSentMessage = function(body, author, authorPic, locationCoords, 
 	};
 }
 
+export const addDiscoveredMessage = function(body, author, authorPic, locationCoords, locationName, city) {
+	return {
+		type: 'ADD_DISCOVERED_MESSAGE', 
+		body, 
+		author, 
+		authorPic, 
+		locationCoords, 
+		locationName, 
+		city
+	};
+}
+
 export const setVisibility = function (filter) {
 	return {type: 'SET_VISIBILITY', filter}
 }

@@ -25,6 +25,22 @@ router.get('/user/:id', function (req, res, next) {
 	}).catch(next);
 });
 
+router.get('/test', function (req, res, next) {
+	console.log("YOU HIT A ROUTE ON THE SERVER!! FIRST TIME FROM A REACT-NATIVE APP!!");
+	res.json({
+		id: 14,
+		body: "I COME FROM THE OTHER SIDE OF THE INTERNET! HOW HAUNTING!!.",
+		author: "Joe Langer",
+		locationName: "Financial District",
+		locationCoords: [40.70790519856078, -74.01487782597542],
+		city: "New York, NY",
+		authorPic: 'https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-1/p100x100/11057221_10153411465937025_7220678579653297083_n.jpg?oh=7e3c4e26c604a1d09637fa4becc16c81&oe=582E91C9',
+		reported: false,
+		unread: true,
+		currentUser: false
+	})
+})
+
 //get all messages (for admin console)
 router.get('/', function (req, res, next) {
 	Message.findAll()

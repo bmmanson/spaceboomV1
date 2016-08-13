@@ -34,6 +34,20 @@ export const messages = (state = [], action) => {
         unread: false
         }
       ]
+    case 'ADD_DISCOVERED_MESSAGE':
+      return [
+        ...state,
+        {id: ++messageId,
+        body: action.body,
+        author: action.author,
+        authorPic: action.authorPic,
+        locationCoords: action.locationCoords,
+        locationName: action.locationName,
+        city: action.city,
+        currentUser: false,
+        unread: true
+        }
+      ]
     default:
       return state
   }
