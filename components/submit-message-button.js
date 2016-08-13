@@ -11,14 +11,24 @@ import { store } from './../store.js';
 class SubmitMessageButton extends Component {
 	
 	_submitMessage (body) {
-		store.dispatch(addSentMessage(
-			body, 
-			"Ben Manson",
-			'https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-1/p100x100/13620351_10207342419702909_3505351797653340889_n.jpg?oh=a1710d119f06150bb51c6903ed7f6acf&oe=58244469',
-			[40.73126701752318, -73.98654699325562],
-			"Fullstack Academy",
-			"New York, NY")
+		navigator.geolocation.getCurrentPosition(
+			function (initialPosition) {
+				console.log("INIT POS:", initialPosition);
+				let coords = [initialPosition.coords.latitude, initialPosition.coords.longitude]
+				console.log("COORDS ARRAY:", coords);
+				store.dispatch(addSentMessage(
+					body, 
+					"Ben Manson",
+					'https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-1/p100x100/13620351_10207342419702909_3505351797653340889_n.jpg?oh=a1710d119f06150bb51c6903ed7f6acf&oe=58244469',
+					coords,
+					"South End",
+					"Halifax, NS")
+				)
+			},
+			(error) => alert(error.message),
+			{enableHighAccuracy: true}
 		)
+
 	}
 
 	render () {
