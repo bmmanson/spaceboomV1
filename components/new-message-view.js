@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
 import { Text, View, NavigatorIOS, TextInput } from 'react-native';
 
-import { MenuButton } from './menu-button';
+import { SubmitMessageButton } from './submit-message-button';
 import { Map } from './map';
 
 import { styles } from './../styles/main';
 import { MessageHeader } from './message-header';
 
+
 class NewMessageView extends Component {
-	_handleBackPress() {
-		this.props.navigator.pop();
-	}	
+
+	constructor(props) {
+		super(props);
+		this.state = {
+			text: 'This is the default text'
+		};
+	}
 
 	render(){
 
@@ -21,10 +26,10 @@ class NewMessageView extends Component {
 					<TextInput style={{flex: 6, fontSize: 16, marginHorizontal: 10}} 
 					placeholder={"Type your message here, then press submit. Anyone with Spaceboom who comes to this location will be able to read it!"}
 					multiline={true}
-					keyboardType={'default'} />
-				<MenuButton buttonText={"Submit"} 
-	        	buttonColor={"skyblue"}
-	        	buttonAction={() => this._handleBackPress()} />
+					keyboardType={'default'} 
+					onChangeText={(text) => this.setState({text})}
+					value={this.state.text} />
+				<SubmitMessageButton messageText={this.state.text} />
 			</View>
 		);
 	}

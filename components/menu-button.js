@@ -28,4 +28,4 @@ class MenuButton extends Component {
 	}
 }
 
-export {MenuButton};
+export { MenuButton };

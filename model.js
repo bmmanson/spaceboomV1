@@ -131,7 +131,10 @@ let model = {
 		unread: false,
 		currentUser: true},
 	],
-	visibilityFilter: 'DISCOVERED'
+	visibilityFilter: 'DISCOVERED',
+	newMessage: {
+		body: "This is default text"
+	}
 }
 
 export { model };
