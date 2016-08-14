@@ -1,5 +1,6 @@
 var express = require('express');
 var Message = require('./../../../models/message');
+var User = require('./../../../models/user');
 var Discovery = require('./../../../models/discovery');
 
 var router = express.Router();
@@ -9,12 +10,23 @@ router.get('/user/:id', function (req, res, next) {
 	var currentUserId = req.params.id;
 	//should get all discovered messages and all sent messages when app starts up
 	Message.findAll({where: 
-		{authorId: currentUserId}
+		{
+			authorId: currentUserId
+		}, 
+		include: {model: User, as: "author"}
 	})
 	.then(function (sentMessages) {
-		Discovery.findAll({where: {
+		Discovery.findAll({where: 
+		{
 			discovererId: currentUserId
-		}})
+		},
+		include: {model: Message, 
+					as: "message", 
+					include: {
+						model: User, 
+						as: "author"}
+					}
+	})
 		//still need to include the actual info for messages, authors and discoverers, and not just the id numbers
 		.then(function (discoveredMessages) {
 			res.json({
@@ -27,7 +39,7 @@ router.get('/user/:id', function (req, res, next) {
 
 //get all messages (for admin console)
 router.get('/', function (req, res, next) {
-	Message.findAll()
+	Message.findAll({include: {model: User, as: "author"}})
 	.then(function(messages){
 		res.json(messages);
 	}).catch(next);
