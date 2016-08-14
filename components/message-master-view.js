@@ -19,18 +19,18 @@ class MessageMaster extends Component {
 			return fetch('http://localhost:1337/api/message/test');
 		}
 
-		fetchNewMessage()
-		.then(function(m){
-			let message = JSON.parse(m._bodyText);
-			store.dispatch(addDiscoveredMessage(
-				message.body,
-				message.author,
-				message.authorPic,
-				message.locationCoords,
-				message.locationName,
-				message.city
-			))
-		})
+		// fetchNewMessage()
+		// .then(function(m){
+		// 	let message = JSON.parse(m._bodyText);
+		// 	store.dispatch(addDiscoveredMessage(
+		// 		message.body,
+		// 		message.author,
+		// 		message.authorPic,
+		// 		message.locationCoords,
+		// 		message.locationName,
+		// 		message.city
+		// 	))
+		// })
 
 	}
 

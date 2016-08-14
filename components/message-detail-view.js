@@ -13,8 +13,8 @@ class MessageDetailView extends Component {
 						showUsersLocation={false}
 						scrollEnabled={false}
 						zoomEnabled={false} 
-						region={{latitude: this.props.message.locationCoords[0], 
-								longitude: this.props.message.locationCoords[1],
+						region={{latitude: this.props.message.latitude, 
+								longitude: this.props.message.longitude,
 								latitudeDelta: 0.005,
 								longitudeDelta: 0.005}} />
 				<MessageHeader 

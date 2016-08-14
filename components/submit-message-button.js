@@ -13,7 +13,6 @@ class SubmitMessageButton extends Component {
 	_submitMessage (body) {
 		navigator.geolocation.getCurrentPosition(
 			function (initialPosition) {
-				console.log("INIT POS:", initialPosition);
 				let coords = [initialPosition.coords.latitude, initialPosition.coords.longitude]
 				console.log("COORDS ARRAY:", coords);
 				store.dispatch(addSentMessage(
