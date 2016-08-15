@@ -12,25 +12,28 @@ export const updateNewMessageBody = function(body){
 	}
 }
 
-export const addSentMessage = function(body, author, authorPic, locationCoords, locationName, city) {
+export const addSentMessage = function(body, author, authorPic, latitude, longitude, locationName, city) {
 	return {
 		type: 'ADD_SENT_MESSAGE', 
 		body, 
 		author, 
 		authorPic, 
-		locationCoords, 
+		latitude,
+		longitude, 
 		locationName, 
 		city
 	};
 }
 
-export const addDiscoveredMessage = function(body, author, authorPic, locationCoords, locationName, city) {
+export const addDiscoveredMessage = function(id, body, author, authorPic, latitude, longitude, locationName, city) {
 	return {
 		type: 'ADD_DISCOVERED_MESSAGE', 
+		id,
 		body, 
 		author, 
 		authorPic, 
-		locationCoords, 
+		latitude,
+		longitude, 
 		locationName, 
 		city
 	};

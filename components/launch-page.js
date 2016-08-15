@@ -28,19 +28,17 @@ class LaunchPage extends Component {
 
 		const goToMessageMaster = () => Actions.messageMaster();
 
-		// navigator.geolocation.watchPosition(
-					
-		// 	(lastPosition) => 
-		// 	{console.log(lastPosition),
-		// 	(error) => alert(error.message),
-		// 	{enableHighAccuracy: true}
-		// });
-
 		navigator.geolocation.watchPosition(
-			function(lastPosition){
+			function (lastPosition) {
 				let latitude = lastPosition.coords.latitude;
 				let longitude = lastPosition.coords.longitude;
 				checkForAndAddNewMessage(latitude, longitude);
+			},
+			function (error) {
+				alert(error.message);
+			},
+			{
+				enableHighAccuracy: true
 			}
 		)
 

@@ -27,7 +27,8 @@ export const messages = (state = [], action) => {
         body: action.body,
         author: action.author,
         authorPic: action.authorPic,
-        locationCoords: action.locationCoords,
+        latitude: action.latitude,
+        longitude: action.longitude,
         locationName: action.locationName,
         city: action.city,
         currentUser: true,
@@ -37,15 +38,18 @@ export const messages = (state = [], action) => {
     case 'ADD_DISCOVERED_MESSAGE':
       return [
         ...state,
-        {id: ++messageId,
-        body: action.body,
-        author: action.author,
-        authorPic: action.authorPic,
-        locationCoords: action.locationCoords,
-        locationName: action.locationName,
-        city: action.city,
-        currentUser: false,
-        unread: true
+        {
+          id: action.id || ++messageId,
+          body: action.body,
+          author: action.author,
+          authorPic: action.authorPic,
+          latitude: action.latitude,
+          longitude: action.longitude,
+          locationName: action.locationName,
+          city: action.city,
+          currentUser: false,
+          unread: true,
+          reported: false
         }
       ]
     default:

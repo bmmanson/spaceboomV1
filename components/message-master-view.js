@@ -13,23 +13,6 @@ import { setVisibility, VisibilityFilters } from './../actions/';
 
 class MessageMaster extends Component {
 
-//	componentWillMount() {
-
-		// fetchNewMessage()
-		// .then(function(m){
-		// 	let message = JSON.parse(m._bodyText);
-		// 	store.dispatch(addDiscoveredMessage(
-		// 		message.body,
-		// 		message.author,
-		// 		message.authorPic,
-		// 		message.locationCoords,
-		// 		message.locationName,
-		// 		message.city
-		// 	))
-		// })
-
-//	}
-
 	render() {
 
 		return (
