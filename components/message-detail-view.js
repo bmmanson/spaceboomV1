@@ -6,6 +6,9 @@ import { Map } from './map';
 import { MessageHeader } from './message-header';
 
 class MessageDetailView extends Component {
+	
+	
+
 	render () {
 		return (
 			<View style={styles.container}>

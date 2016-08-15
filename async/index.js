@@ -6,7 +6,12 @@ const httpRequestForNewMessage = (latitude, longitude) => {
 	return fetch(url, {method: "POST"});
 }
 
-const checkForAndAddNewMessage = (latitude, longitude) => {
+const httpRequestToUpdateMessageAsUnread = (id) => {
+	let url = "http://localhost:1337/api/discovery/unread/" + id;
+	return fetch(url, {method: "PUT"});
+}
+
+export const checkForAndAddNewMessage = (latitude, longitude) => {
 	httpRequestForNewMessage(latitude, longitude)
 	.then(function (response) {
 		let res = JSON.parse(response._bodyText);
@@ -40,4 +45,11 @@ const checkForAndAddNewMessage = (latitude, longitude) => {
 	})
 }
 
-export { checkForAndAddNewMessage };
+export const updateMessageAsUnreadOnServer = (id) => {
+	httpRequestToUpdateMessageAsUnread(id)
+	.then(function (response) {
+		let res = JSON.parse(response._bodyText);
+		console.log("RESPONSE RECEIVED. SERVER UPDATED");
+		console.log("Message marked as read:", res);
+	})
+}

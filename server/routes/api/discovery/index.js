@@ -8,7 +8,7 @@ var router = express.Router();
 
 //user checks to see if new message
 router.post('/new', function (req, res, next) {
-//it makes sense for this to be a post request -- if there's a match, we're creating a new row in the discovery table
+//it makes sense for this to be a post request -- if there's a match, we're creating a new instance/row in the discovery table
 	
 //1st
 //lat : 40.730395
@@ -18,10 +18,9 @@ router.post('/new', function (req, res, next) {
 //lat : 40.730761
 //long : -74.000773
 
-//currently accurate enough to find a message within a half NYC block radius
+//currently accurate enough to find a message within a half NYC block radius. Radius is so large because getCurrentPosition runs so infrequently.
 
 	console.log("THE QUERY:", req.query);
-
 
 	var discoveredLatitude = parseFloat(req.query.latitude);
 	var discoveredLongitude = parseFloat(req.query.longitude);
@@ -52,6 +51,7 @@ router.post('/new', function (req, res, next) {
 			console.log("No matching message for user with id:", userId);
 			return res.json({id: null});
 		} else {
+			//I think I can delete everything from here
 			Discovery.findOne({where:
 				{messageId: message.id}
 			})
@@ -60,6 +60,7 @@ router.post('/new', function (req, res, next) {
 					console.log(`There was a matching message for user with id: ${userId}, but the user had already discovered it.`);
 					return res.json({id: null});
 				} else {
+			//to here
 					Discovery.create({
 						discovererId: userId,
 						messageId: message.id
@@ -104,11 +105,13 @@ router.put('/unread/:id', function (req, res, next) {
 			return message.update({unread: false});
 		} else {
 			//perhaps something better to send to client if the message was already marked unread?
-			res.send({alreadyRead: true});
+			console.log("DISCOVERED MESSAGE was already marked as UNREAD. ID:", message.id);
+			res.send(null);
 		}
 	})
 	.then(function (message) {
-		res.json({message});
+		console.log("DISCOVERED MESSAGE marked as UNREAD. ID:", message.id);
+		return res.json({message});
 	}).catch(next);
 
 });

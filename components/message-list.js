@@ -7,6 +7,7 @@ import { MessageDetailView } from './message-detail-view';
 
 import { store } from './../store';
 import { markAsUnread } from './../actions/';
+import { updateMessageAsUnreadOnServer } from './../async/';
 
 class MessageList extends Component {
 
@@ -19,6 +20,7 @@ class MessageList extends Component {
 		let currentMessage = messages.find((m) => m.id === message.id)
 		if (currentMessage.unread === true) {
 			store.dispatch(markAsUnread(currentMessage.id));
+			updateMessageAsUnreadOnServer(currentMessage.id);
 		}
 		Actions.messageDetail({message});
 	}
