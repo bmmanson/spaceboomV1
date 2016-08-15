@@ -13,6 +13,8 @@ import { TitleBar } from './title-bar';
 import { NewMessageView } from './new-message-view';
 import { MessageMasterView } from './message-master-view';
 
+import { checkForAndAddNewMessage } from './../async';
+
 class LaunchPage extends Component {
 
 	render() {
@@ -26,12 +28,21 @@ class LaunchPage extends Component {
 
 		const goToMessageMaster = () => Actions.messageMaster();
 
+		// navigator.geolocation.watchPosition(
+					
+		// 	(lastPosition) => 
+		// 	{console.log(lastPosition),
+		// 	(error) => alert(error.message),
+		// 	{enableHighAccuracy: true}
+		// });
+
 		navigator.geolocation.watchPosition(
-			(lastPosition) => 
-			{console.log(lastPosition),
-			(error) => alert(error.message),
-			{enableHighAccuracy: true}
-		});
+			function(lastPosition){
+				let latitude = lastPosition.coords.latitude;
+				let longitude = lastPosition.coords.longitude;
+				checkForAndAddNewMessage(latitude, longitude);
+			}
+		)
 
 	    return (
 	    	<View style={styles.container}>

@@ -20,12 +20,18 @@ router.post('/new', function (req, res, next) {
 
 //currently accurate enough to find a message within a half NYC block radius
 
-	discoveredLatitude = +req.body.latitude.toFixed(4);
-	discoveredLongitude = +req.body.longitude.toFixed(4); 
+	console.log("THE QUERY:", req.query);
 
-	var userId = req.body.userId;
 
-	console.log("Request received from user with id:", userId, ". Body of message:", req.body);
+	var discoveredLatitude = parseFloat(req.query.latitude);
+	var discoveredLongitude = parseFloat(req.query.longitude);
+
+	discoveredLatitude = +discoveredLatitude.toFixed(4);
+	discoveredLongitude = +discoveredLongitude.toFixed(4); 
+
+	var userId = req.query.userId;
+
+	console.log("Request received from user with id:", userId, "User Latitude:", parseFloat(req.query.latitude), "User Longitude:", parseFloat(req.query.longitude));
 
 	Message.findOne({where:
 		{
@@ -44,7 +50,7 @@ router.post('/new', function (req, res, next) {
 	.then(function(message){
 		if (message === null) {
 			console.log("No matching message for user with id:", userId);
-			return res.json({noMessageFound: true});
+			return res.json({id: null});
 		} else {
 			Discovery.findOne({where:
 				{messageId: message.id}
@@ -52,9 +58,8 @@ router.post('/new', function (req, res, next) {
 			.then(function(discovery){
 				if (discovery !== null) {
 					console.log(`There was a matching message for user with id: ${userId}, but the user had already discovered it.`);
-					return res.json({noMessageFound: true});
+					return res.json({id: null});
 				} else {
-
 					Discovery.create({
 						discovererId: userId,
 						messageId: message.id
@@ -69,9 +74,10 @@ router.post('/new', function (req, res, next) {
 								as: "message",
 								include: {
 									model: User,
-									as: "author"}
-								}	
-							})
+									as: "author"
+								}
+							}	
+						})
 					})
 					.then(function(sentDiscovery){
 					console.log("New discovery created for request from user with id:", userId);

@@ -13,11 +13,7 @@ import { setVisibility, VisibilityFilters } from './../actions/';
 
 class MessageMaster extends Component {
 
-	componentWillMount() {
-
-		function fetchNewMessage(){
-			return fetch('http://localhost:1337/api/message/test');
-		}
+//	componentWillMount() {
 
 		// fetchNewMessage()
 		// .then(function(m){
@@ -32,7 +28,7 @@ class MessageMaster extends Component {
 		// 	))
 		// })
 
-	}
+//	}
 
 	render() {
 
