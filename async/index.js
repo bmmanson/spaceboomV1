@@ -18,7 +18,7 @@ export const checkForAndAddNewMessage = (latitude, longitude) => {
 		if (res.id !== null) {
 			console.log("NEW MESSAGE, DISCOVERED");
 			let m = {
-				id: res.id,
+				id: res.message.id,
 				body: res.message.text, 
 				author: res.message.author.name,
 				locationName: res.message.locationName,
@@ -50,7 +50,7 @@ export const updateMessageAsUnreadOnServer = (id) => {
 	.then(function (response) {
 		let res = JSON.parse(response._bodyText);
 		if (res.message.id === null) {
-			console.log("ERROR: Server has already marked this message as unread");
+			console.log("Note: server has already marked this message as unread. Something wrong on front end? See async/index.js");
 		} else { 
 			console.log("RESPONSE RECEIVED. SERVER UPDATED");
 			console.log("Message marked as read:", res);

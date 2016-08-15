@@ -92,7 +92,8 @@ router.post('/new', function (req, res, next) {
 
 //mark a discovered message as unread
 router.put('/unread/:id', function (req, res, next) {
-//id must be the id of the discovery, not the message
+	console.log("THE ID:", req.params.id);
+	//id must be the id of the discovery, not the message
 	var readMessageId = req.params.id;
 	Discovery.findOne({where: 
 		{id: readMessageId}

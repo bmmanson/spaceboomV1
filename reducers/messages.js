@@ -4,13 +4,21 @@ const message = (state, action) => {
   switch (action.type) {
     case 'MARK_AS_UNREAD':
       if (state.id !== action.id) {
-        return state
+        return state;
       }
       return Object.assign({}, state, {
         unread: false
       })
+    // case 'DELETE_MESSAGE':
+    // console.log("I GET TO THE MESSAGE FUNCTION");
+    //   if (state.id !== action.id) {
+    //     return state;
+    //   } else { 
+    //     //do nothing
+    //     console.log("I'M SUPPOSED TO GET HERE ONCE");
+    //   }
     default:
-      return state
+      return state;
   }
 }
 
@@ -20,6 +28,9 @@ export const messages = (state = [], action) => {
       return state.map(m =>
         message(m, action)
       )
+    case 'DELETE_MESSAGE':
+      console.log("I GET TO THE MESSAGES FUNCTION");
+      return state.filter(m => m.id !== action.id);
     case 'ADD_SENT_MESSAGE':
       return [
         ...state,

@@ -6,20 +6,29 @@ import {
 	AlertIOS
 } from 'react-native';
 
+import { store } from './../store';
+import { deleteMessage } from './../actions/'; 
+
 class DeleteMessageButton extends Component {
 	
 	_deleteMessage (message) {
-		console.log("MESSAGE GETS TO BUTTON", message);
+		console.log("IS THE STATE UPDATED?", store.getState());
 		if (message.currentUser === true) {
 			AlertIOS.alert(
 				"Delete Message", 
 				"You are the author of this message. If you delete it, nobody will be able to discover it again. Are you sure you want to delete it?",
 				[
-					{text: "Cancel", 
+					{
+					text: "Cancel", 
 					onPress: () => console.log("user didn't delete message"), 
-					style: "cancel"},
-					{text: "Delete", 
-					onPress: () => console.log("user deleted message")
+					style: "cancel"
+					},
+					{
+					text: "Delete", 
+					onPress: function () {
+						store.dispatch(deleteMessage(message.id)); 
+						
+						}
 					}
 				]
 			)
@@ -32,7 +41,7 @@ class DeleteMessageButton extends Component {
 					onPress: () => console.log("user didn't delete message"), 
 					style: "cancel"},
 					{text: "Delete", 
-					onPress: () => console.log("user deleted message")
+					onPress: () => store.dispatch(deleteMessage(message.id))
 					}
 				]
 			)

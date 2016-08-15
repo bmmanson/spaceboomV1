@@ -5,6 +5,14 @@ export const markAsUnread = function(id) {
 	}
 }
 
+export const deleteMessage = function(id) {
+	console.log("I GET TO THE DISPATCH");
+	return {
+		type: 'DELETE_MESSAGE', 
+		id
+	}
+}
+
 export const updateNewMessageBody = function(body){
 	return {
 		type: 'UPDATE_NEW_MESSAGE_BODY',
