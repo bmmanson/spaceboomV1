@@ -20,15 +20,12 @@ router.post('/new', function (req, res, next) {
 
 //currently accurate enough to find a message within a half NYC block radius. Radius is so large because getCurrentPosition runs so infrequently.
 
-	console.log("THE QUERY:", req.query);
-
+	var userId = req.query.userId;
 	var discoveredLatitude = parseFloat(req.query.latitude);
 	var discoveredLongitude = parseFloat(req.query.longitude);
 
 	discoveredLatitude = +discoveredLatitude.toFixed(4);
 	discoveredLongitude = +discoveredLongitude.toFixed(4); 
-
-	var userId = req.query.userId;
 
 	console.log("Request received from user with id:", userId, "User Latitude:", parseFloat(req.query.latitude), "User Longitude:", parseFloat(req.query.longitude));
 
@@ -106,7 +103,9 @@ router.put('/unread/:id', function (req, res, next) {
 		} else {
 			//perhaps something better to send to client if the message was already marked unread?
 			console.log("DISCOVERED MESSAGE was already marked as UNREAD. ID:", message.id);
-			res.send(null);
+			res.send({message: 
+				{id: null}
+			});
 		}
 	})
 	.then(function (message) {

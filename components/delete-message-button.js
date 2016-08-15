@@ -5,13 +5,19 @@ import {
 	NavigatorIOS
 } from 'react-native';
 
-class MenuButton extends Component {
+class DeleteMessageButton extends Component {
 	
+	_deleteMessage (message) {
+
+	}
+
 	render () {
 
 		return (
-			<TouchableHighlight onPress={this.props.buttonAction} style={{flex:1, backgroundColor: this.props.buttonColor}}>
+			<TouchableHighlight onPress={this._deleteMessage.bind(this, this.props.message)} style={{flex:1}}>
 				<Text style={{
+							flex: 1,
+							backgroundColor: '#B22222',
 	   						flexDirection: 'column',
 	    					textAlign: 'center',
 	    					justifyContent: 'center',
@@ -19,11 +25,11 @@ class MenuButton extends Component {
 	    					color: 'white',
 	    					fontWeight: 'bold',
 	    					fontSize: 26}}>
-					{this.props.buttonText}
+					Delete
 				</Text>
 			</TouchableHighlight>
 		);
 	}
 }
 
-export { MenuButton };
+export { DeleteMessageButton };

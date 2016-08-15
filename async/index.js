@@ -49,7 +49,11 @@ export const updateMessageAsUnreadOnServer = (id) => {
 	httpRequestToUpdateMessageAsUnread(id)
 	.then(function (response) {
 		let res = JSON.parse(response._bodyText);
-		console.log("RESPONSE RECEIVED. SERVER UPDATED");
-		console.log("Message marked as read:", res);
+		if (res.message.id === null) {
+			console.log("ERROR: Server has already marked this message as unread");
+		} else { 
+			console.log("RESPONSE RECEIVED. SERVER UPDATED");
+			console.log("Message marked as read:", res);
+		}
 	})
 }
