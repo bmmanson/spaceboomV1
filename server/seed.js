@@ -138,7 +138,6 @@ var data = {
 		{messageId: 9,
 		discovererId: 2
 		}
-			
 	]
 }
 

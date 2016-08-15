@@ -8,8 +8,8 @@ var Discovery = require('./discovery');
 User.hasMany(Message, {as: "author", foreignKey: "authorId"});
 Message.belongsTo(User, {as: "author", foreignKey: "authorId"});
 
-User.belongsToMany(Message, { as: 'foundBy', through: 'discovery', foreignKey: 'discovererId'});
-Message.belongsToMany(User, { as: 'message', through: 'discovery', foreignKey: 'messageId'});
+User.belongsToMany(Message, { as: "author", through: 'discovery', foreignKey: 'discovererId'});
+Message.belongsToMany(User, { as: "message", through: 'discovery', foreignKey: 'messageId'});
 Discovery.belongsTo(Message);
 
 

@@ -61,18 +61,17 @@ router.post('/new', function (req, res, next) {
 					})
 					.then(function(newDiscovery){
 						return Discovery.findOne({where:
-							{id: newDiscovery.id}
-						},
-						{
-							include: [
-								{model: Message, 
+							{
+								id: newDiscovery.id
+							},
+							include: {
+								model: Message,
 								as: "message",
-								include: [
-									{model: User,
+								include: {
+									model: User,
 									as: "author"}
-								]}
-							]
-						})
+								}	
+							})
 					})
 					.then(function(sentDiscovery){
 					console.log("New discovery created for request from user with id:", userId);
