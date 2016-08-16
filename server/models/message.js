@@ -18,6 +18,10 @@ var Message = db.define('message', {
 	},
 	city: {
 		type: Sequelize.STRING
+	},
+	deletedByUser: {
+		type: Sequelize.BOOLEAN,
+		defaultValue: false
 	}
 });
 

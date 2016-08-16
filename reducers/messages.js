@@ -9,14 +9,6 @@ const message = (state, action) => {
       return Object.assign({}, state, {
         unread: false
       })
-    // case 'DELETE_MESSAGE':
-    // console.log("I GET TO THE MESSAGE FUNCTION");
-    //   if (state.id !== action.id) {
-    //     return state;
-    //   } else { 
-    //     //do nothing
-    //     console.log("I'M SUPPOSED TO GET HERE ONCE");
-    //   }
     default:
       return state;
   }

@@ -11,6 +11,32 @@ const httpRequestToUpdateMessageAsUnread = (id) => {
 	return fetch(url, {method: "PUT"});
 }
 
+const httpRequestToDeleteSentMessage = (id) => {
+	let url = "http://localhost:1337/api/message/hide/" + id;
+	return fetch(url, {method: "PUT"});
+}
+
+const httpRequestToDeleteDiscoveredMessage = (id) => {
+	let url = "http://localhost:1337/api/message/hide/" + id;
+	return fetch(url, {method: "PUT"});
+}
+
+export const deleteSentMessageOnServer = (id) => {
+	httpRequestToDeleteSentMessage(id)
+	.then(function(response){
+		let res = JSON.parse(response._bodyText);
+		console.log("DELETED SENT MESSAGE. RESPONSE FROM SERVER:", res);
+	})
+}
+
+export const deleteDiscoveredMessageOnServer = (id) => {
+	httpRequestToDeleteDiscoveredMessage(id)
+	.then(function(response){
+		let res = JSON.parse(response._bodyText);
+		console.log("DELETED SENT MESSAGE. RESPONSE FROM SERVER:", res);
+	})
+}
+
 export const checkForAndAddNewMessage = (latitude, longitude) => {
 	httpRequestForNewMessage(latitude, longitude)
 	.then(function (response) {

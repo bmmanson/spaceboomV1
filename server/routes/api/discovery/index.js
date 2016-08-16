@@ -40,7 +40,7 @@ router.post('/new', function (req, res, next) {
 				$lte: discoveredLongitude + .0005
 			}, authorId: {
 				$ne: userId
-			}
+			}, deletedByUser: false
 		}
 	})
 	.then(function(message){
@@ -127,6 +127,7 @@ router.put('/hide/:id', function (req, res, next) {
 		return message.update({hidden: true})
 	})
 	.then(function (message) {
+		console.log("HIDING DISCOVERED MESSAGE", message);
 		res.json({message});
 	}).catch(next);
 });

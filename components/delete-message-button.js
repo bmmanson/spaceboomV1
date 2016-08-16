@@ -6,8 +6,11 @@ import {
 	AlertIOS
 } from 'react-native';
 
+import { Actions } from 'react-native-router-flux'; 
+
 import { store } from './../store';
 import { deleteMessage } from './../actions/'; 
+import { deleteSentMessageOnServer, deleteDiscoveredMessageOnServer} from './../async/';
 
 class DeleteMessageButton extends Component {
 	
@@ -27,7 +30,8 @@ class DeleteMessageButton extends Component {
 					text: "Delete", 
 					onPress: function () {
 						store.dispatch(deleteMessage(message.id)); 
-						
+						deleteSentMessageOnServer(message.id);
+						Actions.messageMaster();
 						}
 					}
 				]
@@ -41,7 +45,11 @@ class DeleteMessageButton extends Component {
 					onPress: () => console.log("user didn't delete message"), 
 					style: "cancel"},
 					{text: "Delete", 
-					onPress: () => store.dispatch(deleteMessage(message.id))
+					onPress: function () {
+						store.dispatch(deleteMessage(message.id)); 
+						deleteDiscoveredMessageOnServer(message.id);
+						Actions.messageMaster();
+						}
 					}
 				]
 			)

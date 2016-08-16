@@ -45,22 +45,39 @@ router.get('/', function (req, res, next) {
 	}).catch(next);
 });
 
+//hit this route when a user chooses to delete a message. will remain in database, but will no longer be accessible to users
+router.put('/hide/:id', function (req, res, next) {
+	var messageId = req.params.id;
+
+	Message.findOne({where:
+		{
+			id: messageId
+		}
+	})
+	.then(function(message){
+		return message.update({deletedByUser: true})
+	})
+	.then(function(message){
+		console.log("HIDING SENT MESSAGE", message);
+		res.json(message);
+	}).catch(next);
+})
+
+//edit message (only user who posted a message is permitted to change its body)
+router.put('/:id', function (req, res, next) {
+
+});
+
 //post message -- when user submits a message
 router.post('/', function (req, res, next) {
 //may need to contact another API which will give names to locations based on latitude and longitude
 });
-
-//
 
 //delete -- for admins only. removes from db
 router.delete('/:id', function (req, res, next) {
 
 });
 
-//edit message (only user who posted a message is permitted to change its body)
-router.put('/:id', function (req, res, next) {
-
-});
 
 module.exports = router;
 

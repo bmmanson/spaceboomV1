@@ -25,7 +25,7 @@ class MessageMaster extends Component {
 	        		buttonColor={"#FFD700"}
 	        		buttonAction={() => {store.dispatch(setVisibility(VisibilityFilters.DISCOVERED))}} />
 	    		<MenuButton 
-	    			buttonText={"Sent"} 
+	    			buttonText={"Posted"} 
 	        		buttonColor={"orange"}
 	        		buttonAction={() => {store.dispatch(setVisibility(VisibilityFilters.SENT))}} />
 	    	</View>
