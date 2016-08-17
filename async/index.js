@@ -1,7 +1,7 @@
 import { store } from './../store';
 import { addDiscoveredMessage } from './../actions';
 
-const httpRequestForNewMessage = (latitude, longitude) => {
+const httpRequestForNewDiscoveredMessage = (latitude, longitude) => {
 	let url = `http://localhost:1337/api/discovery/new?latitude=${latitude}&longitude=${longitude}&userId=2`
 	return fetch(url, {method: "POST"});
 }
@@ -38,7 +38,7 @@ export const deleteDiscoveredMessageOnServer = (id) => {
 }
 
 export const checkForAndAddNewMessage = (latitude, longitude) => {
-	httpRequestForNewMessage(latitude, longitude)
+	httpRequestForNewDiscoveredMessage(latitude, longitude)
 	.then(function (response) {
 		let res = JSON.parse(response._bodyText);
 		if (res.id !== null) {
