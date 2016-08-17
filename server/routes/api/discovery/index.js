@@ -9,7 +9,7 @@ var router = express.Router();
 //user checks to see if new message
 router.post('/new', function (req, res, next) {
 //it makes sense for this to be a post request -- if there's a match, we're creating a new instance/row in the discovery table
-	
+	console.log(req.body);
 //1st
 //lat : 40.730395
 //long : -74.000119
