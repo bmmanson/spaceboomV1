@@ -1,13 +1,22 @@
-var User = require('./../../models/user');
+'use strict';
+
 var passport = require('passport');
 var session = require('express-session');
+var SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 module.exports = function(app, db) {
 
+	var dbStore = new SequelizeStore({
+		db: db
+	});
+
+    var User = db.model('user'); 
+
 	app.use(session({
 		secret: 'keyboard cat',
+		store: dbStore,
 		resave: false,
-		saveUninitialized: true
+		saveUninitialized: false
 	}));
 	app.use(passport.initialize());
 	app.use(passport.session());
