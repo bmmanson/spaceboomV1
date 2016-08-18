@@ -32,6 +32,7 @@ class DeleteMessageButton extends Component {
 						store.dispatch(deleteMessage(message.id)); 
 						deleteSentMessageOnServer(message.id);
 						Actions.messageMaster();
+						alert("Messaged deleted!");
 						}
 					}
 				]
@@ -49,6 +50,7 @@ class DeleteMessageButton extends Component {
 						store.dispatch(deleteMessage(message.id)); 
 						deleteDiscoveredMessageOnServer(message.id);
 						Actions.messageMaster();
+						alert("Messaged deleted!");
 						}
 					}
 				]

@@ -12,6 +12,7 @@ import { styles } from './../styles/main';
 import { TitleBar } from './title-bar';
 import { NewMessageView } from './new-message-view';
 import { MessageMasterView } from './message-master-view';
+import { FBLogin } from './fb-login';
 
 import { checkForAndAddNewMessage } from './../async';
 
@@ -46,6 +47,9 @@ class LaunchPage extends Component {
 	    	<View style={styles.container}>
 	    		<TitleBar text={"Spaceboom"} />
 	    		<Map height={10} />
+
+	    		<FBLogin />
+
 	        	<MenuButton buttonText={"Post a Message"} 
 	        	buttonColor={"skyblue"}
 	        	buttonAction={goToPostMessage} />
