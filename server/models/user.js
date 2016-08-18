@@ -4,14 +4,19 @@ var Sequelize = require('sequelize');
 var db = require('./_db');
 
 var User = db.define('user', {
-	email: {
+	facebookId: {
 		type: Sequelize.STRING,
-		allowNull: false,
 		unique: true
+	}, 
+	email: {
+		type: Sequelize.STRING
 	},
 	name: {
 		type: Sequelize.STRING,
 		allowNull: false
+	},
+	username: {
+		type: Sequelize.STRING
 	},
 	authorPic: {
 		type: Sequelize.STRING,
@@ -21,6 +26,13 @@ var User = db.define('user', {
 		type: Sequelize.BOOLEAN,
 		defaultValue: false
 	}
+}, 
+{       
+    getterMethods: {
+		firstName:  function() {
+			return this.name.split[0];
+		}
+    }
 });
 
 module.exports = User;

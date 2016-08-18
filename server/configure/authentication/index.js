@@ -1,5 +1,6 @@
 'use strict';
 
+var path = require('path');
 var passport = require('passport');
 var session = require('express-session');
 var SequelizeStore = require('connect-session-sequelize')(session.Store);
@@ -30,5 +31,7 @@ module.exports = function(app, db) {
 	    done(err, user);
 	  });
 	});
+
+	require(path.join(__dirname, 'facebook'))(app, db);
 
 }

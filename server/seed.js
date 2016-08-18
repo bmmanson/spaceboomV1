@@ -8,7 +8,7 @@ var data = {
 		{name: "Joe Langer", 
 		authorPic: 'https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-1/p100x100/11057221_10153411465937025_7220678579653297083_n.jpg?oh=7e3c4e26c604a1d09637fa4becc16c81&oe=582E91C9', 
 		email: "Joe@email.com"},
-		{name: "Ben Manson", 
+		{name: "Ben Manson",
 		authorPic: 'https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-1/p100x100/13620351_10207342419702909_3505351797653340889_n.jpg?oh=a1710d119f06150bb51c6903ed7f6acf&oe=58244469', 
 		email: "Ben@email.com"},
 		{name: "Bex Rosenblatt",
