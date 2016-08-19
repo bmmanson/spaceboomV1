@@ -7,12 +7,12 @@
 		<dict>
 		<key>CFBundleURLSchemes</key>
 		<array>
-			<string>fb1167862893299152</string>
+			<string>fb184378355308895</string>
 		</array>
 		</dict>
 	</array>
 	<key>FacebookAppID</key>
-	<string>1167862893299152</string>
+	<string>184378355308895</string>
 	<key>FacebookDisplayName</key>
 	<string>Spaceboom</string>
 	<key>LSApplicationQueriesSchemes</key>

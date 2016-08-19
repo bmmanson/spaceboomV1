@@ -4,11 +4,7 @@ import {
 	View
 } from 'react-native';
 
-const FBSDK = require('react-native-fbsdk');
-const {
-  LoginButton,
-  AccessToken
-} = FBSDK;
+import {LoginButton, AccessToken} from 'react-native-fbsdk';
 
 class FBLogin extends Component {
   render() {
@@ -21,7 +17,7 @@ class FBLogin extends Component {
               if (error) {
                 alert("login has error: " + result.error);
               } else if (result.isCancelled) {
-                alert("login is cancelled.");
+                alert("login cancelled.");
               } else {
                 AccessToken.getCurrentAccessToken().then(
                   (data) => {

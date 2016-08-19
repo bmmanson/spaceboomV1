@@ -13,12 +13,16 @@ import { TitleBar } from './title-bar';
 import { NewMessageView } from './new-message-view';
 import { MessageMasterView } from './message-master-view';
 import { FBLogin } from './fb-login';
-
 import { checkForAndAddNewMessage } from './../async';
+
+import {LoginManager} from 'react-native-fbsdk';
 
 class LaunchPage extends Component {
 
 	render() {
+
+		console.log(LoginManager);
+		LoginManager.logOut();
 
 		const viewMessageRoute = {
 			component: MessageMasterView,
