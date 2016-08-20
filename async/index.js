@@ -31,7 +31,7 @@ export const sendAccessTokenToServer = (token) => {
 	.then(function (response) {
 		let res = JSON.parse(response._bodyText);
 		console.log("SEND ACCESS TOKEN TO SERVER RESPONSE:", res);
-		return response;
+		return res;
 	})
 	.catch(function (error) {
 		console.log("ERROR FROM ACCESS TOKEN:", error);

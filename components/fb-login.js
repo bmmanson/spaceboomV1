@@ -23,14 +23,20 @@ class FBLogin extends Component {
                 AccessToken.getCurrentAccessToken().then(
                   (data) => {
                     let token = data.accessToken.toString();
+                    return token;
+                })
+                .then(
+                  (token) => {
                     console.log("TOKEN:", token);
-                    sendAccessTokenToServer(token)
-                    .then((response) => {
-                      console.log("RESPONSE AFTER LOGIN:", response);
-                    }).catch(function (err) {
-                      console.log("ERROR IN GET CURRENT ACCESS TOKEN:", err);
-                    })
-                    .done()
+                    return sendAccessTokenToServer(token);
+                })
+                .then(
+                  (response) => {
+                    console.log("RESPONSE AFTER HTTP REQUEST:", response);
+                })
+                .catch(
+                  (err) => {
+                    console.log(err);
                   }
                 )
               }
