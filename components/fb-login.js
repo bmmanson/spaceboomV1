@@ -3,8 +3,9 @@ import React, {Component} from 'react';
 import {
 	View
 } from 'react-native';
-
 import {LoginButton, AccessToken} from 'react-native-fbsdk';
+
+import { sendAccessTokenToServer } from './../async/';
 
 class FBLogin extends Component {
   render() {
@@ -21,7 +22,15 @@ class FBLogin extends Component {
               } else {
                 AccessToken.getCurrentAccessToken().then(
                   (data) => {
-                    alert(data.accessToken.toString())
+                    let token = data.accessToken.toString();
+                    console.log("TOKEN:", token);
+                    sendAccessTokenToServer(token)
+                    .then((response) => {
+                      console.log("RESPONSE AFTER LOGIN:", response);
+                    }).catch(function (err) {
+                      console.log("ERROR IN GET CURRENT ACCESS TOKEN:", err);
+                    })
+                    .done()
                   }
                 )
               }

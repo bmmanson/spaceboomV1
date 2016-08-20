@@ -1,7 +1,9 @@
 'use strict';
 var passport = require('passport');
-var FacebookStrategy = require('passport-facebook').Strategy;
+var FacebookStrategyToken = require('passport-facebook-token');
 var facebookCredentials = require('./../../../fb-credentials');
+
+//use passport-facebook-tokens
 
 module.exports = function (app, db) {
 
@@ -10,12 +12,10 @@ module.exports = function (app, db) {
 	var credentials = {
 		clientID: facebookCredentials.ID,
 		clientSecret: facebookCredentials.SECRET,
-		callbackURL: "http://localhost:1337/auth/facebook/callback",
 		profileFields: ['id', 'displayName', 'email', 'photos'],
-		passReqToCallback: true
 	};
 
-	var verifyCallback = function(req, accessToken, refreshToken, profile, done) {
+	var verifyCallback = function(accessToken, refreshToken, profile, done) {
 		console.log("PROFILE:", profile);
 
 		User.findOne({where: 
@@ -25,7 +25,6 @@ module.exports = function (app, db) {
 		})
 		.then(function (user) {
 			if (user) {
-		    	user.sessionId = req.session.id;
 		    	return user;	
 			} else {
 				User.create({ 
@@ -34,7 +33,6 @@ module.exports = function (app, db) {
 	    		name: profile.displayName,
 	    		authorPic: profile.photos[0].value,
 	    		}).then(function (user) {
-	    			user.sessionId = req.session.id;
 	    			return user;
 	    		})
 			}
@@ -47,15 +45,20 @@ module.exports = function (app, db) {
 	    });
 	}
 
-	passport.use(new FacebookStrategy(credentials, verifyCallback));
+	passport.use(new FacebookStrategyToken(credentials, verifyCallback));
 
-	app.get('/auth/facebook/callback', 
-	passport.authenticate('facebook', { failureRedirect: '/login' }),
+	app.post('/auth/facebook/token', 
+	passport.authenticate('facebook-token'),
 	function(req, res) {
+		var sessionId = req.session.id;
+		console.log("USER SESSION ID:", sessionId);
 		// Successful authentication
-		res.redirect('/');
+		// User.findOne({where: 
+		// 	{
+		// 		facebookId: 
+		// 	}
+		// })
+		res.json({test: true});
 	});
-
-	app.get('/auth/facebook', passport.authenticate('facebook', {scope: ['email']}));
 
 }

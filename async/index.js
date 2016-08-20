@@ -21,9 +21,26 @@ const httpRequestToDeleteDiscoveredMessage = (id) => {
 	return fetch(url, {method: "PUT"});
 }
 
+const httpRequestToSendAccessTokenToServer = (token) => {
+	let url = "http://localhost:1337/auth/facebook/token?access_token=" + token;
+	return fetch(url, {method: "POST"});
+}
+
+export const sendAccessTokenToServer = (token) => {
+	httpRequestToSendAccessTokenToServer(token)
+	.then(function (response) {
+		let res = JSON.parse(response._bodyText);
+		console.log("SEND ACCESS TOKEN TO SERVER RESPONSE:", res);
+		return response;
+	})
+	.catch(function (error) {
+		console.log("ERROR FROM ACCESS TOKEN:", error);
+	})
+}
+
 export const deleteSentMessageOnServer = (id) => {
 	httpRequestToDeleteSentMessage(id)
-	.then(function(response){
+	.then(function (response) {
 		let res = JSON.parse(response._bodyText);
 		console.log("DELETED SENT MESSAGE. RESPONSE FROM SERVER:", res);
 	})
@@ -31,7 +48,7 @@ export const deleteSentMessageOnServer = (id) => {
 
 export const deleteDiscoveredMessageOnServer = (id) => {
 	httpRequestToDeleteDiscoveredMessage(id)
-	.then(function(response){
+	.then(function (response) {
 		let res = JSON.parse(response._bodyText);
 		console.log("DELETED SENT MESSAGE. RESPONSE FROM SERVER:", res);
 	})
@@ -40,6 +57,7 @@ export const deleteDiscoveredMessageOnServer = (id) => {
 export const checkForAndAddNewMessage = (latitude, longitude) => {
 	httpRequestForNewDiscoveredMessage(latitude, longitude)
 	.then(function (response) {
+		console.log(response);
 		let res = JSON.parse(response._bodyText);
 		if (res.id !== null) {
 			console.log("NEW MESSAGE, DISCOVERED");

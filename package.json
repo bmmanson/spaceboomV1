@@ -13,6 +13,7 @@
     "express-session": "^1.14.0",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
+    "passport-facebook-token": "^3.3.0",
     "pg": "^6.0.3",
     "react": "^15.2.1",
     "react-native": "0.30.0",
