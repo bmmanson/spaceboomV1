@@ -19,7 +19,7 @@ router.post('/new', function (req, res, next) {
 
 //currently accurate enough to find a message within a half NYC block radius. Radius is so large because getCurrentPosition runs so infrequently.
 
-	if (req.user.id) console.log("USER LOGGED IN!", req.user.id);
+	console.log("ID:", req.user.id);
 
 	var userId = req.query.userId;
 	var discoveredLatitude = parseFloat(req.query.latitude);
@@ -87,7 +87,6 @@ router.post('/new', function (req, res, next) {
 			})
 		}
 	}).catch(next);
-
 
 });
 

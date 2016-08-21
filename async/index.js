@@ -29,6 +29,7 @@ const httpRequestToSendAccessTokenToServer = (token) => {
 export const sendAccessTokenToServer = (token) => {
 	return httpRequestToSendAccessTokenToServer(token)
 	.then(function (response) {
+		console.log("RESPONSE RECEIVED BY sendAccessTokenToServer:", response)
 		return response.json();
 	})
 	.catch(function (error) {
@@ -37,7 +38,7 @@ export const sendAccessTokenToServer = (token) => {
 }
 
 export const deleteSentMessageOnServer = (id) => {
-	httpRequestToDeleteSentMessage(id)
+	return httpRequestToDeleteSentMessage(id)
 	.then(function (response) {
 		let res = JSON.parse(response._bodyText);
 		console.log("DELETED SENT MESSAGE. RESPONSE FROM SERVER:", res);
@@ -45,7 +46,7 @@ export const deleteSentMessageOnServer = (id) => {
 }
 
 export const deleteDiscoveredMessageOnServer = (id) => {
-	httpRequestToDeleteDiscoveredMessage(id)
+	return httpRequestToDeleteDiscoveredMessage(id)
 	.then(function (response) {
 		let res = JSON.parse(response._bodyText);
 		console.log("DELETED SENT MESSAGE. RESPONSE FROM SERVER:", res);
@@ -53,7 +54,7 @@ export const deleteDiscoveredMessageOnServer = (id) => {
 }
 
 export const checkForAndAddNewMessage = (latitude, longitude) => {
-	httpRequestForNewDiscoveredMessage(latitude, longitude)
+	return httpRequestForNewDiscoveredMessage(latitude, longitude)
 	.then(function (response) {
 		return response.json();
 	})

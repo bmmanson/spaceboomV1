@@ -24,19 +24,18 @@ module.exports = function (app, db) {
 			}
 		})
 		.then(function (user) {
-			if (user) {
-		    	return user;	
-			} else {
+			if (user === null) {
 				return User.create({ 
-	   		 	facebookId: profile.id,
-	   		 	email: profile.emails[0].value,
-	    		name: profile.displayName,
-	    		authorPic: profile.photos[0].value,
-	    		})
+	   				facebookId: profile.id,
+	   			 	email: profile.emails[0].value,
+	    			name: profile.displayName,
+	    			authorPic: profile.photos[0].value,
+	    		})		    		
+			} else {
+				return user;
 			}
 		})
 	    .then(function (userToLogin) {
-	    	console.log("userToLogin", userToLogin)
 	    	done(null, userToLogin);
 	    })
 	    .catch(function (err) {
@@ -51,6 +50,7 @@ module.exports = function (app, db) {
 	function(req, res) {
 		var sessionId = req.session.id;
 		console.log("USER SESSION ID:", sessionId);
+		console.log("FROM LOGIN ROUTE", req);
 		res.json({test: true});
 	});
 
