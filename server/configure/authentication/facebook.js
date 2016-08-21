@@ -52,6 +52,7 @@ module.exports = function (app, db) {
 	function(req, res) {
 		var sessionId = req.session.id;
 		console.log("USER SESSION ID:", sessionId);
+		console.log("REQ.USER OBJECT", req.user);
 		// Successful authentication
 		// User.findOne({where: 
 		// 	{

@@ -4,6 +4,7 @@ import {
 	View
 } from 'react-native';
 import {LoginButton, AccessToken} from 'react-native-fbsdk';
+import { Actions } from 'react-native-router-flux';
 
 import { sendAccessTokenToServer } from './../async/';
 
@@ -32,6 +33,7 @@ class FBLogin extends Component {
                 })
                 .then(
                   (response) => {
+                    Actions.initial();
                     console.log("RESPONSE AFTER HTTP REQUEST:", response);
                 })
                 .catch(
@@ -42,7 +44,10 @@ class FBLogin extends Component {
               }
             }
           }
-          onLogoutFinished={() => alert("logout.")}/>
+          onLogoutFinished={() => {
+            alert("logout.");
+            Actions.login();
+          }}/>
       </View>
     );
   }
