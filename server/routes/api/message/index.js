@@ -8,7 +8,7 @@ var router = express.Router();
 //get messages for user
 router.get('/user/:id', function (req, res, next) {
 	var currentUserId = req.params.id;
-	//should get all discovered messages and all sent messages when app starts up
+	//refactor to use bluebird / Promise.all / .spread
 	Message.findAll({where: 
 		{
 			authorId: currentUserId

@@ -3,8 +3,6 @@ var passport = require('passport');
 var FacebookStrategyToken = require('passport-facebook-token');
 var facebookCredentials = require('./../../../fb-credentials');
 
-//use passport-facebook-tokens
-
 module.exports = function (app, db) {
 
 	var User = db.model('user');
@@ -12,7 +10,7 @@ module.exports = function (app, db) {
 	var credentials = {
 		clientID: facebookCredentials.ID,
 		clientSecret: facebookCredentials.SECRET,
-		profileFields: ['id', 'displayName', 'email', 'photos'],
+		profileFields: ['id', 'displayName', 'photos', 'emails', 'gender'],
 	};
 
 	var verifyCallback = function(accessToken, refreshToken, profile, done) {
@@ -48,10 +46,16 @@ module.exports = function (app, db) {
 	app.post('/auth/facebook/token', 
 	passport.authenticate('facebook-token'),
 	function(req, res) {
-		var sessionId = req.session.id;
-		console.log("USER SESSION ID:", sessionId);
-		console.log("FROM LOGIN ROUTE", req);
-		res.json({test: true});
+
+		var response = {
+			userId: req.user.id,
+			email: req.user.email,
+			name: req.user.name,
+			authorPic: req.user.authorPic,
+			username: req.user.username
+		}
+
+		res.json(response);
 	});
 
 }

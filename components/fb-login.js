@@ -6,7 +6,7 @@ import {
 import {LoginButton, AccessToken} from 'react-native-fbsdk';
 import { Actions } from 'react-native-router-flux';
 
-import { sendAccessTokenToServer } from './../async/';
+import { sendAccessTokenToServer, getAllMessagesByUser } from './../async/';
 
 class FBLogin extends Component {
   render() {
@@ -33,8 +33,14 @@ class FBLogin extends Component {
                 })
                 .then(
                   (response) => {
+                    console.log("RESPONSE PASSED INTO GET ALL MESSAGES:", response);
+                    return getAllMessagesByUser(response.userId);
+                })
+                .then(
+                  (response) => {
                     Actions.initial();
                     console.log("RESPONSE AFTER HTTP REQUEST:", response);
+                    //another http request to update messages
                 })
                 .catch(
                   (err) => {

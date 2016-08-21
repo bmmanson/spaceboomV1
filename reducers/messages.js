@@ -1,5 +1,3 @@
-let messageId = 13;
-
 const message = (state, action) => {
   switch (action.type) {
     case 'MARK_AS_UNREAD':
@@ -26,23 +24,24 @@ export const messages = (state = [], action) => {
     case 'ADD_SENT_MESSAGE':
       return [
         ...state,
-        {id: ++messageId,
-        body: action.body,
-        author: action.author,
-        authorPic: action.authorPic,
-        latitude: action.latitude,
-        longitude: action.longitude,
-        locationName: action.locationName,
-        city: action.city,
-        currentUser: true,
-        unread: false
+        {
+          id: action.id,
+          body: action.body,
+          author: action.author,
+          authorPic: action.authorPic,
+          latitude: action.latitude,
+          longitude: action.longitude,
+          locationName: action.locationName,
+          city: action.city,
+          currentUser: true,
+          unread: false
         }
       ]
     case 'ADD_DISCOVERED_MESSAGE':
       return [
         ...state,
         {
-          id: action.id || ++messageId,
+          id: action.id,
           body: action.body,
           author: action.author,
           authorPic: action.authorPic,

@@ -1,9 +1,17 @@
 import { store } from './../store';
-import { addDiscoveredMessage } from './../actions';
+import { 
+	addDiscoveredMessage,
+	addSentMessage 
+} from './../actions';
 
-const httpRequestForNewDiscoveredMessage = (latitude, longitude) => {
-	let url = `http://localhost:1337/api/discovery/new?latitude=${latitude}&longitude=${longitude}&userId=2`
+const httpRequestForNewDiscoveredMessage = (latitude, longitude, id) => {
+	let url = `http://localhost:1337/api/discovery/new?latitude=${latitude}&longitude=${longitude}&userId=${id}`
 	return fetch(url, {method: "POST"});
+}
+
+const httpRequestForAllMessagesByUser = (id) => {
+	let url = "http://localhost:1337/api/message/user/" + id;
+	return fetch(url, {method: "GET"});
 }
 
 const httpRequestToUpdateMessageAsUnread = (id) => {
@@ -24,6 +32,59 @@ const httpRequestToDeleteDiscoveredMessage = (id) => {
 const httpRequestToSendAccessTokenToServer = (token) => {
 	let url = "http://localhost:1337/auth/facebook/token?access_token=" + token;
 	return fetch(url, {method: "POST"});
+}
+
+export const getAllMessagesByUser = (id) => {
+	return httpRequestForAllMessagesByUser(id)
+	.then((response) => {
+		return response.json();
+	})
+	.then((messages) => {
+		for (var message in messages.sentMessages) {
+			console.log("SENT MESSAGE", messages.sentMessages[message]);
+			let m = messages.sentMessages[message];
+			let id = m.id;
+			let text = m.text; 
+			let author = m.author.name;
+			let authorPic = m.author.authorPic;
+			let latitude = m.latitude.toString();
+			let longitude = m.longitude.toString();
+			let locationName = m.locationName;
+			let city = m.city;
+			store.dispatch(addSentMessage(
+				id,
+				text,
+				author,
+				authorPic,
+				latitude,
+				longitude,
+				locationName,
+				city
+			));
+		}
+		for (var message in messages.discoveredMessages) {
+			console.log("DISCOVERED", messages.discoveredMessages[message]);
+			let m = messages.discoveredMessages[message].message;
+			let id = m.id;
+			let text = m.text;
+			let author = m.author.name;
+			let authorPic = m.author.authorPic;
+			let latitude = m.latitude.toString();
+			let longitude = m.longitude.toString();
+			let locationName = m.locationName;
+			let city = m.city;
+			store.dispatch(addDiscoveredMessage(
+				id,
+				text,
+				author,
+				authorPic,
+				latitude,
+				longitude,
+				locationName,
+				city
+			));
+		}
+	})
 }
 
 export const sendAccessTokenToServer = (token) => {
@@ -54,7 +115,7 @@ export const deleteDiscoveredMessageOnServer = (id) => {
 }
 
 export const checkForAndAddNewMessage = (latitude, longitude) => {
-	return httpRequestForNewDiscoveredMessage(latitude, longitude)
+	return httpRequestForNewDiscoveredMessage(latitude, longitude, 2)
 	.then(function (response) {
 		return response.json();
 	})

@@ -145,8 +145,13 @@ let model = {
 		currentUser: true},
 	],
 	visibilityFilter: 'DISCOVERED',
-	newMessage: {
-		body: "This is default text"
+	currentSession: {
+		newMessageText: "This is default text",
+		userId: null,
+		currentCity: "New York, NY",
+		authorPic: null,
+		name: null,
+		username: null
 	}
 }
 
