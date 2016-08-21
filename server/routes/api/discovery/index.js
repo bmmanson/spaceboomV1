@@ -18,8 +18,9 @@ router.post('/new', function (req, res, next) {
 //long : -74.000773
 
 //currently accurate enough to find a message within a half NYC block radius. Radius is so large because getCurrentPosition runs so infrequently.
-	if (req.session) console.log("YOU DID IT IT WORKS!!!!!", req.session);
-	if (req.user) console.log("NO NO NOW IT ACTUALLY WORKS", req.user);
+
+	if (req.user.id) console.log("USER LOGGED IN!", req.user.id);
+
 	var userId = req.query.userId;
 	var discoveredLatitude = parseFloat(req.query.latitude);
 	var discoveredLongitude = parseFloat(req.query.longitude);

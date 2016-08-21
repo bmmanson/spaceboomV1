@@ -27,9 +27,13 @@ module.exports = function(app, db) {
 	});
 
 	passport.deserializeUser(function(id, done) {
-	  User.findById(id, function(err, user) {
-	    done(err, user);
-	  });
+	  User.findById(id)
+	  .then(function (user) {
+	    done(null, user);
+	  })
+	  .catch(function (err) {
+	  	done(err);
+	  })
 	});
 
 	require(path.join(__dirname, 'facebook'))(app, db);

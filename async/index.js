@@ -27,11 +27,9 @@ const httpRequestToSendAccessTokenToServer = (token) => {
 }
 
 export const sendAccessTokenToServer = (token) => {
-	httpRequestToSendAccessTokenToServer(token)
+	return httpRequestToSendAccessTokenToServer(token)
 	.then(function (response) {
-		let res = JSON.parse(response._bodyText);
-		console.log("SEND ACCESS TOKEN TO SERVER RESPONSE:", res);
-		return response;
+		return response.json();
 	})
 	.catch(function (error) {
 		console.log("ERROR FROM ACCESS TOKEN:", error);
@@ -57,8 +55,9 @@ export const deleteDiscoveredMessageOnServer = (id) => {
 export const checkForAndAddNewMessage = (latitude, longitude) => {
 	httpRequestForNewDiscoveredMessage(latitude, longitude)
 	.then(function (response) {
-		console.log(response);
-		let res = JSON.parse(response._bodyText);
+		return response.json();
+	})
+	.then(function (res) {
 		if (res.id !== null) {
 			console.log("NEW MESSAGE, DISCOVERED");
 			let m = {
