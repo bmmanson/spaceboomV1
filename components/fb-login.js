@@ -6,7 +6,9 @@ import {
 import {LoginButton, AccessToken} from 'react-native-fbsdk';
 import { Actions } from 'react-native-router-flux';
 
+import { store } from './../store';
 import { sendAccessTokenToServer, getAllMessagesByUser } from './../async/';
+import { deleteAllMessages } from './../actions/';
 
 class FBLogin extends Component {
   render() {
@@ -52,6 +54,7 @@ class FBLogin extends Component {
           }
           onLogoutFinished={() => {
             alert("logout.");
+            store.dispatch(deleteAllMessages());
             Actions.login();
           }}/>
       </View>

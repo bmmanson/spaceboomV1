@@ -50,10 +50,12 @@ export const messages = (state = [], action) => {
           locationName: action.locationName,
           city: action.city,
           currentUser: false,
-          unread: true,
+          unread: action.unread,
           reported: false
         }
       ]
+    case 'DELETE_ALL_MESSAGES':
+      return [];
     default:
       return state
   }

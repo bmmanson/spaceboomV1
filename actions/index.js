@@ -2,7 +2,7 @@ export const markAsUnread = function (id) {
 	return {
 		type: 'MARK_AS_UNREAD', 
 		id
-	}
+	};
 }
 
 export const addCurrentSessionOnLogin = function (userId, email, name, authorPic, username) {
@@ -13,21 +13,20 @@ export const addCurrentSessionOnLogin = function (userId, email, name, authorPic
 		name,
 		authorPic,
 		username
-	}
+	};
 }
 
-export const deleteMessage = function(id) {
+export const deleteAllMessages = function () {
+	return {
+		type: 'DELETE_ALL_MESSAGES'
+	};
+}
+
+export const deleteMessage = function (id) {
 	return {
 		type: 'DELETE_MESSAGE', 
 		id
-	}
-}
-
-export const updateNewMessageBody = function (body) {
-	return {
-		type: 'UPDATE_NEW_MESSAGE_BODY',
-		body
-	}
+	};
 }
 
 export const addSentMessage = function (id, body, author, authorPic, latitude, longitude, locationName, city) {
@@ -44,7 +43,7 @@ export const addSentMessage = function (id, body, author, authorPic, latitude, l
 	};
 }
 
-export const addDiscoveredMessage = function (id, body, author, authorPic, latitude, longitude, locationName, city) {
+export const addDiscoveredMessage = function (id, body, author, authorPic, latitude, longitude, locationName, city, unread) {
 	return {
 		type: 'ADD_DISCOVERED_MESSAGE', 
 		id,
@@ -54,12 +53,16 @@ export const addDiscoveredMessage = function (id, body, author, authorPic, latit
 		latitude,
 		longitude, 
 		locationName, 
-		city
+		city,
+		unread
 	};
 }
 
 export const setVisibility = function (filter) {
-	return {type: 'SET_VISIBILITY', filter}
+	return {
+		type: 'SET_VISIBILITY', 
+		filter
+	};
 }
 
 export const VisibilityFilters = {

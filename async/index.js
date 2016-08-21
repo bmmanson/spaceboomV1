@@ -9,6 +9,31 @@ const httpRequestForNewDiscoveredMessage = (latitude, longitude, id) => {
 	return fetch(url, {method: "POST"});
 }
 
+const httpRequestToPostNewMessage = (text, authorId, latitude, longitude, locationName, city) => {
+	let message = {
+		text,
+		authorId,
+		latitude,
+		longitude,
+		locationName,
+		city
+	};
+
+	message = JSON.stringify(message);
+
+	let request = {
+		headers: {
+			//'Accept': 'application/json',
+			'Content-Type': 'application/json'
+  		},
+  		method: "POST",
+  		body: message
+    };
+
+	let url = "http://localhost:1337/api/message/";
+	return fetch(url, request);
+}
+
 const httpRequestForAllMessagesByUser = (id) => {
 	let url = "http://localhost:1337/api/message/user/" + id;
 	return fetch(url, {method: "GET"});
@@ -34,11 +59,15 @@ const httpRequestToSendAccessTokenToServer = (token) => {
 	return fetch(url, {method: "POST"});
 }
 
+export const postNewMessageToServer = (text, authorId, latitude, longitude, locationName, city) => {
+	return httpRequestToPostNewMessage(text, authorId, latitude, longitude, locationName, city)
+	.then((response) => response.json())
+	.then((response) => console.log("httpRequestToPostNewMessage RECEIVES:", response));
+}
+
 export const getAllMessagesByUser = (id) => {
 	return httpRequestForAllMessagesByUser(id)
-	.then((response) => {
-		return response.json();
-	})
+	.then((response) => response.json())
 	.then((messages) => {
 		for (var message in messages.sentMessages) {
 			console.log("SENT MESSAGE", messages.sentMessages[message]);
@@ -73,6 +102,7 @@ export const getAllMessagesByUser = (id) => {
 			let longitude = m.longitude.toString();
 			let locationName = m.locationName;
 			let city = m.city;
+			let unread = messages.discoveredMessages[message].unread;
 			store.dispatch(addDiscoveredMessage(
 				id,
 				text,
@@ -81,7 +111,8 @@ export const getAllMessagesByUser = (id) => {
 				latitude,
 				longitude,
 				locationName,
-				city
+				city,
+				unread
 			));
 		}
 	})
@@ -100,22 +131,19 @@ export const sendAccessTokenToServer = (token) => {
 
 export const deleteSentMessageOnServer = (id) => {
 	return httpRequestToDeleteSentMessage(id)
-	.then(function (response) {
-		let res = JSON.parse(response._bodyText);
-		console.log("DELETED SENT MESSAGE. RESPONSE FROM SERVER:", res);
-	})
+	.then( (response) => response.json() )
+	.then( (response) => console.log("DELETED SENT MESSAGE. RESPONSE FROM SERVER:", response) )
 }
 
 export const deleteDiscoveredMessageOnServer = (id) => {
 	return httpRequestToDeleteDiscoveredMessage(id)
 	.then(function (response) {
-		let res = JSON.parse(response._bodyText);
-		console.log("DELETED SENT MESSAGE. RESPONSE FROM SERVER:", res);
+		return response.json();
 	})
 }
 
 export const checkForAndAddNewMessage = (latitude, longitude) => {
-	return httpRequestForNewDiscoveredMessage(latitude, longitude, 2)
+	return httpRequestForNewDiscoveredMessage(latitude, longitude, 32)
 	.then(function (response) {
 		return response.json();
 	})
@@ -152,13 +180,13 @@ export const checkForAndAddNewMessage = (latitude, longitude) => {
 
 export const updateMessageAsUnreadOnServer = (id) => {
 	httpRequestToUpdateMessageAsUnread(id)
+	.then( (response) => response.json() )
 	.then(function (response) {
-		let res = JSON.parse(response._bodyText);
-		if (res.message.id === null) {
+		if (response.message.id === null) {
 			console.log("Note: server has already marked this message as unread. Something wrong on front end? See async/index.js");
 		} else { 
 			console.log("RESPONSE RECEIVED. SERVER UPDATED");
-			console.log("Message marked as read:", res);
+			console.log("Message marked as read:", response);
 		}
 	})
 }

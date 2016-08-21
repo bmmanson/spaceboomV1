@@ -6,25 +6,39 @@ import {
 } from 'react-native';
 
 import { addSentMessage } from './../actions/';
+import { postNewMessageToServer } from './../async/';
 import { store } from './../store.js';
 
 class SubmitMessageButton extends Component {
 	
-	_submitMessage (body) {
+	_submitMessage (text) {
 		navigator.geolocation.getCurrentPosition(
 			function (initialPosition) {
 				let latitude = initialPosition.coords.latitude; 
 				let longitude = initialPosition.coords.longitude;
-				console.log("COORDS. LAT:", latitude, "LONG:", longitude);
-				store.dispatch(addSentMessage(
-					body, 
-					"Ben Manson",
-					'https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-1/p100x100/13620351_10207342419702909_3505351797653340889_n.jpg?oh=a1710d119f06150bb51c6903ed7f6acf&oe=58244469',
+
+				return postNewMessageToServer(
+					text,
+					null,
 					latitude,
 					longitude,
-					"South End",
-					"Halifax, NS")
+					"Apple",
+					"California, CA"
 				)
+				.then((response) => response.json())
+				.then((response) => {
+					alert("Message sent! Other people can now discover it!");
+					store.dispatch(addSentMessage(
+						response.text, 
+						response.author.name,
+						response.author.authorPic,
+						response.latitude,
+						response.longitude,
+						response.locationName,
+						response.city)
+					)
+					console.log("COORDS. LAT:", response.latitude, "LONG:", response.longitude);
+				})
 			},
 			(error) => alert(error.message),
 			{enableHighAccuracy: true}

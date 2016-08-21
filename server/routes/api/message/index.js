@@ -63,14 +63,40 @@ router.put('/hide/:id', function (req, res, next) {
 	}).catch(next);
 })
 
-//edit message (only user who posted a message is permitted to change its body)
 router.put('/:id', function (req, res, next) {
-
+//edit message (only user who posted the message/an admin is permitted to change its body)
 });
 
 //post message -- when user submits a message
 router.post('/', function (req, res, next) {
 //may need to contact another API which will give names to locations based on latitude and longitude
+
+	var newMessage = {
+		text: req.body.text,
+		authorId: req.body.authorId || req.user.id,
+		latitude: parseFloat(req.body.latitude),
+		longitude: parseFloat(req.body.longitude),
+		locationName: req.body.locationName,
+		city: req.body.city
+	}
+
+	Message.create(newMessage)
+	.then(function (message) {
+		Message.findOne({where:
+			{
+				id: message.id
+			},
+			include: {model: User, as: "author"}
+		})
+		.then(function (message) {
+			//update this in the future if city does not come from req.body
+			console.log("New message created by user in", req.body.city, ". Sending to client:", req.user.id);
+			res.send(message);
+		})
+	})
+
+	.catch(next);
+
 });
 
 //delete -- for admins only. removes from db
