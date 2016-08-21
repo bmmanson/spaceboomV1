@@ -13,7 +13,7 @@ class NewMessageView extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			text: 'This is the default text'
+			text: ''
 		};
 	}
 

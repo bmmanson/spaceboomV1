@@ -23,7 +23,6 @@ const httpRequestToPostNewMessage = (text, authorId, latitude, longitude, locati
 
 	let request = {
 		headers: {
-			//'Accept': 'application/json',
 			'Content-Type': 'application/json'
   		},
   		method: "POST",
@@ -62,7 +61,6 @@ const httpRequestToSendAccessTokenToServer = (token) => {
 export const postNewMessageToServer = (text, authorId, latitude, longitude, locationName, city) => {
 	return httpRequestToPostNewMessage(text, authorId, latitude, longitude, locationName, city)
 	.then((response) => response.json())
-	.then((response) => console.log("httpRequestToPostNewMessage RECEIVES:", response));
 }
 
 export const getAllMessagesByUser = (id) => {

@@ -12,37 +12,40 @@ import { store } from './../store.js';
 class SubmitMessageButton extends Component {
 	
 	_submitMessage (text) {
-		navigator.geolocation.getCurrentPosition(
-			function (initialPosition) {
-				let latitude = initialPosition.coords.latitude; 
-				let longitude = initialPosition.coords.longitude;
+		if (text.length < 8) {
+			alert("That message isn't long enough! Write a longer message and try again!");
+		} else {
+			navigator.geolocation.getCurrentPosition(
+				function (initialPosition) {
+					let latitude = parseFloat(initialPosition.coords.latitude); 
+					let longitude = parseFloat(initialPosition.coords.longitude);
 
-				return postNewMessageToServer(
-					text,
-					null,
-					latitude,
-					longitude,
-					"Apple",
-					"California, CA"
-				)
-				.then((response) => response.json())
-				.then((response) => {
-					alert("Message sent! Other people can now discover it!");
-					store.dispatch(addSentMessage(
-						response.text, 
-						response.author.name,
-						response.author.authorPic,
-						response.latitude,
-						response.longitude,
-						response.locationName,
-						response.city)
+					return postNewMessageToServer(
+						text,
+						null,
+						latitude,
+						longitude,
+						"Apple",
+						"California, CA"
 					)
-					console.log("COORDS. LAT:", response.latitude, "LONG:", response.longitude);
-				})
-			},
-			(error) => alert(error.message),
-			{enableHighAccuracy: true}
-		)
+					.then((response) => {
+						alert("Message sent! Other people can now discover it!");
+						store.dispatch(addSentMessage(
+							response.text, 
+							response.author.name,
+							response.author.authorPic,
+							response.latitude,
+							response.longitude,
+							response.locationName,
+							response.city)
+						)
+						console.log("COORDS. LAT:", response.latitude, "LONG:", response.longitude);
+					})
+				},
+				(error) => alert(error.message),
+				{enableHighAccuracy: true}
+			)
+		}
 
 	}
 
