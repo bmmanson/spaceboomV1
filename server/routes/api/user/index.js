@@ -1,8 +1,59 @@
 var express = require('express');
+var Promise = require('bluebird');
 var router = express.Router();
 var User = require('./../../../models/user');
 var Message = require('./../../../models/message');
+var Discovery = require('./../../../models/discovery');
 
+router.get('/login/:id', function (req, res, next) {
+	var currentUserId = req.params.id;
+
+	var allPostedMessages = Message.findAll({where: 
+		{
+			authorId: currentUserId,
+			deletedByUser: false
+		}, 
+		include: {model: User, as: "author"}
+	})
+	var allDiscoveredMessages = Discovery.findAll({where: 
+		{
+			discovererId: currentUserId,
+			hidden: false
+		},
+		include: {model: Message, 
+					as: "message", 
+					include: {
+						model: User, 
+						as: "author"}
+					}
+	})
+	var userInfo = User.findOne({where:
+		{
+			id: currentUserId
+		}
+	})
+
+	Promise.all([
+		allPostedMessages, 
+		allDiscoveredMessages, 
+		userInfo
+	])
+	.spread(function (sentMessages, discoveredMessages, userInfo) {
+		res.json({
+			sentMessages, 
+			discoveredMessages,
+			userInfo
+		});
+	}).catch(next);
+})
+
+//get all users - admin panel
+router.get('/', function (req, res, next) {
+	User.findAll()
+	.then(function (users) {
+		res.json(users);
+	}).catch(next);
+})
 //ban user
 router.put('/ban/:id', function (req, res, next) {
 	var id = req.params.id;
@@ -19,14 +70,6 @@ router.put('/ban/:id', function (req, res, next) {
 //delete user -- for admin console
 router.delete('/:id', function (req, res, next){
 	res.send("UNDER CONSTRUCTION");
-})
-
-//get all users - admin panel
-router.get('/', function (req, res, next) {
-	User.findAll()
-	.then(function (users) {
-		res.json(users);
-	}).catch(next);
 })
 
 //add user when a new user joins

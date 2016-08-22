@@ -29,7 +29,6 @@ router.get('/user/:id', function (req, res, next) {
 						as: "author"}
 					}
 	})
-		//still need to include the actual info for messages, authors and discoverers, and not just the id numbers
 		.then(function (discoveredMessages) {
 			res.json({
 				sentMessages, 
