@@ -11,14 +11,16 @@ router.get('/user/:id', function (req, res, next) {
 	//refactor to use bluebird / Promise.all / .spread
 	Message.findAll({where: 
 		{
-			authorId: currentUserId
+			authorId: currentUserId,
+			deletedByUser: false
 		}, 
 		include: {model: User, as: "author"}
 	})
 	.then(function (sentMessages) {
 		Discovery.findAll({where: 
 		{
-			discovererId: currentUserId
+			discovererId: currentUserId,
+			hidden: false
 		},
 		include: {model: Message, 
 					as: "message", 
@@ -48,6 +50,9 @@ router.get('/', function (req, res, next) {
 //hit this route when a user chooses to delete a message. will remain in database, but will no longer be accessible to users
 router.put('/hide/:id', function (req, res, next) {
 	var messageId = req.params.id;
+
+	console.log("REQ.PARAMS", req.params);
+	console.log("REQ.BODY", req.body);
 
 	Message.findOne({where:
 		{

@@ -31,6 +31,7 @@ class SubmitMessageButton extends Component {
 					.then((response) => {
 						alert("Message sent! Other people can now discover it!");
 						store.dispatch(addSentMessage(
+							response.id,
 							response.text, 
 							response.author.name,
 							response.author.authorPic,
