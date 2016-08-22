@@ -90,6 +90,26 @@ router.post('/new', function (req, res, next) {
 
 });
 
+router.get('/user/:id', function (req, res, next) {
+	var currentUserId = req.params.id;
+
+	Discovery.findAll({where: 
+		{
+			discovererId: currentUserId,
+			hidden: false
+		},
+		include: {model: Message, 
+					as: "message", 
+					include: {
+						model: User, 
+						as: "author"}
+					}
+	})
+	.then(function (discoveredMessages) {
+		res.send(discoveredMessages);
+	}).catch(next);
+});
+
 //mark a discovered message as unread
 router.put('/unread/:id', function (req, res, next) {
 	console.log("THE ID:", req.params.id);

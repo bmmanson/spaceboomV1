@@ -1,14 +1,14 @@
 var express = require('express');
+var Promise = require('bluebird');
+var router = express.Router();
+
 var Message = require('./../../../models/message');
 var User = require('./../../../models/user');
 var Discovery = require('./../../../models/discovery');
 
-var router = express.Router();
-
-//get messages for user
+//get messages by user
 router.get('/user/:id', function (req, res, next) {
 	var currentUserId = req.params.id;
-	//refactor to use bluebird / Promise.all / .spread
 	Message.findAll({where: 
 		{
 			authorId: currentUserId,
@@ -17,24 +17,9 @@ router.get('/user/:id', function (req, res, next) {
 		include: {model: User, as: "author"}
 	})
 	.then(function (sentMessages) {
-		Discovery.findAll({where: 
-		{
-			discovererId: currentUserId,
-			hidden: false
-		},
-		include: {model: Message, 
-					as: "message", 
-					include: {
-						model: User, 
-						as: "author"}
-					}
-	})
-		.then(function (discoveredMessages) {
-			res.json({
-				sentMessages, 
-				discoveredMessages
-			});
-		})
+		res.json({
+			sentMessages
+		});
 	}).catch(next);
 });
 
