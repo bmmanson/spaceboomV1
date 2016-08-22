@@ -5,7 +5,7 @@ import {
 	NavigatorIOS
 } from 'react-native';
 
-import { addSentMessage } from './../actions/';
+import { addSentMessage, updateNewMessageText } from './../actions/';
 import { postNewMessageToServer } from './../async/';
 import { store } from './../store.js';
 
@@ -39,7 +39,9 @@ class SubmitMessageButton extends Component {
 							response.locationName,
 							response.city)
 						)
+						store.dispatch(updateNewMessageText(""));
 						console.log("COORDS. LAT:", response.latitude, "LONG:", response.longitude);
+
 					})
 				},
 				(error) => alert(error.message),

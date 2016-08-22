@@ -6,7 +6,7 @@ import { model } from './model';
 
 let store = createStore(
 	reducer, 
-	//model, 
+	model, 
 	applyMiddleware(thunk)
 );
 

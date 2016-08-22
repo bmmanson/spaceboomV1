@@ -13,7 +13,7 @@ class App extends Component {
 		return (
 		<Router>
 			<Scene key="root">
-				<Scene key="login" component={LoginView} title="Spaceboom" initial={true} hideNavBar={true} />
+				<Scene key="login" initial={true} component={LoginView} title="Spaceboom" hideNavBar={true} />
 				<Scene key="initial" component={LaunchPage} title="Spaceboom" hideBackImage={true} hideNavBar={false} />
 				<Scene key="newMessage" component={NewMessageView} title="Post a Message" />
 				<Scene key="messageMaster" component={MessageMasterView} title="Messages" />

@@ -1,21 +1,17 @@
 import React, { Component } from 'react';
 import { Text, View, NavigatorIOS, TextInput } from 'react-native';
 
+import { MessageHeader } from './message-header';
 import { SubmitMessageButton } from './submit-message-button';
 import { Map } from './map';
 
 import { styles } from './../styles/main';
-import { MessageHeader } from './message-header';
 
+import { store } from './../store.js';
+import { updateNewMessageText } from './../actions/';
+import { connect } from 'react-redux';
 
-class NewMessageView extends Component {
-
-	constructor(props) {
-		super(props);
-		this.state = {
-			text: ''
-		};
-	}
+class NewMessage extends Component {
 
 	render(){
 
@@ -27,12 +23,29 @@ class NewMessageView extends Component {
 					placeholder={"Type your message here, then press submit. Anyone with Spaceboom who comes to this location will be able to read it!"}
 					multiline={true}
 					keyboardType={'default'} 
-					onChangeText={(text) => this.setState({text})}
-					value={this.state.text} />
-				<SubmitMessageButton messageText={this.state.text} />
+					onChangeText={(text) => store.dispatch(updateNewMessageText(text))}
+					value={this.props.text} />
+				<SubmitMessageButton messageText={this.props.text} />
 			</View>
 		);
 	}
 }
+
+const mapStateToProps = (state) => {
+	return {
+		text: state.currentSession.newMessageText
+	};
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		onChangeText: (text) => {dispatch(updateNewMessageText(text))}
+	}
+}
+
+const NewMessageView = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(NewMessage);
 
 export { NewMessageView };

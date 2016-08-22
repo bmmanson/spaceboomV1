@@ -5,6 +5,13 @@ export const markAsUnread = function (id) {
 	};
 }
 
+export const updateNewMessageText = function (newMessageText) {
+	return {
+		type: 'UPDATE_NEW_MESSAGE_TEXT',
+		newMessageText
+	}
+}
+
 export const addCurrentSessionOnLogin = function (userId, email, name, authorPic, username) {
 	return {
 		type: 'ADD_CURRENT_SESSION_ON_LOGIN',
