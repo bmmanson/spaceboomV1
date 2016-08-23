@@ -1,7 +1,8 @@
 import { store } from './../store';
 import { 
 	addDiscoveredMessage,
-	addSentMessage 
+	addSentMessage,
+	addCurrentSessionOnLogin 
 } from './../actions';
 
 const httpRequestForNewDiscoveredMessage = (latitude, longitude, id) => {
@@ -33,8 +34,8 @@ const httpRequestToPostNewMessage = (text, authorId, latitude, longitude, locati
 	return fetch(url, request);
 }
 
-const httpRequestForAllMessagesByUser = (id) => {
-	let url = "http://localhost:1337/api/message/user/" + id;
+const httpRequestForAllUserDataOnLogin = (id) => {
+	let url = "http://localhost:1337/api/user/login/" + id;
 	return fetch(url, {method: "GET"});
 }
 
@@ -63,13 +64,13 @@ export const postNewMessageToServer = (text, authorId, latitude, longitude, loca
 	.then((response) => response.json())
 }
 
-export const getAllMessagesByUser = (id) => {
-	return httpRequestForAllMessagesByUser(id)
+export const getAllUserDataOnLogin = (id) => {
+	return httpRequestForAllUserDataOnLogin(id)
 	.then((response) => response.json())
-	.then((messages) => {
-		for (var message in messages.sentMessages) {
-			console.log("SENT MESSAGE", messages.sentMessages[message]);
-			let m = messages.sentMessages[message];
+	.then((data) => {
+		for (var message in data.sentMessages) {
+			console.log("SENT MESSAGE", data.sentMessages[message]);
+			let m = data.sentMessages[message];
 			let id = m.id;
 			let text = m.text; 
 			let author = m.author.name;
@@ -89,9 +90,9 @@ export const getAllMessagesByUser = (id) => {
 				city
 			));
 		}
-		for (var message in messages.discoveredMessages) {
-			console.log("DISCOVERED", messages.discoveredMessages[message]);
-			let m = messages.discoveredMessages[message].message;
+		for (var message in data.discoveredMessages) {
+			console.log("DISCOVERED", data.discoveredMessages[message]);
+			let m = data.discoveredMessages[message].message;
 			let id = m.id;
 			let text = m.text;
 			let author = m.author.name;
@@ -100,7 +101,7 @@ export const getAllMessagesByUser = (id) => {
 			let longitude = m.longitude.toString();
 			let locationName = m.locationName;
 			let city = m.city;
-			let unread = messages.discoveredMessages[message].unread;
+			let unread = data.discoveredMessages[message].unread;
 			store.dispatch(addDiscoveredMessage(
 				id,
 				text,
@@ -113,6 +114,13 @@ export const getAllMessagesByUser = (id) => {
 				unread
 			));
 		}
+		store.dispatch(addCurrentSessionOnLogin(
+			data.userInfo.id,
+			data.userInfo.email,
+			data.userInfo.name,
+			data.userInfo.authorPic,
+			data.userInfo.username
+		))
 	})
 }
 

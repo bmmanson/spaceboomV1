@@ -19,8 +19,9 @@ class NewMessage extends Component {
 			<View style={styles.container}>
 				<Map height={5}/>
 				<MessageHeader 
-					authorPic={'https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-1/p100x100/13620351_10207342419702909_3505351797653340889_n.jpg?oh=a1710d119f06150bb51c6903ed7f6acf&oe=58244469'}
-					author={} />
+					authorPic={this.props.authorPic}
+					author={this.props.author}
+					locationName={this.props.username} />
 				<TextInput style={{flex: 6, fontSize: 16, marginHorizontal: 10}} 
 				placeholder={"Type your message here, then press submit. Anyone with Spaceboom who comes to this location will be able to read it!"}
 				multiline={true}
@@ -35,7 +36,12 @@ class NewMessage extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		text: state.currentSession.newMessageText
+		text: state.currentSession.newMessageText,
+		author: state.currentSession.name,
+		authorPic: state.currentSession.authorPic,
+		//note -- most users don't have usernames yet.
+		//need to decide what text to put here
+		username: state.currentSession.username
 	};
 }
 

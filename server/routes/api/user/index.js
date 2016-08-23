@@ -6,6 +6,8 @@ var Message = require('./../../../models/message');
 var Discovery = require('./../../../models/discovery');
 
 router.get('/login/:id', function (req, res, next) {
+	console.log("THE LOGIN ROUTE IS HIT");
+
 	var currentUserId = req.params.id;
 
 	var allPostedMessages = Message.findAll({where: 

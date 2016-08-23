@@ -8,8 +8,8 @@ class MessageHeader extends Component {
 				<Image source={{uri: this.props.authorPic}}
 				style={{height: 48, width: 48, marginHorizontal: 6, borderRadius: 24}} />
 				<View>
-					<Text style={{fontWeight: 'bold', marginTop: 5}}>{this.props.author || "Ben Manson"}</Text>
-					<Text style={{fontSize: 16}}>{this.props.locationName || "Financial District"}</Text>
+					<Text style={{fontWeight: 'bold', marginTop: 5}}>{this.props.author}</Text>
+					<Text style={{fontSize: 16}}>{this.props.locationName}</Text>
 				</View>
 			</View>);
 	}
