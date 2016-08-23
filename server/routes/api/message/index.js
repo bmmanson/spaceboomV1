@@ -1,10 +1,14 @@
 var express = require('express');
 var Promise = require('bluebird');
+var request = require('request');
 var router = express.Router();
 
 var Message = require('./../../../models/message');
 var User = require('./../../../models/user');
 var Discovery = require('./../../../models/discovery');
+
+var googleCredentials = require('./../../../../google-credentials');
+var utils = require('./utils');
 
 //get messages by user
 router.get('/user/:id', function (req, res, next) {
@@ -65,26 +69,40 @@ router.post('/', function (req, res, next) {
 		authorId: req.body.authorId || req.user.id,
 		latitude: parseFloat(req.body.latitude),
 		longitude: parseFloat(req.body.longitude),
-		locationName: req.body.locationName,
-		city: req.body.city
+		locationName: null,
+		city: null
 	}
 
-	Message.create(newMessage)
-	.then(function (message) {
-		Message.findOne({where:
-			{
-				id: message.id
-			},
-			include: {model: User, as: "author"}
-		})
-		.then(function (message) {
-			//update this in the future if city does not come from req.body
-			console.log("New message created by user in", req.body.city, ". Sending to client:", req.user.id);
-			res.send(message);
-		})
-	})
+	var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' 
+		+ newMessage.latitude + ',' + newMessage.longitude + 
+		'&key=' + googleCredentials.APIKEY;
 
-	.catch(next);
+	request(url, function (error, resGoogle, body) {
+		
+		console.log(body);
+
+		var parsedBody = JSON.parse(body);
+		newMessage.locationName = utils.findLocationName(parsedBody);
+		newMessage.city = utils.findCity(parsedBody);
+
+		if (!error && resGoogle.statusCode == 200) {
+			console.log("MESSAGE RECEIVED. CURRENT newMessage:", newMessage);
+
+			Message.create(newMessage)
+			.then(function (message) {
+				return Message.findOne({where:
+				{
+					id: message.id
+				},
+				include: {model: User, as: "author"}
+				})
+			})
+			.then(function (message) {
+			console.log("New message created by user in", newMessage.city, ". Sending to client:", newMessage.authorId);
+				res.send(message);
+			}).catch(next);
+		}
+	})
 
 });
 
