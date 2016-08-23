@@ -17,7 +17,6 @@ class MessageMaster extends Component {
 
 		return (
 	  	<View style={{flex: 1}}>
-	  		<View style={{flex: 1}} />
 	    	<MessageList messages={this.props.messages} />
 	    	<View style={{flex: 1, flexDirection: 'row'}}>
 	    		<MenuButton 
@@ -43,7 +42,8 @@ const getVisibleMessages = (messages, filter) => {
 
 const mapStateToProps = (state) => {
 	return {
-		messages: getVisibleMessages(state.messages, state.visibilityFilter)
+		messages: getVisibleMessages(state.messages, state.visibilityFilter),
+		filter: state.visibilityFilter
 	};
 }
 
