@@ -6,6 +6,8 @@ import { Actions } from 'react-native-router-flux';
 import { addDiscoveredMessage } from './../actions/';
 import { MessageInList } from './message-in-list';
 import { MessageList } from './message-list';
+import { MessageCounter } from './message-counter';
+
 import { store } from './../store.js';
 import { MessageDetailView } from './message-detail-view';
 import { MenuButton } from './menu-button';
@@ -17,6 +19,9 @@ class MessageMaster extends Component {
 
 		return (
 	  	<View style={{flex: 1}}>
+	  		<MessageCounter 
+	  			messageCount={this.props.messages.length}
+	  			filter={this.props.filter} />
 	    	<MessageList messages={this.props.messages} />
 	    	<View style={{flex: 1, flexDirection: 'row'}}>
 	    		<MenuButton 
@@ -37,7 +42,8 @@ const getVisibleMessages = (messages, filter) => {
 	let currentFilter;
 	filter === "SENT" ? currentFilter = true : currentFilter = false; 
 	let messageList = messages.filter(m => m.currentUser === currentFilter);
-	return messageList;
+	console.log("MESSAGE LIST", messageList);
+	return messageList.sort((a, b) => b.id - a.id);
 }
 
 const mapStateToProps = (state) => {
