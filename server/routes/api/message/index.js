@@ -62,7 +62,6 @@ router.put('/:id', function (req, res, next) {
 
 //post message -- when user submits a message
 router.post('/', function (req, res, next) {
-//may need to contact another API which will give names to locations based on latitude and longitude
 
 	var newMessage = {
 		text: req.body.text,
@@ -78,15 +77,12 @@ router.post('/', function (req, res, next) {
 		'&key=' + googleCredentials.APIKEY;
 
 	request(url, function (error, resGoogle, body) {
-		
-		console.log(body);
 
 		var parsedBody = JSON.parse(body);
 		newMessage.locationName = utils.findLocationName(parsedBody);
 		newMessage.city = utils.findCity(parsedBody);
 
 		if (!error && resGoogle.statusCode == 200) {
-			console.log("MESSAGE RECEIVED. CURRENT newMessage:", newMessage);
 
 			Message.create(newMessage)
 			.then(function (message) {
@@ -98,7 +94,7 @@ router.post('/', function (req, res, next) {
 				})
 			})
 			.then(function (message) {
-			console.log("New message created by user in", newMessage.city, ". Sending to client:", newMessage.authorId);
+			console.log("Added new Message from user with ID:", newMessage.authorId, newMessage);
 				res.send(message);
 			}).catch(next);
 		}

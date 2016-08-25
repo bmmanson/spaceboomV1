@@ -54,7 +54,6 @@ class LaunchPage extends Component {
 
 	    return (
 	    	<View style={styles.container}>
-	    		<TitleBar text={"Spaceboom"} />
 	    		<Map height={10} />
 
 	    		<FBLogin />

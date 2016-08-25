@@ -10,9 +10,9 @@ class MessageCounter extends Component {
 
 		const textForComponent = function (filter) {
 			if (filter === "DISCOVERED") {
-				return "Total Messages Found:"
+				return "Total Messages Found: ";
 			} else if (filter === "SENT") {
-				return "Total Messages Submitted:"
+				return "Total Messages Submitted: ";
 			}
 		}
 
