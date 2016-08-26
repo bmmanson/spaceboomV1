@@ -6,6 +6,7 @@ var router = express.Router();
 var Message = require('./../../../models/message');
 var User = require('./../../../models/user');
 var Discovery = require('./../../../models/discovery');
+var Comment = require('./../../../models/comment');
 
 var googleCredentials = require('./../../../../google-credentials');
 var utils = require('./utils');
@@ -18,7 +19,18 @@ router.get('/user/:id', function (req, res, next) {
 			authorId: currentUserId,
 			deletedByUser: false
 		}, 
-		include: {model: User, as: "author"}
+		include: 
+		[
+			{
+			model: User, as: "author"
+			},
+			{
+			model: Comment, as: "comment", include: 
+				{
+					model: User, as: "author"
+				}
+			}
+		]
 	})
 	.then(function (sentMessages) {
 		res.json({
