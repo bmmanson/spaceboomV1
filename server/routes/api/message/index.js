@@ -22,12 +22,16 @@ router.get('/user/:id', function (req, res, next) {
 		include: 
 		[
 			{
-			model: User, as: "author"
+			model: User, 
+			as: "author"
 			},
 			{
-			model: Comment, as: "comment", include: 
+			model: Comment, 
+			as: "comment", 
+			include: 
 				{
-					model: User, as: "author"
+					model: User, 
+					as: "author"
 				}
 			}
 		]
