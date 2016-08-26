@@ -75,8 +75,8 @@ export const getAllUserDataOnLogin = (id) => {
 			let text = m.text; 
 			let author = m.author.name;
 			let authorPic = m.author.authorPic;
-			let latitude = m.latitude.toString();
-			let longitude = m.longitude.toString();
+			let latitude = parseFloat(m.latitude);
+			let longitude = parseFloat(m.longitude);
 			let locationName = m.locationName;
 			let city = m.city;
 			store.dispatch(addSentMessage(
@@ -97,8 +97,8 @@ export const getAllUserDataOnLogin = (id) => {
 			let text = m.text;
 			let author = m.author.name;
 			let authorPic = m.author.authorPic;
-			let latitude = m.latitude.toString();
-			let longitude = m.longitude.toString();
+			let latitude = parseFloat(m.latitude);
+			let longitude = parseFloat(m.longitude);
 			let locationName = m.locationName;
 			let city = m.city;
 			let unread = data.discoveredMessages[message].unread;

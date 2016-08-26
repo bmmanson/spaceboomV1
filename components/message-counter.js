@@ -17,10 +17,10 @@ class MessageCounter extends Component {
 		}
 
 		return (
-			<View style={{flex: 1}}>
-				<Text>
+			<View style={{flex: 1, backgroundColor: '#FAFAFA', justifyContent: 'center', alignItems: 'center'}}>
+				<Text style={{fontStyle: 'italic', textAlign: 'center'}}>
 					{textForComponent(this.props.filter)} 
-					<Text>
+					<Text style={{fontStyle: 'normal', fontWeight: 'bold'}}>
 						{this.props.messageCount}
 					</Text>
 				</Text>

@@ -19,5 +19,6 @@ router.get('/', function (req, res, next) {
 router.use('/message', require('./message/'));
 router.use('/user', require('./user/'));
 router.use('/discovery', require('./discovery/'));
+router.use('/comment', require('./comment/'));
 
 module.exports = router;

@@ -10,7 +10,7 @@ class MenuButton extends Component {
 	render () {
 
 		return (
-			<TouchableHighlight onPress={this.props.buttonAction} style={{flex:1, backgroundColor: this.props.buttonColor}}>
+			<TouchableHighlight onPress={this.props.buttonAction} style={{flex:1, justifyContent: 'center', alignItems: 'center', backgroundColor: this.props.buttonColor}}>
 				<Text style={{
 	   						flexDirection: 'column',
 	    					textAlign: 'center',

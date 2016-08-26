@@ -57,7 +57,7 @@ class SubmitMessageButton extends Component {
 		return (
 			<TouchableHighlight 
 				onPress={this._submitMessage.bind(this, this.props.messageText)} 
-				style={{flex:1, backgroundColor: "skyblue"}}>
+				style={{flex:1, backgroundColor: "skyblue", justifyContent: 'center', alignItems: 'center'}}>
 				<Text style={{
 	   						flexDirection: 'column',
 	    					textAlign: 'center',

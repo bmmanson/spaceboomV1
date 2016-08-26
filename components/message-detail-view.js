@@ -7,10 +7,9 @@ import { MessageHeader } from './message-header';
 import { DeleteMessageButton } from './delete-message-button';
 
 class MessageDetailView extends Component {
-	
-
 
 	render () {
+
 		return (
 			<View style={styles.container}>
 				<MapView style={{flex: 5}}
