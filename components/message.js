@@ -8,7 +8,7 @@ class Message extends Component {
 		return (
 			<View style={{flex: 7, 
 				borderStyle: 'solid', 
-				borderColor: '#303030', 
+				borderColor: '#8C8C8C', 
 				backgroundColor: '#FAFAFA', 
 				borderWidth: 1, 
 				borderRadius: 3, 
@@ -24,22 +24,22 @@ class Message extends Component {
 					author={this.props.message.author} 
 					locationName={this.props.message.locationName}
 					authorPic={this.props.message.authorPic} />
-				<Text style={{flex: 3, fontSize: 16, marginHorizontal: 10}}>
+				<Text style={{flex: 3, fontSize: 14, marginHorizontal: 10, marginTop: 10, marginBottom: 6}}>
 					{this.props.message.body}
 				</Text>
 				<View style={{flex: .5,  
 						marginHorizontal: 10,
+						marginTop: 6,
 						borderStyle: 'solid', 
-						borderBottomColor: '#303030', 
+						borderBottomColor: '#E8E8E8', 
 						borderBottomWidth: 1, 
-						borderTopColor: '#303030', 
+						borderTopColor: '#E8E8E8', 
 						borderTopWidth: 1,
 						justifyContent: 'center', 
 				 		alignItems: 'center'
 						}}>
 					<Text style={{fontSize: 12,
-						alignItems: 'center',
-					 	textAlign: 'center'
+					 	textAlign: 'left'
 					}}>
 						Discovered 0 times.
 					</Text>

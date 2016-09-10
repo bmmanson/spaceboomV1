@@ -11,7 +11,7 @@ class MessageDetailView extends Component {
 
 		return (
 			<View style={{flex: 1}}>
-				<MapView style={{flex: 4, justifyContent: 'space-between'}}
+				<MapView style={{flex: 3, justifyContent: 'space-between'}}
 						showUsersLocation={false}
 						scrollEnabled={false}
 						zoomEnabled={false} 
@@ -19,7 +19,7 @@ class MessageDetailView extends Component {
 								longitude: this.props.message.longitude,
 								latitudeDelta: 0.005,
 								longitudeDelta: 0.005}} />
-			<ScrollView style={{flex: 6, backgroundColor: '#87CEFA'}}>
+			<ScrollView style={{flex: 7, backgroundColor: '#E6E6FA'}}> 
 				<Text style={{marginHorizontal: 10, 
 					marginTop: 2,
 					marginBottom: 2, 

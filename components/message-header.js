@@ -4,12 +4,12 @@ import { Text, View, NavigatorIOS, Image } from 'react-native';
 class MessageHeader extends Component {
 	render () {
 		return (
-			<View style={{flex: 1, flexWrap: 'wrap', marginHorizontal: 10}}>
+			<View style={{flex: 1, flexWrap: 'wrap', marginHorizontal: 10, marginVertical: 10}}>
 				<Image source={{uri: this.props.authorPic}}
-				style={{height: 40, width: 40, margin: 2, borderRadius: 20}} />
-				<View>
-					<Text style={{fontWeight: 'bold', marginTop: 5, fontSize: 14}}>{this.props.author}</Text>
-					<Text style={{fontSize: 12}}>{this.props.locationName}</Text>
+				style={{height: 48, width: 48, margin: 2, borderRadius: 24}} />
+				<View style={{marginLeft: 4}}>
+					<Text style={{fontWeight: 'bold', marginTop: 5, fontSize: 16}}>{this.props.author}</Text>
+					<Text style={{fontSize: 14, marginTop: 3}}>{this.props.locationName}</Text>
 				</View>
 			</View>);
 	}
