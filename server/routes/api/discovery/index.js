@@ -9,17 +9,15 @@ var router = express.Router();
 //user checks to see if new message
 router.post('/new', function (req, res, next) {
 //it makes sense for this to be a post request -- if there's a match, we're creating a new instance/row in the discovery table
-//1st
-//lat : 40.730395
-//long : -74.000119
+	//1st
+	//lat : 40.730395
+	//long : -74.000119
 
-//2nd
-//lat : 40.730761
-//long : -74.000773
+	//2nd
+	//lat : 40.730761
+	//long : -74.000773
 
-//currently accurate enough to find a message within a half NYC block radius. Radius is so large because getCurrentPosition runs so infrequently.
-
-	console.log("ID:", req.user.id);
+	//currently accurate enough to find a message within a half NYC block radius. Radius is so large because getCurrentPosition runs so infrequently.
 
 	var userId = req.query.userId;
 	var discoveredLatitude = parseFloat(req.query.latitude);
@@ -68,13 +66,26 @@ router.post('/new', function (req, res, next) {
 							{
 								id: newDiscovery.id
 							},
-							include: {
+							include: 
+							{
 								model: Message,
 								as: "message",
-								include: {
+								include: 
+								[	
+									{
 									model: User,
 									as: "author"
-								}
+									},
+									{
+									model: Comment,
+									as: "comment",
+									include:
+										{
+										model: User,
+										as: "author"
+										}
+									}
+								]
 							}	
 						})
 					})
@@ -98,12 +109,27 @@ router.get('/user/:id', function (req, res, next) {
 			discovererId: currentUserId,
 			hidden: false
 		},
-		include: {model: Message, 
-					as: "message", 
-					include: {
-						model: User, 
-						as: "author"}
+		include: 
+		{
+			model: Message, 
+			as: "message", 
+			include: 
+			[
+				{
+				model: User, 
+				as: "author"
+				},
+				{
+				model: Comment,
+				as: "comment",
+				include:
+					{
+					model: User,
+					as: "user"
 					}
+				}
+			]
+		}
 	})
 	.then(function (discoveredMessages) {
 		res.send(discoveredMessages);

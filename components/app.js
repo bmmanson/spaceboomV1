@@ -19,7 +19,7 @@ class App extends Component {
 				<Scene key="initial" component={LaunchPage} onBack={() => {}} title="Spaceboom" hideBackImage={true} hideNavBar={false} />
 				<Scene key="newMessage" component={NewMessageView} title="Post a Message" />
 				<Scene key="messageMaster" component={MessageMasterView} title="Messages" sceneStyle={{paddingTop: Navigator.NavigationBar.Styles.General.TotalNavHeight}} />
-				<Scene key="messageDetail" component={MessageDetailView} title="A Message" />
+				<Scene key="messageDetail" component={MessageDetailView} title="A Message" sceneStyle={{paddingTop: Navigator.NavigationBar.Styles.General.TotalNavHeight}} />
 			</Scene>
 		</Router>
 		);

@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
-import { Text, View, MapView } from 'react-native';
+import { Text, View, MapView, ScrollView } from 'react-native';
 
 import { styles } from './../styles/main';
-import { Map } from './map';
-import { MessageHeader } from './message-header';
 import { DeleteMessageButton } from './delete-message-button';
+import { Message } from './message';
 
 class MessageDetailView extends Component {
 
 	render () {
 
 		return (
-			<View style={styles.container}>
-				<MapView style={{flex: 5}}
+			<View style={{flex: 1}}>
+				<MapView style={{flex: 4, justifyContent: 'space-between'}}
 						showUsersLocation={false}
 						scrollEnabled={false}
 						zoomEnabled={false} 
@@ -20,14 +19,19 @@ class MessageDetailView extends Component {
 								longitude: this.props.message.longitude,
 								latitudeDelta: 0.005,
 								longitudeDelta: 0.005}} />
-				<MessageHeader 
-					author={this.props.message.author} 
-					locationName={this.props.message.locationName}
-					authorPic={this.props.message.authorPic} />
-				<Text style={{flex: 6, fontSize: 16, marginHorizontal: 10}}>
-					{this.props.message.body}
+			<ScrollView style={{flex: 6, backgroundColor: '#87CEFA'}}>
+				<Text style={{marginHorizontal: 10, 
+					marginTop: 2,
+					marginBottom: 2, 
+					fontWeight: 'bold', 
+					fontSize: 16, 
+					fontStyle: 'italic', 
+					color: 'white'}}>
+					Message:
 				</Text>
-				<DeleteMessageButton message={this.props.message}/>
+				<Message message={this.props.message} />
+			</ScrollView>
+			<DeleteMessageButton message={this.props.message}/>
 			</View>
 		);
 	}

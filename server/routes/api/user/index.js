@@ -17,7 +17,32 @@ router.get('/login/:id', function (req, res, next) {
 			deletedByUser: false
 		}, 
 		include: 
-		//{
+		[
+			{
+			model: User, 
+			as: "author"
+			},
+			{
+			model: Comment,
+			as: "comment",
+			include: 
+				{
+				model: User,
+				as: "author"
+				}
+			}
+		]
+	})
+	var allDiscoveredMessages = Discovery.findAll({where: 
+		{
+			discovererId: currentUserId,
+			hidden: false
+		},
+		include: 
+		{
+			model: Message, 
+			as: "message", 
+			include: 
 			[
 				{
 				model: User, 
@@ -30,38 +55,9 @@ router.get('/login/:id', function (req, res, next) {
 					{
 					model: User,
 					as: "author"
-					}
+					}	
 				}
 			]
-		//}
-	})
-	var allDiscoveredMessages = Discovery.findAll({where: 
-		{
-			discovererId: currentUserId,
-			hidden: false
-		},
-		include: 
-		{
-			model: Message, 
-			as: "message", 
-			include: 
-			//{
-				[
-					{
-					model: User, 
-					as: "author"
-					},
-					{
-					model: Comment,
-					as: "comment",
-					include: 
-						{
-						model: User,
-						as: "author"
-						}	
-					}
-				]
-			//}
 		}
 	})
 	var userInfo = User.findOne({where:
