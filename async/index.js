@@ -2,7 +2,8 @@ import { store } from './../store';
 import { 
 	addDiscoveredMessage,
 	addSentMessage,
-	addCurrentSessionOnLogin 
+	addCurrentSessionOnLogin,
+	addComment 
 } from './../actions';
 
 const httpRequestForNewDiscoveredMessage = (latitude, longitude, id) => {
@@ -89,6 +90,19 @@ export const getAllUserDataOnLogin = (id) => {
 				locationName,
 				city
 			));
+			if (m.comment) {
+				m.comment.forEach( c => {
+					console.log("SENT MESSAGE COMMENT", c);
+					store.dispatch(addComment(
+						c.id,
+						id,
+						c.text,
+						c.author.name,
+						c.author.authorPic,
+						true
+					));
+				})
+			}
 		}
 		for (var message in data.discoveredMessages) {
 			console.log("DISCOVERED", data.discoveredMessages[message]);
@@ -113,6 +127,19 @@ export const getAllUserDataOnLogin = (id) => {
 				city,
 				unread
 			));
+			if (m.comment) {
+				m.comment.forEach( c => {
+					console.log("DISCOVERED MESSAGE COMMENT", c);
+					store.dispatch(addComment(
+						c.id,
+						id,
+						c.text,
+						c.author.name,
+						c.author.authorPic,
+						true
+					));
+				})
+			}
 		}
 		store.dispatch(addCurrentSessionOnLogin(
 			data.userInfo.id,

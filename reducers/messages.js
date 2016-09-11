@@ -19,7 +19,6 @@ export const messages = (state = [], action) => {
         message(m, action)
       )
     case 'DELETE_MESSAGE':
-      console.log("I GET TO THE MESSAGES FUNCTION");
       return state.filter(m => m.id !== action.id);
     case 'ADD_SENT_MESSAGE':
       return [
@@ -57,6 +56,6 @@ export const messages = (state = [], action) => {
     case 'DELETE_ALL_MESSAGES':
       return [];
     default:
-      return state
+      return state;
   }
 }

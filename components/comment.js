@@ -3,7 +3,7 @@ import { Text, View } from 'react-native';
 
 import { MessageHeader } from './message-header';
 
-class Message extends Component {
+class Comment extends Component {
 	render () {
 		return (
 			<View style={{flex: 7, 
@@ -32,23 +32,6 @@ class Message extends Component {
 					marginBottom: 6}}>
 					{this.props.message.body}
 				</Text>
-				<View style={{flex: .5,  
-						marginHorizontal: 10,
-						marginTop: 6,
-						borderStyle: 'solid', 
-						borderBottomColor: '#E8E8E8', 
-						borderBottomWidth: 1, 
-						borderTopColor: '#E8E8E8', 
-						borderTopWidth: 1,
-						justifyContent: 'center', 
-				 		alignItems: 'center'
-						}}>
-					<Text style={{fontSize: 12,
-					 	textAlign: 'left'
-					}}>
-						Discovered 0 times.
-					</Text>
-				</View>
 				 <View style={{flex: 1, flexDirection: 'row'}}>
 				 	<View style={{flex: 1, 
 				 			justifyContent: 'center', 
@@ -62,7 +45,7 @@ class Message extends Component {
 					 		fontWeight: 'bold', 
 					 		color: '#1874CD',
 	    					}}>
-					 		Comment
+					 		Delete
 					 	</Text>
 				 	</View>
 				 	<View style={{flex: 1, 
@@ -86,4 +69,4 @@ class Message extends Component {
 	}
 }
 
-export { Message };
+export { Comment };

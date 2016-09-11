@@ -36,7 +36,7 @@ export const deleteMessage = function (id) {
 	};
 }
 
-export const addSentMessage = function (id, body, author, authorPic, latitude, longitude, locationName, city) {
+export const addSentMessage = function (id, body, author, authorPic, latitude, longitude, locationName, city, comment) {
 	return {
 		type: 'ADD_SENT_MESSAGE', 
 		id,
@@ -50,7 +50,7 @@ export const addSentMessage = function (id, body, author, authorPic, latitude, l
 	};
 }
 
-export const addDiscoveredMessage = function (id, body, author, authorPic, latitude, longitude, locationName, city, unread) {
+export const addDiscoveredMessage = function (id, body, author, authorPic, latitude, longitude, locationName, city, unread, comment) {
 	return {
 		type: 'ADD_DISCOVERED_MESSAGE', 
 		id,
@@ -62,6 +62,18 @@ export const addDiscoveredMessage = function (id, body, author, authorPic, latit
 		locationName, 
 		city,
 		unread
+	};
+}
+
+export const addComment = function (id, messageId, body, author, authorPic, currentUser) {
+	return {
+		type: 'ADD_COMMENT',
+		id,
+		messageId,
+		body,
+		author,
+		authorPic,
+		currentUser
 	};
 }
 

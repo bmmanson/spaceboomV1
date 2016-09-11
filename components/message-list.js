@@ -22,7 +22,12 @@ class MessageList extends Component {
 			store.dispatch(markAsUnread(currentMessage.id));
 			updateMessageAsUnreadOnServer(currentMessage.id);
 		}
-		Actions.messageDetail({message});
+		let state = store.getState();
+		let comments = state.comments;
+		let messageWithComments = Object.assign({}, currentMessage, {
+			comments: comments.filter( comment => comment.messageId === currentMessage.id)
+		})
+		Actions.messageDetail({message: messageWithComments});
 	}
 
 	render () {
