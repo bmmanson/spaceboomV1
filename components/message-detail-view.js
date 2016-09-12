@@ -13,19 +13,21 @@ class MessageDetailView extends Component {
 		return (
 			<View style={{flex: 1}}>
 
-			<ScrollView style={{flex: 7, backgroundColor: '#E6E6FA'}}> 
+			<ScrollView style={{flex: 10, backgroundColor: '#E6E6FA'}}> 
 				<Message message={this.props.message} />
 				<Comments comments={this.props.message.comments} />
+				<View style={{height: 240, marginVertical: 10}}>
+					<MapView style={{flex: 1, justifyContent: 'space-between'}}
+								showUsersLocation={false}
+								scrollEnabled={false}
+								zoomEnabled={false} 
+								region={{latitude: this.props.message.latitude, 
+										longitude: this.props.message.longitude,
+										latitudeDelta: 0.005,
+										longitudeDelta: 0.005}} />
+				</View>
+				<DeleteMessageButton message={this.props.message}/>
 			</ScrollView>
-			<MapView style={{flex: 3, justifyContent: 'space-between'}}
-						showUsersLocation={false}
-						scrollEnabled={false}
-						zoomEnabled={false} 
-						region={{latitude: this.props.message.latitude, 
-								longitude: this.props.message.longitude,
-								latitudeDelta: 0.005,
-								longitudeDelta: 0.005}} />
-			<DeleteMessageButton message={this.props.message}/>
 			</View>
 		);
 	}

@@ -4,7 +4,17 @@ import { Text, View } from 'react-native';
 import { MessageHeader } from './message-header';
 
 class Message extends Component {
+
 	render () {
+
+		function commentButtonText(comments) {
+			if (!comments || !comments.length) {
+				return "Reply";
+			} else {
+				return "Reply (" + comments.length + ")";
+			}
+		}
+
 		return (
 			<View style={{flex: 7, 
 				borderStyle: 'solid', 
@@ -62,7 +72,7 @@ class Message extends Component {
 					 		fontWeight: 'bold', 
 					 		color: '#1874CD',
 	    					}}>
-					 		Comment
+					 		{commentButtonText(this.props.message.comments)}
 					 	</Text>
 				 	</View>
 				 	<View style={{flex: 1, 
