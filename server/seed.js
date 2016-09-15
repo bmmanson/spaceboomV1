@@ -3,6 +3,9 @@ var db = require('./models');
 var Message = require('./models/message');
 var User = require('./models/user');
 
+//note -- to make this work:
+//need to go into the DB with postico and change Ben's userId to 32
+
 var data = {
 	user: 
 	[
@@ -204,6 +207,10 @@ var data = {
 		{
 		messageId: 9,
 		discovererId: 2
+		},
+		{
+		messageId: 15,
+		discoveredId: 2
 		}
 	],
 	comment: 
