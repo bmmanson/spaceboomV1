@@ -218,7 +218,8 @@ var data = {
 		{
 		text: "I completely agree.",
 		authorId: 3,
-		messageId: 15
+		messageId: 15,
+		numberOfLikes: 3
 		},
 		{
 		text: "I completely disagreed, but I could be persuaded.",
@@ -235,6 +236,21 @@ var data = {
 		authorId: 2,
 		messageId: 15
 		}
+	],
+	commentlike:
+	[
+		{
+			userId: 1,
+			commentId: 1
+		},
+		{
+			userId: 3,
+			commentId: 1
+		},
+		{
+			userId: 4,
+			commentId: 1
+		},
 	]
 }
 

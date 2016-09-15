@@ -60,10 +60,25 @@ const httpRequestToSendAccessTokenToServer = (token) => {
 	return fetch(url, {method: "POST"});
 }
 
+const httpRequestToLikeComment = (commentId) => {
+	let url = "http://localhost:1337/api/comment/like/" + commentId;
+	return fetch(url, {method: "POST"});
+}
+
 export const postNewMessageToServer = (text, authorId, latitude, longitude, locationName, city) => {
 	return httpRequestToPostNewMessage(text, authorId, latitude, longitude, locationName, city)
 	.then((response) => response.json())
 }
+
+export const postCommentAsLikedOnServer = (commentId) => {
+	return httpRequestToLikeComment(commentId)
+	.then((response) => response.json())
+	.then((data) => {
+		if (data) {
+			//do something
+		}
+	})
+} 
 
 export const getAllUserDataOnLogin = (id) => {
 	return httpRequestForAllUserDataOnLogin(id)

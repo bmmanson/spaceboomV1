@@ -78,6 +78,12 @@ export const addComment = function (id, messageId, body, author, authorPic, curr
 	};
 }
 
+export const deleteAllComments = function () {
+	return {
+		type: 'DELETE_ALL_COMMENTS'
+	}
+}
+
 export const setVisibility = function (filter) {
 	return {
 		type: 'SET_VISIBILITY', 

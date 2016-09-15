@@ -24,6 +24,10 @@ var Message = db.define('message', {
 	deletedByUser: {
 		type: Sequelize.BOOLEAN,
 		defaultValue: false
+	},
+	numberOfLikes: {
+		type: Sequelize.INTEGER,
+		defaultValue: 0
 	}
 });
 

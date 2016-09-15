@@ -8,7 +8,7 @@ import { Actions } from 'react-native-router-flux';
 
 import { store } from './../store';
 import { sendAccessTokenToServer, getAllUserDataOnLogin } from './../async/';
-import { deleteAllMessages } from './../actions/';
+import { deleteAllMessages, deleteAllComments } from './../actions/';
 
 class FBLogin extends Component {
   render() {
@@ -55,6 +55,7 @@ class FBLogin extends Component {
           onLogoutFinished={() => {
             alert("logout.");
             store.dispatch(deleteAllMessages());
+            store.dispatch(deleteAllComments());
             Actions.login();
           }}/>
       </View>

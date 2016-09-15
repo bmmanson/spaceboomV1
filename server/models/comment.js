@@ -20,7 +20,11 @@ var Comment = db.define('comment', {
 		type: Sequelize.BOOLEAN,
 		defaultValue: false,
 		allowNull: false
+	},
+	numberOfLikes: {
+		type: Sequelize.INTEGER,
+		defaultValue: 0
 	}
-})
+});
 
 module.exports = Comment;
