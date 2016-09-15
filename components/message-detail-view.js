@@ -13,11 +13,27 @@ class MessageDetailView extends Component {
 		return (
 			<View style={{flex: 1}}>
 
-			<ScrollView style={{flex: 10, backgroundColor: '#E6E6FA'}}> 
-				<Message message={this.props.message} />
-				<Comments comments={this.props.message.comments} />
-				<View style={{height: 240, marginVertical: 10}}>
-					<MapView style={{flex: 1, justifyContent: 'space-between'}}
+			<ScrollView style={{flex: 10, backgroundColor: '#D9D9D9'}}> 
+				
+				<View style={{
+					marginTop: 10,
+					marginBottom: 10,
+					shadowOpacity: 0.8,
+					shadowRadius: 2,
+					shadowOffset: {
+						width: 1,
+						height: 1}}}>
+					<Message message={this.props.message} />
+					<Comments comments={this.props.message.comments} />
+				</View>
+				<View style={{height: 240, marginVertical: 12}}>
+					<MapView style={{flex: 1, 
+						justifyContent: 'space-between',
+					shadowOpacity: 0.8,
+					shadowRadius: 2,
+					shadowOffset: {
+						width: 1,
+						height: 1}}}
 								showUsersLocation={false}
 								scrollEnabled={false}
 								zoomEnabled={false} 

@@ -11,7 +11,8 @@ export const comments = (state = [], action) => {
           body: action.body,
           author: action.author,
           authorPic: action.authorPic,
-          currentUser: action.currentUser
+          currentUser: action.currentUser,
+          isLiked: action.isLiked
         }
       ]
     case 'DELETE_ALL_COMMENTS':

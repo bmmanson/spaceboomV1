@@ -80,6 +80,8 @@ export const getAllUserDataOnLogin = (id) => {
 			let longitude = parseFloat(m.longitude);
 			let locationName = m.locationName;
 			let city = m.city;
+			let currentUser = true;
+			let isLiked = true;
 			store.dispatch(addSentMessage(
 				id,
 				text,
@@ -99,7 +101,8 @@ export const getAllUserDataOnLogin = (id) => {
 						c.text,
 						c.author.name,
 						c.author.authorPic,
-						true
+						currentUser,
+						isLiked
 					));
 				})
 			}
@@ -115,6 +118,8 @@ export const getAllUserDataOnLogin = (id) => {
 			let longitude = parseFloat(m.longitude);
 			let locationName = m.locationName;
 			let city = m.city;
+			let currentUser = true;
+			let isLiked = false;
 			let unread = data.discoveredMessages[message].unread;
 			store.dispatch(addDiscoveredMessage(
 				id,
@@ -136,7 +141,8 @@ export const getAllUserDataOnLogin = (id) => {
 						c.text,
 						c.author.name,
 						c.author.authorPic,
-						true
+						currentUser,
+						isLiked
 					));
 				})
 			}
@@ -148,6 +154,7 @@ export const getAllUserDataOnLogin = (id) => {
 			data.userInfo.authorPic,
 			data.userInfo.username
 		))
+		console.log("STORE", store.getState());
 	})
 }
 

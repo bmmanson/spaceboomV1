@@ -18,18 +18,12 @@ class Message extends Component {
 		return (
 			<View style={{flex: 7, 
 				borderStyle: 'solid', 
-				borderColor: '#8C8C8C', 
-				backgroundColor: '#FAFAFA', 
-				borderWidth: 1, 
-				borderRadius: 3, 
-				margin: 10,
-				marginTop: 2,
-				shadowOpacity: 0.8,
-				shadowRadius: 2,
-				shadowOffset: {
-					width: 1,
-					height: 1
-				}}}>
+				borderColor: '#8C8C8C',
+				borderBottomColor: '#DBDBDB', 
+				backgroundColor: '#F5F5F5', 
+				borderTopWidth: 1,
+				borderBottomWidth: 3
+				}}>
 				<MessageHeader 
 					author={this.props.message.author} 
 					locationName={this.props.message.locationName}

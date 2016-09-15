@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
 import { Text, View, Image } from 'react-native';
 
+import { CommentLikeButton } from './comment-like-button';
+
+
+//#C7C7C7
+
 class Comment extends Component {
 	render () {
 		return (
 			<View style={{flexDirection: 'row', 
 			flex: 1,
 			marginVertical: 8,
-			borderStyle: 'solid',
-			borderBottomWidth: 2, 
-			borderBottomColor: '#E0E0E0',
-			borderTopWidth: 1,
-			borderTopColor: '#E0E0E0'}}>
+			backgroundColor: '#F5F5F5',
+			}}>
 				<View style={{flex: 2, 
-					flexDirection: 'column', 
-					justifyContent: 'center',
-    				alignItems: 'center'}}>
+					flexDirection: 'column'}}>
 					<Image source={{uri: this.props.comment.authorPic}}
-				style={{height: 32, width: 32, borderRadius: 16}} />
+				style={{height: 36, width: 36, borderRadius: 18, alignSelf: 'center'}} />
 				</View>
 				<View style={{flex: 8, 
 					flexDirection: 'column'}}>
@@ -28,12 +28,19 @@ class Comment extends Component {
 						<Text style={{fontSize: 12, margin: 0}}>
 						{this.props.comment.body}
 						</Text>
-						<Text style={{fontSize: 10, color: '#C7C7C7', marginVertical: 6}}>
+						<Text style={{fontSize: 10, color: '#949494', marginVertical: 6}}>
 						5m ago
 						</Text>
 					</View>
 				</View>
-				<View style={{flex: 2, flexDirection: 'column'}}>
+				<View style={{flex: 3, 
+					flexDirection: 'column'}}>
+					<View>
+					<CommentLikeButton isLiked={this.props.comment.isLiked} />
+					<Text style={{fontSize: 10, textAlign: 'center', color: '#949494', marginTop: 6}}>
+						3 Likes
+					</Text>
+					</View>
 				</View>
 			</View>
 
@@ -42,63 +49,3 @@ class Comment extends Component {
 }
 
 export { Comment };
-
-			// <View style={{flex: 7, 
-			// 	borderStyle: 'solid', 
-			// 	borderColor: '#8C8C8C', 
-			// 	backgroundColor: '#FAFAFA', 
-			// 	borderWidth: 1, 
-			// 	borderRadius: 3, 
-			// 	margin: 10,
-			// 	marginTop: 2,
-			// 	shadowOpacity: 0.8,
-			// 	shadowRadius: 2,
-			// 	shadowOffset: {
-			// 		width: 1,
-			// 		height: 1
-			// 	}}}>
-			// 	<MessageHeader 
-			// 		author={this.props.message.author} 
-			// 		locationName={this.props.message.locationName}
-			// 		authorPic={this.props.message.authorPic} />
-			// 	<Text style={{flex: 3,
-			// 		minHeight: 40, 
-			// 		fontSize: 14, 
-			// 		marginHorizontal: 10, 
-			// 		marginTop: 10, 
-			// 		marginBottom: 6}}>
-			// 		{this.props.message.body}
-			// 	</Text>
-			// 	 <View style={{flex: 1, flexDirection: 'row'}}>
-			// 	 	<View style={{flex: 1, 
-			// 	 			justifyContent: 'center', 
-			// 	 			alignItems: 'center'
-			// 	 		}}>
-			// 		 	<Text style={{
-			// 				flexDirection: 'column',
-			// 		 		justifyContent: 'center',
-	  //   					alignItems: 'center',
-			// 		 		textAlign: 'center', 
-			// 		 		fontWeight: 'bold', 
-			// 		 		color: '#1874CD',
-	  //   					}}>
-			// 		 		Delete
-			// 		 	</Text>
-			// 	 	</View>
-			// 	 	<View style={{flex: 1, 
-			// 	 		justifyContent: 'center', 
-			// 	 		alignItems: 'center'
-			// 	 	}}>
-			// 		 	<Text style={{
-			// 		 		flexDirection: 'column',
-			// 		 		justifyContent: 'center',
-	  //   					alignItems: 'center',
-			// 		 		textAlign: 'center', 
-			// 		 		fontWeight: 'bold', 
-			// 		 		color: '#1874CD',
-			// 		 		}}>
-			// 		 		Report
-			// 		 	</Text>
-			// 	 	</View>
-			// 	</View>
-			// </View>
