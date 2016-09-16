@@ -1,4 +1,6 @@
 var express = require('express');
+var Promise = require('bluebird');
+
 var Message = require('./../../../models/message');
 var Discovery = require('./../../../models/discovery');
 var User = require('./../../../models/user');
@@ -7,18 +9,6 @@ var CommentLike = require('./../../../models/comment-like');
 var _db = require('./../../../models/_db');
 
 var router = express.Router();
-
-router.get('/message/:id', function (req, res, next) {
-	var messageId = req.params.id;
-	Comment.findAll({where: 
-		{
-			messageId: messageId
-		}
-	})
-	.then(function (comments) {
-		res.json(comments);
-	})
-});
 
 router.post('/message/:id', function (req, res, next) {
 	var text = req.body.text;
@@ -32,6 +22,67 @@ router.post('/message/:id', function (req, res, next) {
 	})
 	.then(function (comment) {
 		res.json(comment);
+	}).catch(next);
+});
+
+router.get('/message/:id', function (req, res, next) {
+	var userId;
+	var messageId = req.params.id;
+
+	if (req.user) {
+		userId = req.user.id;
+	} else {
+		userId = req.body.id;
+		//return res.sendStatus(401);
+	}
+
+	// for testing spinner
+	console.log("COMMENT MESSAGE ROUTE HIT");
+	for (var i=0; i<1000000000; ++i) {
+		var green = "green";
+	};
+	console.log("AFTER FOR LOOP");
+
+	Comment.findAll({
+		where: 
+			{
+				messageId: messageId
+			},
+		include: 
+			{
+				model: User,
+				as: "author"
+			}
+	})
+	.then(function (comments) {
+		var promisesToCheckIfUserLikedComment = [];
+		comments.forEach(function (comment) {
+			promisesToCheckIfUserLikedComment.push(
+				CommentLike.findOne({where: 
+					{
+						userId: userId,
+						commentId: comment.id
+					}
+				})
+				.then(function (result) {
+					if (result !== null) {
+						return {
+							isLikedByCurrentUser: true,
+							data: comment
+						};
+					} else {
+						return {
+							isLikedByCurrentUser: false,
+							data: comment
+						};
+					}
+				})
+			)
+		})
+		return Promise.all(promisesToCheckIfUserLikedComment); 
+	})
+	.then(function (comments) {
+		res.json(comments);
 	}).catch(next);
 });
 

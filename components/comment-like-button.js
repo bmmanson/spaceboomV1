@@ -5,8 +5,8 @@ class CommentLikeButton extends Component {
 	
 	render () {
 
-		const buttonStyle = function (isLiked) {
-			if (isLiked === true) {
+		const buttonStyle = function (isLikedByCurrentUser) {
+			if (isLikedByCurrentUser === true) {
 				return [likeButtonStyles.button, likeButtonStyles.liked];
 			} else {
 				return [likeButtonStyles.button, likeButtonStyles.notLiked]; 
@@ -14,12 +14,11 @@ class CommentLikeButton extends Component {
 		};
 
 		return (
-			<View style={buttonStyle(this.props.isLiked)}>
+			<View style={buttonStyle(this.props.isLikedByCurrentUser)}>
 				<Text style={likeButtonStyles.text}>
 					LIKE
 				</Text>
 			</View>
-
 		);
 	}
 }

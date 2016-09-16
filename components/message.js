@@ -66,7 +66,7 @@ class Message extends Component {
 					 		fontWeight: 'bold', 
 					 		color: '#1874CD',
 	    					}}>
-					 		{commentButtonText(this.props.message.comments)}
+					 		{commentButtonText(this.props.numberOfComments)}
 					 	</Text>
 				 	</View>
 				 	<View style={{flex: 1, 

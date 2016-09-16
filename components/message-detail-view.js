@@ -1,12 +1,34 @@
 import React, { Component } from 'react';
 import { Text, View, MapView, ScrollView } from 'react-native';
+import { connect } from 'react-redux';
 
 import { styles } from './../styles/main';
 import { DeleteMessageButton } from './delete-message-button';
 import { Message } from './message';
 import { Comments } from './comments';
 
-class MessageDetailView extends Component {
+import { getCommentsForMessage } from './../async/';
+import { store } from './../store';
+
+class MessageDetail extends Component {
+
+	constructor(props) {
+		super(props);
+		this.state = {
+			downloadComplete: false
+		};
+	}
+
+	componentWillMount() {
+		getCommentsForMessage(this.props.message.id)
+		.then( (status) => {
+			if (status === "COMPLETE") {
+				this.setState({
+					downloadComplete: true
+				});
+			}
+		});
+	}
 
 	render () {
 
@@ -23,8 +45,10 @@ class MessageDetailView extends Component {
 					shadowOffset: {
 						width: 1,
 						height: 1}}}>
-					<Message message={this.props.message} />
-					<Comments comments={this.props.message.comments} />
+					<Message message={this.props.message}
+							numberOfComments={this.props.comments.length} />
+					<Comments comments={this.props.comments} 
+							  downloadComplete={this.state.downloadComplete} />
 				</View>
 				<View style={{height: 240, marginVertical: 12}}>
 					<MapView style={{flex: 1, 
@@ -48,5 +72,19 @@ class MessageDetailView extends Component {
 		);
 	}
 }
+
+const sortedComments = (comments) => {
+	return comments.sort((a, b) => a.id - b.id);
+}
+
+const mapStateToProps = (state) => {
+	return {
+		comments: sortedComments(state.comments),
+	};
+}
+
+const MessageDetailView = connect(
+	mapStateToProps
+)(MessageDetail);
 
 export { MessageDetailView };

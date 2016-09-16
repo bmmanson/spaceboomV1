@@ -3,7 +3,8 @@ import {
 	addDiscoveredMessage,
 	addSentMessage,
 	addCurrentSessionOnLogin,
-	addComment 
+	addComment,
+	deleteAllComments 
 } from './../actions';
 
 const httpRequestForNewDiscoveredMessage = (latitude, longitude, id) => {
@@ -65,6 +66,11 @@ const httpRequestToLikeComment = (commentId) => {
 	return fetch(url, {method: "POST"});
 }
 
+const httpRequestForCommentsForMessage = (messageId) => {
+	let url = "http://localhost:1337/api/comment/message/" + messageId;
+	return fetch(url, {method: "GET"});
+}
+
 export const postNewMessageToServer = (text, authorId, latitude, longitude, locationName, city) => {
 	return httpRequestToPostNewMessage(text, authorId, latitude, longitude, locationName, city)
 	.then((response) => response.json())
@@ -78,7 +84,43 @@ export const postCommentAsLikedOnServer = (commentId) => {
 			//do something
 		}
 	})
-} 
+}
+
+export const getCommentsForMessage = (messageId) => {
+	//display error if download unsuccessful
+	store.dispatch(deleteAllComments());
+	return httpRequestForCommentsForMessage(messageId)
+	.then((response) => response.json())
+	.then((comments) => {
+		if (comments.length) {
+			comments.forEach( c => {
+				let id = c.data.id;
+				let messageId = c.data.messageId;
+				let body = c.data.text;
+				let author = c.data.author.name;
+				let authorPic = c.data.author.authorPic;
+				let currentUser = true;
+				let isLikedByCurrentUser = c.isLikedByCurrentUser;
+				let numberOfLikes = c.data.numberOfLikes;
+				store.dispatch(addComment(
+					id,
+					messageId,
+					body,
+					author,
+					authorPic,
+					currentUser,
+					isLikedByCurrentUser,
+					numberOfLikes
+				));
+			})
+			console.log("NEW COMMENTS ADDED:", store.getState());
+			return "COMPLETE";
+		} else {
+			console.log("NO NEW COMMENTS ADDED");
+			return "COMPLETE";
+		}
+	})
+}
 
 export const getAllUserDataOnLogin = (id) => {
 	return httpRequestForAllUserDataOnLogin(id)
@@ -107,21 +149,21 @@ export const getAllUserDataOnLogin = (id) => {
 				locationName,
 				city
 			));
-			if (m.comment) {
-				m.comment.forEach( c => {
-					console.log("SENT MESSAGE COMMENT", c);
-					store.dispatch(addComment(
-						c.id,
-						id,
-						c.text,
-						c.author.name,
-						c.author.authorPic,
-						currentUser,
-						isLiked,
-						c.numberOfLikes
-					));
-				})
-			}
+			// if (m.comment) {
+			// 	m.comment.forEach( c => {
+			// 		console.log("SENT MESSAGE COMMENT", c);
+			// 		store.dispatch(addComment(
+			// 			c.id,
+			// 			id,
+			// 			c.text,
+			// 			c.author.name,
+			// 			c.author.authorPic,
+			// 			currentUser,
+			// 			isLiked,
+			// 			c.numberOfLikes
+			// 		));
+			// 	})
+			// }
 		}
 		for (var message in data.discoveredMessages) {
 			console.log("DISCOVERED", data.discoveredMessages[message]);
@@ -148,21 +190,21 @@ export const getAllUserDataOnLogin = (id) => {
 				city,
 				unread
 			));
-			if (m.comment) {
-				m.comment.forEach( c => {
-					console.log("DISCOVERED MESSAGE COMMENT", c);
-					store.dispatch(addComment(
-						c.id,
-						id,
-						c.text,
-						c.author.name,
-						c.author.authorPic,
-						currentUser,
-						isLiked,
-						c.numberOfLikes
-					));
-				})
-			}
+			// if (m.comment) {
+			// 	m.comment.forEach( c => {
+			// 		console.log("DISCOVERED MESSAGE COMMENT", c);
+			// 		store.dispatch(addComment(
+			// 			c.id,
+			// 			id,
+			// 			c.text,
+			// 			c.author.name,
+			// 			c.author.authorPic,
+			// 			currentUser,
+			// 			isLiked,
+			// 			c.numberOfLikes
+			// 		));
+			// 	})
+			// }
 		}
 		store.dispatch(addCurrentSessionOnLogin(
 			data.userInfo.id,

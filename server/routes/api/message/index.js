@@ -7,6 +7,7 @@ var Message = require('./../../../models/message');
 var User = require('./../../../models/user');
 var Discovery = require('./../../../models/discovery');
 var Comment = require('./../../../models/comment');
+var CommentLike = require('./../../../models/comment-like');
 
 var googleCredentials = require('./../../../../google-credentials');
 var utils = require('./utils');
