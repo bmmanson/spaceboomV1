@@ -117,7 +117,8 @@ export const getAllUserDataOnLogin = (id) => {
 						c.author.name,
 						c.author.authorPic,
 						currentUser,
-						isLiked
+						isLiked,
+						c.numberOfLikes
 					));
 				})
 			}
@@ -157,7 +158,8 @@ export const getAllUserDataOnLogin = (id) => {
 						c.author.name,
 						c.author.authorPic,
 						currentUser,
-						isLiked
+						isLiked,
+						c.numberOfLikes
 					));
 				})
 			}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, Image } from 'react-native';
 
-import { CommentLikeButton } from './comment-like-button';
+import { CommentLikeButtonAndCounter } from './comment-like-button-and-counter';
 
 
 //#C7C7C7
@@ -33,14 +33,8 @@ class Comment extends Component {
 						</Text>
 					</View>
 				</View>
-				<View style={{flex: 3, 
-					flexDirection: 'column'}}>
-					<View>
-					<CommentLikeButton isLiked={this.props.comment.isLiked} />
-					<Text style={{fontSize: 10, textAlign: 'center', color: '#949494', marginTop: 6}}>
-						3 Likes
-					</Text>
-					</View>
+				<View style={{flex: 3, flexDirection: 'column'}}>
+					<CommentLikeButtonAndCounter comment={this.props.comment} />
 				</View>
 			</View>
 

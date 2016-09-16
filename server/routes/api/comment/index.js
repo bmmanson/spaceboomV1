@@ -8,6 +8,18 @@ var _db = require('./../../../models/_db');
 
 var router = express.Router();
 
+router.get('/message/:id', function (req, res, next) {
+	var messageId = req.params.id;
+	Comment.findAll({where: 
+		{
+			messageId: messageId
+		}
+	})
+	.then(function (comments) {
+		res.json(comments);
+	})
+});
+
 router.post('/message/:id', function (req, res, next) {
 	var text = req.body.text;
 	var authorId = req.body.authorId;

@@ -65,7 +65,7 @@ export const addDiscoveredMessage = function (id, body, author, authorPic, latit
 	};
 }
 
-export const addComment = function (id, messageId, body, author, authorPic, currentUser, isLiked) {
+export const addComment = function (id, messageId, body, author, authorPic, currentUser, isLiked, numberOfLikes) {
 	return {
 		type: 'ADD_COMMENT',
 		id,
@@ -74,7 +74,8 @@ export const addComment = function (id, messageId, body, author, authorPic, curr
 		author,
 		authorPic,
 		currentUser,
-		isLiked
+		isLiked,
+		numberOfLikes
 	};
 }
 
