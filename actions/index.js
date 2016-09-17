@@ -79,6 +79,24 @@ export const addComment = function (id, messageId, body, author, authorPic, curr
 	};
 }
 
+export const markCommentAsLiked = function (commentId, numberOfLikes) {
+	console.log("gets to action");
+	return {
+		type: 'MARK_AS_LIKED',
+		id: commentId,
+		numberOfLikes
+	}
+}
+
+export const markCommentAsUnliked = function (commentId, numberOfLikes) {
+	console.log("gets to action");
+	return {
+		type: 'MARK_AS_UNLIKED',
+		id: commentId,
+		numberOfLikes
+	}
+}
+
 export const deleteAllComments = function () {
 	return {
 		type: 'DELETE_ALL_COMMENTS'

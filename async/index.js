@@ -4,7 +4,10 @@ import {
 	addSentMessage,
 	addCurrentSessionOnLogin,
 	addComment,
-	deleteAllComments 
+	deleteAllComments,
+	markCommentAsLiked,
+	markCommentAsUnliked
+
 } from './../actions';
 
 const httpRequestForNewDiscoveredMessage = (latitude, longitude, id) => {
@@ -66,6 +69,11 @@ const httpRequestToLikeComment = (commentId) => {
 	return fetch(url, {method: "POST"});
 }
 
+const httpRequestToUnlikeComment = (commentId) => {
+	let url = "http://localhost:1337/api/comment/like/" + commentId;
+	return fetch(url, {method: "DELETE"});
+}
+
 const httpRequestForCommentsForMessage = (messageId) => {
 	let url = "http://localhost:1337/api/comment/message/" + messageId;
 	return fetch(url, {method: "GET"});
@@ -76,12 +84,24 @@ export const postNewMessageToServer = (text, authorId, latitude, longitude, loca
 	.then((response) => response.json())
 }
 
-export const postCommentAsLikedOnServer = (commentId) => {
+export const postCommentAsLikedOnServer = (commentId, numberOfLikes) => {
 	return httpRequestToLikeComment(commentId)
 	.then((response) => response.json())
 	.then((data) => {
 		if (data) {
-			//do something
+			store.dispatch(markCommentAsLiked(commentId, numberOfLikes));
+			return "COMPLETE";
+		}
+	})
+}
+
+export const postCommentAsUnlikedOnServer = (commentId, numberOfLikes) => {
+	return httpRequestToUnlikeComment(commentId)
+	.then((response) => response.json())
+	.then((data) => {
+		if (data) {
+			store.dispatch(markCommentAsUnliked(commentId, numberOfLikes));
+			return "COMPLETE";
 		}
 	})
 }
@@ -149,21 +169,6 @@ export const getAllUserDataOnLogin = (id) => {
 				locationName,
 				city
 			));
-			// if (m.comment) {
-			// 	m.comment.forEach( c => {
-			// 		console.log("SENT MESSAGE COMMENT", c);
-			// 		store.dispatch(addComment(
-			// 			c.id,
-			// 			id,
-			// 			c.text,
-			// 			c.author.name,
-			// 			c.author.authorPic,
-			// 			currentUser,
-			// 			isLiked,
-			// 			c.numberOfLikes
-			// 		));
-			// 	})
-			// }
 		}
 		for (var message in data.discoveredMessages) {
 			console.log("DISCOVERED", data.discoveredMessages[message]);
@@ -190,21 +195,6 @@ export const getAllUserDataOnLogin = (id) => {
 				city,
 				unread
 			));
-			// if (m.comment) {
-			// 	m.comment.forEach( c => {
-			// 		console.log("DISCOVERED MESSAGE COMMENT", c);
-			// 		store.dispatch(addComment(
-			// 			c.id,
-			// 			id,
-			// 			c.text,
-			// 			c.author.name,
-			// 			c.author.authorPic,
-			// 			currentUser,
-			// 			isLiked,
-			// 			c.numberOfLikes
-			// 		));
-			// 	})
-			// }
 		}
 		store.dispatch(addCurrentSessionOnLogin(
 			data.userInfo.id,

@@ -21,6 +21,5 @@ Discovery.belongsTo(Message);
 
 User.belongsToMany(Comment, {as: "user", through: 'commentlike', foreignKey: 'userId'});
 Comment.belongsToMany(User, {as: "comment", through: 'commentlike', foreignKey: 'commentId'});
-CommentLike.belongsTo(Comment);
 
 module.exports = db;

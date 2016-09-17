@@ -37,7 +37,7 @@ router.get('/message/:id', function (req, res, next) {
 	}
 
 	// for testing spinner
-	console.log("COMMENT MESSAGE ROUTE HIT");
+	console.log("COMMENT MESSAGE ROUTE HIT. SIMULATING DOWNLOAD");
 	for (var i=0; i<1000000000; ++i) {
 		var green = "green";
 	};

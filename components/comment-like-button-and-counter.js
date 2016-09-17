@@ -18,7 +18,7 @@ class CommentLikeButtonAndCounter extends Component {
 
 		return (
 			<View>
-				<CommentLikeButton isLikedByCurrentUser={this.props.comment.isLikedByCurrentUser} />
+				<CommentLikeButton comment={this.props.comment} />
 				<Text style={{fontSize: 10, textAlign: 'center', color: '#949494', marginTop: 6}}>
 					{renderNumberOfLikes(this.props.comment)}
 				</Text>

@@ -8,6 +8,7 @@ import { Message } from './message';
 import { Comments } from './comments';
 
 import { getCommentsForMessage } from './../async/';
+import { markCommentAsLiked, markCommentAsUnliked } from './../actions';
 import { store } from './../store';
 
 class MessageDetail extends Component {
@@ -83,8 +84,18 @@ const mapStateToProps = (state) => {
 	};
 }
 
+const mapDispatchToProps = (dispatch) => ({
+		likeComment (commentId, numberOfLikes) {
+			dispatch(markCommentAsLiked(commentId, numberOfLikes));
+		},
+		dislikeComment (commentId, numberOfLikes) {
+			dispatch(markCommentAsUnliked(commentId, numberOfLikes));
+		}
+});
+
 const MessageDetailView = connect(
-	mapStateToProps
+	mapStateToProps,
+	mapDispatchToProps
 )(MessageDetail);
 
 export { MessageDetailView };
