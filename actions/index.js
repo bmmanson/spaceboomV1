@@ -36,13 +36,14 @@ export const deleteMessage = function (id) {
 	};
 }
 
-export const addSentMessage = function (id, body, author, authorPic, latitude, longitude, locationName, city, timesDiscovered) {
+export const addSentMessage = function (id, body, author, authorPic, authorId, latitude, longitude, locationName, city, timesDiscovered) {
 	return {
 		type: 'ADD_SENT_MESSAGE', 
 		id,
 		body, 
 		author, 
-		authorPic, 
+		authorPic,
+		authorId, 
 		latitude,
 		longitude, 
 		locationName, 
@@ -51,13 +52,14 @@ export const addSentMessage = function (id, body, author, authorPic, latitude, l
 	};
 }
 
-export const addDiscoveredMessage = function (id, body, author, authorPic, latitude, longitude, locationName, city, unread, timesDiscovered) {
+export const addDiscoveredMessage = function (id, body, author, authorPic, authorId, latitude, longitude, locationName, city, unread, timesDiscovered) {
 	return {
 		type: 'ADD_DISCOVERED_MESSAGE', 
 		id,
 		body, 
 		author, 
-		authorPic, 
+		authorPic,
+		authorId, 
 		latitude,
 		longitude, 
 		locationName, 
@@ -67,7 +69,14 @@ export const addDiscoveredMessage = function (id, body, author, authorPic, latit
 	};
 }
 
-export const addComment = function (id, messageId, body, author, authorPic, currentUser, isLikedByCurrentUser, numberOfLikes) {
+export const deleteComment = function (id) {
+	return {
+		type: 'DELETE_COMMENT',
+		id
+	};
+}
+
+export const addComment = function (id, messageId, body, author, authorPic, authorId, currentUser, isLikedByCurrentUser, numberOfLikes) {
 	return {
 		type: 'ADD_COMMENT',
 		id,
@@ -75,6 +84,7 @@ export const addComment = function (id, messageId, body, author, authorPic, curr
 		body,
 		author,
 		authorPic,
+		authorId,
 		currentUser,
 		isLikedByCurrentUser,
 		numberOfLikes

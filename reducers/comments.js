@@ -42,6 +42,7 @@ export const comments = (state = [], action) => {
           body: action.body,
           author: action.author,
           authorPic: action.authorPic,
+          authorId: action.authorId,
           currentUser: action.currentUser,
           isLikedByCurrentUser: action.isLikedByCurrentUser,
           numberOfLikes: action.numberOfLikes

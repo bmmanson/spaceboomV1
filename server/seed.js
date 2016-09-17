@@ -271,7 +271,10 @@ var data = {
 		text: "I'm commenting on my own post because I can. Also I can be a long comment, because I've never seen a long comment before. Aren't you curious how long I can be?",
 		authorId: 1,
 		messageId: 14
-		}
+		},
+		text: "I'm Joe and I'm commenting on this.",
+		authorId: 1,
+		messageId: 13
 	],
 	commentlike:
 	[

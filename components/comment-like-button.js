@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, TouchableHighlight } from 'react-native';
-import { connect } from 'react-redux';
 
 import { store } from './../store';
 import { postCommentAsLikedOnServer, postCommentAsUnlikedOnServer} from './../async';

@@ -46,7 +46,10 @@ router.get('/message/:id', function (req, res, next) {
 	Comment.findAll({
 		where: 
 			{
-				messageId: messageId
+				messageId: messageId,
+				deletedByUser: {
+					$not: true
+				}
 			},
 		include: 
 			{
@@ -145,7 +148,7 @@ router.put('/deletedByUser/:id', function (req, res, next) {
 		return comment.update({deletedByUser: true})
 	})
 	.then(function (comment) {
-		console.log("DELETING COMMENT", comment);
+		console.log("COMMENT WITH ID", deletedMessageId, "DELETED BY USER");
 		res.json({comment});
 	}).catch(next);
 });

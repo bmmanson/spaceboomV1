@@ -8,18 +8,18 @@ class Comments extends Component {
 
 	render() {
 
-		let displayComments = function(comments) {
+		let displayComments = function(comments, message) {
 			
 			if (comments.length) {
 				return (
 					comments.map((comment, i) =>
-						(<Comment comment={comment} key={i} />)
+						(<Comment comment={comment} message={message} key={i} />)
 					)
 				)
 			} 
 		}
 
-		let displayCommentsWhenDownloadCompletes = function (comments, downloadComplete) {
+		let displayCommentsWhenDownloadCompletes = function (comments, message, downloadComplete) {
 			if (downloadComplete === true) {
 				return (
 					<View style={{flex: 7, 
@@ -28,7 +28,7 @@ class Comments extends Component {
 							borderColor: '#8C8C8C', 
 							borderBottomWidth: 1,
 							}}>
-						{displayComments(comments)}
+						{displayComments(comments, message)}
 					</View>
 				);
 			} else {
@@ -53,7 +53,7 @@ class Comments extends Component {
 
 		return (
 			<View>
-			{displayCommentsWhenDownloadCompletes(this.props.comments, this.props.downloadComplete)}
+			{displayCommentsWhenDownloadCompletes(this.props.comments, this.props.message, this.props.downloadComplete)}
 			</View>
 		);
 	}

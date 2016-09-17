@@ -6,9 +6,11 @@ import {
 	addComment,
 	deleteAllComments,
 	markCommentAsLiked,
-	markCommentAsUnliked
-
+	markCommentAsUnliked,
+	deleteComment
 } from './../actions';
+
+export let currentUserId;
 
 const httpRequestForNewDiscoveredMessage = (latitude, longitude, id) => {
 	let url = `http://localhost:1337/api/discovery/new?latitude=${latitude}&longitude=${longitude}&userId=${id}`
@@ -79,9 +81,25 @@ const httpRequestForCommentsForMessage = (messageId) => {
 	return fetch(url, {method: "GET"});
 }
 
+const httpRequestForDeleteComment = (commentId) => {
+	let url = "http://localhost:1337/api/comment/deletedByUser/" + commentId;
+	return fetch(url, {method: "PUT"});
+}
+
 export const postNewMessageToServer = (text, authorId, latitude, longitude, locationName, city) => {
 	return httpRequestToPostNewMessage(text, authorId, latitude, longitude, locationName, city)
 	.then((response) => response.json())
+}
+
+export const deleteCommentOnServer = (commentId) => {
+	return httpRequestForDeleteComment(commentId)
+	.then((response) => response.json())
+	.then((data) => {
+		if (data) {
+			store.dispatch(deleteComment(commentId));
+			return "COMPLETE";
+		}
+	})
 }
 
 export const postCommentAsLikedOnServer = (commentId, numberOfLikes) => {
@@ -114,12 +132,18 @@ export const getCommentsForMessage = (messageId) => {
 	.then((comments) => {
 		if (comments.length) {
 			comments.forEach( c => {
+				let currentUser;
 				let id = c.data.id;
 				let messageId = c.data.messageId;
 				let body = c.data.text;
 				let author = c.data.author.name;
 				let authorPic = c.data.author.authorPic;
-				let currentUser = true;
+				let authorId = c.data.authorId;
+				if (authorId === currentUserId) {
+					currentUser = true;
+				} else {
+					currentUser = false;
+				}
 				let isLikedByCurrentUser = c.isLikedByCurrentUser;
 				let numberOfLikes = c.data.numberOfLikes;
 				store.dispatch(addComment(
@@ -128,6 +152,7 @@ export const getCommentsForMessage = (messageId) => {
 					body,
 					author,
 					authorPic,
+					authorId,
 					currentUser,
 					isLikedByCurrentUser,
 					numberOfLikes
@@ -153,6 +178,7 @@ export const getAllUserDataOnLogin = (id) => {
 			let text = m.text; 
 			let author = m.author.name;
 			let authorPic = m.author.authorPic;
+			let authorId = m.author.id;
 			let latitude = parseFloat(m.latitude);
 			let longitude = parseFloat(m.longitude);
 			let locationName = m.locationName;
@@ -165,6 +191,7 @@ export const getAllUserDataOnLogin = (id) => {
 				text,
 				author,
 				authorPic,
+				authorId,
 				latitude,
 				longitude,
 				locationName,
@@ -179,6 +206,7 @@ export const getAllUserDataOnLogin = (id) => {
 			let text = m.text;
 			let author = m.author.name;
 			let authorPic = m.author.authorPic;
+			let authorId = m.author.id;
 			let latitude = parseFloat(m.latitude);
 			let longitude = parseFloat(m.longitude);
 			let locationName = m.locationName;
@@ -192,6 +220,7 @@ export const getAllUserDataOnLogin = (id) => {
 				text,
 				author,
 				authorPic,
+				authorId,
 				latitude,
 				longitude,
 				locationName,
@@ -200,6 +229,7 @@ export const getAllUserDataOnLogin = (id) => {
 				timesDiscovered
 			));
 		}
+		currentUserId = data.userInfo.id;
 		store.dispatch(addCurrentSessionOnLogin(
 			data.userInfo.id,
 			data.userInfo.email,
