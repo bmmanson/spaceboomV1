@@ -8,7 +8,7 @@ class Message extends Component {
 	render () {
 
 		function commentButtonText(comments) {
-			if (!comments || !comments.length) {
+			if (comments.length === 0 || !comments) {
 				return "Reply";
 			} else {
 				return "Reply (" + comments.length + ")";
@@ -66,7 +66,7 @@ class Message extends Component {
 					 		fontWeight: 'bold', 
 					 		color: '#1874CD',
 	    					}}>
-					 		{commentButtonText(this.props.numberOfComments)}
+					 		{commentButtonText(this.props.comments)}
 					 	</Text>
 				 	</View>
 				 	<View style={{flex: 1, 

@@ -47,7 +47,7 @@ class MessageDetail extends Component {
 						width: 1,
 						height: 1}}}>
 					<Message message={this.props.message}
-							numberOfComments={this.props.comments.length} />
+							comments={this.props.comments} />
 					<Comments comments={this.props.comments} 
 							  downloadComplete={this.state.downloadComplete} />
 				</View>
