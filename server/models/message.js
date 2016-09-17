@@ -28,6 +28,10 @@ var Message = db.define('message', {
 	numberOfLikes: {
 		type: Sequelize.INTEGER,
 		defaultValue: 0
+	},
+	timesDiscovered: {
+		type: Sequelize.INTEGER,
+		defaultValue: 0
 	}
 });
 

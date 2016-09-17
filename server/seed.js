@@ -177,6 +177,10 @@ var data = {
 		discovererId: 2
 		},
 		{
+		messageId: 1,
+		discovererId: 4
+		},
+		{
 		messageId: 2,
 		discovererId: 2
 		},
@@ -205,12 +209,29 @@ var data = {
 		discovererId: 2
 		},
 		{
+		messageId: 8,
+		discovererId: 3
+		},
+		{
 		messageId: 9,
 		discovererId: 2
 		},
 		{
+		messageId: 9,
+		discovererId: 3
+		},
+		{
 		messageId: 15,
-		discoveredId: 2
+		discovererId: 2
+		}
+		,
+		{
+		messageId: 15,
+		discovererId: 3
+		},
+		{
+		messageId: 15,
+		discovererId: 4
 		}
 	],
 	comment: 
@@ -235,6 +256,21 @@ var data = {
 		text: "Ok.",
 		authorId: 2,
 		messageId: 15
+		},
+		{
+		text: "You both are right.",
+		authorId: 4,
+		messageId: 15
+		},
+		{
+		text: "I was written in Postico originally, but now I am reborn again and again thanks to a seed file.",
+		authorId: 1,
+		messageId: 14
+		},
+		{
+		text: "I'm commenting on my own post because I can. Also I can be a long comment, because I've never seen a long comment before. Aren't you curious how long I can be?",
+		authorId: 1,
+		messageId: 14
 		}
 	],
 	commentlike:
