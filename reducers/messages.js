@@ -33,7 +33,8 @@ export const messages = (state = [], action) => {
           locationName: action.locationName,
           city: action.city,
           currentUser: true,
-          unread: false
+          unread: false,
+          timesDiscovered: action.timesDiscovered
         }
       ]
     case 'ADD_DISCOVERED_MESSAGE':
@@ -50,7 +51,8 @@ export const messages = (state = [], action) => {
           city: action.city,
           currentUser: false,
           unread: action.unread,
-          reported: false
+          reported: false,
+          timesDiscovered: action.timesDiscovered
         }
       ]
     case 'DELETE_ALL_MESSAGES':

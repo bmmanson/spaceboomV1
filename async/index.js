@@ -159,6 +159,7 @@ export const getAllUserDataOnLogin = (id) => {
 			let city = m.city;
 			let currentUser = true;
 			let isLiked = true;
+			let timesDiscovered = m.timesDiscovered;
 			store.dispatch(addSentMessage(
 				id,
 				text,
@@ -167,7 +168,8 @@ export const getAllUserDataOnLogin = (id) => {
 				latitude,
 				longitude,
 				locationName,
-				city
+				city,
+				timesDiscovered
 			));
 		}
 		for (var message in data.discoveredMessages) {
@@ -183,6 +185,7 @@ export const getAllUserDataOnLogin = (id) => {
 			let city = m.city;
 			let currentUser = true;
 			let isLiked = false;
+			let timesDiscovered = m.timesDiscovered;
 			let unread = data.discoveredMessages[message].unread;
 			store.dispatch(addDiscoveredMessage(
 				id,
@@ -193,7 +196,8 @@ export const getAllUserDataOnLogin = (id) => {
 				longitude,
 				locationName,
 				city,
-				unread
+				unread,
+				timesDiscovered
 			));
 		}
 		store.dispatch(addCurrentSessionOnLogin(

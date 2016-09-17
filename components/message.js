@@ -7,11 +7,19 @@ class Message extends Component {
 
 	render () {
 
-		function commentButtonText(comments) {
+		function commentButtonText (comments) {
 			if (comments.length === 0 || !comments) {
 				return "Reply";
 			} else {
 				return "Reply (" + comments.length + ")";
+			}
+		}
+
+		function displayTimesDiscovered (message) {
+			if (message.timesDiscovered === 1) {
+				return "Discovered 1 time.";
+			} else {
+				return "Discovered " + message.timesDiscovered + " times.";
 			}
 		}
 
@@ -50,7 +58,7 @@ class Message extends Component {
 					<Text style={{fontSize: 12,
 					 	textAlign: 'left'
 					}}>
-						Discovered 0 times.
+						{displayTimesDiscovered(this.props.message)}
 					</Text>
 				</View>
 				 <View style={{flex: 1, flexDirection: 'row'}}>
