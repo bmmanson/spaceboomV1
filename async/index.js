@@ -86,6 +86,25 @@ const httpRequestForDeleteComment = (commentId) => {
 	return fetch(url, {method: "PUT"});
 }
 
+const httpRequestToAddComment = (messageId, text) => {
+	let url = "http://localhost:1337/api/comment/message/" + messageId;
+	let message = {
+		text, 
+		messageId
+	};
+
+	message = JSON.stringify(message);
+
+	let request = {
+		headers: {
+			'Content-Type': 'application/json'
+  		},
+  		method: "POST",
+  		body: message
+    }
+    return fetch(url, request);
+}
+
 export const postNewMessageToServer = (text, authorId, latitude, longitude, locationName, city) => {
 	return httpRequestToPostNewMessage(text, authorId, latitude, longitude, locationName, city)
 	.then((response) => response.json())
@@ -119,6 +138,28 @@ export const postCommentAsUnlikedOnServer = (commentId, numberOfLikes) => {
 	.then((data) => {
 		if (data) {
 			store.dispatch(markCommentAsUnliked(commentId, numberOfLikes));
+			return "COMPLETE";
+		}
+	})
+}
+
+export const addCommentOnServer = (messageId, text) => {
+	return httpRequestToAddComment(messageId, text)
+	.then((response) => response.json())
+	.then((comment) => {
+		if (comment) {
+			console.log("ADDING COMMENT TO MESSAGE. THE COMMENT:", comment);
+			store.dispatch(addComment(
+				comment.id,
+				comment.messageId,
+				comment.text,
+				comment.author.name,
+				comment.author.authorPic,
+				comment.author.id,
+				true,
+				false,
+				comment.numberOfLikes
+			));
 			return "COMPLETE";
 		}
 	})

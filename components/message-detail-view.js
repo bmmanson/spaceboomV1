@@ -6,6 +6,7 @@ import { styles } from './../styles/main';
 import { DeleteMessageButton } from './delete-message-button';
 import { Message } from './message';
 import { Comments } from './comments';
+import { CommentReply } from './comment-reply';
 
 import { getCommentsForMessage } from './../async/';
 import { markCommentAsLiked, markCommentAsUnliked } from './../actions';
@@ -35,7 +36,7 @@ class MessageDetail extends Component {
 
 		return (
 			<View style={{flex: 1}}>
-				<ScrollView style={{flex: 10, backgroundColor: '#D9D9D9'}}> 
+				<ScrollView style={{backgroundColor: '#D9D9D9'}}> 
 					<View style={{
 						marginTop: 0,
 						marginBottom: 6,
@@ -68,6 +69,7 @@ class MessageDetail extends Component {
 					</View>
 					<DeleteMessageButton message={this.props.message}/>
 				</ScrollView>
+				<CommentReply message={this.props.message} />
 			</View>
 		);
 	}

@@ -12,8 +12,14 @@ var router = express.Router();
 
 router.post('/message/:id', function (req, res, next) {
 	var text = req.body.text;
-	var authorId = req.body.authorId;
+	var authorId = req.user.id;
 	var messageId = req.params.id;
+
+	console.log("POST COMMENT MESSAGE ROUTE HIT. SIMULATING DOWNLOAD");
+	for (var i=0; i<1000000000; ++i) {
+		var green = "green";
+	};
+	console.log("AFTER FOR LOOP");
 
 	Comment.create({
 		text: text,
@@ -21,7 +27,24 @@ router.post('/message/:id', function (req, res, next) {
 		messageId: messageId
 	})
 	.then(function (comment) {
-		res.json(comment);
+		console.log("ID OF NEW COMMENT IS THIS:", comment.id);
+		return Comment.findOne({
+			where: 
+			{
+				id: 
+				comment.id
+			},
+			include: 
+			{
+				model: User,
+				as: "author"
+			}	
+		})
+	})
+	.then(function (newComment) {
+		console.log("NEW COMMENT", newComment);
+		console.log("USER WITH ID", authorId, "CREATED NEW COMMENT");
+		res.json(newComment);
 	}).catch(next);
 });
 
@@ -32,12 +55,11 @@ router.get('/message/:id', function (req, res, next) {
 	if (req.user) {
 		userId = req.user.id;
 	} else {
-		userId = req.body.id;
-		//return res.sendStatus(401);
+		return res.sendStatus(401);
 	}
 
 	// for testing spinner
-	console.log("COMMENT MESSAGE ROUTE HIT. SIMULATING DOWNLOAD");
+	console.log("GET COMMENT MESSAGE ROUTE HIT. SIMULATING DOWNLOAD");
 	for (var i=0; i<1000000000; ++i) {
 		var green = "green";
 	};
@@ -97,7 +119,7 @@ router.post('/like/:id', function (req, res, next) {
 	if (req.user) {
 		userId = req.user.id;
 	} else {
-		userId = req.body.id;
+		return sendStatus(401);
 	}
 
 	//not safe -- first should make sure that the like doesn't already exist
@@ -119,7 +141,7 @@ router.delete('/like/:id', function (req, res, next) {
 	if (req.user) {
 		userId = req.user.id;
 	} else {
-		userId = req.body.id;
+		return sendStatus(401);
 	}
 
 	CommentLike.findOne({where: 
