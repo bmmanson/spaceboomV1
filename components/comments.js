@@ -5,7 +5,6 @@ import { Comment } from './comment';
 
 class Comments extends Component {
 
-
 	render() {
 
 		let displayComments = function(comments, message) {
@@ -24,9 +23,6 @@ class Comments extends Component {
 				return (
 					<View style={{flex: 7, 
 							backgroundColor: '#F5F5F5',
-							borderStyle: 'solid', 
-							borderColor: '#8C8C8C', 
-							borderBottomWidth: 1,
 							}}>
 						{displayComments(comments, message)}
 					</View>
@@ -34,10 +30,7 @@ class Comments extends Component {
 			} else {
 				return (
 					<View style={{flex: 7, 
-							backgroundColor: '#F5F5F5',
-							borderStyle: 'solid', 
-							borderColor: '#8C8C8C', 
-							borderBottomWidth: 1,
+							backgroundColor: '#F5F5F5'
 							}}>
 						<View>
 							<Image source={require('./../img/spinner.gif')}

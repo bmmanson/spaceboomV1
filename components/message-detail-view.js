@@ -6,6 +6,7 @@ import { styles } from './../styles/main';
 import { DeleteMessageButton } from './delete-message-button';
 import { Message } from './message';
 import { Comments } from './comments';
+import { MessageMap } from './message-map';
 import { CommentReply } from './comment-reply';
 
 import { getCommentsForMessage } from './../async/';
@@ -50,22 +51,7 @@ class MessageDetail extends Component {
 						<Comments comments={this.props.comments} 
 								  message={this.props.message}
 								  downloadComplete={this.state.downloadComplete} />
-					</View>
-					<View style={{height: 240, marginVertical: 12}}>
-						<MapView style={{flex: 1, 
-							justifyContent: 'space-between',
-						shadowOpacity: 0.8,
-						shadowRadius: 2,
-						shadowOffset: {
-							width: 1,
-							height: 1}}}
-									showUsersLocation={false}
-									scrollEnabled={false}
-									zoomEnabled={false} 
-									region={{latitude: this.props.message.latitude, 
-											longitude: this.props.message.longitude,
-											latitudeDelta: 0.005,
-											longitudeDelta: 0.005}} />
+						<MessageMap message={this.props.message} />
 					</View>
 					<DeleteMessageButton message={this.props.message}/>
 				</ScrollView>

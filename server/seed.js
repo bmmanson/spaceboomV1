@@ -272,9 +272,11 @@ var data = {
 		authorId: 1,
 		messageId: 14
 		},
+		{
 		text: "I'm Joe and I'm commenting on this.",
 		authorId: 1,
 		messageId: 13
+		}
 	],
 	commentlike:
 	[
@@ -290,6 +292,21 @@ var data = {
 			userId: 4,
 			commentId: 1
 		},
+	],
+	messagelike: 
+	[
+		{
+			userId: 1,
+			messageId: 15
+		},
+		{
+			userId: 3,
+			messageId: 15
+		},
+		{
+			userId: 4,
+			messageId: 15
+		}
 	]
 }
 

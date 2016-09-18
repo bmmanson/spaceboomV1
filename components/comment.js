@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, Image, TouchableHighlight, AlertIOS } from 'react-native';
+let moment = require('moment');
 
 import { store } from './../store';
 import { deleteCommentOnServer, currentUserId } from './../async';
@@ -9,6 +10,12 @@ import { CommentLikeButtonAndCounter } from './comment-like-button-and-counter';
 class Comment extends Component {
 
 	render () {
+
+		function displayFormattedTime (comment) {
+			if (comment.createdAt) {
+				return moment(comment.createdAt).fromNow();
+			}	
+		}
 
 		function deleteComment (comment) {
 			if (comment) {
@@ -67,7 +74,7 @@ class Comment extends Component {
 						</Text>
 						<View style={{flexDirection: "row"}}>
 							<Text style={{fontSize: 10, color: '#949494', marginVertical: 6}}>
-							5m ago
+							{displayFormattedTime(this.props.comment)}
 							{" "}
 							{displayDeleteButton(this.props.comment, this.props.message)}
 							</Text>

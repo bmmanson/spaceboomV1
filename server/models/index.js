@@ -4,6 +4,7 @@ var Message = require('./message');
 var Discovery = require('./discovery');
 var Comment = require('./comment');
 var CommentLike = require('./comment-like');
+var MessageLike = require('./message-like');
 
 //a note to self in the future. For explanation for why this works, see:
 //https://codedump.io/share/aMWdBzH4lHro/1/sequelize-hasmany-join-association
@@ -21,5 +22,8 @@ Discovery.belongsTo(Message);
 
 User.belongsToMany(Comment, {as: "user", through: 'commentlike', foreignKey: 'userId'});
 Comment.belongsToMany(User, {as: "comment", through: 'commentlike', foreignKey: 'commentId'});
+
+User.belongsToMany(Message, {as: "user", through: 'messagelike', foreignKey: 'userId'});
+Message.belongsToMany(User, {as: "message", through: 'messagelike', foreignKey: 'messageId'});
 
 module.exports = db;

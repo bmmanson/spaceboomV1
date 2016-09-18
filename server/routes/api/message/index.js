@@ -52,12 +52,60 @@ router.get('/', function (req, res, next) {
 	}).catch(next);
 });
 
+//partial redundancy with discovery routes -- need to consolidate
+router.put('/report/:id', function (req, res, next) {
+	var messageId = req.params.id;
+
+	// if (!req.user) {
+	// 	return res.sendStatus(401);
+	// }
+
+	Discovery.findOne({where:
+		{
+			id: messageId
+		}
+	})
+	.then(function (discovery) {
+		return message.update({reported: true});
+	})
+	.then(function (discovery) {
+		console.log("Message with ID", 
+			message.id, 
+			"reported by user with ID"); 
+			//req.user.id
+			//);
+		return res.json(message);
+	});
+});
+
+router.put('/cancelReport/:id', function (req, res, next) {
+	var messageId = req.params.id;
+
+	// if (!req.user) {
+	// 	return res.sendStatus(401);
+	// }
+
+	Message.findOne({where:
+		{
+			id: messageId
+		}
+	})
+	.then(function (message) {
+		return message.update({reported: false});
+	})
+	.then(function (message) {
+		console.log("Message with ID", 
+			message.id, 
+			"reported by user with ID"); 
+			//req.user.id
+			//);
+		return res.json(message);
+	});
+});
+
 //hit this route when a user chooses to delete a message. will remain in database, but will no longer be accessible to users
 router.put('/hide/:id', function (req, res, next) {
 	var messageId = req.params.id;
-
-	console.log("REQ.PARAMS", req.params);
-	console.log("REQ.BODY", req.body);
 
 	Message.findOne({where:
 		{
@@ -65,7 +113,7 @@ router.put('/hide/:id', function (req, res, next) {
 		}
 	})
 	.then(function(message){
-		return message.update({deletedByUser: true})
+		return message.update({deletedByUser: true});
 	})
 	.then(function(message){
 		console.log("HIDING SENT MESSAGE", message);

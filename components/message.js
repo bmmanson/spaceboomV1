@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
+let moment = require('moment');
 
 import { MessageHeader } from './message-header';
 
@@ -13,6 +14,12 @@ class Message extends Component {
 			} else {
 				return "Reply (" + comments.length + ")";
 			}
+		}
+
+		function displayFormattedTime (message) {
+			if (message.createdAt) {
+				return moment(message.createdAt).fromNow();
+			}	
 		}
 
 		function displayTimesDiscovered (message) {
@@ -41,8 +48,14 @@ class Message extends Component {
 					fontSize: 14, 
 					marginHorizontal: 10, 
 					marginTop: 10, 
-					marginBottom: 6}}>
+					marginBottom: 2}}>
 					{this.props.message.body}
+				</Text>
+				<Text style={{color: '#949494', 
+					fontSize: 12,
+					marginHorizontal: 12,
+					marginBottom: 4}}>
+					{displayFormattedTime(this.props.message)}
 				</Text>
 				<View style={{flex: .5,  
 						marginHorizontal: 10,
@@ -62,6 +75,21 @@ class Message extends Component {
 					</Text>
 				</View>
 				 <View style={{flex: 1, flexDirection: 'row'}}>
+				 	<View style={{flex: 1, 
+				 			justifyContent: 'center', 
+				 			alignItems: 'center'
+				 		}}>
+					 	<Text style={{
+							flexDirection: 'column',
+					 		justifyContent: 'center',
+	    					alignItems: 'center',
+					 		textAlign: 'center', 
+					 		fontWeight: 'bold', 
+					 		color: '#1874CD',
+	    					}}>
+					 		Like (0)
+					 	</Text>
+				 	</View>				 	
 				 	<View style={{flex: 1, 
 				 			justifyContent: 'center', 
 				 			alignItems: 'center'

@@ -164,7 +164,8 @@ router.put('/unread/:id', function (req, res, next) {
 
 //hide message (users has decided to delete message. we keep the discovery in the database, but to user it will appear hidden)
 router.put('/hide/:id', function (req, res, next) {
-//id must be the id of the discovery, not the message
+	//currently, id must be the id of the discovery, not the message
+	//change that
 	var hiddenMessageId = req.params.id;
 	Discovery.findOne({where: 
 		{id: hiddenMessageId}

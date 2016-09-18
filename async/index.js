@@ -158,7 +158,8 @@ export const addCommentOnServer = (messageId, text) => {
 				comment.author.id,
 				true,
 				false,
-				comment.numberOfLikes
+				comment.numberOfLikes,
+				comment.createdAt
 			));
 			return "COMPLETE";
 		}
@@ -180,6 +181,7 @@ export const getCommentsForMessage = (messageId) => {
 				let author = c.data.author.name;
 				let authorPic = c.data.author.authorPic;
 				let authorId = c.data.authorId;
+				let createdAt = c.data.createdAt;
 				if (authorId === currentUserId) {
 					currentUser = true;
 				} else {
@@ -196,7 +198,8 @@ export const getCommentsForMessage = (messageId) => {
 					authorId,
 					currentUser,
 					isLikedByCurrentUser,
-					numberOfLikes
+					numberOfLikes,
+					createdAt
 				));
 			})
 			console.log("NEW COMMENTS ADDED:", store.getState());
@@ -227,6 +230,7 @@ export const getAllUserDataOnLogin = (id) => {
 			let currentUser = true;
 			let isLiked = true;
 			let timesDiscovered = m.timesDiscovered;
+			let createdAt = m.createdAt;
 			store.dispatch(addSentMessage(
 				id,
 				text,
@@ -237,7 +241,8 @@ export const getAllUserDataOnLogin = (id) => {
 				longitude,
 				locationName,
 				city,
-				timesDiscovered
+				timesDiscovered,
+				createdAt
 			));
 		}
 		for (var message in data.discoveredMessages) {
@@ -256,6 +261,7 @@ export const getAllUserDataOnLogin = (id) => {
 			let isLiked = false;
 			let timesDiscovered = m.timesDiscovered;
 			let unread = data.discoveredMessages[message].unread;
+			let createdAt = m.createdAt;
 			store.dispatch(addDiscoveredMessage(
 				id,
 				text,
@@ -267,7 +273,8 @@ export const getAllUserDataOnLogin = (id) => {
 				locationName,
 				city,
 				unread,
-				timesDiscovered
+				timesDiscovered,
+				createdAt
 			));
 		}
 		currentUserId = data.userInfo.id;
@@ -322,7 +329,10 @@ export const checkForAndAddNewMessage = (latitude, longitude) => {
 				latitude: parseFloat(res.message.latitude),
 				longitude: parseFloat(res.message.longitude),
 				city: res.message.city,
-				authorPic: res.message.author.authorPic
+				authorPic: res.message.author.authorPic,
+				authorId: res.message.author.id,
+				createdAt: res.message.createdAt,
+				timesDiscovered: res.message.timesDiscovered
 			}
 			console.log("NEW MESSAGE:", m);
 			store.dispatch(addDiscoveredMessage(
@@ -330,10 +340,14 @@ export const checkForAndAddNewMessage = (latitude, longitude) => {
 				m.body,
 				m.author,
 				m.authorPic,
+				m.authorId,
 				m.latitude,
 				m.longitude,
 				m.locationName,
-				m.city
+				m.city,
+				true, 
+				m.timesDiscovered,
+				m.createdAt
 			))
 		} else {
 			console.log("Response from server received. No new message");

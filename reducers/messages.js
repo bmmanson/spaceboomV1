@@ -35,7 +35,8 @@ export const messages = (state = [], action) => {
           city: action.city,
           currentUser: true,
           unread: false,
-          timesDiscovered: action.timesDiscovered
+          timesDiscovered: action.timesDiscovered,
+          createdAt: action.createdAt
         }
       ]
     case 'ADD_DISCOVERED_MESSAGE':
@@ -54,7 +55,8 @@ export const messages = (state = [], action) => {
           currentUser: false,
           unread: action.unread,
           reported: false,
-          timesDiscovered: action.timesDiscovered
+          timesDiscovered: action.timesDiscovered,
+          createdAt: action.createdAt
         }
       ]
     case 'DELETE_ALL_MESSAGES':

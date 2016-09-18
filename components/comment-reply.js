@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, TouchableHighlight } from 'react-native';
+import { Text, 
+	View, 
+	TextInput, 
+	TouchableHighlight, 
+	Image,
+	AlertIOS,
+	KeyboardAvoidingView } from 'react-native';
 
 import { addCommentOnServer } from './../async';
 
@@ -20,6 +26,71 @@ class CommentReply extends Component {
 
 		const sendCommentToServerAndUpdate = function (message, text) {
 			return addCommentOnServer(message.id, text);
+		}
+
+		const downloadingSpinner = (
+			<Image source={require('./../img/spinner.gif')}
+			style={{height: 24, 
+					width: 24, 
+					marginTop: 6,
+					marginLeft: 14}} />
+		);
+
+		const sendButton = (
+			<View>
+			<View style={{height: 25,
+				width: 50, 
+				backgroundColor: '#3D59AB', 
+				borderColor: '#C6E2FF',
+				borderRadius: 5,
+				borderWidth: 1,
+				borderStyle: 'solid',
+				justifyContent: 'center',
+				alignItems: 'center'}}>
+				<TouchableHighlight style={{
+					height: 25,
+					width: 50, 
+					justifyContent: 'center', 
+					alignItems: 'center'}} 
+					onPress={() => {
+						this.setState({uploadingComment: true});
+						sendCommentToServerAndUpdate(
+							this.props.message,
+							this.state.text
+						).then((status) => {
+							if (status === "COMPLETE") {
+								this.setState({
+									text: "",
+									charactersRemaining: maxCharacters,
+									inputHeight: 40,
+									uploadingComment: false
+								});
+							}
+						})
+					}} >
+				<Text style={{color: 'white', 
+							fontWeight: 'bold', 
+							textAlign: 'center'}}>
+					SEND
+				</Text>
+				</TouchableHighlight>
+			</View>
+				<Text style={{color: '#575757', 
+							fontWeight: 'bold', 
+							fontSize: 10, 
+							textAlign: 'center', 
+							marginTop: 3}}>
+					{"" + this.state.charactersRemaining}
+				</Text>
+			</View>
+		);
+
+		const displaySendButtonOrSpinner = function (state) {
+			if (state.uploadingComment === false) {
+				return sendButton;
+			} else {
+				return downloadingSpinner;
+			}
 		}
 
 		return (
@@ -60,50 +131,7 @@ class CommentReply extends Component {
 					<View style={{width: 50,
 							marginTop: 6,
 							marginRight: 6}}>
-						<View style={{height: 25,
-							width: 50, 
-							backgroundColor: '#3D59AB', 
-							borderColor: '#C6E2FF',
-							borderRadius: 5,
-							borderWidth: 1,
-							borderStyle: 'solid',
-							justifyContent: 'center',
-		    				alignItems: 'center'}}>
-		    				<TouchableHighlight style={{
-		    					height: 25,
-		    					width: 50, 
-		    					justifyContent: 'center', 
-		    					alignItems: 'center'}} 
-		    					onPress={() => {
-		    						this.setState({uploadingComment: true});
-		    						sendCommentToServerAndUpdate(
-		    							this.props.message,
-		    							this.state.text
-		    						).then((status) => {
-		    							if (status === "COMPLETE") {
-		    								this.setState({
-		    									text: "",
-		    									charactersRemaining: maxCharacters,
-		    									inputHeight: 40,
-		    									uploadingComment: false
-		    								});
-		    							}
-		    						})
-		    					}} >
-							<Text style={{color: 'white', 
-										fontWeight: 'bold', 
-										textAlign: 'center'}}>
-								SEND
-							</Text>
-							</TouchableHighlight>
-						</View>
-							<Text style={{color: '#575757', 
-										fontWeight: 'bold', 
-										fontSize: 10, 
-										textAlign: 'center', 
-										marginTop: 3}}>
-								{"" + this.state.charactersRemaining}
-							</Text>
+						{displaySendButtonOrSpinner(this.state)}
 					</View>
 				</View>
 			</View>
