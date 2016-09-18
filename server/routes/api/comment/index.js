@@ -122,7 +122,7 @@ router.post('/like/:id', function (req, res, next) {
 		return sendStatus(401);
 	}
 
-	//not safe -- first should make sure that the like doesn't already exist
+	//should make sure that the like doesn't already exist?
 	CommentLike.create({
 		userId: userId,
 		commentId: commentId

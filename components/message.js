@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, TouchableHighlight } from 'react-native';
 let moment = require('moment');
 
 import { MessageHeader } from './message-header';
@@ -33,11 +33,14 @@ class Message extends Component {
 		function displayNumberOfLikes (message) {
 			if (message.numberOfLikes) {
 				return "Likes (" + message.numberOfLikes + ")";
+			} else {
+				return "Likes (0)";
 			}
 		}
 
 		return (
-			<View style={{flex: 7, 
+			<View style={{
+				minHeight: 40, 
 				borderStyle: 'solid', 
 				borderColor: '#8C8C8C',
 				borderBottomColor: '#DBDBDB', 
@@ -50,7 +53,7 @@ class Message extends Component {
 					locationName={this.props.message.locationName}
 					authorPic={this.props.message.authorPic} />
 				<Text style={{flex: 3,
-					minHeight: 40, 
+					minHeight: 14, 
 					fontSize: 14, 
 					marginHorizontal: 10, 
 					marginTop: 10, 
@@ -60,10 +63,11 @@ class Message extends Component {
 				<Text style={{color: '#949494', 
 					fontSize: 12,
 					marginHorizontal: 12,
-					marginBottom: 4}}>
+					marginVertical: 10}}>
 					{displayFormattedTime(this.props.message)}
 				</Text>
-				<View style={{flex: .5,  
+				<View style={{
+						height: 20,  
 						marginHorizontal: 10,
 						marginTop: 6,
 						borderStyle: 'solid', 
@@ -74,17 +78,24 @@ class Message extends Component {
 						justifyContent: 'center', 
 				 		alignItems: 'center'
 						}}>
-					<Text style={{fontSize: 12,
-					 	textAlign: 'left'
+					<Text style={{
+					 	textAlign: 'left',
+					 	marginVertical: 6,
+					 	fontSize: 12
 					}}>
 						{displayTimesDiscovered(this.props.message)}
 					</Text>
 				</View>
-				 <View style={{flex: 1, flexDirection: 'row'}}>
+				 <View style={{height: 38, flexDirection: 'row'}}>
 				 	<View style={{flex: 1, 
 				 			justifyContent: 'center', 
 				 			alignItems: 'center'
 				 		}}>
+				 		<TouchableHighlight
+				 			style={{flex: 1,
+				 			justifyContent: 'center', 
+				 			alignItems: 'center'}}
+				 			onPress={() => {}}>
 					 	<Text style={{
 							flexDirection: 'column',
 					 		justifyContent: 'center',
@@ -95,6 +106,7 @@ class Message extends Component {
 	    					}}>
 					 		{displayNumberOfLikes(this.props.message)}
 					 	</Text>
+					 	</TouchableHighlight>
 				 	</View>				 	
 				 	<View style={{flex: 1, 
 				 			justifyContent: 'center', 

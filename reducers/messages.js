@@ -7,6 +7,22 @@ const message = (state, action) => {
       return Object.assign({}, state, {
         unread: false
       })
+    case 'MARK_AS_LIKED':
+      if (state.id !== action.id) {
+        return state;
+      }
+      return Object.assign({}, state, {
+        isLikedByCurrentUser: true,
+        numberOfLikes: action.numberOfLikes + 1
+      })
+    case 'MARK_AS_UNLIKED':
+      if (state.id !== action.id) {
+        return state;
+      }
+      return Object.assign({}, state, {
+        isLikedByCurrentUser: false,
+        numberOfLikes: action.numberOfLikes - 1
+      })
     default:
       return state;
   }
@@ -15,6 +31,14 @@ const message = (state, action) => {
 export const messages = (state = [], action) => {
   switch (action.type) {
     case 'MARK_AS_UNREAD':
+      return state.map(m =>
+        message(m, action)
+      )
+    case 'MARK_AS_LIKED':
+      return state.map(m =>
+        message(m, action)
+      )
+    case 'MARK_AS_UNLIKED':
       return state.map(m =>
         message(m, action)
       )

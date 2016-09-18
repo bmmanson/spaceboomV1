@@ -4,6 +4,7 @@ var request = require('request');
 var router = express.Router();
 
 var Message = require('./../../../models/message');
+var MessageLike = require('./../../../models/message-like');
 var User = require('./../../../models/user');
 var Discovery = require('./../../../models/discovery');
 var Comment = require('./../../../models/comment');
@@ -123,6 +124,54 @@ router.put('/hide/:id', function (req, res, next) {
 
 router.put('/:id', function (req, res, next) {
 //edit message (only user who posted the message/an admin is permitted to change its body)
+});
+
+router.post('/like/:id', function (req, res, next) {
+	var userId;
+	var messageId = req.params.id;
+	
+	//delete later
+	if (req.user) {
+		userId = req.user.id;
+	} else {
+		return sendStatus(401);
+	}
+
+	//should make sure that like doesn't already exist?
+	MessageLike.create({
+		userId: userId,
+		MessageId: MessageId
+	})
+	.then(function (like) {
+		console.log("USER WITH ID", userId, "LIKED MESSAGE WITH ID", messageId);
+		res.json(like);
+	}).catch(next);
+});
+
+router.delete('/like/:id', function (req, res, next) {
+	var userId;
+	var messageId = req.params.id;
+
+	//delete later
+	if (req.user) {
+		userId = req.user.id;
+	} else {
+		return sendStatus(401);
+	}
+
+	MessageLike.findOne({where: 
+		{
+			userId: userId,
+			MessageId: MessageId
+		}
+	})
+	.then(function (like) {
+		like.destroy();
+	})
+	.then(function (like) {
+		console.log("USER WITH ID", userId, "UNLIKED MESSAGE WITH ID", messageId);
+		res.json({deleted: true});
+	}).catch(next);
 });
 
 //post message -- when user submits a message

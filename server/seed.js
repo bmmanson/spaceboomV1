@@ -168,7 +168,17 @@ var data = {
 		latitude: 37.33759308,
 		longitude: -122.0404889,
 		city: "Cupertino, CA"
-		}
+		},
+
+		{
+		text: '"Do you even know what farm to table means?!" Here at Whole Foods!',
+		author: 2,
+		locationName: "Upper East Side",
+		latitude: 40.759318,
+		longitude: -73.966216,
+		city: "New York, NY"
+		},
+
 
 	],
 	discovery: 
