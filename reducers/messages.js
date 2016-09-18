@@ -36,6 +36,7 @@ export const messages = (state = [], action) => {
           currentUser: true,
           unread: false,
           timesDiscovered: action.timesDiscovered,
+          numberOfLikes: action.numberOfLikes,
           createdAt: action.createdAt
         }
       ]
@@ -56,6 +57,7 @@ export const messages = (state = [], action) => {
           unread: action.unread,
           reported: false,
           timesDiscovered: action.timesDiscovered,
+          numberOfLikes: action.numberOfLikes,
           createdAt: action.createdAt
         }
       ]

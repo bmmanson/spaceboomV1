@@ -30,6 +30,12 @@ class Message extends Component {
 			}
 		}
 
+		function displayNumberOfLikes (message) {
+			if (message.numberOfLikes) {
+				return "Likes (" + message.numberOfLikes + ")";
+			}
+		}
+
 		return (
 			<View style={{flex: 7, 
 				borderStyle: 'solid', 
@@ -87,7 +93,7 @@ class Message extends Component {
 					 		fontWeight: 'bold', 
 					 		color: '#1874CD',
 	    					}}>
-					 		Like (0)
+					 		{displayNumberOfLikes(this.props.message)}
 					 	</Text>
 				 	</View>				 	
 				 	<View style={{flex: 1, 

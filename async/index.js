@@ -230,6 +230,7 @@ export const getAllUserDataOnLogin = (id) => {
 			let currentUser = true;
 			let isLiked = true;
 			let timesDiscovered = m.timesDiscovered;
+			let numberOfLikes = m.numberOfLikes;
 			let createdAt = m.createdAt;
 			store.dispatch(addSentMessage(
 				id,
@@ -242,6 +243,7 @@ export const getAllUserDataOnLogin = (id) => {
 				locationName,
 				city,
 				timesDiscovered,
+				numberOfLikes,
 				createdAt
 			));
 		}
@@ -260,6 +262,7 @@ export const getAllUserDataOnLogin = (id) => {
 			let currentUser = true;
 			let isLiked = false;
 			let timesDiscovered = m.timesDiscovered;
+			let numberOfLikes = m.numberOfLikes;
 			let unread = data.discoveredMessages[message].unread;
 			let createdAt = m.createdAt;
 			store.dispatch(addDiscoveredMessage(
@@ -274,6 +277,7 @@ export const getAllUserDataOnLogin = (id) => {
 				city,
 				unread,
 				timesDiscovered,
+				numberOfLikes,
 				createdAt
 			));
 		}
@@ -314,7 +318,7 @@ export const deleteDiscoveredMessageOnServer = (id) => {
 }
 
 export const checkForAndAddNewMessage = (latitude, longitude) => {
-	return httpRequestForNewDiscoveredMessage(latitude, longitude, 32)
+	return httpRequestForNewDiscoveredMessage(latitude, longitude, currentUserId)
 	.then(function (response) {
 		return response.json();
 	})
@@ -332,7 +336,8 @@ export const checkForAndAddNewMessage = (latitude, longitude) => {
 				authorPic: res.message.author.authorPic,
 				authorId: res.message.author.id,
 				createdAt: res.message.createdAt,
-				timesDiscovered: res.message.timesDiscovered
+				timesDiscovered: res.message.timesDiscovered,
+				numberOfLikes: res.message.numberOfLikes
 			}
 			console.log("NEW MESSAGE:", m);
 			store.dispatch(addDiscoveredMessage(
@@ -347,6 +352,7 @@ export const checkForAndAddNewMessage = (latitude, longitude) => {
 				m.city,
 				true, 
 				m.timesDiscovered,
+				m.numberOfLikes,
 				m.createdAt
 			))
 		} else {

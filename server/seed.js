@@ -5,6 +5,7 @@ var User = require('./models/user');
 
 //note -- to make this work:
 //need to go into the DB with postico and change Ben's userId to 32
+//use the facebookId you get from the server
 
 var data = {
 	user: 
@@ -306,7 +307,23 @@ var data = {
 		{
 			userId: 4,
 			messageId: 15
-		}
+		},
+		{
+			userId: 1,
+			messageId: 14
+		},
+		{
+			userId: 1,
+			messageId: 13
+		},
+		{
+			userId: 3,
+			messageId: 13
+		},
+		{
+			userId: 4,
+			messageId: 13
+		},
 	]
 }
 
