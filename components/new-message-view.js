@@ -18,10 +18,7 @@ class NewMessage extends Component {
 		return (
 			<View style={styles.container}>
 				<Map height={5}/>
-				<MessageHeader 
-					authorPic={this.props.authorPic}
-					author={this.props.author}
-					locationName={this.props.username} />
+				<MessageHeader message={this.props.message} />
 				<TextInput style={{flex: 6, fontSize: 16, marginHorizontal: 10}} 
 				placeholder={"Type your message here, then press submit. Anyone with Spaceboom who comes to this location will be able to read it!"}
 				multiline={true}

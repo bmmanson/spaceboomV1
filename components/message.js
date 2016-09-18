@@ -48,10 +48,7 @@ class Message extends Component {
 				borderTopWidth: 1,
 				borderBottomWidth: 3
 				}}>
-				<MessageHeader 
-					author={this.props.message.author} 
-					locationName={this.props.message.locationName}
-					authorPic={this.props.message.authorPic} />
+				<MessageHeader message={this.props.message} />
 				<Text style={{flex: 3,
 					minHeight: 14, 
 					fontSize: 14, 
