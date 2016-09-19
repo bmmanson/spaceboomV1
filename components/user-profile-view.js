@@ -3,6 +3,9 @@ import { ScrollView, Text, View, Image } from 'react-native';
 
 import { getUserInfoForProfileFromServer } from './../async/';
 
+let Dimensions = require('Dimensions');
+let windowSize = Dimensions.get('window');
+
 class UserProfileView extends Component {
 
 	constructor(props) {
@@ -32,16 +35,10 @@ class UserProfileView extends Component {
 	render() {
 
 		return (
-		<ScrollView style={{flex: 1}}>
-	  		<Text style={{textAlign: 'center', marginTop: 40}}>
-	  			Hello. Profiles will live here in the future. 
-	  			{" "}
-	  			You got the userId!
-	  			{" "}
-	  			It is:
-	  			{this.state.user.id}
-	  			{displayProfilePicture(this.state)}
-	  		</Text>
+		<ScrollView style={{flex: 1, backgroundColor: '#D9D9D9'}}>
+			<View style={{flex: 1, alignItems: 'stretch', backgroundColor: 'blue'}}>
+				{displayProfilePicture(this.state)}
+			</View>
 	    </ScrollView>
 		);
 	}
@@ -50,11 +47,8 @@ class UserProfileView extends Component {
 const displayProfilePicture = function(state) {
 	if (state.downloadComplete) {
 		return (
-			<View style={{height: 300, width: 300}}>
-			<Text>
-				Also downloaded picture! But you cannot see it!
-			</Text>	
-			<Image source={{uri: state.user.authorPic}} style={{height: 200, width: 200}} />
+			<View style={{flex: 1}}>
+				<Image source={{uri: state.user.authorPic}} style={{height: windowSize.width, width: windowSize.width}} />
 			</View>
 		);
 	} else {
@@ -62,9 +56,6 @@ const displayProfilePicture = function(state) {
 			<View style={{height: 300, width: 300}}>
 			<Image source={require('./../img/spinner.gif')}
 							style={{height: 32, width: 32, margin: 10, alignSelf: 'center'}} />
-			<Text>
-				Downloading!
-			</Text>
 			</View>
 		);
 	}
