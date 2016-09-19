@@ -8,11 +8,11 @@ class UserProfileView extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			downloadComplete: false,
 			user: {
 				id: 'downloading...',
-				//authorPic: 
+				authorPic: null
 			},
-			downloadComplete: false
 		};
 	}
 
@@ -40,25 +40,34 @@ class UserProfileView extends Component {
 	  			{" "}
 	  			It is:
 	  			{this.state.user.id}
+	  			{displayProfilePicture(this.state)}
 	  		</Text>
 	    </ScrollView>
 		);
 	}
 }
 
-//	  		<Image source={{uri: require('./../img/spinner.gif')}} 
-//	  			style={{height: 200, width: 200}} />
-
-// const downloadComplete = (
-
-// )
-
-// const downloading = (
-// 	<View style={{flex: 1}}>
-// 		<Text>
-// 			Downloading...
-// 		</Text>
-// 	</View>
-// )
+const displayProfilePicture = function(state) {
+	if (state.downloadComplete) {
+		return (
+			<View style={{height: 300, width: 300}}>
+			<Text>
+				Also downloaded picture! But you cannot see it!
+			</Text>	
+			<Image source={{uri: state.user.authorPic}} style={{height: 200, width: 200}} />
+			</View>
+		);
+	} else {
+		return (
+			<View style={{height: 300, width: 300}}>
+			<Image source={require('./../img/spinner.gif')}
+							style={{height: 32, width: 32, margin: 10, alignSelf: 'center'}} />
+			<Text>
+				Downloading!
+			</Text>
+			</View>
+		);
+	}
+}
 
 export { UserProfileView };
