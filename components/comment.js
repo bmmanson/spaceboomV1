@@ -6,6 +6,7 @@ import { store } from './../store';
 import { deleteCommentOnServer, currentUserId } from './../async';
 
 import { CommentLikeButtonAndCounter } from './comment-like-button-and-counter';
+import { AuthorPic } from './author-pic'
 
 class Comment extends Component {
 
@@ -61,8 +62,11 @@ class Comment extends Component {
 			backgroundColor: '#F5F5F5',
 			}}>
 				<View style={{flex: 2, flexDirection: 'column'}}>
-					<Image source={{uri: this.props.comment.authorPic}}
-				style={{height: 36, width: 36, borderRadius: 18, alignSelf: 'center'}} />
+					<AuthorPic message={this.props.comment} 
+						style={{height: 36, 
+							width: 36, 
+							borderRadius: 18, 
+							alignSelf: 'center'}} />
 				</View>
 				<View style={{flex: 8, flexDirection: 'column'}}>
 					<View style={{flex: 1, marginTop: 4}}>
