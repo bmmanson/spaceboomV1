@@ -80,6 +80,22 @@ router.get('/login/:id', function (req, res, next) {
 	}).catch(next);
 })
 
+router.get('/profile/:id', function (req, res, next) {
+	console.log("PROFILE ROUTE HIT");
+	var userId = req.params.id;
+
+	if (req.user) {
+		if (req.user.id === userId) {
+			//include settings
+		}
+		User.findById(userId)
+		.then(function (user) {
+			console.log("SENDING PROFILE WITH ID:", user.id, "TO ", req.user.id);
+			res.json(user);
+		}).catch(next);
+	} 
+})
+
 //get all users - admin panel
 router.get('/', function (req, res, next) {
 	User.findAll()

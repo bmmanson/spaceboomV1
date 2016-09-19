@@ -105,6 +105,20 @@ const httpRequestToAddComment = (messageId, text) => {
     return fetch(url, request);
 }
 
+const httpRequestForUserProfile = (userId) => {
+	let url = "http://localhost:1337/api/user/profile/" + userId;
+	return fetch(url, {method:"GET"});
+}
+
+export const getUserInfoForProfileFromServer = (userId) => {
+	return httpRequestForUserProfile(userId)
+	.then((response) => response.json())
+	.then((data) => {
+		console.log("THE DATA FROM ASYNC FILE", data);
+		return data;
+	});
+}
+
 export const postNewMessageToServer = (text, authorId, latitude, longitude, locationName, city) => {
 	return httpRequestToPostNewMessage(text, authorId, latitude, longitude, locationName, city)
 	.then((response) => response.json())
