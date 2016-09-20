@@ -7,6 +7,7 @@ import {
 } from './../async/';
 
 import { comments } from './comments';
+import { UserProfileDiscoveredUsers } from './user-profile-discovered-users';
 import { CommentReply } from './comment-reply';
 
 let Dimensions = require('Dimensions');
@@ -17,6 +18,7 @@ class UserProfileView extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			discoveredUsers: [],
 			downloadComplete: false,
 			user: {
 				id: 'downloading...',
@@ -25,7 +27,7 @@ class UserProfileView extends Component {
 					timesViewed: '??',
 					messagesDiscovered: '??',
 					messagesSent: '??',
-					aboutMe: '??'
+					aboutMe: '??',
 				},
 			},
 		};
@@ -44,13 +46,13 @@ class UserProfileView extends Component {
 
 		getDiscoveredUsersFromServer(this.props.userId)
 		.then( (discoveredUsers) => {
+			console.log("DISCOVERED USERS FROM PROFILE VIEW", discoveredUsers);
 			if (discoveredUsers) {
 				this.setState({
 					discoveredUsers
 				})
 			}
 		})
-		//separate http request for comments
 	}
 
 	render() {
@@ -67,23 +69,17 @@ class UserProfileView extends Component {
 				<View style={{flex: 1, alignItems: 'stretch', backgroundColor: 'blue'}}>
 					{displayProfilePicture(this.state)}
 				</View>
-				<View style={{minHeight: 120, 
+				<View style={{minHeight: 80, 
 					backgroundColor: '#FAFAFA',
 					}}>
-					<View style={{flex: 1, marginLeft: 10, marginRight: 10, marginTop: 10, marginBottom: 4}}>
+					<View style={{flex: 1, marginLeft: 18, marginRight: 18, marginTop: 18, marginBottom: 4}}>
 						<View style={{flexDirection: 'row'}}>
 							<View style={{flex: .8}}>
-								<Text style={{fontWeight: 'bold', fontSize: 16, marginBottom: 2, marginTop: 0}}>
+								<Text style={{fontWeight: 'bold', color: '#1C86EE', fontSize: 16, marginBottom: 0, marginTop: 0}}>
 									{this.state.user.name}
 								</Text>
 								<Text style={{fontSize: 12}}>
 									Profile Views: {this.state.user.userprofile.timesViewed}
-								</Text>
-								<Text style={{fontSize: 12}}>
-									Messages Found: {this.state.user.userprofile.messagesDiscovered}
-								</Text>
-								<Text style={{fontSize: 12}}>
-									Messages Posted: {this.state.user.userprofile.messagesSent}
 								</Text>
 							</View>
 							<View style={{flex: .2}}>
@@ -95,7 +91,8 @@ class UserProfileView extends Component {
 									backgroundColor: '#F0F8FF',
 									justifyContent: 'center', 
 							 		alignItems: 'center',
-							 		height: 28
+							 		height: 28,
+							 		marginTop: 0
 								}}>
 									<Text style={{fontWeight: 'bold', color: '#6C7B8B', fontSize: 10}}>
 										SETTINGS
@@ -106,11 +103,8 @@ class UserProfileView extends Component {
 						<View style={{
 								marginTop: 6, 
 								paddingBottom: 6,
-								marginHorizontal: 10,
-								borderStyle: 'solid',
-								borderBottomColor: '#EDEDED', 
-								borderBottomWidth: 2,
-								minHeight: 60,
+								marginHorizontal: 0,
+								minHeight: 8,
 							}}>
 							<Text style={{fontWeight: 'bold', marginBottom: 2}}>
 								About me:
@@ -121,21 +115,7 @@ class UserProfileView extends Component {
 						</View>
 					</View>
 				</View>
-				<View style={{
-					height: 100, 
-					backgroundColor: '#FAFAFA', 
-					marginHorizontal: 4}}>
-					<Text style={{textAlign: 'center', color: '#BABABA', marginVertical: 2}}>
-						1 Discovered User:
-					</Text>
-					<View style={{marginVertical: 4}}>
-						<Image source={require('./../img/ben_profile.jpg')} 
-						style={{height: 52, width: 52, borderRadius: 26, alignSelf: 'center'}} />
-						<Text style={{textAlign: 'center', fontSize: 12, color: '#C9C9C9', marginTop: 6, fontStyle: 'italic'}}>
-							Ben
-						</Text>
-					</View>
-				</View>
+				<UserProfileDiscoveredUsers discoveredUsers={this.state.discoveredUsers} />
 			</View>
 	    </ScrollView>
 	    <CommentReply message={this.props.message} />
@@ -162,3 +142,12 @@ const displayProfilePicture = function(state) {
 }
 
 export { UserProfileView };
+
+/*
+<Text style={{fontSize: 12, textAlign: 'right'}}>
+	Messages Found: {this.state.user.userprofile.messagesDiscovered}
+</Text>
+<Text style={{fontSize: 12, textAlign: 'right'}}>
+	Messages Posted: {this.state.user.userprofile.messagesSent}
+</Text>
+*/

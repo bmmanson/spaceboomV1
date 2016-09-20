@@ -46,13 +46,13 @@ var data = {
 		},
 		{
 			userId: 3,
-			aboutMe: "Pending...",
+			aboutMe: "People may say I couldn't sing, but no one can ever say I didn't sing.",
 			profilePic: 'https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/13700056_10207110079535082_4219144356567438027_n.jpg?oh=41b308c3853f42a9764d3ab6fa3988e6&oe=586AB142'
 
 		},
 		{
 			userId: 4,
-			aboutMe: "I've got blisters on my fingers",
+			aboutMe: "Im too tiredddd",
 			profilePic: 'https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/12313953_2624518816159_9033810844249390225_n.jpg?oh=5d871d9a0fa48e4a445396825b970eb5&oe=58814BD2'
 		}		
 	],

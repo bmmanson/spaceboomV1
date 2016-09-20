@@ -118,7 +118,10 @@ const httpRequestForDiscoveredUsers = (userId) => {
 export const getDiscoveredUsersFromServer = (userId) => {
 	return httpRequestForDiscoveredUsers(userId)
 	.then((response) => response.json())
-	.then((data) => data);
+	.then((data) => {
+		console.log("DISCOVERED USERS, ASYNC FILE", data);
+		return data;
+	});
 }
 
 export const getUserInfoForProfileFromServer = (userId) => {
