@@ -3,6 +3,7 @@
 var Sequelize = require('sequelize');
 var db = require('./_db');
 var Message = require('./message');
+var UserProfile = require('./user-profile');
 
 var Discovery = db.define('discovery', {
 	id: {
@@ -28,7 +29,7 @@ var Discovery = db.define('discovery', {
 }, {
 	hooks: {
 		afterCreate: function (discovery, options) {
-			Discovery.findAll({where:
+			var incrementTimesDiscovered = Discovery.findAll({where:
 				{
 					messageId: discovery.messageId
 				}
@@ -39,6 +40,28 @@ var Discovery = db.define('discovery', {
 					message.update({timesDiscovered: discoveries.length});
 					console.log("NUMBER OF TIMES DISCOVERED FOR MESSAGE", message.id, "IS NOW", discoveries.length);
 				})
+			});
+
+			var incrementNumberOfDiscoveries = Discovery.findAll({where:
+				{
+					discovererId: discovery.discovererId
+				}
+			})
+			.then(function (discoveries) {
+				UserProfile.findOne({where: 
+					{
+						userId: discovery.discovererId
+					}
+				})
+				.then(function (profile) {
+					profile.update({messagesDiscovered: discoveries.length});
+					console.log("USER ID", discovery.discovererId, "HAS DISCOVERED", discoveries.length, " MESSAGES");
+				})
+			})
+
+			Promise.all(incrementTimesDiscovered, incrementNumberOfDiscoveries)
+			.then(function (discoveries) {
+				console.log("DISCOVERY UPDATED");
 			})
 		}
 	}

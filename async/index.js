@@ -110,6 +110,17 @@ const httpRequestForUserProfile = (userId) => {
 	return fetch(url, {method:"GET"});
 }
 
+const httpRequestForDiscoveredUsers = (userId) => {
+	let url = "http://localhost:1337/api/user/discoveredUsers/" + userId;
+	return fetch(url, {method: "GET"});
+}
+
+export const getDiscoveredUsersFromServer = (userId) => {
+	return httpRequestForDiscoveredUsers(userId)
+	.then((response) => response.json())
+	.then((data) => data);
+}
+
 export const getUserInfoForProfileFromServer = (userId) => {
 	return httpRequestForUserProfile(userId)
 	.then((response) => response.json())

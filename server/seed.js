@@ -33,6 +33,29 @@ var data = {
 		email: "Gus@email.com"
 		}
 	],
+	userprofile: [
+		{
+			userId: 1,
+			aboutMe: "I know this sounds insane, but this is an insane world. We have to come for them, or they will come for us. It's that simple.",
+			profilePic: 'https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/11057221_10153411465937025_7220678579653297083_n.jpg?oh=3060bf764613f89d66ebfb27beed8ce9&oe=58729891'
+		},
+		{
+			userId: 2,
+			aboutMe: "He who has the power to destroy a thing, controls it.",
+			profilePic: 'https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/13620351_10207342419702909_3505351797653340889_n.jpg?oh=4c5f48fff81e1ab0a46395aa27819440&oe=5873ED31',
+		},
+		{
+			userId: 3,
+			aboutMe: "Pending...",
+			profilePic: 'https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/13700056_10207110079535082_4219144356567438027_n.jpg?oh=41b308c3853f42a9764d3ab6fa3988e6&oe=586AB142'
+
+		},
+		{
+			userId: 4,
+			aboutMe: "I've got blisters on my fingers",
+			profilePic: 'https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/12313953_2624518816159_9033810844249390225_n.jpg?oh=5d871d9a0fa48e4a445396825b970eb5&oe=58814BD2'
+		}		
+	],
 	message: 
 	[
 		{
@@ -172,7 +195,7 @@ var data = {
 
 		{
 		text: '"Do you even know what farm to table means?!" Here at Whole Foods!',
-		author: 2,
+		authorId: 2,
 		locationName: "Upper East Side",
 		latitude: 40.759318,
 		longitude: -73.966216,

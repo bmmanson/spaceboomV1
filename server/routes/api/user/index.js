@@ -2,9 +2,12 @@ var express = require('express');
 var Promise = require('bluebird');
 var router = express.Router();
 var User = require('./../../../models/user');
+var UserProfile = require('./../../../models/user-profile');
 var Message = require('./../../../models/message');
 var Discovery = require('./../../../models/discovery');
 var Comment = require('./../../../models/comment');
+
+var utils = require('./utils');
 
 router.get('/login/:id', function (req, res, next) {
 	console.log("THE LOGIN ROUTE IS HIT");
@@ -78,23 +81,68 @@ router.get('/login/:id', function (req, res, next) {
 			userInfo
 		});
 	}).catch(next);
-})
+});
 
 router.get('/profile/:id', function (req, res, next) {
 	console.log("PROFILE ROUTE HIT");
 	var userId = req.params.id;
 
-	if (req.user) {
-		if (req.user.id === userId) {
-			//include settings
+	UserProfile.findOne({
+		where:
+		{
+			userId: userId
 		}
-		User.findById(userId)
+	})
+	.then(function (profile) {
+		profile.update({timesViewed: profile.timesViewed + 1});
+	})
+	.then(function () {
+		User.findOne({
+			where: 
+			{
+				id: userId
+			},
+			include: 
+			{
+				model: UserProfile
+			}
+
+		})
 		.then(function (user) {
 			console.log("SENDING PROFILE WITH ID:", user.id, "TO ", req.user.id);
 			res.json(user);
 		}).catch(next);
-	} 
-})
+	})
+	 
+});
+
+router.get('/discoveredUsers/:id', function (req, res, next) {
+	var userId = req.params.id;
+	Discovery.findAll({
+		where: {
+			discovererId: userId
+		}
+	})
+	.then(function (discoveredMessages) {
+		var promisesForDiscoveredMessages = [];
+		discoveredMessages.forEach(function (discoveredMessage) {
+			let id = discoveredMessage.messageId;
+			promisesForDiscoveredMessages.push(Message.findById(id));
+		});
+		return Promise.all(promisesForDiscoveredMessages);
+	})
+	.then(function (messages) {
+		var ids = utils.removeDuplicateUsers(messages);
+		var promisesForUsers = [];
+		ids.forEach(function (id) {
+			promisesForUsers.push(User.findById(id));
+		});
+		return Promise.all(promisesForUsers);
+	})
+	.then(function (users) {
+		res.json(users);
+	}).catch(next);
+});
 
 //get all users - admin panel
 router.get('/', function (req, res, next) {
@@ -102,7 +150,7 @@ router.get('/', function (req, res, next) {
 	.then(function (users) {
 		res.json(users);
 	}).catch(next);
-})
+});
 //ban user
 router.put('/ban/:id', function (req, res, next) {
 	var id = req.params.id;
@@ -114,12 +162,12 @@ router.put('/ban/:id', function (req, res, next) {
 		res.send(user);
 	}).catch(next);
 
-})
+});
 
 //delete user -- for admin console
 router.delete('/:id', function (req, res, next){
 	res.send("UNDER CONSTRUCTION");
-})
+});
 
 //add user when a new user joins
 router.post('/', function (req, res, next) {
@@ -134,6 +182,6 @@ router.post('/', function (req, res, next) {
 	.then(function (success){
 		res.json(success);
 	}).catch(next);
-})
+});
 
 module.exports = router;
