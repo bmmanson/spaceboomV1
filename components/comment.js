@@ -43,8 +43,8 @@ class Comment extends Component {
 			}
 		}
 
-		function displayDeleteButton (comment, message) {
-			if (comment.currentUser || message.authorId === currentUserId) {
+		function displayDeleteButton (comment, commentedOnId) {
+			if (comment.currentUser || commentedOnId === currentUserId) {
 				return (
 				<TouchableHighlight style={{height: 10, width: 55}} onPress={() => {deleteComment(comment)}}>
 				<Text style={{color: '#949494', fontSize: 10}}>
@@ -80,7 +80,7 @@ class Comment extends Component {
 							<Text style={{fontSize: 10, color: '#949494', marginVertical: 6}}>
 							{displayFormattedTime(this.props.comment)}
 							{" "}
-							{displayDeleteButton(this.props.comment, this.props.message)}
+							{displayDeleteButton(this.props.comment, this.props.userIdOfCommentedOn)}
 							</Text>
 						</View>
 					</View>

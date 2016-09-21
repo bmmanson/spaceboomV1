@@ -49,7 +49,7 @@ class MessageDetail extends Component {
 						<Message message={this.props.message}
 								comments={this.props.comments} />
 						<Comments comments={this.props.comments} 
-								  message={this.props.message}
+								  commentedOn={this.props.message}
 								  downloadComplete={this.state.downloadComplete} />
 						<MessageMap message={this.props.message} />
 					</View>

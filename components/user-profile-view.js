@@ -1,25 +1,29 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, View, Image } from 'react-native';
+import { connect } from 'react-redux';
 
 import { 
 	getUserInfoForProfileFromServer, 
-	getDiscoveredUsersFromServer 
+	getDiscoveredUsersFromServer,
+	getWallPostsFromServer 
 } from './../async/';
 
-import { comments } from './comments';
+import { Comments } from './comments';
 import { UserProfileDiscoveredUsers } from './user-profile-discovered-users';
 import { CommentReply } from './comment-reply';
 
 let Dimensions = require('Dimensions');
 let windowSize = Dimensions.get('window');
 
-class UserProfileView extends Component {
+class UserProfile extends Component {
 
 	constructor(props) {
 		super(props);
 		this.state = {
 			discoveredUsers: [],
-			downloadComplete: false,
+			wallPosts: [],
+			userInfoDownloadComplete: false,
+			wallPostDownloadComplete: false,
 			user: {
 				id: 'downloading...',
 				name: "downloading...",
@@ -38,7 +42,7 @@ class UserProfileView extends Component {
 		.then( (user) => {
 			if (user) {
 				this.setState({
-					downloadComplete: true,
+					userInfoDownloadComplete: true,
 					user
 				});
 			}
@@ -50,6 +54,16 @@ class UserProfileView extends Component {
 			if (discoveredUsers) {
 				this.setState({
 					discoveredUsers
+				})
+			}
+		})
+
+		getWallPostsFromServer(this.props.userId)
+		.then( (wallPosts) => {
+			if (wallPosts) {
+				console.log("THE WALL POSTS ON USER PROFILE VIEW", wallPosts);
+				this.setState({
+					wallPostDownloadComplete: true,
 				})
 			}
 		})
@@ -66,7 +80,7 @@ class UserProfileView extends Component {
 					backgroundColor: '#F5F5F5', 
 					borderTopWidth: 1,
 					borderBottomWidth: 3}}>
-				<View style={{flex: 1, alignItems: 'stretch', backgroundColor: 'blue'}}>
+				<View style={{flex: 1, alignItems: 'stretch', backgroundColor: '#DBDBDB'}}>
 					{displayProfilePicture(this.state)}
 				</View>
 				<View style={{minHeight: 80, 
@@ -105,7 +119,7 @@ class UserProfileView extends Component {
 								paddingBottom: 6,
 								marginHorizontal: 0,
 								minHeight: 8,
-							}}>
+								borderColor: '#EDEDED'}}>
 							<Text style={{fontWeight: 'bold', marginBottom: 2}}>
 								About me:
 							</Text>
@@ -116,6 +130,9 @@ class UserProfileView extends Component {
 					</View>
 				</View>
 				<UserProfileDiscoveredUsers discoveredUsers={this.state.discoveredUsers} />
+				<Comments comments={this.props.comments}
+					commentedOn={this.state.user}
+					downloadComplete={this.state.wallPostDownloadComplete} />
 			</View>
 	    </ScrollView>
 	    <CommentReply message={this.props.message} />
@@ -124,8 +141,10 @@ class UserProfileView extends Component {
 	}
 }
 
+
+
 const displayProfilePicture = function(state) {
-	if (state.downloadComplete) {
+	if (state.userInfoDownloadComplete) {
 		return (
 			<View style={{flex: 1}}>
 				<Image source={{uri: state.user.userprofile.profilePic}} style={{height: windowSize.width, width: windowSize.width}} />
@@ -140,6 +159,20 @@ const displayProfilePicture = function(state) {
 		);
 	}
 }
+
+const sortedComments = (comments) => {
+	return comments.sort((a, b) => a.id - b.id);
+}
+
+const mapStateToProps = (state) => {
+	return {
+		comments: sortedComments(state.comments),
+	};
+}
+
+const UserProfileView = connect(
+	mapStateToProps
+)(UserProfile);
 
 export { UserProfileView };
 

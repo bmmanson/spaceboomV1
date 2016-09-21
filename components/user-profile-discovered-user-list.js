@@ -17,10 +17,12 @@ class UserProfileDiscoveredUserList extends Component {
 		    	dataSource={this._getUserProfiles(this.props.discoveredUsers)}
 		    	renderRow={ (discoveredUser) => <UserProfileInHorizontalList discoveredUser={discoveredUser} />} 
 		    	horizontal={true}
-		    	style={{flex: 1, marginHorizontal: 10, paddingTop: 2, paddingBottom: 4}} />
+		    	style={{flex: 1, paddingTop: 2, paddingBottom: 4}} />
 	    	</View>
 		);
 	}
+
+	//marginHorizontal: 10
 }
 
 export { UserProfileDiscoveredUserList };

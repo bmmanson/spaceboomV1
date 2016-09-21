@@ -83,6 +83,8 @@ router.get('/login/:id', function (req, res, next) {
 	}).catch(next);
 });
 
+router.use('/wallpost', require('./wallpost'));
+
 router.get('/profile/:id', function (req, res, next) {
 	console.log("PROFILE ROUTE HIT");
 	var userId = req.params.id;

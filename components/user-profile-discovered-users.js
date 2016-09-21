@@ -3,7 +3,7 @@ import { View, Text, ListView } from 'react-native';
 
 import { UserProfileDiscoveredUserList } from './user-profile-discovered-user-list';
 
-const alt = (<View><Text>Hi</Text></View>);
+const alt = (<View><Text>{" "}</Text></View>);
 
 const displayNumberOfUsersDiscovered = function (numberOfUsers) {
 	if (numberOfUsers === 1) {
@@ -38,13 +38,17 @@ class UserProfileDiscoveredUsers extends Component {
 			borderStyle: 'solid',
 			borderColor: '#EDEDED', 
 			borderBottomWidth: 2,
-			borderTopWidth: 2,
-			marginHorizontal: 18}}>
+			borderTopWidth: 2
+			}}>
 				{displayListWhenReady(this.props.discoveredUsers)}
 			</View>
 		);
 	}
 }
+
+
+
+//marginHorizontal: 18
 
 export { UserProfileDiscoveredUsers };
 

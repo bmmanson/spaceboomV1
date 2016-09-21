@@ -115,6 +115,11 @@ const httpRequestForDiscoveredUsers = (userId) => {
 	return fetch(url, {method: "GET"});
 }
 
+const httpRequestForWallPosts = (userId) => {
+	let url = "http://localhost:1337/api/user/wallpost/" + userId;
+	return fetch(url, {method: "GET"});
+}
+
 export const getDiscoveredUsersFromServer = (userId) => {
 	return httpRequestForDiscoveredUsers(userId)
 	.then((response) => response.json())
@@ -131,6 +136,49 @@ export const getUserInfoForProfileFromServer = (userId) => {
 		console.log("THE DATA FROM ASYNC FILE", data);
 		return data;
 	});
+}
+
+export const getWallPostsFromServer = (userId) => {
+	return httpRequestForWallPosts(userId)
+	.then((response) => response.json())
+	.then((comments) => {
+		if (comments.length) {
+			comments.forEach( c => {
+				let currentUser;
+				let id = c.data.id;
+				let messageId = c.data.messageId;
+				let body = c.data.text;
+				let author = c.data.author.name;
+				let authorPic = c.data.author.authorPic;
+				let authorId = c.data.authorId;
+				let createdAt = c.data.createdAt;
+				if (authorId === currentUserId) {
+					currentUser = true;
+				} else {
+					currentUser = false;
+				}
+				let isLikedByCurrentUser = c.isLikedByCurrentUser;
+				let numberOfLikes = c.data.numberOfLikes;
+				store.dispatch(addComment(
+					id,
+					messageId,
+					body,
+					author,
+					authorPic,
+					authorId,
+					currentUser,
+					isLikedByCurrentUser,
+					numberOfLikes,
+					createdAt
+				));
+			})
+			console.log("NEW COMMENTS ADDED:", store.getState());
+			return "COMPLETE";
+		} else {
+			console.log("NO NEW COMMENTS ADDED");
+			return "COMPLETE";
+		}
+	})
 }
 
 export const postNewMessageToServer = (text, authorId, latitude, longitude, locationName, city) => {
