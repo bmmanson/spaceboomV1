@@ -1,20 +1,15 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableHighlight } from 'react-native';
+import { Text, View, TouchableHighlight, StyleSheet } from 'react-native';
 let moment = require('moment');
 
 import { MessageHeader } from './message-header';
+import { MessageReportButton } from './message-report-button';
+import { MessageLikeButton } from './message-like-button';
+import { MessageReplyButton } from './message-reply-button';
 
 class Message extends Component {
 
 	render () {
-
-		function commentButtonText (comments) {
-			if (comments.length === 0 || !comments) {
-				return "Reply";
-			} else {
-				return "Reply (" + comments.length + ")";
-			}
-		}
 
 		function displayFormattedTime (message) {
 			if (message.createdAt) {
@@ -27,14 +22,6 @@ class Message extends Component {
 				return "Discovered 1 time.";
 			} else {
 				return "Discovered " + message.timesDiscovered + " times.";
-			}
-		}
-
-		function displayNumberOfLikes (message) {
-			if (message.numberOfLikes) {
-				return "Likes (" + message.numberOfLikes + ")";
-			} else {
-				return "Likes (0)";
 			}
 		}
 
@@ -84,57 +71,9 @@ class Message extends Component {
 					</Text>
 				</View>
 				 <View style={{height: 38, flexDirection: 'row'}}>
-				 	<View style={{flex: 1, 
-				 			justifyContent: 'center', 
-				 			alignItems: 'center'
-				 		}}>
-				 		<TouchableHighlight
-				 			style={{flex: 1,
-				 			justifyContent: 'center', 
-				 			alignItems: 'center'}}
-				 			onPress={() => {}}>
-					 	<Text style={{
-							flexDirection: 'column',
-					 		justifyContent: 'center',
-	    					alignItems: 'center',
-					 		textAlign: 'center', 
-					 		fontWeight: 'bold', 
-					 		color: '#1874CD',
-	    					}}>
-					 		{displayNumberOfLikes(this.props.message)}
-					 	</Text>
-					 	</TouchableHighlight>
-				 	</View>				 	
-				 	<View style={{flex: 1, 
-				 			justifyContent: 'center', 
-				 			alignItems: 'center'
-				 		}}>
-					 	<Text style={{
-							flexDirection: 'column',
-					 		justifyContent: 'center',
-	    					alignItems: 'center',
-					 		textAlign: 'center', 
-					 		fontWeight: 'bold', 
-					 		color: '#1874CD',
-	    					}}>
-					 		{commentButtonText(this.props.comments)}
-					 	</Text>
-				 	</View>
-				 	<View style={{flex: 1, 
-				 		justifyContent: 'center', 
-				 		alignItems: 'center'
-				 	}}>
-					 	<Text style={{
-					 		flexDirection: 'column',
-					 		justifyContent: 'center',
-	    					alignItems: 'center',
-					 		textAlign: 'center', 
-					 		fontWeight: 'bold', 
-					 		color: '#1874CD',
-					 		}}>
-					 		Report
-					 	</Text>
-				 	</View>
+				 	<MessageLikeButton message={this.props.message} />	 	
+				 	<MessageReplyButton comments={this.props.comments} />
+				 	<MessageReportButton message={this.props.message} />
 				</View>
 			</View>
 		);

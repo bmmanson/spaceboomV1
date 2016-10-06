@@ -53,20 +53,24 @@ class CommentReply extends Component {
 					justifyContent: 'center', 
 					alignItems: 'center'}} 
 					onPress={() => {
-						this.setState({uploadingComment: true});
-						sendCommentToServerAndUpdate(
-							this.props.message,
-							this.state.text
-						).then((status) => {
-							if (status === "COMPLETE") {
-								this.setState({
-									text: "",
-									charactersRemaining: maxCharacters,
-									inputHeight: 40,
-									uploadingComment: false
-								});
-							}
-						})
+						if (this.state.text.length < 1) {
+							AlertIOS.alert("Your message must contain at least one character!");
+						} else {
+							this.setState({uploadingComment: true});
+							sendCommentToServerAndUpdate(
+								this.props.message,
+								this.state.text
+							).then((status) => {
+								if (status === "COMPLETE") {
+									this.setState({
+										text: "",
+										charactersRemaining: maxCharacters,
+										inputHeight: 40,
+										uploadingComment: false
+									});
+								}
+							})
+						}
 					}} >
 				<Text style={{color: 'white', 
 							fontWeight: 'bold', 

@@ -120,6 +120,17 @@ const httpRequestForWallPosts = (userId) => {
 	return fetch(url, {method: "GET"});
 }
 
+const httpRequestToReportMessage = (messageId) => {
+	let url = "http://localhost:1337/api/message/report/add/" + messageId;
+	return fetch(url, {method: "POST"});
+}
+
+export const reportMessageToServer = (messageId) => {
+	return httpRequestToReportMessage(messageId)
+	.then((response) => response.json())
+	.then((data) => data);
+}
+
 export const getDiscoveredUsersFromServer = (userId) => {
 	return httpRequestForDiscoveredUsers(userId)
 	.then((response) => response.json())

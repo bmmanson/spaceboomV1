@@ -9,6 +9,9 @@ var Comment = require('./../../../models/comment');
 
 var utils = require('./utils');
 
+router.use('/wallpost', require('./wallpost'));
+router.use('/report', require('./report'));
+
 router.get('/login/:id', function (req, res, next) {
 	console.log("THE LOGIN ROUTE IS HIT");
 
@@ -82,8 +85,6 @@ router.get('/login/:id', function (req, res, next) {
 		});
 	}).catch(next);
 });
-
-router.use('/wallpost', require('./wallpost'));
 
 router.get('/profile/:id', function (req, res, next) {
 	console.log("PROFILE ROUTE HIT");

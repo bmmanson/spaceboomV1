@@ -31,8 +31,7 @@ router.post('/message/:id', function (req, res, next) {
 		return Comment.findOne({
 			where: 
 			{
-				id: 
-				comment.id
+				id: comment.id
 			},
 			include: 
 			{
