@@ -36,7 +36,23 @@ export const deleteMessage = function (id) {
 	};
 }
 
-export const addSentMessage = function (id, body, author, authorPic, authorId, latitude, longitude, locationName, city, timesDiscovered, numberOfLikes, createdAt) {
+export const markMessageAsLiked = function (id, numberOfLikes) {
+	return {
+		type: 'MARK_MESSAGE_AS_LIKED',
+		id,
+		numberOfLikes
+	}
+}
+
+export const markMessageAsUnliked = function (id, numberOfLikes) {
+	return {
+		type: 'MARK_MESSAGE_AS_UNLIKED',
+		id,
+		numberOfLikes
+	}
+}
+
+export const addSentMessage = function (id, body, author, authorPic, authorId, latitude, longitude, locationName, city, timesDiscovered, numberOfLikes, isLikedByCurrentUser, createdAt) {
 	return {
 		type: 'ADD_SENT_MESSAGE', 
 		id,
@@ -50,11 +66,12 @@ export const addSentMessage = function (id, body, author, authorPic, authorId, l
 		city,
 		timesDiscovered,
 		numberOfLikes,
+		isLikedByCurrentUser,
 		createdAt
 	};
 }
 
-export const addDiscoveredMessage = function (id, body, author, authorPic, authorId, latitude, longitude, locationName, city, unread, timesDiscovered, numberOfLikes, createdAt) {
+export const addDiscoveredMessage = function (id, body, author, authorPic, authorId, latitude, longitude, locationName, city, unread, timesDiscovered, numberOfLikes, isLikedByCurrentUser, createdAt) {
 	return {
 		type: 'ADD_DISCOVERED_MESSAGE', 
 		id,
@@ -69,6 +86,7 @@ export const addDiscoveredMessage = function (id, body, author, authorPic, autho
 		unread,
 		timesDiscovered,
 		numberOfLikes,
+		isLikedByCurrentUser,
 		createdAt
 	};
 }

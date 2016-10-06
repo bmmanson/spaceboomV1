@@ -125,6 +125,54 @@ const httpRequestToReportMessage = (messageId) => {
 	return fetch(url, {method: "POST"});
 }
 
+const httpRequestLikeMessage = (messageId) => {
+	let url = "http://localhost:1337/api/message/like/" + messageId;
+	return fetch(url, {method: "POST"});
+}
+
+const httpRequestDislikeMessage = (messageId) => {
+	let url = "http://localhost:1337/api/message/like/" + messageId;
+	return fetch(url, {method: "DELETE"});
+}
+
+const httpRequestGetLikeDataForMessage = (messageId) => {
+	let url = "http://localhost:1337/api/message/like/" + messageId;
+	return fetch(url, {method: "GET"});
+}
+
+const httpRequestTimesDiscoveredForMessage = (messageId) => {
+	let url = "http://localhost:1337/api/message/timesDiscovered/" + messageId;
+	return fetch(url, {method: "GET"});
+}
+
+export const getTimesDiscoveredForMessage = (messageId) => {
+	return httpRequestTimesDiscoveredForMessage(messageId)
+	.then( (response) => response.json())
+	.then( (data) => data);
+}
+
+export const getLikeDataForMessage = (messageId) => {
+	return httpRequestGetLikeDataForMessage(messageId)
+	.then( (response) => response.json())
+	.then( (data) => data);
+}
+
+export const likeMessageOnServer = (messageId) => {
+	return httpRequestLikeMessage(messageId)
+	.then((response) => response.json())
+	.then((data) => {
+		return data;
+	});
+}
+
+export const dislikeMessageOnServer = (messageId) => {
+	return httpRequestDislikeMessage(messageId)
+	.then((response) => response.json())
+	.then((data) => {
+		return data;
+	});
+}
+
 export const reportMessageToServer = (messageId) => {
 	return httpRequestToReportMessage(messageId)
 	.then((response) => response.json())
@@ -315,7 +363,7 @@ export const getAllUserDataOnLogin = (id) => {
 			let locationName = m.locationName;
 			let city = m.city;
 			let currentUser = true;
-			let isLiked = true;
+			let isLikedByCurrentUser = false;
 			let timesDiscovered = m.timesDiscovered;
 			let numberOfLikes = m.numberOfLikes;
 			let createdAt = m.createdAt;
@@ -331,6 +379,7 @@ export const getAllUserDataOnLogin = (id) => {
 				city,
 				timesDiscovered,
 				numberOfLikes,
+				isLikedByCurrentUser,
 				createdAt
 			));
 		}
@@ -347,7 +396,7 @@ export const getAllUserDataOnLogin = (id) => {
 			let locationName = m.locationName;
 			let city = m.city;
 			let currentUser = true;
-			let isLiked = false;
+			let isLikedByCurrentUser = true;
 			let timesDiscovered = m.timesDiscovered;
 			let numberOfLikes = m.numberOfLikes;
 			let unread = data.discoveredMessages[message].unread;
@@ -365,6 +414,7 @@ export const getAllUserDataOnLogin = (id) => {
 				unread,
 				timesDiscovered,
 				numberOfLikes,
+				isLikedByCurrentUser,
 				createdAt
 			));
 		}
@@ -424,6 +474,7 @@ export const checkForAndAddNewMessage = (latitude, longitude) => {
 				authorId: res.message.author.id,
 				createdAt: res.message.createdAt,
 				timesDiscovered: res.message.timesDiscovered,
+				isLikedMyCurrentUser: false,
 				numberOfLikes: res.message.numberOfLikes
 			}
 			console.log("NEW MESSAGE:", m);
@@ -440,6 +491,7 @@ export const checkForAndAddNewMessage = (latitude, longitude) => {
 				true, 
 				m.timesDiscovered,
 				m.numberOfLikes,
+				m.isLikedByCurrentUser,
 				m.createdAt
 			))
 		} else {

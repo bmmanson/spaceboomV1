@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Text, View, MapView, ScrollView } from 'react-native';
+import { View, ScrollView, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 
-import { styles } from './../styles/main';
 import { DeleteMessageButton } from './delete-message-button';
 import { Message } from './message';
 import { Comments } from './comments';
@@ -36,16 +35,9 @@ class MessageDetail extends Component {
 	render () {
 
 		return (
-			<View style={{flex: 1}}>
-				<ScrollView style={{backgroundColor: '#D9D9D9'}}> 
-					<View style={{
-						marginTop: 0,
-						marginBottom: 6,
-						shadowOpacity: 0.8,
-						shadowRadius: 2,
-						shadowOffset: {
-							width: 1,
-							height: 1}}}>
+			<View style={style.view}>
+				<ScrollView style={style.scrollView}> 
+					<View style={style.container}>
 						<Message message={this.props.message}
 								comments={this.props.comments} />
 						<Comments comments={this.props.comments} 
@@ -61,6 +53,24 @@ class MessageDetail extends Component {
 	}
 }
 
+const style = StyleSheet.create({
+	view: {
+		flex: 1
+	},
+	scrollView: {
+		backgroundColor: '#D9D9D9'
+	},
+	container: {
+		marginTop: 0,
+		marginBottom: 6,
+		shadowOpacity: 0.8,
+		shadowRadius: 2,
+		shadowOffset: {
+			width: 1,
+			height: 1}	
+	}
+});
+
 const sortedComments = (comments) => {
 	return comments.sort((a, b) => a.id - b.id);
 }
@@ -71,18 +81,8 @@ const mapStateToProps = (state) => {
 	};
 }
 
-const mapDispatchToProps = (dispatch) => ({
-		likeComment (commentId, numberOfLikes) {
-			dispatch(markCommentAsLiked(commentId, numberOfLikes));
-		},
-		dislikeComment (commentId, numberOfLikes) {
-			dispatch(markCommentAsUnliked(commentId, numberOfLikes));
-		}
-});
-
 const MessageDetailView = connect(
-	mapStateToProps,
-	mapDispatchToProps
+	mapStateToProps
 )(MessageDetail);
 
 export { MessageDetailView };

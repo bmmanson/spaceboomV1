@@ -7,7 +7,7 @@ const message = (state, action) => {
       return Object.assign({}, state, {
         unread: false
       })
-    case 'MARK_AS_LIKED':
+    case 'MARK_MESSAGE_AS_LIKED':
       if (state.id !== action.id) {
         return state;
       }
@@ -15,7 +15,7 @@ const message = (state, action) => {
         isLikedByCurrentUser: true,
         numberOfLikes: action.numberOfLikes + 1
       })
-    case 'MARK_AS_UNLIKED':
+    case 'MARK_MESSAGE_AS_UNLIKED':
       if (state.id !== action.id) {
         return state;
       }
@@ -34,11 +34,11 @@ export const messages = (state = [], action) => {
       return state.map(m =>
         message(m, action)
       )
-    case 'MARK_AS_LIKED':
+    case 'MARK_MESSAGE_AS_LIKED':
       return state.map(m =>
         message(m, action)
       )
-    case 'MARK_AS_UNLIKED':
+    case 'MARK_MESSAGE_AS_UNLIKED':
       return state.map(m =>
         message(m, action)
       )
@@ -59,6 +59,7 @@ export const messages = (state = [], action) => {
           city: action.city,
           currentUser: true,
           unread: false,
+          isLiked: action.isLiked,
           timesDiscovered: action.timesDiscovered,
           numberOfLikes: action.numberOfLikes,
           createdAt: action.createdAt
@@ -79,6 +80,7 @@ export const messages = (state = [], action) => {
           city: action.city,
           currentUser: false,
           unread: action.unread,
+          isLiked: action.isLiked,
           reported: false,
           timesDiscovered: action.timesDiscovered,
           numberOfLikes: action.numberOfLikes,

@@ -14,6 +14,7 @@ var googleCredentials = require('./../../../../google-credentials');
 var utils = require('./utils');
 
 router.use('/report', require('./report'));
+router.use('/like', require('./like'));
 
 //get messages by user
 router.get('/user/:id', function (req, res, next) {
@@ -47,6 +48,14 @@ router.get('/user/:id', function (req, res, next) {
 	}).catch(next);
 });
 
+router.get('/timesDiscovered/:id', function (req, res, next) {
+	var messageId = req.params.id;
+	Message.findById(messageId)
+	.then(function (message) {
+		res.json({timesDiscovered: message.timesDiscovered});
+	}).catch(next);
+});
+
 //get all messages (for admin console)
 router.get('/', function (req, res, next) {
 	Message.findAll({include: {model: User, as: "author"}})
@@ -75,54 +84,6 @@ router.put('/hide/:id', function (req, res, next) {
 
 router.put('/:id', function (req, res, next) {
 //edit message (only user who posted the message/an admin is permitted to change its body)
-});
-
-router.post('/like/:id', function (req, res, next) {
-	var userId;
-	var messageId = req.params.id;
-	
-	//delete later
-	if (req.user) {
-		userId = req.user.id;
-	} else {
-		return sendStatus(401);
-	}
-
-	//should make sure that like doesn't already exist?
-	MessageLike.create({
-		userId: userId,
-		MessageId: MessageId
-	})
-	.then(function (like) {
-		console.log("USER WITH ID", userId, "LIKED MESSAGE WITH ID", messageId);
-		res.json(like);
-	}).catch(next);
-});
-
-router.delete('/like/:id', function (req, res, next) {
-	var userId;
-	var messageId = req.params.id;
-
-	//delete later
-	if (req.user) {
-		userId = req.user.id;
-	} else {
-		return sendStatus(401);
-	}
-
-	MessageLike.findOne({where: 
-		{
-			userId: userId,
-			MessageId: MessageId
-		}
-	})
-	.then(function (like) {
-		like.destroy();
-	})
-	.then(function (like) {
-		console.log("USER WITH ID", userId, "UNLIKED MESSAGE WITH ID", messageId);
-		res.json({deleted: true});
-	}).catch(next);
 });
 
 //post message -- when user submits a message
