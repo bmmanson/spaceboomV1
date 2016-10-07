@@ -1,3 +1,9 @@
+export const beginLoggingInOnLaunch = function () {
+	return {
+		type: "BEGIN_LOGGING_IN_ON_LAUNCH"
+	}
+}
+
 export const markAsUnread = function (id) {
 	return {
 		type: 'MARK_AS_UNREAD', 

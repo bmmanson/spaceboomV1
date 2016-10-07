@@ -1,12 +1,8 @@
 export const currentSession = (state = {}, action) => {
 	switch (action.type) {
-		case 'DOWNLOADING_ON_LAUNCH':
+		case 'BEGIN_LOGGING_IN_ON_LAUNCH':
 			return Object.assign({}, state, {
-				downloadingOnAppLaunch: true
-			})
-		case 'DOWNLOAD_ON_LAUNCH_COMPLETE':
-			return Object.assign({}, state, {
-				downloadingOnAppLaunch: false
+				loggingInOnAppLaunch: true
 			})
 		case 'UPDATE_NEW_MESSAGE_TEXT':
 			return Object.assign({}, state, {
@@ -18,7 +14,8 @@ export const currentSession = (state = {}, action) => {
 				email: action.email,
 				name: action.name,
 				authorPic: action.authorPic,
-				username: action.username
+				username: action.username,
+				loggingInOnAppLaunch: false
 			})
 		default: 
 			return state;
