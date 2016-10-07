@@ -29,8 +29,8 @@ var User = db.define('user', {
 }, 
 {       
     getterMethods: {
-		firstName:  function() {
-			return this.name.split[0];
+		facebookId: function() {
+			return "";
 		}
     }
 });

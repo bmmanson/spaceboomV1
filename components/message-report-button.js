@@ -9,7 +9,7 @@ class MessageReportButton extends Component {
 		const reportMessage = (message) => {
 			AlertIOS.alert(
 			"Report Message",
-			"Do you want to flag this message as inappropriate? If you tap yes, a moderator will check whether this message or its comments contain inappropriate material.",
+			"Do you want to flag this message as inappropriate? If you tap yes, a moderator will check whether this message or its comments contain inappropriate content.",
 			[
 			{
 				text: "No",

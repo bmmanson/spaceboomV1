@@ -8,7 +8,6 @@ class CommentLikeButtonAndCounter extends Component {
 	render () {
 
 		let renderNumberOfLikes = function (comment) {
-			console.log("THE COMMENT FROM RENDER NUMBER OF LIKES", comment);
 			if (comment.numberOfLikes === 1) {
 				return "1 Like";
 			} else {

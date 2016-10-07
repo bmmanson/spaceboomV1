@@ -1,5 +1,13 @@
 export const currentSession = (state = {}, action) => {
 	switch (action.type) {
+		case 'DOWNLOADING_ON_LAUNCH':
+			return Object.assign({}, state, {
+				downloadingOnAppLaunch: true
+			})
+		case 'DOWNLOAD_ON_LAUNCH_COMPLETE':
+			return Object.assign({}, state, {
+				downloadingOnAppLaunch: false
+			})
 		case 'UPDATE_NEW_MESSAGE_TEXT':
 			return Object.assign({}, state, {
 				newMessageText: action.newMessageText

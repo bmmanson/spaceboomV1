@@ -67,7 +67,8 @@ const style = StyleSheet.create({
 		shadowRadius: 2,
 		shadowOffset: {
 			width: 1,
-			height: 1}	
+			height: 1
+		}	
 	}
 });
 

@@ -152,9 +152,10 @@ const displayProfilePicture = function(state) {
 		);
 	} else {
 		return (
-			<View style={{height: windowSize.width, width: windowSize.width}}>
-			<Image source={require('./../img/spinner.gif')}
-							style={{height: 32, width: 32, margin: 10, alignSelf: 'center'}} />
+			<View style={{height: windowSize.width, width: windowSize.width, justifyContent: 'center', 
+							 		alignItems: 'center'}}>
+				<Image source={require('./../img/spinner.gif')}
+							style={{height: 48, width: 48, margin: 10, alignSelf: 'center'}} />
 			</View>
 		);
 	}
@@ -175,12 +176,3 @@ const UserProfileView = connect(
 )(UserProfile);
 
 export { UserProfileView };
-
-/*
-<Text style={{fontSize: 12, textAlign: 'right'}}>
-	Messages Found: {this.state.user.userprofile.messagesDiscovered}
-</Text>
-<Text style={{fontSize: 12, textAlign: 'right'}}>
-	Messages Posted: {this.state.user.userprofile.messagesSent}
-</Text>
-*/

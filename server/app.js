@@ -2,7 +2,7 @@
 
 var express = require('express');
 var db = require('./models');
-
+var path = require('path');
 var app = express();
 
 require('./configure')(app, db);

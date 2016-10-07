@@ -10,6 +10,8 @@ var _db = require('./../../../models/_db');
 
 var router = express.Router();
 
+router.use('/like', require('./like'));
+
 router.post('/message/:id', function (req, res, next) {
 	var text = req.body.text;
 	var authorId = req.user.id;
@@ -107,54 +109,6 @@ router.get('/message/:id', function (req, res, next) {
 	})
 	.then(function (comments) {
 		res.json(comments);
-	}).catch(next);
-});
-
-router.post('/like/:id', function (req, res, next) {
-	var userId;
-	var commentId = req.params.id;
-	
-	//delete later
-	if (req.user) {
-		userId = req.user.id;
-	} else {
-		return sendStatus(401);
-	}
-
-	//should make sure that the like doesn't already exist?
-	CommentLike.create({
-		userId: userId,
-		commentId: commentId
-	})
-	.then(function (like) {
-		console.log("USER WITH ID", userId, "LIKED COMMENT WITH ID", commentId);
-		res.json(like);
-	}).catch(next);
-});
-
-router.delete('/like/:id', function (req, res, next) {
-	var userId;
-	var commentId = req.params.id;
-
-	//delete later
-	if (req.user) {
-		userId = req.user.id;
-	} else {
-		return sendStatus(401);
-	}
-
-	CommentLike.findOne({where: 
-		{
-			userId: userId,
-			commentId: commentId
-		}
-	})
-	.then(function (like) {
-		like.destroy();
-	})
-	.then(function (like) {
-		console.log("USER WITH ID", userId, "UNLIKED COMMENT WITH ID", commentId);
-		res.json({deleted: true});
 	}).catch(next);
 });
 
