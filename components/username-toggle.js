@@ -16,7 +16,7 @@ class UsernameToggle extends Component {
 			<View style={{flex: 1, flexDirection: 'row'}}>
 				<View style={{flex: .8}}>
 					<Text style={{flex: 1, fontSize: 16, marginLeft: 8, marginTop: 12}}>
-					Display identity from Facebook
+					Display name from Facebook
 					</Text>
 				</View>
 				<View style={{flex: .2, alignItems:'center',

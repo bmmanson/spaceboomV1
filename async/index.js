@@ -105,6 +105,26 @@ const httpRequestToAddComment = (messageId, text) => {
     return fetch(url, request);
 }
 
+
+const httpRequestToSubmitUsername = (username) => {
+	let usernameJSON = {
+		username
+	};
+
+	usernameJSON = JSON.stringify(usernameJSON);
+
+	let request = {
+		headers: {
+			'Content-Type': 'application/json'
+  		},
+  		method: "PUT",
+  		body: usernameJSON
+    };
+
+	let url = "http://localhost:1337/api/user/settings/username/";
+	return fetch(url, request);
+}
+
 const httpRequestForUserProfile = (userId) => {
 	let url = "http://localhost:1337/api/user/profile/" + userId;
 	return fetch(url, {method:"GET"});
@@ -143,6 +163,12 @@ const httpRequestGetLikeDataForMessage = (messageId) => {
 const httpRequestTimesDiscoveredForMessage = (messageId) => {
 	let url = "http://localhost:1337/api/message/timesDiscovered/" + messageId;
 	return fetch(url, {method: "GET"});
+}
+
+export const submitNewUsername = (username) => {
+	return httpRequestToSubmitUsername(username)
+	.then( (response) => response.json())
+	.then( (data) => data);
 }
 
 export const getTimesDiscoveredForMessage = (messageId) => {

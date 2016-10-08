@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import { Text, View, TextInput, TouchableHighlight } from 'react-native';
 
+import { UsernameButton } from './username-button';
+
 class UsernameInput extends Component {
 
 	constructor(props) {
 		super(props);
 		this.state = {
 			text:'',
-			validUsername: false};
+			valid: false
+		};
 	}
 
 	render() {
@@ -24,25 +27,18 @@ class UsernameInput extends Component {
 							if (text.length < 24) {
 								this.setState({text})
 							}
-							if (text.length === 0) {
-								this.setState({validUsername: false});
+							let re = /[^a-z0-9]/gi;
+							if (text.length === 0 || text.match(re)) {
+								this.setState({valid: false});
 							} else {
-								this.setState({validUsername: true});
+								this.setState({valid: true});
 							}
 						}} />
 				</View>
-				<View style={{flex: .2, alignItems:'center',
-			justifyContent:'center'}}>
-					<View style={{borderRadius: 4,
-								width: 50,
-								padding: 3,
-								backgroundColor: '#EEC900'}}>
-						<TouchableHighlight onPress={()=>{}}>
-							<Text style={{color: 'white', textAlign: 'center', fontWeight: 'bold'}}>
-								SEND
-							</Text>
-						</TouchableHighlight>
-					</View>
+				<View style={{flex: .2, 
+							alignItems:'center',
+							justifyContent:'center'}}>
+					<UsernameButton username={this.state} />
 				</View>
 			</View>
 		);
