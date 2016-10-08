@@ -26,7 +26,7 @@ module.exports = function (app, db) {
 				return User.create({ 
 	   				facebookId: profile.id,
 	   			 	email: profile.emails[0].value,
-	    			name: profile.displayName,
+	    			facebookName: profile.displayName,
 	    			authorPic: profile.photos[0].value,
 	    		})		    		
 			} else {
@@ -50,7 +50,7 @@ module.exports = function (app, db) {
 		var response = {
 			userId: req.user.id,
 			email: req.user.email,
-			name: req.user.name,
+			facebookName: req.user.name,
 			authorPic: req.user.authorPic,
 			username: req.user.username
 		}

@@ -23,7 +23,7 @@ var UserProfile = db.define('userprofile', {
 	profilePic: {
 		type: Sequelize.STRING,
 		allowNull: false
-	},
+	}
 });
 
 module.exports = UserProfile;

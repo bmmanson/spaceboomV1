@@ -19,16 +19,6 @@ class LaunchPage extends Component {
 
 	render() {
 
-		const currentLocation = () => {
-			navigator.geolocation.getCurrentPosition(
-				(position) => {
-					let latitude = position.coords.latitude;
-					let longitude = position.coords.longitude;
-					checkForAndAddNewMessage(latitude, longitude);
-				}
-			)
-		}
-
 		const viewMessageRoute = {
 			component: MessageMasterView,
 			title: "Messsages"
@@ -54,13 +44,7 @@ class LaunchPage extends Component {
 
 	    return (
 	    	<View style={styles.container}>
-	    		<Map height={10} />
-
-	    		<FBLogin />
-
-	    		<MenuButton buttonText={"Check"}
-	    		buttonColor={"red"}
-	    		buttonAction= {currentLocation}/>
+	    		<Map height={13} />
 
 	        	<MenuButton buttonText={"Post a Message"} 
 	        	buttonColor={"skyblue"}
@@ -73,5 +57,23 @@ class LaunchPage extends Component {
 	    );
 	}
 }
+
+/*
+	const currentLocation = () => {
+		navigator.geolocation.getCurrentPosition(
+			(position) => {
+				let latitude = position.coords.latitude;
+				let longitude = position.coords.longitude;
+				checkForAndAddNewMessage(latitude, longitude);
+			}
+		)
+	}
+
+	<FBLogin />
+
+	<MenuButton buttonText={"Check"}
+	buttonColor={"red"}
+	buttonAction= {currentLocation}/>
+*/
 
 export { LaunchPage };

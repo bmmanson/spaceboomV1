@@ -11,6 +11,7 @@ var utils = require('./utils');
 
 router.use('/wallpost', require('./wallpost'));
 router.use('/report', require('./report'));
+router.use('/settings', require('./settings'));
 
 router.get('/login/:id', function (req, res, next) {
 	console.log("THE LOGIN ROUTE IS HIT");
@@ -175,7 +176,7 @@ router.delete('/:id', function (req, res, next){
 //add user when a new user joins
 router.post('/', function (req, res, next) {
 	var email = req.body.email;
-	var name = req.body.name;
+	var facebookName = req.body.facebookName;
 	var authorPic = req.body.authorPic;
 
 	User.create({

@@ -41,7 +41,8 @@ class FBLogin extends Component {
                 })
                 .then(
                   (response) => {
-                    Actions.initial();
+                    //logic here to determine with go to newUsername or frontpage
+                    Actions.newUsername();
                     console.log("RESPONSE AFTER HTTP REQUEST:", response);
                     //another http request to update messages?
                 })
