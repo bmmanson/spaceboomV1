@@ -20,7 +20,16 @@ class UsernameInput extends Component {
 						placeholder={"Your username here:"}
 						placeholderTextColor={"#C7C7C7"}
 						value={this.state.text}
-						onChangeText={(text) => {if (text.length < 24) {this.setState({text})}}} />
+						onChangeText={(text) => {
+							if (text.length < 24) {
+								this.setState({text})
+							}
+							if (text.length === 0) {
+								this.setState({validUsername: false});
+							} else {
+								this.setState({validUsername: true});
+							}
+						}} />
 				</View>
 				<View style={{flex: .2, alignItems:'center',
 			justifyContent:'center'}}>
