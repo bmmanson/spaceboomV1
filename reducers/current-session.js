@@ -4,6 +4,10 @@ export const currentSession = (state = {}, action) => {
 			return Object.assign({}, state, {
 				loggingInOnAppLaunch: true
 			})
+		case 'ADD_USERNAME':
+			return Object.assign({}, state, {
+				username: action.username
+			})
 		case 'UPDATE_NEW_MESSAGE_TEXT':
 			return Object.assign({}, state, {
 				newMessageText: action.newMessageText
@@ -14,6 +18,7 @@ export const currentSession = (state = {}, action) => {
 				email: action.email,
 				name: action.name,
 				authorPic: action.authorPic,
+				facebookName: action.facebookName,
 				username: action.username,
 				loggingInOnAppLaunch: false
 			})

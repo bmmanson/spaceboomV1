@@ -4,6 +4,27 @@ var router = express.Router();
 var User = require('./../../../models/user');
 var UserProfile = require('./../../../models/user-profile');
 
+router.get('/view/', function (req, res, next) {
+	console.log("SETTINGS/VIEW ROUTE HIT BY USER WITH ID:", req.user.id);
+	var userId = req.user.id;
+	User.findById(userId)
+	.then(function (user) {
+		return UserProfile.findOne({
+			where:
+			{
+				userId: userId
+			}
+		})
+		.then(function (profile) {
+			res.json({
+				aboutMe: profile.aboutMe,
+				username: user.username,
+				displayRealIdentity: user.displayRealIdentity
+			})
+		})
+	})
+});
+
 router.put('/username/', function (req, res, next) {
 	var username = req.body.username.text;
 	var userId = req.user.id;
@@ -37,22 +58,21 @@ router.put('/username/', function (req, res, next) {
 	}).catch(next);
 });
 
-router.put('/toggleNameDisplayed/:id', function (req, res, next) {
-	var val = req.body.displayRealIdentity;
-	var userId = req.params.id;
-	
+router.put('/toggleNameDisplayed/', function (req, res, next) {
+	var displayRealIdentity = req.body.displayRealIdentity;
+	var userId = req.user.id;
 	User.findById(userId)
 	.then(function (user) {
-		return user.update({displayRealIdentity: val})
+		return user.update({displayRealIdentity: displayRealIdentity})
 	})
 	.then(function (user) {
 		res.send(user);
 	}).catch(next);
 });
 
-router.put('/aboutMe/:id', function (req, res, next) {
-	var text = req.body.text;
-	var userId = req.params.id;
+router.put('/aboutMe/', function (req, res, next) {
+	var text = req.body.aboutMe;
+	var userId = req.user.id;
 
 	UserProfile.findOne({
 		where: 

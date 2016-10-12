@@ -39,7 +39,7 @@ var User = db.define('user', {
 			if (this.displayRealIdentity) {
 				return this.facebookName;
 			} else {
-				return "@" + this.username;
+				return this.username;
 			}
 		}
     }

@@ -4,6 +4,20 @@ export const beginLoggingInOnLaunch = function () {
 	}
 }
 
+export const addUsername = function (username) {
+	return {
+		type: 'ADD_USERNAME',
+		username
+	};
+}
+
+export const changeAuthorNameOfSentMessages = function (author) {
+	return {
+		type: 'CHANGE_AUTHOR_NAME_OF_SENT_MESSAGES',
+		author
+	}
+}
+
 export const markAsUnread = function (id) {
 	return {
 		type: 'MARK_AS_UNREAD', 
@@ -18,12 +32,13 @@ export const updateNewMessageText = function (newMessageText) {
 	}
 }
 
-export const addCurrentSessionOnLogin = function (userId, email, name, authorPic, username) {
+export const addCurrentSessionOnLogin = function (userId, email, name, facebookName, authorPic, username) {
 	return {
 		type: 'ADD_CURRENT_SESSION_ON_LOGIN',
 		userId,
 		email,
 		name,
+		facebookName,
 		authorPic,
 		username
 	};
