@@ -15,7 +15,6 @@ import { deleteSentMessageOnServer, deleteDiscoveredMessageOnServer} from './../
 class DeleteMessageButton extends Component {
 	
 	_deleteMessage (message) {
-		console.log("IS THE STATE UPDATED?", store.getState());
 		if (message.currentUser === true) {
 			AlertIOS.alert(
 				"Delete Message", 
@@ -33,7 +32,7 @@ class DeleteMessageButton extends Component {
 						deleteSentMessageOnServer(message.id)
 						.then( (message) => {
 							Actions.pop();
-							alert("Messaged deleted!");
+							AlertIOS.alert("","Messaged deleted!");
 						})
 						}
 					}
@@ -42,7 +41,7 @@ class DeleteMessageButton extends Component {
 		} else {
 			AlertIOS.alert(
 				"Delete Message", 
-				"You are not the author of this message. If you delete it, you won't be able to see it anymore. Are you sure you want to delete it?",
+				"You are not the author of this message. If you delete it, you won't be able to see it anymore, but others will still be able to discover it. Are you sure you want to delete it?",
 				[
 					{text: "Cancel", 
 					onPress: () => console.log("user didn't delete message"), 
@@ -53,7 +52,7 @@ class DeleteMessageButton extends Component {
 						deleteDiscoveredMessageOnServer(message.id)
 						.then ( (message) => {
 							Actions.pop();
-							alert("Messaged deleted!");
+							AlertIOS.alert("", "Messaged deleted!");
 						})
 						}
 					}

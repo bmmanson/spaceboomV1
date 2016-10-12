@@ -11,13 +11,6 @@ var User = db.define('user', {
 	email: {
 		type: Sequelize.STRING
 	},
-	name: {
-		type: Sequelize.STRING,
-		allowNull: false
-	},
-	username: {
-		type: Sequelize.STRING
-	},
 	authorPic: {
 		type: Sequelize.STRING,
 		allowNull: false
@@ -25,12 +18,29 @@ var User = db.define('user', {
 	banned: {
 		type: Sequelize.BOOLEAN,
 		defaultValue: false
+	},
+	displayRealIdentity: {
+		type: Sequelize.BOOLEAN,
+		defaultValue: true
+	},
+	username: {
+		type: Sequelize.STRING,
+	},
+	facebookName: {
+		type: Sequelize.STRING
 	}
 }, 
 {       
     getterMethods: {
-		firstName:  function() {
-			return this.name.split[0];
+		facebookId: function() {
+			return "";
+		},
+		name: function() {
+			if (this.displayRealIdentity) {
+				return this.facebookName;
+			} else {
+				return "@" + this.username;
+			}
 		}
     }
 });

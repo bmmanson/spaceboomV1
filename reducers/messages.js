@@ -7,6 +7,22 @@ const message = (state, action) => {
       return Object.assign({}, state, {
         unread: false
       })
+    case 'MARK_MESSAGE_AS_LIKED':
+      if (state.id !== action.id) {
+        return state;
+      }
+      return Object.assign({}, state, {
+        isLikedByCurrentUser: true,
+        numberOfLikes: action.numberOfLikes + 1
+      })
+    case 'MARK_MESSAGE_AS_UNLIKED':
+      if (state.id !== action.id) {
+        return state;
+      }
+      return Object.assign({}, state, {
+        isLikedByCurrentUser: false,
+        numberOfLikes: action.numberOfLikes - 1
+      })
     default:
       return state;
   }
@@ -15,6 +31,14 @@ const message = (state, action) => {
 export const messages = (state = [], action) => {
   switch (action.type) {
     case 'MARK_AS_UNREAD':
+      return state.map(m =>
+        message(m, action)
+      )
+    case 'MARK_MESSAGE_AS_LIKED':
+      return state.map(m =>
+        message(m, action)
+      )
+    case 'MARK_MESSAGE_AS_UNLIKED':
       return state.map(m =>
         message(m, action)
       )
@@ -28,12 +52,17 @@ export const messages = (state = [], action) => {
           body: action.body,
           author: action.author,
           authorPic: action.authorPic,
+          authorId: action.authorId,
           latitude: action.latitude,
           longitude: action.longitude,
           locationName: action.locationName,
           city: action.city,
           currentUser: true,
-          unread: false
+          unread: false,
+          isLiked: action.isLiked,
+          timesDiscovered: action.timesDiscovered,
+          numberOfLikes: action.numberOfLikes,
+          createdAt: action.createdAt
         }
       ]
     case 'ADD_DISCOVERED_MESSAGE':
@@ -44,13 +73,18 @@ export const messages = (state = [], action) => {
           body: action.body,
           author: action.author,
           authorPic: action.authorPic,
+          authorId: action.authorId,
           latitude: action.latitude,
           longitude: action.longitude,
           locationName: action.locationName,
           city: action.city,
           currentUser: false,
           unread: action.unread,
-          reported: false
+          isLiked: action.isLiked,
+          reported: false,
+          timesDiscovered: action.timesDiscovered,
+          numberOfLikes: action.numberOfLikes,
+          createdAt: action.createdAt
         }
       ]
     case 'DELETE_ALL_MESSAGES':

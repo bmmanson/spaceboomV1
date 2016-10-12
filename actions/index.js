@@ -1,3 +1,9 @@
+export const beginLoggingInOnLaunch = function () {
+	return {
+		type: "BEGIN_LOGGING_IN_ON_LAUNCH"
+	}
+}
+
 export const markAsUnread = function (id) {
 	return {
 		type: 'MARK_AS_UNREAD', 
@@ -36,36 +42,69 @@ export const deleteMessage = function (id) {
 	};
 }
 
-export const addSentMessage = function (id, body, author, authorPic, latitude, longitude, locationName, city, comment) {
+export const markMessageAsLiked = function (id, numberOfLikes) {
+	return {
+		type: 'MARK_MESSAGE_AS_LIKED',
+		id,
+		numberOfLikes
+	}
+}
+
+export const markMessageAsUnliked = function (id, numberOfLikes) {
+	return {
+		type: 'MARK_MESSAGE_AS_UNLIKED',
+		id,
+		numberOfLikes
+	}
+}
+
+export const addSentMessage = function (id, body, author, authorPic, authorId, latitude, longitude, locationName, city, timesDiscovered, numberOfLikes, isLikedByCurrentUser, createdAt) {
 	return {
 		type: 'ADD_SENT_MESSAGE', 
 		id,
 		body, 
 		author, 
-		authorPic, 
+		authorPic,
+		authorId, 
 		latitude,
 		longitude, 
 		locationName, 
-		city
+		city,
+		timesDiscovered,
+		numberOfLikes,
+		isLikedByCurrentUser,
+		createdAt
 	};
 }
 
-export const addDiscoveredMessage = function (id, body, author, authorPic, latitude, longitude, locationName, city, unread, comment) {
+export const addDiscoveredMessage = function (id, body, author, authorPic, authorId, latitude, longitude, locationName, city, unread, timesDiscovered, numberOfLikes, isLikedByCurrentUser, createdAt) {
 	return {
 		type: 'ADD_DISCOVERED_MESSAGE', 
 		id,
 		body, 
 		author, 
-		authorPic, 
+		authorPic,
+		authorId, 
 		latitude,
 		longitude, 
 		locationName, 
 		city,
-		unread
+		unread,
+		timesDiscovered,
+		numberOfLikes,
+		isLikedByCurrentUser,
+		createdAt
 	};
 }
 
-export const addComment = function (id, messageId, body, author, authorPic, currentUser, isLiked) {
+export const deleteComment = function (id) {
+	return {
+		type: 'DELETE_COMMENT',
+		id
+	};
+}
+
+export const addComment = function (id, messageId, body, author, authorPic, authorId, currentUser, isLikedByCurrentUser, numberOfLikes, createdAt) {
 	return {
 		type: 'ADD_COMMENT',
 		id,
@@ -73,9 +112,36 @@ export const addComment = function (id, messageId, body, author, authorPic, curr
 		body,
 		author,
 		authorPic,
+		authorId,
 		currentUser,
-		isLiked
+		isLikedByCurrentUser,
+		numberOfLikes,
+		createdAt
 	};
+}
+
+export const markCommentAsLiked = function (commentId, numberOfLikes) {
+	console.log("gets to action");
+	return {
+		type: 'MARK_AS_LIKED',
+		id: commentId,
+		numberOfLikes
+	}
+}
+
+export const markCommentAsUnliked = function (commentId, numberOfLikes) {
+	console.log("gets to action");
+	return {
+		type: 'MARK_AS_UNLIKED',
+		id: commentId,
+		numberOfLikes
+	}
+}
+
+export const deleteAllComments = function () {
+	return {
+		type: 'DELETE_ALL_COMMENTS'
+	}
 }
 
 export const setVisibility = function (filter) {

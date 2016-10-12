@@ -8,7 +8,7 @@ import { Actions } from 'react-native-router-flux';
 
 import { store } from './../store';
 import { sendAccessTokenToServer, getAllUserDataOnLogin } from './../async/';
-import { deleteAllMessages } from './../actions/';
+import { deleteAllMessages, deleteAllComments, beginLoggingInOnLaunch } from './../actions/';
 
 class FBLogin extends Component {
   render() {
@@ -23,6 +23,7 @@ class FBLogin extends Component {
               } else if (result.isCancelled) {
                 alert("login cancelled.");
               } else {
+                store.dispatch(beginLoggingInOnLaunch());
                 AccessToken.getCurrentAccessToken().then(
                   (data) => {
                     let token = data.accessToken.toString();
@@ -40,9 +41,10 @@ class FBLogin extends Component {
                 })
                 .then(
                   (response) => {
-                    Actions.initial();
+                    //logic here to determine with go to newUsername or frontpage
+                    Actions.newUsername();
                     console.log("RESPONSE AFTER HTTP REQUEST:", response);
-                    //another http request to update messages
+                    //another http request to update messages?
                 })
                 .catch(
                   (err) => {
@@ -55,6 +57,7 @@ class FBLogin extends Component {
           onLogoutFinished={() => {
             alert("logout.");
             store.dispatch(deleteAllMessages());
+            store.dispatch(deleteAllComments());
             Actions.login();
           }}/>
       </View>

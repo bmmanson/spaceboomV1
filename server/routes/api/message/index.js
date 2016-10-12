@@ -4,12 +4,17 @@ var request = require('request');
 var router = express.Router();
 
 var Message = require('./../../../models/message');
+var MessageLike = require('./../../../models/message-like');
 var User = require('./../../../models/user');
 var Discovery = require('./../../../models/discovery');
 var Comment = require('./../../../models/comment');
+var CommentLike = require('./../../../models/comment-like');
 
 var googleCredentials = require('./../../../../google-credentials');
 var utils = require('./utils');
+
+router.use('/report', require('./report'));
+router.use('/like', require('./like'));
 
 //get messages by user
 router.get('/user/:id', function (req, res, next) {
@@ -43,6 +48,14 @@ router.get('/user/:id', function (req, res, next) {
 	}).catch(next);
 });
 
+router.get('/timesDiscovered/:id', function (req, res, next) {
+	var messageId = req.params.id;
+	Message.findById(messageId)
+	.then(function (message) {
+		res.json({timesDiscovered: message.timesDiscovered});
+	}).catch(next);
+});
+
 //get all messages (for admin console)
 router.get('/', function (req, res, next) {
 	Message.findAll({include: {model: User, as: "author"}})
@@ -55,16 +68,13 @@ router.get('/', function (req, res, next) {
 router.put('/hide/:id', function (req, res, next) {
 	var messageId = req.params.id;
 
-	console.log("REQ.PARAMS", req.params);
-	console.log("REQ.BODY", req.body);
-
 	Message.findOne({where:
 		{
 			id: messageId
 		}
 	})
 	.then(function(message){
-		return message.update({deletedByUser: true})
+		return message.update({deletedByUser: true});
 	})
 	.then(function(message){
 		console.log("HIDING SENT MESSAGE", message);
