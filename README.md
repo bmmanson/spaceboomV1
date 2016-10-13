@@ -27,7 +27,6 @@ Spaceboom is nearly complete. Here is a list of features that I’ve finished (l
 - Users can delete messages they've created so they're no longer discoverable. Users can also remove discovered messages from their collection without making them undiscoverable
 - Users can flag messages as inappropriate
 - The app uses the React Native geolocation API to retrieve the user's coordinates. It sends the coordinates as a JSON object in the body of an http post request every time the user's coordinates change significantly while the app is running. If a posted message has coordinates that approximate those of the message, the server creates a new instance in the discovery model, and returns the messages data to the client
-- Each message displays 
 - Users can post new messages
 - Users can change their bio on their profile
 - Implemented Facebook login using Passport.js and the Facebook iOS SDK. Users can provide user names, and decide whether their username is displayed to other users, or their real identity (as provided by Facebook)
