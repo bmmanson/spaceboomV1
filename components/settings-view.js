@@ -94,6 +94,7 @@ class SettingsView extends Component {
 							<UsernameButton username={this.state} />
 						</View>
 					</View>
+
 					
 				</View>
 			</View>
