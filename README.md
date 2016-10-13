@@ -1,9 +1,9 @@
 #Spaceboom
 
 ## Introduction
-Spaceboom is a location-based messaging app for iOS. The idea is similar to geo-caching: it allows you to leave a messages at a specific location for others to find. If another user goes to a location where you posted a message, the user will receive a notification telling them they’ve discovered a new message. It will then be added to their collection of messages, and they will be able to read it. Friends have described the app as “Pokemon Go for people”.
+Spaceboom is a location-based messaging app for iOS. The idea is similar to geo-caching: it allows you to leave a messages at a specific location for others to find. If another user goes to a location where you posted a message, the user will receive a notification telling them they’ve discovered a new message. It will then be added to their collection of messages, and they will be able to read it. Friends of mine have described the app as “Pokemon Go for people”.
 
-The app also has a social networking aspect. You can interact with other users who have discovered a message by leaving comments on it. In addition, each user has a customizable profile, which can also be commented on -- it is similar to a Facebook "Wall". You can see a user’s profile if you have discovered one of their messages, or if you have seen a comment they have left on another user’s message. A user’s profile also lists and links to the profiles of all users whose messages the user has discovered.
+The app also has a social networking aspect. You can interact with other users who have discovered a message by leaving comments on it. In addition, each user has a customizable profile, which can also be commented on, similar to a Facebook "Wall". You can see a user’s profile if you have discovered one of their messages, or if you have seen a comment they have left on another user’s message. A user’s profile also lists and links to the profiles of all users whose messages the user has discovered.
 
 I have been building Spaceboom by myself. It's built using React Native and Redux on the front-end and Node.js, Express and Sequelize/SQL on the back-end.
 
