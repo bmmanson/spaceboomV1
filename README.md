@@ -11,19 +11,11 @@ I have been building Spaceboom by myself. It's built using React Native and Redu
 
 ![Login Page](/img/screenshots/loginpage.png?raw=true “Login page”)
 
-Login page
-
 ![Message Master View](/img/screenshots/messages.png?raw=true “Message Master View”)
-
-Message Master View
 
 ![Message Detail View](/img/screenshots/message-view.png?raw=true “Message Detail View”)
 
-Message Detail View
-
 ![User Profile](/img/screenshots/user-view.png?raw=true “User Profile”)
-
-User Profile
 
 ## Progress
 
