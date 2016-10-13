@@ -59,14 +59,14 @@ class UsernameButton extends Component {
 				.then( (data) => {
 					if (!data.valid) {
 						this.setState({sendingUsername: false});
-						AlertIOS.alert("", "Invalid username. Somebody else is already using that username, or it is inappropriate.");
+						AlertIOS.alert("", "Invalid username. Somebody else is already using that username or it is inappropriate.");
 					} else {
 						this.setState({sendingUsername: false});
 						AlertIOS.alert("", "You have successfully added your username.");
 					}
 				})
 			} else {
-				AlertIOS.alert("", "Invalid username: cannot contain special characters or spaces.");
+				AlertIOS.alert("", "Invalid username: cannot contain special characters or spaces and must be at least 3 characters long.");
 			}
 		}
 

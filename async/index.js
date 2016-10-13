@@ -7,7 +7,9 @@ import {
 	deleteAllComments,
 	markCommentAsLiked,
 	markCommentAsUnliked,
-	deleteComment
+	deleteComment,
+	addUsername,
+	changeAuthorNameOfSentMessages
 } from './../actions';
 
 export let currentUserId;
@@ -125,9 +127,52 @@ const httpRequestToSubmitUsername = (username) => {
 	return fetch(url, request);
 }
 
+const httpRequestToToggleNameDisplay = (displayRealIdentity) => {
+	let url = "http://localhost:1337/api/user/settings/toggleNameDisplayed/";
+	let body = {
+		displayRealIdentity
+	};
+
+	body = JSON.stringify(body);
+
+	let request = {
+		headers: {
+			'Content-Type': 'application/json'
+  		},
+  		method: "PUT",
+  		body
+    }
+
+    return fetch(url, request);
+}
+
+const httpRequestSendAboutMe = (aboutMe) => {
+	let url = "http://localhost:1337/api/user/settings/aboutMe/";
+	let body = {
+		aboutMe
+	};
+
+	body = JSON.stringify(body);
+
+	let request = {
+		headers: {
+			'Content-Type': 'application/json'
+  		},
+  		method: "PUT",
+  		body
+    }
+
+    return fetch(url, request);
+}
+
 const httpRequestForUserProfile = (userId) => {
 	let url = "http://localhost:1337/api/user/profile/" + userId;
 	return fetch(url, {method:"GET"});
+}
+
+const httpRequestForSettingsData = () => {
+	let url = "http://localhost:1337/api/user/settings/view/";
+	return fetch(url, {method: "GET"});
 }
 
 const httpRequestForDiscoveredUsers = (userId) => {
@@ -165,10 +210,39 @@ const httpRequestTimesDiscoveredForMessage = (messageId) => {
 	return fetch(url, {method: "GET"});
 }
 
+export const sendAboutMe = (aboutMe) => {
+	return httpRequestSendAboutMe(aboutMe)
+	.then((response) => response.json())
+	.then((data) => data);
+}
+
+export const getDataForSettings = () => {
+	return httpRequestForSettingsData()
+	.then((response) => response.json())
+	.then((data) => data);
+}
+
 export const submitNewUsername = (username) => {
 	return httpRequestToSubmitUsername(username)
 	.then( (response) => response.json())
-	.then( (data) => data);
+	.then( (data) => {
+		if (data.valid) {
+			store.dispatch(addUsername(data.username));
+			return data;
+		} else {
+			return data;
+		}
+	});
+}
+
+export const toggleNameDisplayedOnServer = (displayRealIdentity) => {
+	return httpRequestToToggleNameDisplay(displayRealIdentity)
+	.then( (response) => response.json())
+	.then( (data) => {
+		console.log("DATA FROM TOGGLENAME", data);
+		store.dispatch(changeAuthorNameOfSentMessages(data.name));
+		return data;
+	});
 }
 
 export const getTimesDiscoveredForMessage = (messageId) => {
@@ -449,10 +523,11 @@ export const getAllUserDataOnLogin = (id) => {
 			data.userInfo.id,
 			data.userInfo.email,
 			data.userInfo.name,
+			data.userInfo.facebookName,
 			data.userInfo.authorPic,
 			data.userInfo.username
 		))
-		console.log("STORE", store.getState());
+		return store.getState();
 	})
 }
 

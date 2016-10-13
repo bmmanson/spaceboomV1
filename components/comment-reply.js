@@ -40,7 +40,7 @@ class CommentReply extends Component {
 			<View>
 			<View style={{height: 25,
 				width: 50, 
-				backgroundColor: '#3D59AB', 
+				backgroundColor: '#EEC900', 
 				borderColor: '#C6E2FF',
 				borderRadius: 5,
 				borderWidth: 1,

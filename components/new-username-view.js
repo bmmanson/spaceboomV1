@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { View, Text, Image } from 'react-native';
+import { connect } from 'react-redux';
 
 import { UsernameInput } from './username-input';
 import { UsernameToggle } from './username-toggle';
+import { UsernameContinueButton } from './username-continue-button';
 
-class NewUsernameView extends Component {
+class NewUsername extends Component {
 
 	render () {
 		return (
@@ -13,9 +15,9 @@ class NewUsernameView extends Component {
 				<View style={{flex: 2, alignItems:'center',
         			justifyContent:'center'}}>
 					<Text style={{textAlign: 'center', color: 'white', fontSize: 16, marginBottom: 6}}>
-						Hello, Ben! Welcome to Spaceboom!
+						Hello, {this.props.firstName}! Welcome to Spaceboom!
 					</Text>
-					<Text style={{textAlign: 'center', color: 'white', fontSize: 22, fontWeight: 'bold'}}>
+					<Text style={{textAlign: 'center', color: 'white', fontSize: 22, fontWeight: 'bold', marginBottom: 6}}>
 						Choose a username:
 					</Text>
 				</View>
@@ -28,10 +30,12 @@ class NewUsernameView extends Component {
 							borderColor: '#A8A8A8',
 							borderRadius: 5}}>
 					<View style={{flex: 1, borderStyle: 'solid', borderBottomWidth: 1, borderBottomColor:'#CFCFCF'}}>
-						<UsernameInput />
+						<UsernameInput 
+							userCanContinue={this.props.userCanContinue} />
 					</View>
 					<View style={{flex: 1}}>
-						<UsernameToggle />
+						<UsernameToggle 
+							userCanContinue={this.props.userCanContinue} />
 					</View>
 				</View>
 				<View style={{flex: 1}} />
@@ -47,12 +51,35 @@ class NewUsernameView extends Component {
 						a location-based messaging app
 					</Text>
 				</View>
-				<View style={{flex: 1}} />
+				<View style={{flex: 2, alignItems:'center',
+    			justifyContent:'center'}}>
+					<UsernameContinueButton 
+						userCanContinue={this.props.userCanContinue} />
+				</View>
 				<View style={{flex: 8}} />
 			</View>
 		);
 	}
-
 }
+
+const userStatus = (currentSession) => {
+	if (currentSession["username"] === "NULL" || currentSession["username"] === null) {
+		return false;
+	} else {
+		return true;	
+	} 
+}
+
+const mapStateToProps = (state) => {
+	return {
+		userCanContinue: userStatus(state.currentSession),
+		firstName: state.currentSession.facebookName.split(' ')[0],
+	};
+}
+
+const NewUsernameView = connect(
+	mapStateToProps
+)(NewUsername);
+
 
 export { NewUsernameView };

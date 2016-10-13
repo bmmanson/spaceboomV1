@@ -41,10 +41,13 @@ class FBLogin extends Component {
                 })
                 .then(
                   (response) => {
-                    //logic here to determine with go to newUsername or frontpage
-                    Actions.newUsername();
-                    console.log("RESPONSE AFTER HTTP REQUEST:", response);
-                    //another http request to update messages?
+                    console.log("RESPONSE AFTER HTTP REQUEST (STORE):", response);
+                    let username = response.currentSession.username;
+                    if (username === null || username === "NULL") {
+                      Actions.newUsername();
+                    } else {
+                      Actions.initial();
+                    }
                 })
                 .catch(
                   (err) => {

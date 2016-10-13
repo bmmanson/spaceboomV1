@@ -5,12 +5,14 @@ import { connect } from 'react-redux';
 import { 
 	getUserInfoForProfileFromServer, 
 	getDiscoveredUsersFromServer,
-	getWallPostsFromServer 
+	getWallPostsFromServer,
+	currentUserId 
 } from './../async/';
 
 import { Comments } from './comments';
 import { UserProfileDiscoveredUsers } from './user-profile-discovered-users';
 import { CommentReply } from './comment-reply';
+import { SettingsButton } from './settings-button';
 
 let Dimensions = require('Dimensions');
 let windowSize = Dimensions.get('window');
@@ -96,23 +98,7 @@ class UserProfile extends Component {
 									Profile Views: {this.state.user.userprofile.timesViewed}
 								</Text>
 							</View>
-							<View style={{flex: .2}}>
-								<View style={{
-									borderRadius: 3,
-									borderStyle: "solid",
-									borderWidth: 2,
-									borderColor: '#B9D3EE',
-									backgroundColor: '#F0F8FF',
-									justifyContent: 'center', 
-							 		alignItems: 'center',
-							 		height: 28,
-							 		marginTop: 0
-								}}>
-									<Text style={{fontWeight: 'bold', color: '#6C7B8B', fontSize: 10}}>
-										SETTINGS
-									</Text>
-								</View>
-							</View>
+							{renderSettingsButtonIfCurrentUser(currentUserId, this.state.user.id)}
 						</View>
 						<View style={{
 								marginTop: 6, 
@@ -141,7 +127,11 @@ class UserProfile extends Component {
 	}
 }
 
-
+const renderSettingsButtonIfCurrentUser = (currentUser, userId) => {
+	if (currentUser === userId) {
+		return (<SettingsButton />);
+	}
+}
 
 const displayProfilePicture = function(state) {
 	if (state.userInfoDownloadComplete) {

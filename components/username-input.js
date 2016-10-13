@@ -24,11 +24,11 @@ class UsernameInput extends Component {
 						placeholderTextColor={"#C7C7C7"}
 						value={this.state.text}
 						onChangeText={(text) => {
-							if (text.length < 24) {
+							if (text.length < 25) {
 								this.setState({text})
 							}
 							let re = /[^a-z0-9]/gi;
-							if (text.length === 0 || text.match(re)) {
+							if (text.length < 3 || text.match(re)) {
 								this.setState({valid: false});
 							} else {
 								this.setState({valid: true});

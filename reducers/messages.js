@@ -23,6 +23,14 @@ const message = (state, action) => {
         isLikedByCurrentUser: false,
         numberOfLikes: action.numberOfLikes - 1
       })
+    case 'CHANGE_AUTHOR_NAME_OF_SENT_MESSAGES':
+      if (state.currentUser) {
+        return Object.assign({}, state, {
+          author: action.author
+        })
+      } else {
+        return state;
+      }
     default:
       return state;
   }
@@ -39,6 +47,10 @@ export const messages = (state = [], action) => {
         message(m, action)
       )
     case 'MARK_MESSAGE_AS_UNLIKED':
+      return state.map(m =>
+        message(m, action)
+      )
+    case 'CHANGE_AUTHOR_NAME_OF_SENT_MESSAGES':
       return state.map(m =>
         message(m, action)
       )
