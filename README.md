@@ -22,8 +22,8 @@ I have been building Spaceboom by myself. It's built using React Native and Redu
 Spaceboom is nearly complete. Here is a list of features that I’ve finished (leaving aside refactoring and cosmetic changes, in some cases):
 
 - All views (the login view, the root view, newUsername, newMessage, messageMasterView, MessageDetailView, userProfile) except for the settings view
-- All routes and SQL models
-- Users can “like” messages, comment on messages and profiles, and like comments
+- All routes and SQL models are complete
+- Users can “like” messages, comment on messages and profiles, and "like" comments on messages and profiles
 - Users can delete messages they've created so they're no longer discoverable. Users can also remove discovered messages from their collection without making them undiscoverable
 - Users can flag messages as inappropriate
 - The app uses the React Native geolocation API to retrieve the user's coordinates. It sends the coordinates as a JSON object in the body of an http post request every time the user's coordinates change significantly while the app is running. If a posted message has coordinates that approximate those of the message, the server creates a new instance in the discovery model, and returns the messages data to the client
