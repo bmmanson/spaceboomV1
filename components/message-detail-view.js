@@ -44,8 +44,8 @@ class MessageDetail extends Component {
 								  commentedOn={this.props.message}
 								  downloadComplete={this.state.downloadComplete} />
 						<MessageMap message={this.props.message} />
+						<DeleteMessageButton message={this.props.message} />
 					</View>
-					<DeleteMessageButton message={this.props.message}/>
 				</ScrollView>
 				<CommentReply message={this.props.message} />
 			</View>
@@ -61,6 +61,7 @@ const style = StyleSheet.create({
 		backgroundColor: '#D9D9D9'
 	},
 	container: {
+		backgroundColor: '#FAFAFA',
 		marginTop: 0,
 		marginBottom: 6,
 		shadowOpacity: 0.8,

@@ -9,20 +9,11 @@ import { Actions } from 'react-native-router-flux';
 import { Map } from './map';
 import { MenuButton } from './menu-button';
 import { styles } from './../styles/main';
-import { TitleBar } from './title-bar';
-import { NewMessageView } from './new-message-view';
-import { MessageMasterView } from './message-master-view';
-import { FBLogin } from './fb-login';
 import { checkForAndAddNewMessage } from './../async';
 
 class LaunchPage extends Component {
 
 	render() {
-
-		const viewMessageRoute = {
-			component: MessageMasterView,
-			title: "Messsages"
-		}
 
 		const goToPostMessage = () => Actions.newMessage();
 
@@ -57,23 +48,5 @@ class LaunchPage extends Component {
 	    );
 	}
 }
-
-/*
-	const currentLocation = () => {
-		navigator.geolocation.getCurrentPosition(
-			(position) => {
-				let latitude = position.coords.latitude;
-				let longitude = position.coords.longitude;
-				checkForAndAddNewMessage(latitude, longitude);
-			}
-		)
-	}
-
-	<FBLogin />
-
-	<MenuButton buttonText={"Check"}
-	buttonColor={"red"}
-	buttonAction= {currentLocation}/>
-*/
 
 export { LaunchPage };
