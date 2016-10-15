@@ -8,7 +8,7 @@ class UsernameInput extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			text:'',
+			username:'',
 			valid: false
 		};
 	}
@@ -22,13 +22,13 @@ class UsernameInput extends Component {
 						style={{height: 30, marginTop: 4, marginLeft: 6, marginTop: 8}} 
 						placeholder={"Your username here:"}
 						placeholderTextColor={"#C7C7C7"}
-						value={this.state.text}
-						onChangeText={(text) => {
-							if (text.length < 25) {
-								this.setState({text})
+						value={this.state.username}
+						onChangeText={(username) => {
+							if (username.length < 25) {
+								this.setState({username})
 							}
 							let re = /[^a-z0-9]/gi;
-							if (text.length < 3 || text.match(re)) {
+							if (username.length < 3 || username.match(re)) {
 								this.setState({valid: false});
 							} else {
 								this.setState({valid: true});

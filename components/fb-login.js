@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 
-import {
-	View
-} from 'react-native';
+import { View } from 'react-native';
 import {LoginButton, AccessToken} from 'react-native-fbsdk';
 import { Actions } from 'react-native-router-flux';
 

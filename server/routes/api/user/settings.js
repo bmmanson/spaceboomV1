@@ -26,7 +26,7 @@ router.get('/view/', function (req, res, next) {
 });
 
 router.put('/username/', function (req, res, next) {
-	var username = req.body.username.text;
+	var username = req.body.username;
 	var userId = req.user.id;
 
 	console.log("USERNAME ROUTE HIT. USERNAME:", username);
