@@ -7,12 +7,12 @@ class MessageMap extends Component {
 		return (
 		<View style={styles.view}>
 			<View style={styles.locationInformation}>
-				<View style={{flex: .3}}>
+				<View style={{flex: .5}}>
 					<Text style={styles.locationTextTitle}>
-						Location:
+						Location of Message:
 					</Text>
 				</View>
-				<View style={{flex: .7}}>
+				<View style={{flex: .5}}>
 					<Text style={styles.locationText}>
 						{this.props.message.city}
 						{" "}

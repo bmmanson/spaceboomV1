@@ -7,6 +7,9 @@ import {
 	Image,
 	StyleSheet } from 'react-native';
 
+import { store } from './../store';
+import { changeAuthorNameOfSentMessages } from './../actions';
+
 import { submitNewUsername } from './../async/';
 
 class UsernameButton extends Component {
@@ -55,13 +58,14 @@ class UsernameButton extends Component {
 		const submitUsername = (username) => {
 			if (username.valid) {
 				this.setState({sendingUsername: true});
-				submitNewUsername(username)
+				submitNewUsername(username.username)
 				.then( (data) => {
 					if (!data.valid) {
 						this.setState({sendingUsername: false});
 						AlertIOS.alert("", "Invalid username. Somebody else is already using that username or it is inappropriate.");
 					} else {
 						this.setState({sendingUsername: false});
+						store.dispatch(changeAuthorNameOfSentMessages(data.username));
 						AlertIOS.alert("", "You have successfully added your username.");
 					}
 				})

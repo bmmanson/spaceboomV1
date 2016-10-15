@@ -4,8 +4,6 @@ import { toggleNameDisplayedOnServer } from './../async/';
 
 class UsernameToggle extends Component {
 
-	//change with props later
-
 	constructor(props) {
 		super(props);
 		this.state = {displayRealIdentity: true};
