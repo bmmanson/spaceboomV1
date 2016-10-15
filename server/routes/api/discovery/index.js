@@ -7,26 +7,16 @@ var _db = require('./../../../models/_db');
 var router = express.Router();
 
 //user checks to see if new message
-router.post('/new', function (req, res, next) {
-//it makes sense for this to be a post request -- if there's a match, we're creating a new instance/row in the discovery table
-	//1st
-	//lat : 40.730395
-	//long : -74.000119
+router.post('/new/', function (req, res, next) {
+	console.log("DISCOVERY/NEW HIT:", req.body);
+	var userId = req.user.id;
+	var rawLatitude = req.body.location.coords.latitude;
+	var rawLongitude = req.body.location.coords.longitude;
 
-	//2nd
-	//lat : 40.730761
-	//long : -74.000773
+	var discoveredLatitude = +rawLatitude.toFixed(4);
+	var discoveredLongitude = +rawLongitude.toFixed(4); 
 
-	//currently accurate enough to find a message within a half NYC block radius. Radius is so large because getCurrentPosition runs so infrequently.
-
-	var userId = req.query.userId;
-	var discoveredLatitude = parseFloat(req.query.latitude);
-	var discoveredLongitude = parseFloat(req.query.longitude);
-
-	discoveredLatitude = +discoveredLatitude.toFixed(4);
-	discoveredLongitude = +discoveredLongitude.toFixed(4); 
-
-	console.log("Request received from user with id:", userId, "User Latitude:", parseFloat(req.query.latitude), "User Longitude:", parseFloat(req.query.longitude));
+	console.log("Request received from user with id:", userId, "User Latitude:", rawLatitude, "User Longitude:", rawLongitude);
 
 	Message.findOne({where:
 		{
@@ -98,7 +88,6 @@ router.post('/new', function (req, res, next) {
 			})
 		}
 	}).catch(next);
-
 });
 
 router.get('/user/:id', function (req, res, next) {
