@@ -28,10 +28,10 @@ Spaceboom is nearly complete. Here is a list of features that I’ve finished:
 - Users can flag messages as inappropriate
 - The app uses the React Native geolocation API to retrieve the user's coordinates. It sends the coordinates as a JSON object in the body of an http post request every time the user's coordinates change significantly while the app is running. If a posted message has coordinates that approximate those of the message, the server creates a new instance in the discovery model, and returns the messages data to the client
 - Users can post new messages
-- Users can change their bio on their profile
+- Users can change the bio that appears on their profile
 - Implemented Facebook login using Passport.js and the Facebook iOS SDK. Users can provide user names, and decide whether their username is displayed to other users, or their real identity (as provided by Facebook)
 - Google Maps API integration to get names for locations of messages
-- App sends user's coordinates to the server even when the app is only running in the background
+- App still sends user's coordinates to the server even when the app is only running in the background
 - Notifications
 
 ### Features to be implemented
