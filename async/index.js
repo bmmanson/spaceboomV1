@@ -9,7 +9,8 @@ import {
 	markCommentAsUnliked,
 	deleteComment,
 	addUsername,
-	changeAuthorNameOfSentMessages
+	changeAuthorNameOfSentMessages,
+	markAsUnread
 } from './../actions';
 
 export let currentUserId;
@@ -59,7 +60,7 @@ const httpRequestToDeleteSentMessage = (id) => {
 }
 
 const httpRequestToDeleteDiscoveredMessage = (id) => {
-	let url = "http://localhost:1337/api/message/hide/" + id;
+	let url = "http://localhost:1337/api/discovery/hide/" + id;
 	return fetch(url, {method: "PUT"});
 }
 
@@ -555,58 +556,52 @@ export const deleteDiscoveredMessageOnServer = (id) => {
 	})
 }
 
-export const checkForAndAddNewMessage = (latitude, longitude) => {
-	return httpRequestForNewDiscoveredMessage(latitude, longitude, currentUserId)
-	.then(function (response) {
-		return response.json();
-	})
-	.then(function (res) {
-		if (res.id !== null) {
-			console.log("NEW MESSAGE, DISCOVERED");
-			let m = {
-				id: res.message.id,
-				body: res.message.text, 
-				author: res.message.author.name,
-				locationName: res.message.locationName,
-				latitude: parseFloat(res.message.latitude),
-				longitude: parseFloat(res.message.longitude),
-				city: res.message.city,
-				authorPic: res.message.author.authorPic,
-				authorId: res.message.author.id,
-				createdAt: res.message.createdAt,
-				timesDiscovered: res.message.timesDiscovered,
-				isLikedMyCurrentUser: false,
-				numberOfLikes: res.message.numberOfLikes
-			}
-			console.log("NEW MESSAGE:", m);
-			store.dispatch(addDiscoveredMessage(
-				m.id,
-				m.body,
-				m.author,
-				m.authorPic,
-				m.authorId,
-				m.latitude,
-				m.longitude,
-				m.locationName,
-				m.city,
-				true, 
-				m.timesDiscovered,
-				m.numberOfLikes,
-				m.isLikedByCurrentUser,
-				m.createdAt
-			))
-		} else {
-			console.log("Response from server received. No new message");
+export const addDiscoveredMessageToCollection = (res) => {
+	if (res.id !== null) {
+		console.log("NEW MESSAGE, DISCOVERED");
+		let m = {
+			id: res.message.id,
+			body: res.message.text, 
+			author: res.message.author.name,
+			locationName: res.message.locationName,
+			latitude: parseFloat(res.message.latitude),
+			longitude: parseFloat(res.message.longitude),
+			city: res.message.city,
+			authorPic: res.message.author.authorPic,
+			authorId: res.message.author.id,
+			createdAt: res.message.createdAt,
+			timesDiscovered: res.message.timesDiscovered,
+			isLikedMyCurrentUser: false,
+			numberOfLikes: res.message.numberOfLikes
 		}
-
-	})
+		console.log("NEW MESSAGE:", m);
+		store.dispatch(addDiscoveredMessage(
+			m.id,
+			m.body,
+			m.author,
+			m.authorPic,
+			m.authorId,
+			m.latitude,
+			m.longitude,
+			m.locationName,
+			m.city,
+			true, 
+			m.timesDiscovered,
+			m.numberOfLikes,
+			m.isLikedByCurrentUser,
+			m.createdAt
+		))
+	} else {
+		console.log("Response from server received. No new message");
+	}
 }
 
 export const updateMessageAsUnreadOnServer = (id) => {
+	store.dispatch(markAsUnread(id));
 	httpRequestToUpdateMessageAsUnread(id)
 	.then( (response) => response.json() )
 	.then(function (response) {
-		if (response.message.id === null) {
+		if (response === null) {
 			console.log("Note: server has already marked this message as unread. Something wrong on front end? See async/index.js");
 		} else { 
 			console.log("RESPONSE RECEIVED. SERVER UPDATED");

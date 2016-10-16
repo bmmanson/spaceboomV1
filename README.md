@@ -19,7 +19,7 @@ I have been building Spaceboom by myself. It's built using React Native and Redu
 
 ## Progress
 
-Spaceboom is nearly complete. Here is a list of features that I’ve finished (leaving aside refactoring and cosmetic changes, in some cases):
+Spaceboom is nearly complete. Here is a list of features that I’ve finished:
 
 - All views complete (the login view, the root view, newUsername, newMessage, messageMasterView, MessageDetailView, userProfile, settings)
 - All routes and SQL models are complete
@@ -31,12 +31,13 @@ Spaceboom is nearly complete. Here is a list of features that I’ve finished (l
 - Users can change their bio on their profile
 - Implemented Facebook login using Passport.js and the Facebook iOS SDK. Users can provide user names, and decide whether their username is displayed to other users, or their real identity (as provided by Facebook)
 - Google Maps API integration to get names for locations of messages
-
-### Features to be implemented
-
 - App sends user's coordinates to the server even when the app is only running in the background
 - Notifications
+
+### Features to be implemented
+- Fix a few minor bugs
 - Deploy an instance of the server using Heroku
+- Add icons/launch screen in xCode
 - Submit to the App Store for review
 
 

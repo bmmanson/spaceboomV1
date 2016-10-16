@@ -1,6 +1,7 @@
 var express = require('express');
 var Message = require('./../../../models/message');
 var Discovery = require('./../../../models/discovery');
+var Comment = require('./../../../models/comment');
 var User = require('./../../../models/user');
 var _db = require('./../../../models/_db');
 
@@ -37,16 +38,16 @@ router.post('/new/', function (req, res, next) {
 			console.log("No matching message for user with id:", userId);
 			return res.json({id: null});
 		} else {
-			//I think I can delete everything from here
 			Discovery.findOne({where:
-				{messageId: message.id}
+				{
+					messageId: message.id
+				}
 			})
 			.then(function(discovery){
 				if (discovery !== null) {
 					console.log(`There was a matching message for user with id: ${userId}, but the user had already discovered it.`);
 					return res.json({id: null});
 				} else {
-			//to here
 					Discovery.create({
 						discovererId: userId,
 						messageId: message.id
@@ -66,15 +67,6 @@ router.post('/new/', function (req, res, next) {
 									model: User,
 									as: "author"
 									},
-									{
-									model: Comment,
-									as: "comment",
-									include:
-										{
-										model: User,
-										as: "author"
-										}
-									}
 								]
 							}	
 						})
@@ -126,45 +118,51 @@ router.get('/user/:id', function (req, res, next) {
 });
 
 //mark a discovered message as unread
-router.put('/unread/:id', function (req, res, next) {
-	console.log("THE ID:", req.params.id);
-	//id must be the id of the discovery, not the message
-	var readMessageId = req.params.id;
+router.put('/unread/:messageId', function (req, res, next) {
+	// id is the id of the message of the discovery, not the discovery itself
+	// not conventional. Think of rewriting async code in a later version to fix this
+	// would require saving the discovery ids on the client -- worth it?
+	var messageId = req.params.messageId;
+	var discovererId = req.user.id;
 	Discovery.findOne({where: 
-		{id: readMessageId}
-	})
-	.then(function (message) {
-		if (message.unread === true) {
-			return message.update({unread: false});
-		} else {
-			//perhaps something better to send to client if the message was already marked unread?
-			console.log("DISCOVERED MESSAGE was already marked as UNREAD. ID:", message.id);
-			res.send({message: 
-				{id: null}
-			});
+		{
+			messageId: messageId,
+			discovererId: discovererId
 		}
 	})
-	.then(function (message) {
-		console.log("DISCOVERED MESSAGE marked as UNREAD. ID:", message.id);
-		return res.json({message});
+	.then(function (discovery) {
+		if (discovery.unread === true) {
+			console.log("DISCOVERY had not already been yet marked as unread. MARKING AS UNREAD, ID:", discovery.id);
+			return discovery.update({unread: false});
+		} else {
+			console.log("Error on front-end? DISCOVERY had already been marked as UNREAD. ID:", discovery.id);
+			return null;
+		}
+	})
+	.then(function (discovery) {
+		return res.json({discovery});
 	}).catch(next);
 
 });
 
 //hide message (users has decided to delete message. we keep the discovery in the database, but to user it will appear hidden)
-router.put('/hide/:id', function (req, res, next) {
+router.put('/hide/:messageId', function (req, res, next) {
 	//currently, id must be the id of the discovery, not the message
-	//change that
-	var hiddenMessageId = req.params.id;
+	//see note about above route
+	var hiddenMessageId = req.params.messageId;
+	var discovererId = req.user.id;
 	Discovery.findOne({where: 
-		{id: hiddenMessageId}
+		{
+			messageId: hiddenMessageId,
+			discovererId: discovererId
+		}
 	})
-	.then(function (message) {
-		return message.update({hidden: true})
+	.then(function (discovery) {
+		return discovery.update({hidden: true});
 	})
-	.then(function (message) {
-		console.log("HIDING DISCOVERED MESSAGE", message);
-		res.json({message});
+	.then(function (discovery) { 
+		console.log("USER WITH ID:", req.user.id, "HIDING DISCOVERED DISCOVERY WITH ID:", discovery.id);
+		res.json({discovery});
 	}).catch(next);
 });
 

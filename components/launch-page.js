@@ -1,12 +1,12 @@
 import React from 'react';
-import { Text, View, NavigatorIOS } from 'react-native';
+import { Text, View, PushNotificationIOS, AlertIOS, AppState } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 
 import { Map } from './map';
 import { MenuButton } from './menu-button';
 import { styles } from './../styles/main';
 import BackgroundGeolocation from 'react-native-background-geolocation';
-import { checkForAndAddNewMessage } from './../async';
+import { addDiscoveredMessageToCollection } from './../async';
 
 export var LaunchPage = React.createClass({
 
@@ -17,7 +17,7 @@ getInitialState() {
 		stationaryRadius: 25,
 		distanceFilter: 50,
 		stopTimeout: 1,       
-		debug: true,
+		debug: false,
 		stopOnTerminate: false,
 		startOnBoot: true, 
 		url: 'http://localhost:1337/api/discovery/new/',
@@ -62,13 +62,23 @@ getInitialState() {
 			console.log('- Current motion activity: ', activityName);  // eg: 'on_foot', 'still', 'in_vehicle'
 		});
 
-		// This event fires when the user toggles location-services
-		BackgroundGeolocation.on('providerchange', function (provider) {
-			console.log('- Location provider changed: ', provider.enabled);    
-    	});
-
 		BackgroundGeolocation.on('http', function (response) {
-			console.log('- Returned http post request response:', response);
+			console.log("THE JSON BEFORE PARSE", response);
+			let res = JSON.parse(response.responseText);
+			console.log('- Returned http post request response:', res);
+			console.log('APP STATE', AppState.currentState);
+			if (res.id !== null) {
+				addDiscoveredMessageToCollection(res);
+				if (AppState.currentState === 'background') {
+					PushNotificationIOS.presentLocalNotification(
+						{
+							alertBody: "You discovered a new message! It was written by " + res.message.author.name + ". Check it out!"
+						}
+					);
+				} else if (AppState.currentState === 'active') {
+					AlertIOS.alert("", "You discovered a new message! It was written by " + res.message.author.name + ".");
+				}
+			}
 		})
 
     	return null;
