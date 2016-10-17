@@ -22,18 +22,21 @@ class NewMessageHeader extends Component {
 						{this.props.currentSession.name}
 					</Text>
 					<Text style={styles.locationNameText}>
-						Apple HQ
+						{this.props.currentSession.locationName}
 					</Text>
 				</View>
 				<View style={styles.buttonContainer}>
 					<View style={styles.buttonContentContainer}>
-						<SubmitMessageButton messageText={this.props.messageText} />
+						<SubmitMessageButton 
+							messageText={this.props.messageText}
+							downloading={this.props.currentSession.downloading} />
 						<Text style={styles.counter}>
 							{this.props.counter}
 						</Text>
 					</View>
 				</View>
-			</View>);
+			</View>
+		);
 	}
 }
 
@@ -65,8 +68,9 @@ const styles = StyleSheet.create({
 		fontSize: 16
 	},
 	locationNameText: {
-		fontSize: 14, 
-		marginTop: 3
+		fontSize: 12, 
+		marginTop: 3,
+		color: '#8C8C8C'
 	},
 	buttonContainer: {
 		flex: .2,
@@ -75,8 +79,6 @@ const styles = StyleSheet.create({
 	},
 	buttonContentContainer: {
 		flex: 1,
-		// justifyContent: 'center',
-	 //    alignItems: 'center',
 	},
 	counter: {
 		textAlign: 'center', 

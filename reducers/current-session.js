@@ -12,6 +12,18 @@ export const currentSession = (state = {}, action) => {
 			return Object.assign({}, state, {
 				newMessageText: action.newMessageText
 			})
+		case 'UPDATE_LOCATION_NAME':
+			return Object.assign({}, state, {
+				locationName: action.locationName
+			})
+		case 'DOWNLOADING_ON':
+			return Object.assign({}, state, {
+				downloading: true
+			})
+		case 'DOWNLOADING_OFF':
+			return Object.assign({}, state, {
+				downloading: false
+			})
 		case 'ADD_CURRENT_SESSION_ON_LOGIN':
 			return Object.assign({}, state, {
 				userId: action.userId,
@@ -20,7 +32,9 @@ export const currentSession = (state = {}, action) => {
 				authorPic: action.authorPic,
 				facebookName: action.facebookName,
 				username: action.username,
-				loggingInOnAppLaunch: false
+				loggingInOnAppLaunch: false,
+				locationName: "loading...",
+				downloading: false
 			})
 		default: 
 			return state;

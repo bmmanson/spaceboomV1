@@ -10,7 +10,8 @@ import {
 	deleteComment,
 	addUsername,
 	changeAuthorNameOfSentMessages,
-	markAsUnread
+	markAsUnread,
+	updateLocationName
 } from './../actions';
 
 export let currentUserId;
@@ -206,6 +207,20 @@ const httpRequestGetLikeDataForMessage = (messageId) => {
 const httpRequestTimesDiscoveredForMessage = (messageId) => {
 	let url = "http://localhost:1337/api/message/timesDiscovered/" + messageId;
 	return fetch(url, {method: "GET"});
+}
+
+const httpRequestToGetUserLocationName = (latitude, longitude) => {
+	let url = `http://localhost:1337/api/message/locationName?latitude=${latitude}&longitude=${longitude}`;
+    return fetch(url, {method: "GET"});
+}
+
+export const getUserLocationName = (latitude, longitude) => {
+	return httpRequestToGetUserLocationName(latitude, longitude)
+	.then((response) => response.json())
+	.then((data) => {
+		store.dispatch(updateLocationName(data.locationName));
+		return data;
+	});
 }
 
 export const sendAboutMe = (aboutMe) => {

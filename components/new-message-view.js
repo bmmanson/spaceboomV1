@@ -6,6 +6,8 @@ import { Map } from './map';
 
 import { styles } from './../styles/main';
 
+import { getUserLocationName } from './../async';
+
 import { store } from './../store.js';
 import { updateNewMessageText } from './../actions/';
 import { connect } from 'react-redux';
@@ -19,6 +21,18 @@ class NewMessage extends Component {
 		this.state = {
 			counter: maxChars
 		};
+	}
+
+	componentWillMount () {
+		navigator.geolocation.getCurrentPosition(
+			function (initialPosition) {
+				let latitude = parseFloat(initialPosition.coords.latitude); 
+				let longitude = parseFloat(initialPosition.coords.longitude);
+				getUserLocationName(latitude, longitude);
+			},
+			(error) => alert(error.message),
+			{enableHighAccuracy: true}
+		)
 	}
 
 	render(){
