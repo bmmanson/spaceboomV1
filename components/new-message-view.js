@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, NavigatorIOS, TextInput } from 'react-native';
 
-import { MessageHeader } from './message-header';
-import { SubmitMessageButton } from './submit-message-button';
+import { NewMessageHeader } from './new-message-header';
 import { Map } from './map';
 
 import { styles } from './../styles/main';
@@ -11,21 +10,37 @@ import { store } from './../store.js';
 import { updateNewMessageText } from './../actions/';
 import { connect } from 'react-redux';
 
+const maxChars = 260;
+
 class NewMessage extends Component {
+
+	constructor(props) {
+		super(props);
+		this.state = {
+			counter: maxChars
+		};
+	}
 
 	render(){
 
 		return (
 			<View style={styles.container}>
-				<Map height={5}/>
-				<MessageHeader message={this.props.message} />
+				<Map height={4}/>
+				<NewMessageHeader 
+					currentSession={this.props.currentSession} 
+					messageText={this.props.text}
+					counter={this.state.counter} />
 				<TextInput style={{flex: 6, fontSize: 16, marginHorizontal: 10}} 
-				placeholder={"Type your message here, then press submit. Anyone with Spaceboom who comes to this location will be able to read it!"}
+				placeholder={"Type your message here, then press the send button. Anyone with Spaceboom who comes to this location will be able to read it!"}
 				multiline={true}
 				keyboardType={'default'} 
-				onChangeText={(text) => store.dispatch(updateNewMessageText(text))}
+				onChangeText={(text) => {
+					store.dispatch(updateNewMessageText(text));
+					this.setState({counter: maxChars - text.length});
+				}}
+				maxLength={260}
 				value={this.props.text} />
-				<SubmitMessageButton messageText={this.props.text} />
+				
 			</View>
 		);
 	}
@@ -34,11 +49,7 @@ class NewMessage extends Component {
 const mapStateToProps = (state) => {
 	return {
 		text: state.currentSession.newMessageText,
-		author: state.currentSession.name,
-		authorPic: state.currentSession.authorPic,
-		//note -- most users don't have usernames yet.
-		//need to decide what text to put here
-		username: state.currentSession.username
+		currentSession: state.currentSession
 	};
 }
 

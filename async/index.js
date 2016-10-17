@@ -20,14 +20,11 @@ const httpRequestForNewDiscoveredMessage = (latitude, longitude, id) => {
 	return fetch(url, {method: "POST"});
 }
 
-const httpRequestToPostNewMessage = (text, authorId, latitude, longitude, locationName, city) => {
+const httpRequestToPostNewMessage = (text, latitude, longitude) => {
 	let message = {
 		text,
-		authorId,
 		latitude,
-		longitude,
-		locationName,
-		city
+		longitude
 	};
 
 	message = JSON.stringify(message);
@@ -341,8 +338,8 @@ export const getWallPostsFromServer = (userId) => {
 	})
 }
 
-export const postNewMessageToServer = (text, authorId, latitude, longitude, locationName, city) => {
-	return httpRequestToPostNewMessage(text, authorId, latitude, longitude, locationName, city)
+export const postNewMessageToServer = (text, latitude, longitude) => {
+	return httpRequestToPostNewMessage(text, latitude, longitude)
 	.then((response) => response.json())
 }
 

@@ -19,7 +19,6 @@ class MessageList extends Component {
 	_seeDetailView(message, messages){
 		let currentMessage = messages.find((m) => m.id === message.id)
 		if (currentMessage.unread === true) {
-			store.dispatch(markAsUnread(currentMessage.id));
 			updateMessageAsUnreadOnServer(currentMessage.id);
 		}
 		Actions.messageDetail({message: currentMessage});

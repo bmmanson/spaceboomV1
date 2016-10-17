@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
 	Text,
 	TouchableHighlight,
-	NavigatorIOS
+	NavigatorIOS,
+	Image
 } from 'react-native';
 
 import { addSentMessage, updateNewMessageText } from './../actions/';
@@ -12,7 +13,7 @@ import { store } from './../store.js';
 class SubmitMessageButton extends Component {
 	
 	_submitMessage (text) {
-		if (text.length < 8) {
+		if (text.length < 4) {
 			alert("That message isn't long enough! Write a longer message and try again!");
 		} else {
 			navigator.geolocation.getCurrentPosition(
@@ -22,11 +23,8 @@ class SubmitMessageButton extends Component {
 
 					return postNewMessageToServer(
 						text,
-						null,
 						latitude,
-						longitude,
-						"Apple",
-						"California, CA"
+						longitude
 					)
 					.then((response) => {
 						alert("Message sent! Other people can now discover it!");
@@ -57,16 +55,20 @@ class SubmitMessageButton extends Component {
 		return (
 			<TouchableHighlight 
 				onPress={this._submitMessage.bind(this, this.props.messageText)} 
-				style={{flex:1, backgroundColor: "skyblue", justifyContent: 'center', alignItems: 'center'}}>
+				style={{borderRadius: 4,
+						width: 60,
+						padding: 3, 
+						backgroundColor: "skyblue", 
+						justifyContent: 'center', 
+						alignItems: 'center'}}>
 				<Text style={{
 	   						flexDirection: 'column',
 	    					textAlign: 'center',
 	    					justifyContent: 'center',
 	    					alignItems: 'center',
 	    					color: 'white',
-	    					fontWeight: 'bold',
-	    					fontSize: 26}}>
-					{"Submit"}
+	    					fontWeight: 'bold'}}>
+					{"SEND"}
 				</Text>
 			</TouchableHighlight>
 		);

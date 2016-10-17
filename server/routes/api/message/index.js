@@ -88,10 +88,9 @@ router.put('/:id', function (req, res, next) {
 
 //post message -- when user submits a message
 router.post('/', function (req, res, next) {
-
 	var newMessage = {
 		text: req.body.text,
-		authorId: req.body.authorId || req.user.id,
+		authorId: req.user.id,
 		latitude: parseFloat(req.body.latitude),
 		longitude: parseFloat(req.body.longitude),
 		locationName: null,
