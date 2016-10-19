@@ -7,11 +7,12 @@ export const updateMessageAsUnreadOnServer = (id) => {
 	httpRequestToUpdateMessageAsUnread(id)
 	.then( (response) => response.json() )
 	.then(function (response) {
-		if (response.message.id === null) {
+		if (response === null) {
 			console.log("Note: server has already marked this message as unread. Something wrong on front end? See async/index.js");
 		} else { 
 			console.log("RESPONSE RECEIVED. SERVER UPDATED");
 			console.log("Message marked as read:", response);
 		}
+		store.dispatch(markAsUnread(id));
 	})
 }

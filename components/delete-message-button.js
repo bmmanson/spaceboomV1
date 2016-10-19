@@ -74,7 +74,8 @@ class DeleteMessageButton extends Component {
 	    					alignItems: 'center',
 	    					color: 'white',
 	    					fontWeight: 'bold',
-	    					fontSize: 26}}>
+	    					fontSize: 26,
+	    					marginVertical: 6}}>
 					Delete
 				</Text>
 			</TouchableHighlight>

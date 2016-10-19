@@ -88,10 +88,9 @@ router.put('/:id', function (req, res, next) {
 
 //post message -- when user submits a message
 router.post('/', function (req, res, next) {
-
 	var newMessage = {
 		text: req.body.text,
-		authorId: req.body.authorId || req.user.id,
+		authorId: req.user.id,
 		latitude: parseFloat(req.body.latitude),
 		longitude: parseFloat(req.body.longitude),
 		locationName: null,
@@ -125,8 +124,31 @@ router.post('/', function (req, res, next) {
 			}).catch(next);
 		}
 	})
-
 });
+
+router.get('/locationName/', function (req, res, next) {
+	var latitude = parseFloat(req.query.latitude);
+	var longitude = parseFloat(req.query.longitude);
+
+	var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' 
+		+ latitude + ',' 
+		+ longitude + 
+		'&key=' + googleCredentials.APIKEY;
+
+	request(url, function (error, resGoogle, body) {
+
+		var parsedBody = JSON.parse(body);
+		var locationName = utils.findLocationName(parsedBody);
+
+		if (!error && resGoogle.statusCode == 200) {
+			res.json({locationName: locationName});
+			console.log("USER WITH ID:", req.user.id, 
+				"REQUESTS LOCATION NAME WITH LAT:", latitude, 
+				"LONG:", longitude, 
+				"locationName:", locationName);
+		}
+	})
+})
 
 //delete -- for admins only. removes from db
 router.delete('/:id', function (req, res, next) {

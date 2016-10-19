@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, TouchableHighlight, Switch, AlertIOS } from 'react-native';
+import { Text, View, TextInput, TouchableHighlight, Switch, AlertIOS, Image } from 'react-native';
 
 import { UsernameToggle } from './username-toggle';
 import { SettingsAboutMe } from './settings-about-me';
@@ -15,7 +15,8 @@ class SettingsView extends Component {
 			aboutMe: 'downloading...',
 			username: "",
 			valid: true,
-			displayRealIdentity: true
+			displayRealIdentity: true,
+			downloadingAboutMe: false
 		};
 	}
 
@@ -34,12 +35,41 @@ class SettingsView extends Component {
 
 	render() {
 
-		const sendAboutMeToServer = (aboutMe) => {
-			sendAboutMe(aboutMe)
-			.then((aboutMe) => {
-				AlertIOS.alert("", "You have successfully updated your bio.");
-			})
+	const sendAboutMeToServer = (aboutMe) => {
+		this.setState({downloadingAboutMe: true});
+		sendAboutMe(aboutMe)
+		.then((aboutMe) => {
+			AlertIOS.alert("", "You have successfully updated your bio.");
+			this.setState({downloadingAboutMe: false});
+		})
+	}
+
+	const displayAboutMeButtonOrSpinner = (state) => {
+		if (state.downloadingAboutMe) {
+			return (
+				<Image source={require('./../img/spinner.gif')}
+				style={{height: 24, 
+						width: 24}} />
+			);
+		} else {
+			return (
+				<View style={{borderRadius: 4,
+							alignSelf: 'center',
+							width: 50,
+							padding: 3,
+							backgroundColor: '#EEC900', alignItems:'center', justifyContent:'center'}}>
+					<TouchableHighlight onPress={() => {
+						sendAboutMeToServer(this.state.aboutMe)
+						}} 
+						style={{flex: 1, alignItems:'center', justifyContent:'center'}}>
+						<Text style={{fontWeight: 'bold', color: 'white'}}>
+							SEND
+						</Text>
+					</TouchableHighlight>
+				</View>
+			);
 		}
+	}
 
 		return (
 			<View style={{flex: 1, backgroundColor: 'steelblue'}}>
@@ -66,20 +96,7 @@ class SettingsView extends Component {
 				        			maxLength={125} />
 							</View>
 							<View style={{flex: .2, alignItems:'center', justifyContent:'center'}}>
-								<View style={{borderRadius: 4,
-											alignSelf: 'center',
-											width: 50,
-											padding: 3,
-											backgroundColor: '#EEC900', alignItems:'center', justifyContent:'center'}}>
-									<TouchableHighlight onPress={() => {
-										sendAboutMeToServer(this.state.aboutMe)
-										}} 
-										style={{flex: 1, alignItems:'center', justifyContent:'center'}}>
-										<Text style={{fontWeight: 'bold', color: 'white'}}>
-											SEND
-										</Text>
-									</TouchableHighlight>
-								</View>
+								{displayAboutMeButtonOrSpinner(this.state)}
 							</View>
 						</View>
 						<Text style={{fontWeight: 'bold', fontSize: 12, marginVertical: 2}}>

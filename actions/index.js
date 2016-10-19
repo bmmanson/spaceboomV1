@@ -32,6 +32,18 @@ export const updateNewMessageText = function (newMessageText) {
 	}
 }
 
+export const downloadingOn = function () {
+	return {
+		type: 'DOWNLOADING_ON'
+	}
+}
+
+export const downloadingOff = function () {
+	return {
+		type: 'DOWNLOADING_OFF'
+	}
+}
+
 export const addCurrentSessionOnLogin = function (userId, email, name, facebookName, authorPic, username) {
 	return {
 		type: 'ADD_CURRENT_SESSION_ON_LOGIN',
@@ -42,6 +54,13 @@ export const addCurrentSessionOnLogin = function (userId, email, name, facebookN
 		authorPic,
 		username
 	};
+}
+
+export const updateLocationName = function (locationName) {
+	return {
+		type: 'UPDATE_LOCATION_NAME',
+		locationName
+	}
 }
 
 export const deleteAllMessages = function () {
