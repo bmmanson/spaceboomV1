@@ -15,6 +15,8 @@ I have been building Spaceboom by myself. It's built using React Native and Redu
 
 ![Message Detail View](/img/screenshots/message-view.png?raw=true “Message Detail View”)
 
+![Post Message](/img/screenshots/post-message.png?raw=true “Post Message”)
+
 ![User Profile](/img/screenshots/user-view.png?raw=true “User Profile”)
 
 ## Progress
@@ -32,7 +34,7 @@ Spaceboom is nearly complete. Here is a list of features that I’ve finished:
 - Implemented Facebook login using Passport.js and the Facebook iOS SDK. Users can provide user names, and decide whether their username is displayed to other users, or their real identity (as provided by Facebook)
 - Google Maps API integration to get names for locations of messages
 - App still sends user's coordinates to the server even when the app is only running in the background
-- Notifications
+- Notifications work
 
 ### Features to be implemented
 - Fix a few minor bugs

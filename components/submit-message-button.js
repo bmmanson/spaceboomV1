@@ -37,10 +37,15 @@ class SubmitMessageButton extends Component {
 								response.text, 
 								response.author.name,
 								response.author.authorPic,
-								response.latitude,
-								response.longitude,
+								response.author.id,
+								parseFloat(response.latitude),
+								parseFloat(response.longitude),
 								response.locationName,
-								response.city)
+								response.city,
+								0,
+								0,
+								false,
+								response.createdAt)
 							)
 							store.dispatch(updateNewMessageText(""));
 							console.log("COORDS. LAT:", response.latitude, "LONG:", response.longitude);
