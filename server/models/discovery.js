@@ -35,7 +35,7 @@ var Discovery = db.define('discovery', {
 				}
 			})
 			.then(function (discoveries) {
-				Message.findById(discovery.messageId)
+				return Message.findById(discovery.messageId)
 				.then(function (message) {
 					message.update({timesDiscovered: discoveries.length});
 					console.log("NUMBER OF TIMES DISCOVERED FOR MESSAGE", message.id, "IS NOW", discoveries.length);
@@ -48,7 +48,7 @@ var Discovery = db.define('discovery', {
 				}
 			})
 			.then(function (discoveries) {
-				UserProfile.findOne({where: 
+				return UserProfile.findOne({where: 
 					{
 						userId: discovery.discovererId
 					}

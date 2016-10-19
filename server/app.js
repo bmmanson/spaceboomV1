@@ -9,15 +9,18 @@ require('./configure')(app, db);
 app.use(require('./routes'));
 
 //error handling middleware
-//log
-app.use(function (err, req, res, next) {
-    console.log("ERROR-HANDLING MIDDLEWARE HIT");
+app.use(function (req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
     next(err);
 });
+
 //send response
 app.use(function (err, req, res, next) {
-    console.log("ERROR ROUTE HIT");
-    res.status(err.status || 500).send({status: err.status});
+    err.status = err.status || 500;
+    console.log("Error route hit. Error status:", err.status);
+    res.status(err.status || 500);
+    res.json({status: err.status});
 });
 
 var port = 1337;

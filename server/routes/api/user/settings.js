@@ -1,5 +1,7 @@
 var express = require('express');
 var Promise = require('bluebird');
+var swearjar = require('swearjar');
+swearjar.loadBadWords('./../../../node_modules/swearjar/lib/config/en_US.json');
 var router = express.Router();
 var User = require('./../../../models/user');
 var UserProfile = require('./../../../models/user-profile');
@@ -22,7 +24,7 @@ router.get('/view/', function (req, res, next) {
 				displayRealIdentity: user.displayRealIdentity
 			})
 		})
-	})
+	}).catch(next);
 });
 
 router.put('/username/', function (req, res, next) {
@@ -30,6 +32,13 @@ router.put('/username/', function (req, res, next) {
 	var userId = req.user.id;
 
 	console.log("USERNAME ROUTE HIT. USERNAME:", username);
+
+	if (swearjar.profane(username)) {
+		res.json({
+			valid: false
+		})
+		return;
+	}
 
 	User.findOne({
 		where:

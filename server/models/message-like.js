@@ -17,7 +17,7 @@ var MessageLike = db.define('messagelike', {
 				}
 			})
 			.then(function (messages) {
-				Message.findById(messagelike.messageId)
+				return Message.findById(messagelike.messageId)
 				.then(function (message) {
 					message.update({numberOfLikes: messages.length});
 					console.log("NUMBER OF LIKES FOR MESSAGE", message.id, "IS NOW", messages.length);
@@ -31,7 +31,7 @@ var MessageLike = db.define('messagelike', {
 				}
 			})
 			.then(function (messages) {
-				Message.findById(messagelike.messageId)
+				return Message.findById(messagelike.messageId)
 				.then(function (message) {
 					message.update({numberOfLikes: messages.length});
 					console.log("NUMBER OF LIKES FOR MESSAGE", message.id, "IS NOW", messages.length);
