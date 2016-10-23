@@ -14,7 +14,7 @@ router.use('/report', require('./report'));
 router.use('/settings', require('./settings'));
 
 router.get('/login/:id', function (req, res, next) {
-	console.log("THE LOGIN ROUTE IS HIT");
+	console.log("Someone is logging in. ID:", req.params.id);
 
 	var currentUserId = req.params.id;
 
@@ -88,7 +88,6 @@ router.get('/login/:id', function (req, res, next) {
 });
 
 router.get('/profile/:id', function (req, res, next) {
-	console.log("PROFILE ROUTE HIT");
 	var userId = req.params.id;
 
 	UserProfile.findOne({
@@ -113,10 +112,10 @@ router.get('/profile/:id', function (req, res, next) {
 
 		})
 		.then(function (user) {
-			console.log("SENDING PROFILE WITH ID:", user.id, "TO ", req.user.id);
+			console.log("Sending profile with ID:", user.id, "to user with ID:", req.user.id);
 			res.json(user);
 		}).catch(next);
-	})
+	}).catch(next);
 	 
 });
 
@@ -159,7 +158,9 @@ router.get('/', function (req, res, next) {
 router.put('/ban/:id', function (req, res, next) {
 	var id = req.params.id;
 	User.findOne({where:
-		{id: id}
+		{
+			id: id
+		}
 	}).then(function (user) {
 		return user.update({banned: true});
 	}).then(function (user) {
@@ -170,7 +171,7 @@ router.put('/ban/:id', function (req, res, next) {
 
 //delete user -- for admin console
 router.delete('/:id', function (req, res, next){
-	res.send("UNDER CONSTRUCTION");
+	res.send("Route does not yet exist");
 });
 
 //add user when a new user joins

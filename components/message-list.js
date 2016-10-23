@@ -28,6 +28,7 @@ class MessageList extends Component {
 		return (
 	    	<ListView 
 	    	style={{flex: 12, margin: 0}}
+	    	enableEmptySections={true}
 	    	dataSource={this._getMessages(this.props.messages)}
 	    	renderRow={ 
 	    		(message) => <MessageInList author={message.author} 

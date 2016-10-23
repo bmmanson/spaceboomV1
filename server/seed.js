@@ -93,7 +93,7 @@ var data = {
 
 	],
 	message: 
-	[
+	[	
 		{
 			text: "I am a message that was created at a specific location. I am written in English, I'm legible, I convey meaning, and I'm composed of letters and words.",
 			authorId: 1,
