@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import { View, ScrollView, StyleSheet } from 'react-native';
+import { View, 
+	ScrollView, 
+	StyleSheet, 
+	Keyboard, 
+	Dimensions, 
+	LayoutAnimation } from 'react-native';
 import { connect } from 'react-redux';
 
 import { DeleteMessageButton } from './delete-message-button';
@@ -17,11 +22,15 @@ class MessageDetail extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			downloadComplete: false
+			downloadComplete: false,
+			visibleHeight: Dimensions.get('window').height - 65,
 		};
 	}
 
 	componentWillMount() {
+		this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this.keyboardDidShow.bind(this));
+		this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this.keyboardDidHide.bind(this));
+
 		getCommentsForMessage(this.props.message.id)
 		.then( (status) => {
 			if (status === "COMPLETE") {
@@ -32,22 +41,45 @@ class MessageDetail extends Component {
 		});
 	}
 
+	componentWillUnmount () {
+		this.keyboardDidShowListener.remove();
+		this.keyboardDidHideListener.remove();
+	}
+
+	keyboardDidShow (e) {
+		let newSize = Dimensions.get('window').height - e.endCoordinates.height - 65;
+		this.setState({
+			visibleHeight: newSize,
+		});
+		LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+	}
+  
+	keyboardDidHide (e) {
+		let newSize = Dimensions.get('window').height - 65;
+		this.setState({
+			visibleHeight: newSize,
+		});
+		LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+	} 
+
 	render () {
 
 		return (
 			<View style={style.view}>
-				<ScrollView style={style.scrollView}> 
-					<View style={style.container}>
-						<Message message={this.props.message}
-								comments={this.props.comments} />
-						<Comments comments={this.props.comments} 
-								  commentedOn={this.props.message}
-								  downloadComplete={this.state.downloadComplete} />
-						<MessageMap message={this.props.message} />
-						<DeleteMessageButton message={this.props.message} />
-					</View>
-				</ScrollView>
-				<CommentReply message={this.props.message} />
+				<View style={{height: this.state.visibleHeight}}>
+					<ScrollView style={style.scrollView}> 
+						<View style={style.container}>
+							<Message message={this.props.message}
+									comments={this.props.comments} />
+							<Comments comments={this.props.comments} 
+									  commentedOn={this.props.message}
+									  downloadComplete={this.state.downloadComplete} />
+							<MessageMap message={this.props.message} />
+							<DeleteMessageButton message={this.props.message} />
+						</View>
+					</ScrollView>
+					<CommentReply message={this.props.message} />
+				</View>
 			</View>
 		);
 	}
@@ -55,9 +87,10 @@ class MessageDetail extends Component {
 
 const style = StyleSheet.create({
 	view: {
-		flex: 1
+		flex: 1,
 	},
 	scrollView: {
+		flex: 1,
 		backgroundColor: '#D9D9D9'
 	},
 	container: {

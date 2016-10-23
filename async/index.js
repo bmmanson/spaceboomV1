@@ -214,6 +214,25 @@ const httpRequestToGetUserLocationName = (latitude, longitude) => {
     return fetch(url, {method: "GET"});
 }
 
+const httpRequestToPostWallPost = (userId, text) => {
+	let url = "http://localhost:1337/api/user/wallpost/" + userId;
+	let message = {
+		text, 
+		userId
+	};
+
+	message = JSON.stringify(message);
+
+	let request = {
+		headers: {
+			'Content-Type': 'application/json'
+  		},
+  		method: "POST",
+  		body: message
+    }
+    return fetch(url, request);
+}
+
 export const getUserLocationName = (latitude, longitude) => {
 	return httpRequestToGetUserLocationName(latitude, longitude)
 	.then((response) => response.json())
@@ -302,11 +321,32 @@ export const getDiscoveredUsersFromServer = (userId) => {
 }
 
 export const getUserInfoForProfileFromServer = (userId) => {
+	store.dispatch(deleteAllComments());
 	return httpRequestForUserProfile(userId)
 	.then((response) => response.json())
 	.then((data) => {
 		console.log("THE DATA FROM ASYNC FILE", data);
 		return data;
+	});
+}
+
+export const sendWallPostToServer = (userId, text) => {
+	return httpRequestToPostWallPost(userId, text)
+	.then((response) => response.json())
+	.then((data) => {
+		store.dispatch(addComment(
+				data.id,
+				data.userId,
+				data.text,
+				data.author.name,
+				data.author.authorPic,
+				data.author.id,
+				true,
+				false,
+				data.numberOfLikes,
+				data.createdAt
+		));
+		return "COMPLETE";
 	});
 }
 

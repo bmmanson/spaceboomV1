@@ -59,7 +59,33 @@ router.get('/:id', function (req, res, next) {
 	.then(function (wallposts) {
 		res.json(wallposts);
 	}).catch(next);
+});
 
+router.post('/:userId', function (req, res, next) {
+	var authorId = req.user.id || req.body.authorId;
+	var profileId = req.params.userId;
+	var text = req.body.text;
+	WallPost.create({
+		text: text,
+		authorId: authorId,
+		userId: profileId
+	})
+	.then(function (wallpost) {
+		return WallPost.findOne({where: 
+			{
+				id: wallpost.id,
+			},
+			include: 
+			{
+				model: User,
+				as: "author"
+			}
+		});
+	})
+	.then(function (wallpost) {
+		console.log("USER WITH ID:", req.user.id, "CREATED NEW WALLPOST ON ID:", profileId);
+		res.json(wallpost);
+	}).catch(next);
 });
 
 module.exports = router;

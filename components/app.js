@@ -13,6 +13,7 @@ import { NewUsernameView } from './new-username-view';
 import { UserProfileView } from './user-profile-view';
 import { SettingsView } from './settings-view';
 
+import { userProfileBackButton } from './../utils/on-back';
 
 class App extends Component {
 	render () {
@@ -25,7 +26,7 @@ class App extends Component {
 				<Scene key="newMessage" component={NewMessageView} title="Post a Message" />
 				<Scene key="messageMaster" component={MessageMasterView} title="Messages" sceneStyle={{paddingTop: Navigator.NavigationBar.Styles.General.TotalNavHeight}} />
 				<Scene key="messageDetail" component={MessageDetailView} title="A Message" sceneStyle={{paddingTop: Navigator.NavigationBar.Styles.General.TotalNavHeight}} />
-				<Scene key="UserProfile" component={UserProfileView} title="User Profile" sceneStyle={{paddingTop: Navigator.NavigationBar.Styles.General.TotalNavHeight}} />
+				<Scene key="UserProfile" component={UserProfileView} title="User Profile" onBack={(test)=>{userProfileBackButton(test);}} sceneStyle={{paddingTop: Navigator.NavigationBar.Styles.General.TotalNavHeight}} />
 				<Scene key="Settings" component={SettingsView} title="User Settings" sceneStyle={{paddingTop: Navigator.NavigationBar.Styles.General.TotalNavHeight}} />
 			</Scene>
 		</Router>

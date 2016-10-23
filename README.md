@@ -1,7 +1,7 @@
 #Spaceboom
 
 ## Introduction
-Spaceboom is a location-based messaging app for iOS. The idea for the app is similar to geo-caching: it allows you to leave a messages at a specific location for others to find. If another user goes to a location where you posted a message, the user will receive a notification telling them they’ve discovered a new message. It will then be added to their collection of messages, and they will be able to read it. The app has been described as “Pokémon Go for people”.
+Spaceboom is a location-based messaging app for iOS. The idea for the app is similar to geo-caching: it allows you to leave a messages at a specific location for others to find. If another user goes to a location where were when you posted a message, the user will receive a notification telling them they’ve discovered a new message. It will then be added to their collection of messages, and they will be able to read it. The app has been described as “Pokémon Go for people”.
 
 The app also has a social networking aspect. You can interact with other users who have discovered a message by leaving comments on it. In addition, each user has a customizable profile, which can also be commented on, similar to a Facebook "Wall". You can see a user’s profile if you have discovered one of their messages, or if you have seen a comment they have left on another user’s message. A user’s profile also lists and links to the profiles of all users whose messages the user has discovered.
 
@@ -21,7 +21,7 @@ I have been building Spaceboom by myself. It's built using React Native and Redu
 
 ## Progress
 
-Spaceboom is nearly complete. Here is a list of features that I’ve finished:
+Spaceboom is nearly complete, and I'm now preparing to submit it to the App Store. Here is a list of features that I’ve finished:
 
 - All views complete (the login view, the root view, newUsername, newMessage, messageMasterView, MessageDetailView, userProfile, settings)
 - All routes and SQL models are complete
@@ -35,11 +35,11 @@ Spaceboom is nearly complete. Here is a list of features that I’ve finished:
 - Google Maps API integration to get names for locations of messages
 - App still sends user's coordinates to the server even when the app is only running in the background
 - Notifications work
+- Fixed the final remaining known bugs
 
 ### Features to be implemented
-- Fix a few minor bugs
-- Deploy an instance of the server using Heroku
 - Add icons/launch screen in xCode
+- Deploy an instance of the server using Heroku
 - Submit to the App Store for review
 
 

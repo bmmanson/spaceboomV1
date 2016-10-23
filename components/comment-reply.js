@@ -4,10 +4,9 @@ import { Text,
 	TextInput, 
 	TouchableHighlight, 
 	Image,
-	AlertIOS,
-	KeyboardAvoidingView } from 'react-native';
+	AlertIOS } from 'react-native';
 
-import { addCommentOnServer } from './../async';
+import { addCommentOnServer, sendWallPostToServer } from './../async';
 
 const maxCharacters = 225;
 
@@ -25,7 +24,14 @@ class CommentReply extends Component {
 	render () {
 
 		const sendCommentToServerAndUpdate = function (message, text) {
-			return addCommentOnServer(message.id, text);
+			//if the response is a post on a user profile
+			if (message.email) {
+				return sendWallPostToServer(message.id, text);	
+			//if the comment is a response to a message
+			} else {
+				return addCommentOnServer(message.id, text);
+				
+			}
 		}
 
 		const downloadingSpinner = (
