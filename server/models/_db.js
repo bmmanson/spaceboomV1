@@ -1,6 +1,8 @@
 var Sequelize = require('sequelize');
 
-var db = new Sequelize('postgres://localhost:5432/spaceboomv1', {
+var env = require('./../env');
+
+var db = new Sequelize(env.DATABASE_URI, {
   logging: false
 });
 

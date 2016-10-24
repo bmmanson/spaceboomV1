@@ -1,15 +1,15 @@
 'use strict';
 var passport = require('passport');
 var FacebookStrategyToken = require('passport-facebook-token');
-var facebookCredentials = require('./../../../fb-credentials');
+var env = require('./../../env');
 
 module.exports = function (app, db) {
 
 	var User = db.model('user');
 
 	var credentials = {
-		clientID: facebookCredentials.ID,
-		clientSecret: facebookCredentials.SECRET,
+		clientID: env.FACEBOOK.clientID,
+		clientSecret: env.FACEBOOK.clientSecret,
 		profileFields: ['id', 'displayName', 'photos', 'emails', 'gender'],
 	};
 
