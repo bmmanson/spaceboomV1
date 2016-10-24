@@ -23,20 +23,21 @@ I have been building Spaceboom by myself. It's built using React Native and Redu
 
 Spaceboom is nearly complete, and I'm now preparing to submit it to the App Store. Here is a list of features that I’ve finished:
 
-- All views complete (the login view, the root view, newUsername, newMessage, messageMasterView, MessageDetailView, userProfile, settings)
-- All routes and SQL models are complete
-- Users can “like” messages, comment on messages and profiles, and "like" comments on messages and profiles
-- Users can delete messages they've created so they're no longer discoverable. Users can also remove discovered messages from their collection without making them undiscoverable
-- Users can flag messages as inappropriate
-- The app uses the React Native geolocation API to retrieve the user's coordinates. It sends the coordinates as a JSON object in the body of an http post request every time the user's coordinates change significantly while the app is running. If a posted message has coordinates that approximate those of the message, the server creates a new instance in the discovery model, and returns the messages data to the client
-- Users can post new messages
+- All views complete (the login view, the root view, newUsername, newMessage, messageMasterView, MessageDetailView, userProfile, settings).
+- All routes and SQL models are complete.
+- Users can “like” messages, comment on messages and profiles, and "like" comments on messages and profiles.
+- Users can delete messages they've created so they're no longer discoverable. Users can also remove discovered messages from their collection without making them undiscoverable.
+- Users can flag messages as inappropriate.
+- The app uses the React Native geolocation API to retrieve the user's coordinates. It sends the coordinates as a JSON object in the body of an http post request every time the user's coordinates change significantly while the app is running. If a posted message on the server has coordinates that approximate the coordinates, the server creates a new instance in the discovery model, and returns the message's data to the client.
+- Users can post new messages.
 - Users can change the bio that appears on their profile
-- Implemented Facebook login using Passport.js and the Facebook iOS SDK. Users can provide user names, and decide whether their username is displayed to other users, or their real identity (as provided by Facebook)
-- Google Maps API integration to get names for locations of messages
-- App still sends user's coordinates to the server even when the app is only running in the background
-- Notifications work
-- Fixed the final remaining known bugs
-- Added icons/launch screen in xCode
+- Implemented Facebook login using Passport.js and the Facebook iOS SDK.
+- Users can provide user names. Each user decides whether their username or their real identity (as provided by Facebook) is displayed to all other users.
+- Google Maps API integration to get names for locations of messages has been added.
+- The app still sends user's coordinates to the server even when the app is only running in the background.
+- Notifications work.
+- The final remaining known bugs have been fixed.
+- Assets (icons and launch screen) have been added to xCode.
 
 ### Features to be implemented
 - Deploy an instance of the server using Heroku
