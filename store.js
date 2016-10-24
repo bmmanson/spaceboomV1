@@ -10,6 +10,4 @@ let store = createStore(
 	applyMiddleware(thunk)
 );
 
-console.log(store.getState());
-
 export { store };

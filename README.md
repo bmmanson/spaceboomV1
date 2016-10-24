@@ -36,9 +36,9 @@ Spaceboom is nearly complete, and I'm now preparing to submit it to the App Stor
 - App still sends user's coordinates to the server even when the app is only running in the background
 - Notifications work
 - Fixed the final remaining known bugs
+- Add icons/launch screen in xCode
 
 ### Features to be implemented
-- Add icons/launch screen in xCode
 - Deploy an instance of the server using Heroku
 - Submit to the App Store for review
 
