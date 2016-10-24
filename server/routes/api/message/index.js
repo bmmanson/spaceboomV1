@@ -10,7 +10,7 @@ var Discovery = require('./../../../models/discovery');
 var Comment = require('./../../../models/comment');
 var CommentLike = require('./../../../models/comment-like');
 
-var googleCredentials = require('./../../../../google-credentials');
+var env = require('./../../../env');
 var utils = require('./utils');
 
 router.use('/report', require('./report'));
@@ -99,7 +99,7 @@ router.post('/', function (req, res, next) {
 
 	var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' 
 		+ newMessage.latitude + ',' + newMessage.longitude + 
-		'&key=' + googleCredentials.APIKEY;
+		'&key=' + env.GOOGLE.APIKEY;
 
 	request(url, function (error, resGoogle, body) {
 
@@ -133,7 +133,7 @@ router.get('/locationName/', function (req, res, next) {
 	var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' 
 		+ latitude + ',' 
 		+ longitude + 
-		'&key=' + googleCredentials.APIKEY;
+		'&key=' + env.GOOGLE.APIKEY;
 
 	request(url, function (error, resGoogle, body) {
 
