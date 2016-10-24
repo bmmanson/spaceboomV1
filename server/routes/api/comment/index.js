@@ -17,12 +17,6 @@ router.post('/message/:id', function (req, res, next) {
 	var authorId = req.user.id;
 	var messageId = req.params.id;
 
-	console.log("POST COMMENT MESSAGE ROUTE HIT. SIMULATING DOWNLOAD");
-	for (var i=0; i<1000000000; ++i) {
-		var green = "green";
-	};
-	console.log("AFTER FOR LOOP");
-
 	Comment.create({
 		text: text,
 		authorId: authorId,
@@ -58,13 +52,6 @@ router.get('/message/:id', function (req, res, next) {
 	} else {
 		return res.sendStatus(401);
 	}
-
-	// for testing spinner
-	console.log("GET COMMENT MESSAGE ROUTE HIT. SIMULATING DOWNLOAD");
-	for (var i=0; i<1000000000; ++i) {
-		var green = "green";
-	};
-	console.log("AFTER FOR LOOP");
 
 	Comment.findAll({
 		where: 

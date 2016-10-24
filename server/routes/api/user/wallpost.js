@@ -10,12 +10,6 @@ var Message = require('./../../../models/message');
 router.get('/:id', function (req, res, next) {
 	var userId = req.params.id;
 
-	console.log("WALL POST ROUTE HIT. SIMULATING DOWNLOAD");
-	for (var i=0; i<1000000000; ++i) {
-		var green = "green";
-	};
-	console.log("AFTER FOR LOOP");
-
 	WallPost.findAll({
 		where: 
 		{
