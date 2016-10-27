@@ -16,13 +16,11 @@ import {
 
 export let currentUserId;
 
-const rootUrl = 'https://dry-savannah-68177.herokuapp.com/api';
-//see below one route which does not use rootUrl const
+//TWO THINGS about rootUrl:
+//1 - see below one route which does not use rootUrl const (around line 60/70)
+//2 - component in launch-page.js uses rootUrl const
 
-const httpRequestForNewDiscoveredMessage = (latitude, longitude, id) => {
-	let url = `${rootUrl}/discovery/new?latitude=${latitude}&longitude=${longitude}&userId=${id}`
-	return fetch(url, {method: "POST"});
-}
+export const rootUrl = 'https://dry-savannah-68177.herokuapp.com/api';
 
 const httpRequestToPostNewMessage = (text, latitude, longitude) => {
 	let message = {

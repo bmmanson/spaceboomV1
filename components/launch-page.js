@@ -6,7 +6,7 @@ import { Map } from './map';
 import { MenuButton } from './menu-button';
 import { styles } from './../styles/main';
 import BackgroundGeolocation from 'react-native-background-geolocation';
-import { addDiscoveredMessageToCollection } from './../async';
+import { addDiscoveredMessageToCollection, rootUrl } from './../async';
 
 export var LaunchPage = React.createClass({
 
@@ -20,7 +20,7 @@ getInitialState() {
 		debug: false,
 		stopOnTerminate: false,
 		startOnBoot: true, 
-		url: 'http://localhost:1337/api/discovery/new/',
+		url: rootUrl + '/discovery/new/',
 		batchSync: false,       
 		autoSync: true,         
 		maxDaysToPersist: 1,
