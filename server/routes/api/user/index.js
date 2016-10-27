@@ -129,7 +129,7 @@ router.get('/discoveredUsers/:id', function (req, res, next) {
 	.then(function (discoveredMessages) {
 		var promisesForDiscoveredMessages = [];
 		discoveredMessages.forEach(function (discoveredMessage) {
-			let id = discoveredMessage.messageId;
+			var id = discoveredMessage.messageId;
 			promisesForDiscoveredMessages.push(Message.findById(id));
 		});
 		return Promise.all(promisesForDiscoveredMessages);
@@ -174,19 +174,5 @@ router.delete('/:id', function (req, res, next){
 	res.send("Route does not yet exist");
 });
 
-//add user when a new user joins
-router.post('/', function (req, res, next) {
-	var email = req.body.email;
-	var facebookName = req.body.facebookName;
-	var authorPic = req.body.authorPic;
-
-	User.create({
-		email, 
-		name, 
-		authorPic})
-	.then(function (success){
-		res.json(success);
-	}).catch(next);
-});
 
 module.exports = router;
