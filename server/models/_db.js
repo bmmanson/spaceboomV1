@@ -4,7 +4,7 @@ var env = require('./../env');
 
 var db;
 
-if (env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production') {
     // the application is executed on Heroku ... use the postgres database
     db = new Sequelize(env.DATABASE_URI, {
       dialect:  'postgres',
@@ -13,12 +13,12 @@ if (env.NODE_ENV === 'production') {
       host:     match[3],
       logging:  true 
     })
-  } else {
-    // the application is executed on the local machine ... use mysql
-    db = new Sequelize(env.DATABASE_URI, {
-	  logging: false
+} else {
+// the application is executed on the local machine ... use mysql
+	db = new Sequelize(env.DATABASE_URI, {
+		logging: false
 	});
-  }
+}
 
 // original: 
 // var db = new Sequelize(env.DATABASE_URI, {
