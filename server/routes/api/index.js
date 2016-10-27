@@ -1,5 +1,8 @@
 var express = require('express');
 var router = express.Router();
+/*
+
+Temporarily removed for debugging
 
 router.use(function (req, res, next) {
 	//user must be logged in to use app
@@ -9,9 +12,10 @@ router.use(function (req, res, next) {
 		res.sendStatus(401);
 	}
 })
+*/
 
 router.get('/', function (req, res, next) {
-	res.send("API ROUTE");
+	res.send("ROOT API ROUTE. WELCOME");
 })
 
 //mount message router
