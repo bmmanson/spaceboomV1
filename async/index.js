@@ -16,8 +16,11 @@ import {
 
 export let currentUserId;
 
+const rootUrl = 'https://dry-savannah-68177.herokuapp.com/api';
+//see below one route which does not use rootUrl const
+
 const httpRequestForNewDiscoveredMessage = (latitude, longitude, id) => {
-	let url = `http://localhost:1337/api/discovery/new?latitude=${latitude}&longitude=${longitude}&userId=${id}`
+	let url = `${rootUrl}/discovery/new?latitude=${latitude}&longitude=${longitude}&userId=${id}`
 	return fetch(url, {method: "POST"});
 }
 
@@ -38,57 +41,58 @@ const httpRequestToPostNewMessage = (text, latitude, longitude) => {
   		body: message
     };
 
-	let url = "http://localhost:1337/api/message/";
+	let url = rootUrl + "/message/";
 	return fetch(url, request);
 }
 
 const httpRequestForAllUserDataOnLogin = (id) => {
-	let url = "http://localhost:1337/api/user/login/" + id;
+	let url = rootUrl + "/user/login/" + id;
 	return fetch(url, {method: "GET"});
 }
 
 const httpRequestToUpdateMessageAsUnread = (id) => {
-	let url = "http://localhost:1337/api/discovery/unread/" + id;
+	let url = rootUrl + "/discovery/unread/" + id;
 	return fetch(url, {method: "PUT"});
 }
 
 const httpRequestToDeleteSentMessage = (id) => {
-	let url = "http://localhost:1337/api/message/hide/" + id;
+	let url = rootUrl + "/message/hide/" + id;
 	return fetch(url, {method: "PUT"});
 }
 
 const httpRequestToDeleteDiscoveredMessage = (id) => {
-	let url = "http://localhost:1337/api/discovery/hide/" + id;
+	let url = rootUrl + "/discovery/hide/" + id;
 	return fetch(url, {method: "PUT"});
 }
 
 const httpRequestToSendAccessTokenToServer = (token) => {
-	let url = "http://localhost:1337/auth/facebook/token?access_token=" + token;
+	//note that this route is an exception
+	let url = "https://dry-savannah-68177.herokuapp.com/auth/facebook/token?access_token=" + token;
 	return fetch(url, {method: "POST"});
 }
 
 const httpRequestToLikeComment = (commentId) => {
-	let url = "http://localhost:1337/api/comment/like/" + commentId;
+	let url = rootUrl + "/comment/like/" + commentId;
 	return fetch(url, {method: "POST"});
 }
 
 const httpRequestToUnlikeComment = (commentId) => {
-	let url = "http://localhost:1337/api/comment/like/" + commentId;
+	let url = rootUrl + "/comment/like/" + commentId;
 	return fetch(url, {method: "DELETE"});
 }
 
 const httpRequestForCommentsForMessage = (messageId) => {
-	let url = "http://localhost:1337/api/comment/message/" + messageId;
+	let url = rootUrl + "/comment/message/" + messageId;
 	return fetch(url, {method: "GET"});
 }
 
 const httpRequestForDeleteComment = (commentId) => {
-	let url = "http://localhost:1337/api/comment/deletedByUser/" + commentId;
+	let url = rootUrl + "/comment/deletedByUser/" + commentId;
 	return fetch(url, {method: "PUT"});
 }
 
 const httpRequestToAddComment = (messageId, text) => {
-	let url = "http://localhost:1337/api/comment/message/" + messageId;
+	let url = rootUrl + "/comment/message/" + messageId;
 	let message = {
 		text, 
 		messageId
@@ -122,12 +126,12 @@ const httpRequestToSubmitUsername = (username) => {
   		body: usernameJSON
     };
 
-	let url = "http://localhost:1337/api/user/settings/username/";
+	let url = rootUrl + "/user/settings/username/";
 	return fetch(url, request);
 }
 
 const httpRequestToToggleNameDisplay = (displayRealIdentity) => {
-	let url = "http://localhost:1337/api/user/settings/toggleNameDisplayed/";
+	let url = rootUrl + "/user/settings/toggleNameDisplayed/";
 	let body = {
 		displayRealIdentity
 	};
@@ -146,7 +150,7 @@ const httpRequestToToggleNameDisplay = (displayRealIdentity) => {
 }
 
 const httpRequestSendAboutMe = (aboutMe) => {
-	let url = "http://localhost:1337/api/user/settings/aboutMe/";
+	let url = rootUrl + "/user/settings/aboutMe/";
 	let body = {
 		aboutMe
 	};
@@ -165,57 +169,57 @@ const httpRequestSendAboutMe = (aboutMe) => {
 }
 
 const httpRequestForUserProfile = (userId) => {
-	let url = "http://localhost:1337/api/user/profile/" + userId;
+	let url = rootUrl + "/user/profile/" + userId;
 	return fetch(url, {method:"GET"});
 }
 
 const httpRequestForSettingsData = () => {
-	let url = "http://localhost:1337/api/user/settings/view/";
+	let url = rootUrl + "/user/settings/view/";
 	return fetch(url, {method: "GET"});
 }
 
 const httpRequestForDiscoveredUsers = (userId) => {
-	let url = "http://localhost:1337/api/user/discoveredUsers/" + userId;
+	let url = rootUrl + "/user/discoveredUsers/" + userId;
 	return fetch(url, {method: "GET"});
 }
 
 const httpRequestForWallPosts = (userId) => {
-	let url = "http://localhost:1337/api/user/wallpost/" + userId;
+	let url = rootUrl + "/user/wallpost/" + userId;
 	return fetch(url, {method: "GET"});
 }
 
 const httpRequestToReportMessage = (messageId) => {
-	let url = "http://localhost:1337/api/message/report/add/" + messageId;
+	let url = rootUrl + "/message/report/add/" + messageId;
 	return fetch(url, {method: "POST"});
 }
 
 const httpRequestLikeMessage = (messageId) => {
-	let url = "http://localhost:1337/api/message/like/" + messageId;
+	let url = rootUrl + "/message/like/" + messageId;
 	return fetch(url, {method: "POST"});
 }
 
 const httpRequestDislikeMessage = (messageId) => {
-	let url = "http://localhost:1337/api/message/like/" + messageId;
+	let url = rootUrl + "/message/like/" + messageId;
 	return fetch(url, {method: "DELETE"});
 }
 
 const httpRequestGetLikeDataForMessage = (messageId) => {
-	let url = "http://localhost:1337/api/message/like/" + messageId;
+	let url = rootUrl + "/message/like/" + messageId;
 	return fetch(url, {method: "GET"});
 }
 
 const httpRequestTimesDiscoveredForMessage = (messageId) => {
-	let url = "http://localhost:1337/api/message/timesDiscovered/" + messageId;
+	let url = rootUrl + "/message/timesDiscovered/" + messageId;
 	return fetch(url, {method: "GET"});
 }
 
 const httpRequestToGetUserLocationName = (latitude, longitude) => {
-	let url = `http://localhost:1337/api/message/locationName?latitude=${latitude}&longitude=${longitude}`;
+	let url = `${rootUrl}/message/locationName?latitude=${latitude}&longitude=${longitude}`;
     return fetch(url, {method: "GET"});
 }
 
 const httpRequestToPostWallPost = (userId, text) => {
-	let url = "http://localhost:1337/api/user/wallpost/" + userId;
+	let url = rootUrl + "/user/wallpost/" + userId;
 	let message = {
 		text, 
 		userId

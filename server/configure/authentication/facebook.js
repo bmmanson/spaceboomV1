@@ -8,8 +8,8 @@ module.exports = function (app, db) {
 	var User = db.model('user');
 
 	var credentials = {
-		clientID: env.FACEBOOK_APP_ID,
-		clientSecret: env.FACEBOOK_SECRET,
+		clientID: process.env.FACEBOOK_APP_ID,
+		clientSecret: process.env.FACEBOOK_SECRET,
 		profileFields: ['id', 'displayName', 'photos', 'emails', 'gender'],
 	};
 
