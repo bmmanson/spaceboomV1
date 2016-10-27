@@ -99,7 +99,7 @@ router.post('/', function (req, res, next) {
 
 	var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' 
 		+ newMessage.latitude + ',' + newMessage.longitude + 
-		'&key=' + env.GOOGLE.APIKEY;
+		'&key=' + env.GOOGLE_API_KEY;
 
 	request(url, function (error, resGoogle, body) {
 
@@ -133,7 +133,7 @@ router.get('/locationName/', function (req, res, next) {
 	var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' 
 		+ latitude + ',' 
 		+ longitude + 
-		'&key=' + env.GOOGLE.APIKEY;
+		'&key=' + env.GOOGLE_API_KEY;
 
 	request(url, function (error, resGoogle, body) {
 

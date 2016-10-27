@@ -28,9 +28,9 @@ Spaceboom is nearly complete, and I'm now preparing to submit it to the App Stor
 - Users can “like” messages, comment on messages and profiles, and "like" comments on messages and profiles.
 - Users can delete messages they've created so they're no longer discoverable. Users can also remove discovered messages from their collection without making them undiscoverable.
 - Users can flag messages as inappropriate.
-- The app uses the React Native geolocation API to retrieve the user's coordinates. It sends the coordinates as a JSON object in the body of an http post request every time the user's coordinates change significantly while the app is running. If a posted message on the server has coordinates that approximate the coordinates, the server creates a new instance in the discovery model, and returns the message's data to the client.
+- The app uses the React Native geolocation API to retrieve the user's coordinates. It sends the coordinates as a JSON object in the body of an http post request every time the user's coordinates change significantly while the app is running. If a posted message on the server has coordinates that approximate the coordinates in the JSON object, the server creates a new instance in the discovery model, and returns the message's data to the client.
 - Users can post new messages.
-- Users can change the bio that appears on their profile
+- Users can change the bio that appears on their profile.
 - Implemented Facebook login using Passport.js and the Facebook iOS SDK.
 - Users can provide user names. Each user decides whether their username or their real identity (as provided by Facebook) is displayed to all other users.
 - Google Maps API integration to get names for locations of messages has been added.
