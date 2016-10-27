@@ -23,7 +23,7 @@ app.use(require('./routes'));
 //     res.json({status: err.status});
 // });
 
-var port = 1337;
+var port = process.env.PORT || 1337;
 var server = app.listen(port, function(){
 	console.log("listening on port", port);
 	db.sync()
