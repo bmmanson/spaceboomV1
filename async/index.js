@@ -273,7 +273,7 @@ export const toggleNameDisplayedOnServer = (displayRealIdentity) => {
 	return httpRequestToToggleNameDisplay(displayRealIdentity)
 	.then( (response) => response.json())
 	.then( (data) => {
-		console.log("DATA FROM TOGGLENAME", data);
+		//console.log("DATA FROM TOGGLENAME", data);
 		store.dispatch(changeAuthorNameOfSentMessages(data.name));
 		return data;
 	});
@@ -317,7 +317,7 @@ export const getDiscoveredUsersFromServer = (userId) => {
 	return httpRequestForDiscoveredUsers(userId)
 	.then((response) => response.json())
 	.then((data) => {
-		console.log("DISCOVERED USERS, ASYNC FILE", data);
+		//console.log("DISCOVERED USERS, ASYNC FILE", data);
 		return data;
 	});
 }
@@ -327,7 +327,7 @@ export const getUserInfoForProfileFromServer = (userId) => {
 	return httpRequestForUserProfile(userId)
 	.then((response) => response.json())
 	.then((data) => {
-		console.log("THE DATA FROM ASYNC FILE", data);
+		//console.log("THE DATA FROM ASYNC FILE", data);
 		return data;
 	});
 }
@@ -386,10 +386,10 @@ export const getWallPostsFromServer = (userId) => {
 					createdAt
 				));
 			})
-			console.log("NEW COMMENTS ADDED:", store.getState());
+			//console.log("NEW COMMENTS ADDED:", store.getState());
 			return "COMPLETE";
 		} else {
-			console.log("NO NEW COMMENTS ADDED");
+			//console.log("NO NEW COMMENTS ADDED");
 			return "COMPLETE";
 		}
 	})
@@ -438,7 +438,7 @@ export const addCommentOnServer = (messageId, text) => {
 	.then((response) => response.json())
 	.then((comment) => {
 		if (comment) {
-			console.log("ADDING COMMENT TO MESSAGE. THE COMMENT:", comment);
+			//console.log("ADDING COMMENT TO MESSAGE. THE COMMENT:", comment);
 			store.dispatch(addComment(
 				comment.id,
 				comment.messageId,
@@ -492,10 +492,10 @@ export const getCommentsForMessage = (messageId) => {
 					createdAt
 				));
 			})
-			console.log("NEW COMMENTS ADDED:", store.getState());
+			//console.log("NEW COMMENTS ADDED:", store.getState());
 			return "COMPLETE";
 		} else {
-			console.log("NO NEW COMMENTS ADDED");
+			//console.log("NO NEW COMMENTS ADDED");
 			return "COMPLETE";
 		}
 	})
@@ -506,7 +506,7 @@ export const getAllUserDataOnLogin = (id) => {
 	.then((response) => response.json())
 	.then((data) => {
 		for (var message in data.sentMessages) {
-			console.log("SENT MESSAGE", data.sentMessages[message]);
+			//console.log("SENT MESSAGE", data.sentMessages[message]);
 			let m = data.sentMessages[message];
 			let id = m.id;
 			let text = m.text; 
@@ -539,7 +539,7 @@ export const getAllUserDataOnLogin = (id) => {
 			));
 		}
 		for (var message in data.discoveredMessages) {
-			console.log("DISCOVERED", data.discoveredMessages[message]);
+			//console.log("DISCOVERED", data.discoveredMessages[message]);
 			let m = data.discoveredMessages[message].message;
 			let id = m.id;
 			let text = m.text;
@@ -589,18 +589,18 @@ export const getAllUserDataOnLogin = (id) => {
 export const sendAccessTokenToServer = (token) => {
 	return httpRequestToSendAccessTokenToServer(token)
 	.then(function (response) {
-		console.log("RESPONSE RECEIVED BY sendAccessTokenToServer:", response)
+		//console.log("RESPONSE RECEIVED BY sendAccessTokenToServer:", response)
 		return response.json();
 	})
 	.catch(function (error) {
-		console.log("ERROR FROM ACCESS TOKEN:", error);
+		//console.log("ERROR FROM ACCESS TOKEN:", error);
 	})
 }
 
 export const deleteSentMessageOnServer = (id) => {
 	return httpRequestToDeleteSentMessage(id)
 	.then( (response) => response.json() )
-	.then( (response) => console.log("DELETED SENT MESSAGE. RESPONSE FROM SERVER:", response) )
+	.then( (response) => {} ); //console.log("DELETED SENT MESSAGE. RESPONSE FROM SERVER:", response) )
 }
 
 export const deleteDiscoveredMessageOnServer = (id) => {
@@ -612,7 +612,7 @@ export const deleteDiscoveredMessageOnServer = (id) => {
 
 export const addDiscoveredMessageToCollection = (res) => {
 	if (res.id !== null) {
-		console.log("NEW MESSAGE, DISCOVERED");
+		//console.log("NEW MESSAGE, DISCOVERED");
 		let m = {
 			id: res.message.id,
 			body: res.message.text, 
@@ -628,7 +628,7 @@ export const addDiscoveredMessageToCollection = (res) => {
 			isLikedMyCurrentUser: false,
 			numberOfLikes: res.message.numberOfLikes
 		}
-		console.log("NEW MESSAGE:", m);
+		//console.log("NEW MESSAGE:", m);
 		store.dispatch(addDiscoveredMessage(
 			m.id,
 			m.body,
@@ -646,7 +646,7 @@ export const addDiscoveredMessageToCollection = (res) => {
 			m.createdAt
 		))
 	} else {
-		console.log("Response from server received. No new message");
+		//console.log("Response from server received. No new message");
 	}
 }
 
@@ -656,10 +656,10 @@ export const updateMessageAsUnreadOnServer = (id) => {
 	.then( (response) => response.json() )
 	.then(function (response) {
 		if (response === null) {
-			console.log("Note: server has already marked this message as unread. Something wrong on front end? See async/index.js");
+			//console.log("Note: server has already marked this message as unread. Something wrong on front end? See async/index.js");
 		} else { 
-			console.log("RESPONSE RECEIVED. SERVER UPDATED");
-			console.log("Message marked as read:", response);
+			//console.log("RESPONSE RECEIVED. SERVER UPDATED");
+			//console.log("Message marked as read:", response);
 		}
 	})
 }

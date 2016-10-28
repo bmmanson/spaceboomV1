@@ -46,7 +46,7 @@ const logOut = () => {
 		[
 			{
 			text: "No", 
-			onPress: () => console.log("User didn't log out"), 
+			onPress: () => {}, //console.log("User didn't log out"), 
 			style: "cancel"
 			},
 			{

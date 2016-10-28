@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ListView } from 'react-native';
+import { ListView, StyleSheet, View } from 'react-native';
 import { Actions } from 'react-native-router-flux'; 
 
 import { MessageInList } from './message-in-list';
@@ -30,6 +30,7 @@ class MessageList extends Component {
 	    	style={{flex: 12, margin: 0}}
 	    	enableEmptySections={true}
 	    	dataSource={this._getMessages(this.props.messages)}
+	    	renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
 	    	renderRow={ 
 	    		(message) => <MessageInList author={message.author} 
 	    		body={message.body}
@@ -42,5 +43,14 @@ class MessageList extends Component {
 		);
 	}
 }
+
+const styles = StyleSheet.create({
+  separator: {
+    flex: 1,
+    height: StyleSheet.hairlineWidth,
+    marginLeft: 12,
+    backgroundColor: '#D4D4D4',
+  },
+});
 
 export { MessageList };

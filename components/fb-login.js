@@ -29,17 +29,17 @@ class FBLogin extends Component {
                 })
                 .then(
                   (token) => {
-                    console.log("TOKEN:", token);
+                    //console.log("TOKEN:", token);
                     return sendAccessTokenToServer(token);
                 })
                 .then(
                   (response) => {
-                    console.log("RESPONSE PASSED INTO GET ALL MESSAGES:", response);
+                    //console.log("RESPONSE PASSED INTO GET ALL MESSAGES:", response);
                     return getAllUserDataOnLogin(response.userId);
                 })
                 .then(
                   (response) => {
-                    console.log("RESPONSE AFTER HTTP REQUEST (STORE):", response);
+                    //console.log("RESPONSE AFTER HTTP REQUEST (STORE):", response);
                     let username = response.currentSession.username;
                     if (username === null || username === "NULL") {
                       Actions.newUsername();
@@ -49,7 +49,7 @@ class FBLogin extends Component {
                 })
                 .catch(
                   (err) => {
-                    console.log(err);
+                    //console.log(err);
                   }
                 )
               }

@@ -22,7 +22,6 @@ class UserProfileDiscoveredUserList extends Component {
 		);
 	}
 
-	//marginHorizontal: 10
 }
 
 export { UserProfileDiscoveredUserList };

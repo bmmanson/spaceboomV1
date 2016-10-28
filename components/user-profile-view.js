@@ -61,7 +61,7 @@ class UserProfile extends Component {
 
 		getDiscoveredUsersFromServer(this.props.userId)
 		.then( (discoveredUsers) => {
-			console.log("DISCOVERED USERS FROM PROFILE VIEW", discoveredUsers);
+			//console.log("DISCOVERED USERS FROM PROFILE VIEW", discoveredUsers);
 			if (discoveredUsers) {
 				this.setState({
 					discoveredUsers
@@ -72,7 +72,7 @@ class UserProfile extends Component {
 		getWallPostsFromServer(this.props.userId)
 		.then( (wallPosts) => {
 			if (wallPosts) {
-				console.log("THE WALL POSTS ON USER PROFILE VIEW", wallPosts);
+				//console.log("THE WALL POSTS ON USER PROFILE VIEW", wallPosts);
 				this.setState({
 					wallPostDownloadComplete: true,
 				})

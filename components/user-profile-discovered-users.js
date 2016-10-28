@@ -49,8 +49,5 @@ class UserProfileDiscoveredUsers extends Component {
 }
 
 
-
-//marginHorizontal: 18
-
 export { UserProfileDiscoveredUsers };
 

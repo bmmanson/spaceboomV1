@@ -22,7 +22,7 @@ class DeleteMessageButton extends Component {
 				[
 					{
 					text: "Cancel", 
-					onPress: () => console.log("user didn't delete message"), 
+					onPress: () => {}, //console.log("user didn't delete message"), 
 					style: "cancel"
 					},
 					{
@@ -44,7 +44,7 @@ class DeleteMessageButton extends Component {
 				"You are not the author of this message. If you delete it, you won't be able to see it anymore, but others will still be able to discover it. Are you sure you want to delete it?",
 				[
 					{text: "Cancel", 
-					onPress: () => console.log("user didn't delete message"), 
+					onPress: () => {},  
 					style: "cancel"},
 					{text: "Delete", 
 					onPress: function () {

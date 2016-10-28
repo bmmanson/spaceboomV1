@@ -10,7 +10,6 @@ class Comments extends Component {
 		let displayComments = function(comments, id, type) {
 			
 			if (comments.length) {
-				console.log("INSIDE THE DISPLAY COMMENTS FUNCTION. 32?", id);
 				return (
 					comments.map((comment, i) =>
 						(<Comment comment={comment} userIdOfCommentedOn={id} type={type} key={i} />)
@@ -65,7 +64,6 @@ class Comments extends Component {
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 7, 
 		backgroundColor: '#F5F5F5',
 	},
 	spinner: {

@@ -19,14 +19,14 @@ class CommentLikeButton extends Component {
 		const likeComment = function (commentId, numberOfLikes) {
 			postCommentAsLikedOnServer(commentId, numberOfLikes)
 			.then(() => {
-				console.log("COMMENT LIKED:", store.getState());
+				
 			});
 		};
 
 		const dislikeComment = function (commentId, numberOfLikes) {
 			postCommentAsUnlikedOnServer(commentId, numberOfLikes)
 			.then(() => {
-				console.log("COMMENT DISLIKED:", store.getState());
+				
 			});
 		};
 

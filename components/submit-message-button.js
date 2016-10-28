@@ -48,7 +48,7 @@ class SubmitMessageButton extends Component {
 								response.createdAt)
 							)
 							store.dispatch(updateNewMessageText(""));
-							console.log("COORDS. LAT:", response.latitude, "LONG:", response.longitude);
+							//console.log("COORDS. LAT:", response.latitude, "LONG:", response.longitude);
 							store.dispatch(downloadingOff());
 						})
 					},

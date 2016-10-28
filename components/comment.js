@@ -48,7 +48,7 @@ class Comment extends Component {
 				return (
 				<TouchableHighlight style={{height: 10, width: 55}} onPress={() => {deleteComment(comment)}}>
 				<Text style={{color: '#949494', fontSize: 10}}>
-					|| DELETE
+					- DELETE
 				</Text>
 				</TouchableHighlight>
 				);
@@ -57,27 +57,27 @@ class Comment extends Component {
 
 		return (
 			<View style={{flexDirection: 'row', 
-			flex: 1,
 			marginVertical: 8,
 			backgroundColor: '#F5F5F5',
+			minHeight: 60
 			}}>
-				<View style={{flex: 2, flexDirection: 'column'}}>
+				<View style={{flex: 3, flexDirection: 'column'}}>
 					<AuthorPic message={this.props.comment} 
-						style={{height: 36, 
-							width: 36, 
-							borderRadius: 18, 
+						style={{height: 50, 
+							width: 50, 
+							borderRadius: 25, 
 							alignSelf: 'center'}} />
 				</View>
 				<View style={{flex: 8, flexDirection: 'column'}}>
-					<View style={{flex: 1, marginTop: 4}}>
-						<Text style={{fontWeight: 'bold', fontSize: 12, margin: 0}}>
+					<View style={{flex: 1, margin: 1}}>
+						<Text style={{fontWeight: 'bold', fontSize: 14, marginBottom: 2}}>
 						{this.props.comment.author}
 						</Text>
-						<Text style={{fontSize: 12, margin: 0}}>
+						<Text style={{fontSize: 14, margin: 1}}>
 						{this.props.comment.body}
 						</Text>
-						<View style={{flexDirection: "row"}}>
-							<Text style={{fontSize: 10, color: '#949494', marginVertical: 6}}>
+						<View style={{flexDirection: "row", marginVertical: 6}}>
+							<Text style={{fontSize: 10, color: '#949494'}}>
 							{displayFormattedTime(this.props.comment)}
 							{" "}
 							{displayDeleteButton(this.props.comment, this.props.userIdOfCommentedOn)}

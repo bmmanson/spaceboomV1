@@ -13,7 +13,7 @@ class MessageReportButton extends Component {
 			[
 			{
 				text: "No",
-				onPress: () => console.log("user didn't delete message"),
+				onPress: () => {}, //console.log("user didn't delete message"),
 				style: "cancel"
 			},
 			{
