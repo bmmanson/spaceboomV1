@@ -38,9 +38,9 @@ Spaceboom is nearly complete, and I'm now preparing to submit it to the App Stor
 - Notifications work.
 - The final remaining known bugs have been fixed.
 - Assets (icons and launch screen) have been added to xCode.
+- An instance of the server has been deployed using Heroku.
 
 ### Features to be implemented
-- Deploy an instance of the server using Heroku
 - Submit to the App Store for review
 
 
