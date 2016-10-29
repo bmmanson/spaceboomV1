@@ -61,7 +61,7 @@ class Comment extends Component {
 			backgroundColor: '#F5F5F5',
 			minHeight: 60
 			}}>
-				<View style={{flex: 3, flexDirection: 'column'}}>
+				<View style={{flex: 2, flexDirection: 'column'}}>
 					<AuthorPic message={this.props.comment} 
 						style={{height: 50, 
 							width: 50, 

@@ -7,6 +7,7 @@ var app = express();
 
 require('./configure')(app, db);
 app.use(require('./routes'));
+app.use('/policy', express.static(__dirname + '/public/static'));
 
 // //error handling middleware
 // app.use(function (req, res, next) {

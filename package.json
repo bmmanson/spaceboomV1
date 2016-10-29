@@ -20,7 +20,7 @@
     "pg": "^6.0.3",
     "react": "^15.2.1",
     "react-native": "0.30.0",
-    "react-native-background-geolocation": "^1.5.0",
+    "react-native-background-geolocation": "^1.5.2",
     "react-native-fbsdk": "^0.3.0",
     "react-native-keyboard-spacer": "^0.3.0",
     "react-native-router-flux": "^3.32.0",

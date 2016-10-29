@@ -1,8 +1,10 @@
 var Sequelize = require('sequelize');
 
-var db = new Sequelize(process.env.DATABASE_URL, {
+var URL = process.env.DATABASE_URL;
+
+var db = new Sequelize(URL, {
   logging: false
-})
+});
 
 module.exports = db;
 

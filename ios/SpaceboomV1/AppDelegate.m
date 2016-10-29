@@ -13,7 +13,6 @@
 #import "RCTRootView.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
-
 @implementation AppDelegate
 
 // Required to register for notifications
