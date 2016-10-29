@@ -128,7 +128,7 @@ class CommentReply extends Component {
 						borderColor: '#B0B0B0', 
 						borderWidth: 1,
 						minHeight: Math.max(40, this.state.inputHeight),
-						backgroundColor: '#E3E3E3',
+						backgroundColor: '#F2F2F2',
 						fontSize: 14,
 						color: '#636363',
 						fontWeight: 'bold',
