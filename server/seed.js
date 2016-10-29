@@ -13,32 +13,38 @@ var data = {
 		{
 			facebookName: "Joe Langer", 
 			authorPic: 'https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-1/p100x100/11057221_10153411465937025_7220678579653297083_n.jpg?oh=7e3c4e26c604a1d09637fa4becc16c81&oe=582E91C9', 
-			email: "Joe@email.com"
+			email: "Joe@email.com",
+			facebookId: 500,
 		},
 		{
 			facebookName: "Ben Manson",
 			authorPic: 'https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-1/p100x100/13620351_10207342419702909_3505351797653340889_n.jpg?oh=a1710d119f06150bb51c6903ed7f6acf&oe=58244469', 
 			email: "ben@email.com",
+			facebookId: 200,
 		},
 		{
 			facebookName: "Bex Rosenblatt",
 			authorPic: 'https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/13700056_10207110079535082_4219144356567438027_n.jpg?oh=41b308c3853f42a9764d3ab6fa3988e6&oe=586AB142',
-			email: "Bex@email.com"
+			email: "Bex@email.com",
+			facebookId: 201,
 		},
 		{
 			facebookName: "Gus Johnson",
 			authorPic: 'https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-1/p100x100/12313953_2624518816159_9033810844249390225_n.jpg?oh=8e5e827092ee00d262dfaf25478ea1c8&oe=5831D470',
-			email: "Gus@email.com"
+			email: "Gus@email.com",
+			facebookId: 401,
 		},
 		{
 			facebookName: "Adam Casey",
 			authorPic: "https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-1/p100x100/1907977_10100354101824849_1005827950_n.jpg?oh=eff7927f629bfc5538f6b3656c356538&oe=586A83E4",
-			email: "adam@email.com"
+			email: "adam@email.com",
+			facebookId: 403,
 		},
 		{
 			facebookName: "Alex Atkins",
 			authorPic: 'https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-1/p100x100/14390822_803369240264_7365045778749445001_n.jpg?oh=31c8c68b33ca12a95cf64550b4dbd2ff&oe=5875BC6B',
-			email: "alex@email.com"
+			email: "alex@email.com",
+			facebookId: 501
 		}
 	],
 	userprofile: [

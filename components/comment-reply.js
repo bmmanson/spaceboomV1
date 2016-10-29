@@ -24,13 +24,12 @@ class CommentReply extends Component {
 	render () {
 
 		const sendCommentToServerAndUpdate = function (message, text) {
-			//if the response is a post on a user profile
-			if (message.facebookId) {
-				return sendWallPostToServer(message.id, text);	
-			//if the comment is a response to a message
-			} else {
+			if (message.body) {
+				//if the comment is a response to a message
 				return addCommentOnServer(message.id, text);
-				
+			} else {
+				//if the response is a post on a user profile
+				return sendWallPostToServer(message.id, text);
 			}
 		}
 
