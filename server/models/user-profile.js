@@ -10,7 +10,7 @@ var UserProfile = db.define('userprofile', {
 	},
 	aboutMe: {
 		type: Sequelize.STRING,
-		defaultValue: "Write a short description of yourself!"
+		defaultValue: "This user hasn't written a bio yet.",
 	},
 	messagesDiscovered: {
 		type: Sequelize.INTEGER,
