@@ -65,7 +65,7 @@ class Comment extends Component {
 					<AuthorPic message={this.props.comment} 
 						style={{height: 40, 
 							width: 40, 
-							borderRadius: 25, 
+							borderRadius: 20, 
 							alignSelf: 'center'}} />
 				</View>
 				<View style={{flex: 8, flexDirection: 'column'}}>
@@ -86,7 +86,7 @@ class Comment extends Component {
 					</View>
 				</View>
 				<View style={{flex: 3, flexDirection: 'column'}}>
-					<CommentLikeButtonAndCounter comment={this.props.comment} />
+					<CommentLikeButtonAndCounter comment={this.props.comment} commentType={this.props.commentType} />
 				</View>
 			</View>
 

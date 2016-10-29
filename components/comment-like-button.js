@@ -16,31 +16,25 @@ class CommentLikeButton extends Component {
 			}
 		};
 
-		const likeComment = function (commentId, numberOfLikes) {
-			postCommentAsLikedOnServer(commentId, numberOfLikes)
-			.then(() => {
-				
-			});
+		const likeComment = function (commentId, numberOfLikes, type) {
+			postCommentAsLikedOnServer(commentId, numberOfLikes, type);
 		};
 
-		const dislikeComment = function (commentId, numberOfLikes) {
-			postCommentAsUnlikedOnServer(commentId, numberOfLikes)
-			.then(() => {
-				
-			});
+		const dislikeComment = function (commentId, numberOfLikes, type) {
+			postCommentAsUnlikedOnServer(commentId, numberOfLikes, type);
 		};
 
-		const likeOrDislikeComment = function (comment) {
+		const likeOrDislikeComment = function (comment, type) {
 			if (comment.isLikedByCurrentUser === false) {
-				return likeComment(comment.id, comment.numberOfLikes);
+				return likeComment(comment.id, comment.numberOfLikes, type);
 			} else {
-				return dislikeComment(comment.id, comment.numberOfLikes);
+				return dislikeComment(comment.id, comment.numberOfLikes, type);
 			}
 		}
 
 		return (
 			<View style={buttonStyle(this.props.comment)}>
-				<TouchableHighlight onPress={() => {likeOrDislikeComment(this.props.comment)}}>
+				<TouchableHighlight onPress={() => {likeOrDislikeComment(this.props.comment, this.props.commentType)}}>
 					<Text style={likeButtonStyles.text}>
 						LIKE
 					</Text>

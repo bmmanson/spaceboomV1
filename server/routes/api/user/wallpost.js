@@ -7,6 +7,8 @@ var WallPost = require('./../../../models/wall-post');
 var WallPostLike = require('./../../../models/wall-post-like');
 var Message = require('./../../../models/message');
 
+router.use('/like', require('./like'));
+
 router.get('/:id', function (req, res, next) {
 	var userId = req.params.id;
 

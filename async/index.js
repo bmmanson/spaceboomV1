@@ -196,6 +196,8 @@ const httpRequestToReportMessage = (messageId) => {
 	return fetch(url, {method: "POST"});
 }
 
+//likes for messages
+
 const httpRequestLikeMessage = (messageId) => {
 	let url = rootUrl + "api/message/like/" + messageId;
 	return fetch(url, {method: "POST"});
@@ -221,6 +223,18 @@ const httpRequestToGetUserLocationName = (latitude, longitude) => {
     return fetch(url, {method: "GET"});
 }
 
+//likes for wall posts
+const httpRequestLikeWallPost = (wallpostId) => {
+	let url = rootUrl + "api/user/wallpost/like/" + wallpostId;
+	return fetch(url, {method: "POST"});
+}
+
+const httpRequestDislikeWallPost = (wallpostId) => {
+	let url = rootUrl + "api/user/wallpost/like/" + wallpostId;
+	return fetch(url, {method: "DELETE"});
+}
+
+//send wall post
 const httpRequestToPostWallPost = (userId, text) => {
 	let url = rootUrl + "api/user/wallpost/" + userId;
 	let message = {
@@ -427,26 +441,48 @@ export const deleteCommentOnServer = (commentId, type) => {
 	}
 }
 
-export const postCommentAsLikedOnServer = (commentId, numberOfLikes) => {
-	return httpRequestToLikeComment(commentId)
-	.then((response) => response.json())
-	.then((data) => {
-		if (data) {
-			store.dispatch(markCommentAsLiked(commentId, numberOfLikes));
-			return "COMPLETE";
-		}
-	})
+export const postCommentAsLikedOnServer = (commentId, numberOfLikes, type) => {
+	if (type === "MESSAGE") {
+		return httpRequestToLikeComment(commentId)
+		.then((response) => response.json())
+		.then((data) => {
+			if (data) {
+				store.dispatch(markCommentAsLiked(commentId, numberOfLikes));
+				return "COMPLETE";
+			}
+		})
+	} else if (type === "USER") {
+		return httpRequestLikeWallPost(commentId)
+		.then((response) => response.json())
+		.then((data) => {
+			if (data) {
+				store.dispatch(markCommentAsLiked(commentId, numberOfLikes));
+				return "COMPLETE";
+			}
+		})
+	}
 }
 
-export const postCommentAsUnlikedOnServer = (commentId, numberOfLikes) => {
-	return httpRequestToUnlikeComment(commentId)
-	.then((response) => response.json())
-	.then((data) => {
-		if (data) {
-			store.dispatch(markCommentAsUnliked(commentId, numberOfLikes));
-			return "COMPLETE";
-		}
-	})
+export const postCommentAsUnlikedOnServer = (commentId, numberOfLikes, type) => {
+	if (type === "MESSAGE") {
+		return httpRequestToUnlikeComment(commentId)
+		.then((response) => response.json())
+		.then((data) => {
+			if (data) {
+				store.dispatch(markCommentAsUnliked(commentId, numberOfLikes));
+				return "COMPLETE";
+			}
+		})
+	} else if (type === "USER") {
+		return httpRequestDislikeWallPost(commentId)
+		.then((response) => response.json())
+		.then((data) => {
+			if (data) {
+				store.dispatch(markCommentAsUnliked(commentId, numberOfLikes));
+				return "COMPLETE";
+			}
+		})
+	}
 }
 
 export const addCommentOnServer = (messageId, text) => {
