@@ -28,7 +28,7 @@ module.exports = function (app, db) {
 	   				facebookId: profile.id,
 	   			 	email: profile.emails[0].value,
 	    			facebookName: profile.displayName,
-	    			authorPic: profile.photos[0].value,
+	    			authorPic: 'https://graph.facebook.com/v2.6/' + profile.id + '/picture?type=normal',
 	    		})
 	    		.then(function (newUser) {
 	    			console.log("CREATING NEW USER WITH ID:", newUser.id, "NAME:", newUser.name);
