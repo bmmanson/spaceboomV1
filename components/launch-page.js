@@ -14,8 +14,8 @@ getInitialState() {
     
     BackgroundGeolocation.configure({
 		desiredAccuracy: 0,
-		stationaryRadius: 25,
-		distanceFilter: 50,
+		stationaryRadius: 20,
+		distanceFilter: 25,
 		stopTimeout: 1,       
 		debug: false,
 		stopOnTerminate: false,
