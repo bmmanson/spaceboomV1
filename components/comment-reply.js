@@ -25,7 +25,7 @@ class CommentReply extends Component {
 
 		const sendCommentToServerAndUpdate = function (message, text) {
 			//if the response is a post on a user profile
-			if (message.email) {
+			if (message.facebookId) {
 				return sendWallPostToServer(message.id, text);	
 			//if the comment is a response to a message
 			} else {

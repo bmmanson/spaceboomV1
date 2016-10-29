@@ -79,13 +79,12 @@ router.post('/:userId', function (req, res, next) {
 		});
 	})
 	.then(function (wallpost) {
-		console.log("USER WITH ID:", req.user.id, "CREATED NEW WALLPOST ON ID:", profileId);
+		console.log("USER WITH ID:", req.user.id, "CREATED NEW WALL POST ON ID:", profileId);
 		res.json(wallpost);
 	}).catch(next);
 });
 
 router.put('/deletedByUser/:id', function (req, res, next) {
-	console.log("ROUTE HIT");
 	var wallPostId = req.params.id;
 	WallPost.findById(wallPostId)
 	.then(function (wallPost) {

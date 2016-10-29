@@ -37,7 +37,6 @@ router.post('/message/:id', function (req, res, next) {
 		})
 	})
 	.then(function (newComment) {
-		console.log("NEW COMMENT", newComment);
 		console.log("USER WITH ID", authorId, "CREATED NEW COMMENT");
 		res.json(newComment);
 	}).catch(next);

@@ -22,7 +22,7 @@ var data = {
 		},
 		{
 			facebookName: "Bex Rosenblatt",
-			authorPic: 'https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-1/p100x100/13700056_10207110079535082_4219144356567438027_n.jpg?oh=4861020e8cc6411904e4c478222f200d&oe=5811CD1A',
+			authorPic: 'https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/13700056_10207110079535082_4219144356567438027_n.jpg?oh=41b308c3853f42a9764d3ab6fa3988e6&oe=586AB142',
 			email: "Bex@email.com"
 		},
 		{
