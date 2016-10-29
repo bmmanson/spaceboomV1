@@ -82,4 +82,16 @@ router.post('/:userId', function (req, res, next) {
 	}).catch(next);
 });
 
+router.put('/deletedByUser/:id', function (req, res, next) {
+	console.log("ROUTE HIT");
+	var wallPostId = req.params.id;
+	WallPost.findById(wallPostId)
+	.then(function (wallPost) {
+		return wallPost.update({deletedByUser: true});
+	})
+	.then(function (wallPost) {
+		return res.json({comment: wallPost});
+	});
+});
+
 module.exports = router;

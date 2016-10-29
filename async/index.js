@@ -84,8 +84,13 @@ const httpRequestForCommentsForMessage = (messageId) => {
 	return fetch(url, {method: "GET"});
 }
 
-const httpRequestForDeleteComment = (commentId) => {
+const httpRequestForDeleteMessageComment = (commentId) => {
 	let url = rootUrl + "api/comment/deletedByUser/" + commentId;
+	return fetch(url, {method: "PUT"});
+}
+
+const httpRequestToDeleteWallComment = (commentId) => {
+	let url = rootUrl + "api/user/wallpost/deletedByUser/" + commentId;
 	return fetch(url, {method: "PUT"});
 }
 
@@ -400,15 +405,26 @@ export const postNewMessageToServer = (text, latitude, longitude) => {
 	.then((response) => response.json())
 }
 
-export const deleteCommentOnServer = (commentId) => {
-	return httpRequestForDeleteComment(commentId)
-	.then((response) => response.json())
-	.then((data) => {
-		if (data) {
-			store.dispatch(deleteComment(commentId));
-			return "COMPLETE";
-		}
-	})
+export const deleteCommentOnServer = (commentId, type) => {
+	if (type === "MESSAGE") {
+		return httpRequestForDeleteMessageComment(commentId)
+		.then((response) => response.json())
+		.then((data) => {
+			if (data) {
+				store.dispatch(deleteComment(commentId));
+				return "COMPLETE";
+			}
+		})
+	} else if (type === "USER") {
+		return httpRequestToDeleteWallComment(commentId)
+		.then((response) => response.json())
+		.then((data) => {
+			if (data) {
+				store.dispatch(deleteComment(commentId));
+				return "COMPLETE";
+			}
+		})
+	}
 }
 
 export const postCommentAsLikedOnServer = (commentId, numberOfLikes) => {

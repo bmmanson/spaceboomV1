@@ -18,7 +18,7 @@ class Comment extends Component {
 			}	
 		}
 
-		function deleteComment (comment) {
+		function deleteComment (comment, type) {
 			if (comment) {
 				AlertIOS.alert(
 					"Delete Comment", 
@@ -32,7 +32,7 @@ class Comment extends Component {
 						{
 						text: "Delete", 
 						onPress: function () {
-							deleteCommentOnServer(comment.id)
+							deleteCommentOnServer(comment.id, type)
 							.then( () => {
 								AlertIOS.alert("", "Comment deleted!");
 							})
@@ -43,10 +43,10 @@ class Comment extends Component {
 			}
 		}
 
-		function displayDeleteButton (comment, commentedOnId) {
+		function displayDeleteButton (comment, commentedOnId, type) {
 			if (comment.currentUser || commentedOnId === currentUserId) {
 				return (
-				<TouchableHighlight style={{height: 10, width: 55}} onPress={() => {deleteComment(comment)}}>
+				<TouchableHighlight style={{height: 10, width: 55}} onPress={() => {deleteComment(comment, type)}}>
 				<Text style={{color: '#949494', fontSize: 10}}>
 					- DELETE
 				</Text>
@@ -63,8 +63,8 @@ class Comment extends Component {
 			}}>
 				<View style={{flex: 2, flexDirection: 'column'}}>
 					<AuthorPic message={this.props.comment} 
-						style={{height: 50, 
-							width: 50, 
+						style={{height: 40, 
+							width: 40, 
 							borderRadius: 25, 
 							alignSelf: 'center'}} />
 				</View>
@@ -80,7 +80,7 @@ class Comment extends Component {
 							<Text style={{fontSize: 10, color: '#949494'}}>
 							{displayFormattedTime(this.props.comment)}
 							{" "}
-							{displayDeleteButton(this.props.comment, this.props.userIdOfCommentedOn)}
+							{displayDeleteButton(this.props.comment, this.props.userIdOfCommentedOn, this.props.commentType)}
 							</Text>
 						</View>
 					</View>

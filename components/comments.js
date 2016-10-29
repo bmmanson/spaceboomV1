@@ -8,11 +8,11 @@ class Comments extends Component {
 	render() {
 
 		let displayComments = function(comments, id, type) {
-			
+			console.log("TYPE OF COMMENT", type);
 			if (comments.length) {
 				return (
 					comments.map((comment, i) =>
-						(<Comment comment={comment} userIdOfCommentedOn={id} type={type} key={i} />)
+						(<Comment comment={comment} userIdOfCommentedOn={id} commentType={type} key={i} />)
 					)
 				)
 			} 
