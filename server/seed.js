@@ -21,7 +21,6 @@ var data = {
 			authorPic: 'https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-1/p100x100/13620351_10207342419702909_3505351797653340889_n.jpg?oh=a1710d119f06150bb51c6903ed7f6acf&oe=58244469', 
 			email: "ben@email.com",
 			username: "Benny",
-			id: 32
 		},
 		{
 			facebookName: "Bex Rosenblatt",

@@ -20,7 +20,7 @@ getInitialState() {
 		debug: false,
 		stopOnTerminate: false,
 		startOnBoot: true, 
-		url: rootUrl + '/discovery/new/',
+		url: rootUrl + 'api/discovery/new/',
 		batchSync: false,       
 		autoSync: true,         
 		maxDaysToPersist: 1,

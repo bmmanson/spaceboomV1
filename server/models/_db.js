@@ -1,6 +1,6 @@
 var Sequelize = require('sequelize');
 
-var URL = process.env.DATABASE_URL;
+var URL = process.env.DATABASE_URL || 'postgres://localhost:5432/spaceboomv1';
 
 var db = new Sequelize(URL, {
   logging: false

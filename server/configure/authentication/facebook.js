@@ -6,6 +6,7 @@ var env = require('./../../env');
 module.exports = function (app, db) {
 
 	var User = db.model('user');
+	var UserProfile = db.model('userprofile');
 
 	var credentials = {
 		clientID: process.env.FACEBOOK_APP_ID,
@@ -28,7 +29,14 @@ module.exports = function (app, db) {
 	   			 	email: profile.emails[0].value,
 	    			facebookName: profile.displayName,
 	    			authorPic: profile.photos[0].value,
-	    		})		    		
+	    		})
+	    		.then(function (newUser) {
+	    			console.log("CREATING NEW USER WITH ID:", newUser.id, "NAME:", newUser.name);
+	    			return UserProfile.create({
+	    				userId: newUser.id,
+	    				profilePic: 'https://graph.facebook.com/v2.6/' + profile.id + '/picture?height=600&width=600',
+	    			})
+	    		})
 			} else {
 				return user;
 			}
