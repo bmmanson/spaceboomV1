@@ -31,11 +31,6 @@ var data = {
 			email: "Gus@email.com"
 		},
 		{
-			facebookName: "Hillary Clinton",
-			authorPic: "https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-1/p100x100/13619932_1181179818605212_8343925786278448182_n.jpg?oh=39d9a4098413961d80c42dfa1621f35f&oe=587E8FB5",
-			email: "hrc@privateserver.com"
-		},
-		{
 			facebookName: "Adam Casey",
 			authorPic: "https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-1/p100x100/1907977_10100354101824849_1005827950_n.jpg?oh=eff7927f629bfc5538f6b3656c356538&oe=586A83E4",
 			email: "adam@email.com"
@@ -49,7 +44,7 @@ var data = {
 	userprofile: [
 		{
 			userId: 1,
-			aboutMe: "I know this sounds insane, but this is an insane world. We have to come for them, or they will come for us. It's that simple.",
+			aboutMe: "I'm not a real person. Ben made me up!",
 			profilePic: 'https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/11057221_10153411465937025_7220678579653297083_n.jpg?oh=3060bf764613f89d66ebfb27beed8ce9&oe=58729891',
 			timesViewed: 32
 		},
@@ -61,7 +56,7 @@ var data = {
 		},
 		{
 			userId: 3,
-			aboutMe: "People may say I couldn't sing, but no one can ever say I didn't sing.",
+			aboutMe: "People may say I couldn't sing, but no one can ever say I didn't sing (Not the real Bex, but based on her).",
 			profilePic: 'https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-9/13700056_10207110079535082_4219144356567438027_n.jpg?oh=41b308c3853f42a9764d3ab6fa3988e6&oe=586AB142',
 			timesViewed: 12,
 
@@ -74,18 +69,12 @@ var data = {
 		},
 		{
 			userId: 5,
-			aboutMe: "I'm running for president.",
-			profilePic: "https://scontent-lga3-1.xx.fbcdn.net/t31.0-8/13584898_1181179818605212_8343925786278448182_o.jpg",
-			timesViewed: 0
-		},
-		{
-			userId: 6,
-			aboutMe: "Canadian.",
+			aboutMe: "Canadian. (Not the real Adam)",
 			profilePic: "https://scontent-lga3-1.xx.fbcdn.net/t31.0-8/10003821_10100354101824849_1005827950_o.jpg"
 		},
 		{
-			userId: 7,
-			aboutMe: "a future lawyer",
+			userId: 6,
+			aboutMe: "A future lawyer. (Not the real Alex)",
 			profilePic: 'https://scontent-lga3-1.xx.fbcdn.net/v/t1.0-1/c1.0.958.958/14390822_803369240264_7365045778749445001_n.jpg?oh=6ed3e8c45ba6f5fa4d9baef382d161b0&oe=587E9AAE'
 		}
 
@@ -147,7 +136,7 @@ var data = {
 		},
 
 		{
-			text: "I did it! Seven messages. But this one's short.",
+			text: "I did it! Seven messages! But this one's short.",
 			authorId: 3,
 			locationName: "Upper East Side",
 			latitude: 40.761658441958225, 
@@ -157,7 +146,7 @@ var data = {
 
 		{
 			text: "Ok, only one more. Now I can see what it looks like when you scroll. Now we can ALL see what it looks like!",
-			authorId: 7,
+			authorId: 6,
 			locationName: "Hell's Kitchen",
 			latitude: 40.767281648876688, 
 			longitude: -73.98880004882812,
@@ -166,7 +155,7 @@ var data = {
 
 		{
 			text: "Yes!",
-			authorId: 5,
+			authorId: 1,
 			locationName: "Hell's Kitchen",
 			latitude: 40.767281648876688, 
 			longitude: -73.98880004882812,
@@ -174,17 +163,8 @@ var data = {
 		},
 
 		{
-			text: "I'm getting so tired of coming up with these new messages, but here we go. I'm writing another message. Woo. Message.",
-			authorId: 6,
-			locationName: "East Village",
-			latitude: 40.73126701752318, 
-			longitude: -73.98654699325562,
-			city: "New York, NY"
-		},
-
-		{
 			text: "I'm listening to MSNBC's coverage of the 2016 DNC right now and I'll tell you what. It's annoying! It's very annoying! The speeches, those were good! But these pundits, I tell ya... I might have to turn off the tube!",
-			authorId: 2,
+			authorId: 6,
 			locationName: "East Village",
 			latitude: 40.73126701752318,
 			longitude: -73.98654699325562,
@@ -193,7 +173,7 @@ var data = {
 
 		{
 			text: "Okay, actually, I like Chris Hayes. But no one else is bringing their A-game right now.",
-			authorId: 2,
+			authorId: 6,
 			locationName: "East Village",
 			latitude: 40.73126701752318, 
 			longitude: -73.98654699325562,
@@ -202,7 +182,7 @@ var data = {
 
 		{
 			text: "I still like Chris Hayes, because still no one else is bringing their A-game.",
-			authorId: 2,
+			authorId: 6,
 			locationName: "East Village",
 			latitude: 40.73126701752318, 
 			longitude: -73.98654699325562,
@@ -211,7 +191,7 @@ var data = {
 
 		{
 			text: "Greetings from California! I'm the first message that's been sent using Postman! Ooo, so exciting!",
-			authorId: 1,
+			authorId: 3,
 			locationName: "Apple",
 			latitude: 37.33760111,
 			longitude: -122.02320004,
@@ -220,7 +200,7 @@ var data = {
 
 		{
 			text: "Is this some stupid busy highway? It seems the simulator always stops at this intersection and waits there for forever!! Did the simulated human being bump into someone they know? Or are they being arrested?! Being questioned for a bit on a late night talk show?!",
-			authorId: 1,
+			authorId: 3,
 			locationName: "Apple",
 			latitude: 37.33759308,
 			longitude: -122.0404889,
@@ -229,189 +209,76 @@ var data = {
 
 		{
 			text: '"Do you even know what farm to table means?!" Here at Whole Foods!',
-			authorId: 2,
+			authorId: 3,
 			locationName: "Upper East Side",
 			latitude: 40.759318,
 			longitude: -73.966216,
 			city: "New York, NY"
 		},
 
+		{
+			text: "Nothing to see here, bud! Just a regular ol' house.",
+			authorId: 3,
+			locationName: "Rehavia",
+			latitude: 31.768246532038013,
+			longitude: 35.20976543426514,
+			city: "Jerusalem, Israel"
+		},
 
-	],
-	discovery: 
-	[
 		{
-		messageId: 1,
-		discovererId: 2
+			text: "Hey... what's this place even called, anyway? Does it have a name?",
+			latitude: 31.776611,
+			longitude: 35.235075,
+			authorId: 3,
+			locationName: "Old City",
+			city: "Jerusalem, Israel"
 		},
+
 		{
-		messageId: 1,
-		discovererId: 4
+			text: "Tel Aviv! City that Never Sleeps! Or is the the City of Lights?! The Twin City? Wait, how could there be ONE TWin City?",
+			latitude: 32.072375,
+			longitude: 34.779748,
+			authorId: 3,
+			locationName: "Kikar HaBima",
+			city: "Tel Aviv-Yafo, Israel"
 		},
+
 		{
-		messageId: 2,
-		discovererId: 2
+			text: "Wow! Facebook has offices here? Startup nation? or 'Mature Multinational nation'!",
+			latitude: 32.062978,
+			longitude: 34.771729,
+			authorId: 3,
+			locationName: "Sderot Rothschild",
+			city: "Tel Aviv-Yafo, Israel"
 		},
+
 		{
-		messageId: 1,
-		discovererId: 5
+			text: "No man's land, huh? Can I have it? lol jk",
+			latitude: 31.824628,
+			longitude: 35.010338,
+			authorId: 3,
+			locationName: "No Man's Land",
+			city: "Israel/Palestine"
 		},
+
 		{
-		messageId: 7,
-		discovererId: 5
+			text: "My *favorite* gas station",
+			latitude: 31.783816,
+			longitude: 35.208419,
+			authorId: 3,
+			locationName: "Zichron Yosef",
+			city: "Jerusalem, IL"
 		},
+
 		{
-		messageId: 2,
-		discovererId: 5
-		},
-		{
-		messageId: 3,
-		discovererId: 2
-		},
-		{
-		messageId: 4,
-		discovererId: 2
-		},
-		{
-		messageId: 5,
-		discovererId: 2
-		},
-		{
-		messageId: 6,
-		discovererId: 2
-		},
-		{
-		messageId: 7,
-		discovererId: 2
-		},
-		{
-		messageId: 8,
-		discovererId: 2
-		},
-		{
-		messageId: 8,
-		discovererId: 3
-		},
-		{
-		messageId: 9,
-		discovererId: 2
-		},
-		{
-		messageId: 9,
-		discovererId: 3
-		},
-		{
-		messageId: 15,
-		discovererId: 2
-		}
-		,
-		{
-		messageId: 15,
-		discovererId: 3
-		},
-		{
-		messageId: 15,
-		discovererId: 4
-		},
-		{
-		messageId: 11,
-		discovererId: 3
-		},
-		{
-		messageId: 11,
-		discovererId: 5
+			text: "BEACH!",
+			latitude: 32.078757,
+			longitude: 34.766407,
+			authorId: 3,
+			locationName: "Shlomo Lahat Promenade",
+			city: "Tel Aviv-Yafo, Israel"
 		}
 	],
-	comment: 
-	[
-		{
-		text: "I completely agree.",
-		authorId: 3,
-		messageId: 15,
-		numberOfLikes: 3
-		},
-		{
-		text: "I completely disagree, but I could be persuaded.",
-		authorId: 2,
-		messageId: 15
-		},
-		{
-		text: "Ok, since this is the internet, let's have a civil discussion about it.",
-		authorId: 3,
-		messageId: 15
-		},
-		{
-		text: "Ok.",
-		authorId: 2,
-		messageId: 15
-		},
-		{
-		text: "You both are right.",
-		authorId: 4,
-		messageId: 15
-		},
-		{
-		text: "I was written in Postico originally, but now I am reborn again and again thanks to a seed file.",
-		authorId: 1,
-		messageId: 14
-		},
-		{
-		text: "I'm commenting on my own post because I can. Also I can be a long comment, because I've never seen a long comment before. Aren't you curious how long I can be?",
-		authorId: 1,
-		messageId: 14
-		},
-		{
-		text: "I'm Joe and I'm commenting on this.",
-		authorId: 1,
-		messageId: 13
-		}
-	],
-	commentlike:
-	[
-		{
-			userId: 1,
-			commentId: 1
-		},
-		{
-			userId: 3,
-			commentId: 1
-		},
-		{
-			userId: 4,
-			commentId: 1
-		},
-	],
-	messagelike: 
-	[
-		{
-			userId: 1,
-			messageId: 15
-		},
-		{
-			userId: 3,
-			messageId: 15
-		},
-		{
-			userId: 4,
-			messageId: 15
-		},
-		{
-			userId: 1,
-			messageId: 14
-		},
-		{
-			userId: 1,
-			messageId: 13
-		},
-		{
-			userId: 3,
-			messageId: 13
-		},
-		{
-			userId: 4,
-			messageId: 13
-		},
-	]
 }
 
 db.sync({force: true})
