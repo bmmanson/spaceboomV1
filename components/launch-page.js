@@ -14,8 +14,8 @@ getInitialState() {
     
     BackgroundGeolocation.configure({
 		desiredAccuracy: 0,
-		stationaryRadius: 20,
-		distanceFilter: 25,
+		stationaryRadius: 25,
+		distanceFilter: 35,
 		stopTimeout: 1,       
 		debug: false,
 		stopOnTerminate: false,
@@ -24,20 +24,25 @@ getInitialState() {
 		batchSync: false,       
 		autoSync: true,         
 		maxDaysToPersist: 1,
-		useSignificantChangesOnly: true,   
+		seSignificantChangesOnly: true,   
 		headers: {              
 			'Content-Type': 'application/json'
 		},
 		method: "POST"
 		}, 
 		function(state) {
-			//console.log("- BackgroundGeolocation is configured and ready: ", state.enabled);
+			console.log("- BackgroundGeolocation is configured and ready: ", state.enabled);
 		  
 			if (!state.enabled) {
 		    	BackgroundGeolocation.start(function() {
-		    		//console.log("- Start success");
+		    		console.log("- Start success");
 		    	});
 			}
+		});
+
+		// This handler fires whenever bgGeo receives a location update.
+		BackgroundGeolocation.on('location', function(location) {
+			console.log('- [js]location: ', JSON.stringify(location));
 		});
 
 		// This handler fires whenever bgGeo receives an error
@@ -47,11 +52,21 @@ getInitialState() {
 			alert(type + " Error: " + code);
 		});
 
+		// This handler fires when movement states changes (stationary->moving; moving->stationary)
+		BackgroundGeolocation.on('motionchange', function (location) {
+			console.log('- [js]motionchanged: ', JSON.stringify(location));
+		});
+
+		// This event fires when a change in motion activity is detected
+		BackgroundGeolocation.on('activitychange', function (activityName) {
+			console.log('- Current motion activity: ', activityName);  // eg: 'on_foot', 'still', 'in_vehicle'
+		});
+
 		BackgroundGeolocation.on('http', function (response) {
-			//console.log("THE JSON BEFORE PARSE", response);
+			console.log("THE JSON BEFORE PARSE", response);
 			let res = JSON.parse(response.responseText);
-			//console.log('- Returned http post request response:', res);
-			//console.log('APP STATE', AppState.currentState);
+			console.log('- Returned http post request response:', res);
+			console.log('APP STATE', AppState.currentState);
 			if (res.id !== null) {
 				addDiscoveredMessageToCollection(res);
 				if (AppState.currentState === 'background') {
