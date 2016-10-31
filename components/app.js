@@ -20,14 +20,14 @@ class App extends Component {
 		return (
 		<Router>
 			<Scene key="root">
-				<Scene key="login" initial={true} component={LoginView} title="Spaceboom" hideNavBar={true} />
-				<Scene key="initial" component={LaunchPage} onBack={() => {}} title="Spaceboom" hideBackImage={true} hideNavBar={false} rightTitle={"Settings"} onRight={() => {Actions.Settings()}} />
-				<Scene key="newUsername" component={NewUsernameView} hideNavBar={true} />
-				<Scene key="newMessage" component={NewMessageView} title="Post a Message" />
-				<Scene key="messageMaster" component={MessageMasterView} title="Messages" sceneStyle={{paddingTop: Navigator.NavigationBar.Styles.General.TotalNavHeight}} />
-				<Scene key="messageDetail" component={MessageDetailView} title="A Message" sceneStyle={{paddingTop: Navigator.NavigationBar.Styles.General.TotalNavHeight}} />
-				<Scene key="UserProfile" component={UserProfileView} title="User Profile" onBack={(test)=>{userProfileBackButton(test);}} sceneStyle={{paddingTop: Navigator.NavigationBar.Styles.General.TotalNavHeight}} />
-				<Scene key="Settings" component={SettingsView} title="User Settings" sceneStyle={{paddingTop: Navigator.NavigationBar.Styles.General.TotalNavHeight}} />
+				<Scene key="login" initial={true} component={LoginView} title="Spaceboom" hideNavBar={true} panHandlers={null} />
+				<Scene key="initial" component={LaunchPage} onBack={() => {}} title="Spaceboom" hideBackImage={true} hideNavBar={false} rightTitle={"Settings"} onRight={() => {Actions.Settings()}} panHandlers={null} />
+				<Scene key="newUsername" component={NewUsernameView} hideNavBar={true} panHandlers={null} />
+				<Scene key="newMessage" component={NewMessageView} title="Post a Message" panHandlers={null} />
+				<Scene key="messageMaster" component={MessageMasterView} title="Messages" sceneStyle={{paddingTop: Navigator.NavigationBar.Styles.General.TotalNavHeight}} panHandlers={null} />
+				<Scene key="messageDetail" component={MessageDetailView} title="A Message" sceneStyle={{paddingTop: Navigator.NavigationBar.Styles.General.TotalNavHeight}} panHandlers={null} />
+				<Scene key="UserProfile" component={UserProfileView} title="User Profile" onBack={(test)=>{userProfileBackButton(test);}} sceneStyle={{paddingTop: Navigator.NavigationBar.Styles.General.TotalNavHeight}} panHandlers={null} />
+				<Scene key="Settings" component={SettingsView} title="User Settings" sceneStyle={{paddingTop: Navigator.NavigationBar.Styles.General.TotalNavHeight}} panHandlers={null} />
 			</Scene>
 		</Router>
 		);
