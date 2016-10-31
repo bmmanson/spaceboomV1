@@ -8,4 +8,3 @@ module.exports = {
     "FACEBOOK_SECRET": process.env.FACEBOOK_SECRET,
     "GOOGLE_API_KEY": process.env.GOOGLE_API_KEY,
 };
-

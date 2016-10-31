@@ -219,7 +219,7 @@ const httpRequestTimesDiscoveredForMessage = (messageId) => {
 }
 
 const httpRequestToGetUserLocationName = (latitude, longitude) => {
-	let url = `${rootUrl}/message/locationName?latitude=${latitude}&longitude=${longitude}`;
+	let url = `${rootUrl}api/message/locationName?latitude=${latitude}&longitude=${longitude}`;
     return fetch(url, {method: "GET"});
 }
 
