@@ -5,7 +5,7 @@ var productionConfigPath = path.join(__dirname, './production.js');
 if (process.env.NODE_ENV === 'production') {
     module.exports = require(productionConfigPath);
 } else {
-	// console.log("DEV RUNS");
+	//console.log("DEVELOPER ENVIRONMENT RUNS");
 	// process.env.DATABASE_URL = 'postgres://localhost:5432/spaceboomv1';
 	// process.env.FACEBOOK_APP_ID = require('./../../fb-credentials').ID;
 	// process.env.FACEBOOK_SECRET = require('./../../fb-credentials').SECRET;

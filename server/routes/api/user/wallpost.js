@@ -5,17 +5,19 @@ var User = require('./../../../models/user');
 var UserProfile = require('./../../../models/user-profile');
 var WallPost = require('./../../../models/wall-post');
 var WallPostLike = require('./../../../models/wall-post-like');
-var Message = require('./../../../models/message');
 
 router.use('/like', require('./like'));
 
 router.get('/:id', function (req, res, next) {
-	var userId = req.params.id;
+	var userId = req.user.id;
+	var profileId = req.params.id;
 
 	WallPost.findAll({
+		//get all wall posts which are comments for 
+		//the profile with id of profileId
 		where: 
 		{
-			userId: userId,
+			userId: profileId,
 			deletedByUser: {
 				$not: true
 			}
@@ -36,11 +38,13 @@ router.get('/:id', function (req, res, next) {
 					}
 				})
 				.then(function (result) {
+					//if a like for this message exists, return true
 					if (result !== null) {
 						return {
 							isLikedByCurrentUser: true,
 							data: wallpost
 						}
+					// else, false
 					} else {
 						return {
 							isLikedByCurrentUser: false,
