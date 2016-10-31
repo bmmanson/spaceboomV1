@@ -69,15 +69,12 @@ getInitialState() {
 			console.log('APP STATE', AppState.currentState);
 			if (res.id !== null) {
 				addDiscoveredMessageToCollection(res);
-				if (AppState.currentState === 'background') {
-					PushNotificationIOS.presentLocalNotification(
-						{
-							alertBody: "You discovered a new message! It was written by " + res.message.author.name + ". Check it out!"
-						}
-					);
-				} else if (AppState.currentState === 'active') {
-					AlertIOS.alert("", "You discovered a new message! It was written by " + res.message.author.name + ".");
-				}
+				PushNotificationIOS.presentLocalNotification(
+					{
+						alertBody: "You discovered a new message! It was written by " + res.message.author.name + ". Check it out!"
+					}
+				);
+				AlertIOS.alert("", "You discovered a new message! It was written by " + res.message.author.name + ".");
 			}
 		})
 

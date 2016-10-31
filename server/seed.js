@@ -223,7 +223,7 @@ var data = {
 		},
 
 		{
-			text: "Nothing to see here, bud! Just a regular ol' house.",
+			text: "Nothing to see here, bud! Just a regular ol' house. No one notable lives here. No one!",
 			authorId: 3,
 			locationName: "Rehavia",
 			latitude: 31.768246532038013,
@@ -283,7 +283,25 @@ var data = {
 			authorId: 3,
 			locationName: "Shlomo Lahat Promenade",
 			city: "Tel Aviv-Yafo, Israel"
-		}
+		},
+
+		{
+			text: "Amazing grocery store. Just amazing! Have you TRIED their bulgarit?",
+			authorId: 3,
+			locationName: "Katamon",
+			latitude: 31.766228,
+			longitude: 35.208746,
+			city: "Jerusalem, Israel"
+		},
+
+		{
+			text: "Hummus with fried onions. Do it. Do it now.",
+			authorId: 3,
+			locationName: "Rehavia",
+			latitude: 31.769916,
+			longitude: 35.2116,
+			city: "Jerusalem, Israel"
+		},
 	],
 }
 
