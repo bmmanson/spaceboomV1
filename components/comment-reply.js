@@ -18,7 +18,7 @@ class CommentReply extends Component {
 			inputHeight: 40,
 			charactersRemaining: maxCharacters,
 			uploadingComment: false
-		 };
+		};
 	}
 
 	render () {
@@ -108,33 +108,33 @@ class CommentReply extends Component {
 			borderStyle: 'solid'}}>
 				<View style={{flexDirection: "row"}}>
 					<TextInput 
-					value={this.state.text}
-					onChange={(event) => {
-						if (maxCharacters - event.nativeEvent.text.length > -1) {
-							this.setState({
-								text: event.nativeEvent.text,
-								inputHeight: event.nativeEvent.contentSize.height,
-								charactersRemaining: maxCharacters - event.nativeEvent.text.length
-							});
-						}
-					}}
-					placeholder={"Tell 'em what you think!"}
-					placeholderTextColor={'#575757'}
-					multiline={true}
-					style={{margin: 6, 
-						borderRadius: 5, 
-						borderStyle: 'solid', 
-						borderColor: '#B0B0B0', 
-						borderWidth: 1,
-						minHeight: Math.max(40, this.state.inputHeight),
-						backgroundColor: '#F2F2F2',
-						fontSize: 14,
-						color: '#636363',
-						fontWeight: 'bold',
-						flex: 1,
-						padding: 2,
-						paddingLeft: 6,
-						paddingRight: 6}} />
+						value={this.state.text}
+						onChange={(event) => {
+							if (maxCharacters - event.nativeEvent.text.length > -1) {
+								this.setState({
+									text: event.nativeEvent.text,
+									inputHeight: event.nativeEvent.contentSize.height,
+									charactersRemaining: maxCharacters - event.nativeEvent.text.length
+								});
+							}
+						}}
+						placeholder={"Tell 'em what you think!"}
+						placeholderTextColor={'#575757'}
+						multiline={true}
+						style={{margin: 6, 
+							borderRadius: 5, 
+							borderStyle: 'solid', 
+							borderColor: '#B0B0B0', 
+							borderWidth: 1,
+							minHeight: Math.max(40, this.state.inputHeight),
+							backgroundColor: '#F2F2F2',
+							fontSize: 14,
+							color: '#636363',
+							fontWeight: 'bold',
+							flex: 1,
+							padding: 2,
+							paddingLeft: 6,
+							paddingRight: 6}} />
 					<View style={{width: 50,
 							marginTop: 6,
 							marginRight: 6}}>

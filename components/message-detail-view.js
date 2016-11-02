@@ -39,6 +39,7 @@ class MessageDetail extends Component {
 				});
 			}
 		});
+
 	}
 
 	componentWillUnmount () {
@@ -112,7 +113,7 @@ const sortedComments = (comments) => {
 
 const mapStateToProps = (state) => {
 	return {
-		comments: sortedComments(state.comments),
+		comments: sortedComments(state.comments)
 	};
 }
 
