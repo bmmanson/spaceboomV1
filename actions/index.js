@@ -111,7 +111,7 @@ export const addSentMessage = function (id, body, author, authorPic, authorId, l
 	};
 }
 
-export const addDiscoveredMessage = function (id, body, author, authorPic, authorId, latitude, longitude, locationName, city, unread, timesDiscovered, numberOfLikes, isLikedByCurrentUser, createdAt) {
+export const addDiscoveredMessage = function (id, body, author, authorPic, authorId, latitude, longitude, locationName, city, unread, timesDiscovered, numberOfLikes, isLikedByCurrentUser, createdAt, discoveryId) {
 	return {
 		type: 'ADD_DISCOVERED_MESSAGE', 
 		id,
@@ -127,7 +127,8 @@ export const addDiscoveredMessage = function (id, body, author, authorPic, autho
 		timesDiscovered,
 		numberOfLikes,
 		isLikedByCurrentUser,
-		createdAt
+		createdAt,
+		discoveryId
 	};
 }
 

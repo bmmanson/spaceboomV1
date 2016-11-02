@@ -43,7 +43,11 @@ const getVisibleMessages = (messages, filter) => {
 	filter === "SENT" ? currentFilter = true : currentFilter = false; 
 	let messageList = messages.filter(m => m.currentUser === currentFilter);
 	console.log("MESSAGE LIST", messageList);
-	return messageList.sort((a, b) => b.id - a.id);
+	if (!currentFilter) {
+		return messageList.sort((a, b) => b.discoveryId - a.discoveryId);
+	} else {
+		return messageList.sort((a, b) => b.id - a.id);
+	} 
 }
 
 const mapStateToProps = (state) => {

@@ -96,7 +96,8 @@ export const messages = (state = [], action) => {
           reported: false,
           timesDiscovered: action.timesDiscovered,
           numberOfLikes: action.numberOfLikes,
-          createdAt: action.createdAt
+          createdAt: action.createdAt,
+          discoveryId: action.discoveryId
         }
       ]
     case 'DELETE_ALL_MESSAGES':

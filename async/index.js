@@ -608,6 +608,7 @@ export const getAllUserDataOnLogin = (id) => {
 			let numberOfLikes = m.numberOfLikes;
 			let unread = data.discoveredMessages[message].unread;
 			let createdAt = m.createdAt;
+			let discoveryId = data.discoveredMessages[message].id;
 			store.dispatch(addDiscoveredMessage(
 				id,
 				text,
@@ -622,7 +623,8 @@ export const getAllUserDataOnLogin = (id) => {
 				timesDiscovered,
 				numberOfLikes,
 				isLikedByCurrentUser,
-				createdAt
+				createdAt,
+				discoveryId
 			));
 		}
 		currentUserId = data.userInfo.id;
@@ -678,7 +680,8 @@ export const addDiscoveredMessageToCollection = (res) => {
 			createdAt: res.message.createdAt,
 			timesDiscovered: res.message.timesDiscovered,
 			isLikedMyCurrentUser: false,
-			numberOfLikes: res.message.numberOfLikes
+			numberOfLikes: res.message.numberOfLikes,
+			discoveryId: res.id
 		}
 		//console.log("NEW MESSAGE:", m);
 		store.dispatch(addDiscoveredMessage(
@@ -695,7 +698,8 @@ export const addDiscoveredMessageToCollection = (res) => {
 			m.timesDiscovered,
 			m.numberOfLikes,
 			m.isLikedByCurrentUser,
-			m.createdAt
+			m.createdAt,
+			m.discoveryId
 		))
 	} else {
 		//console.log("Response from server received. No new message");
