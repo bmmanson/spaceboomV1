@@ -26,6 +26,8 @@
 		880306A11D660DC600E7182C /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 880306A01D660DC600E7182C /* FBSDKShareKit.framework */; };
 		8822D3221DB3BC9600204433 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8822D3181DB3BC5900204433 /* libRCTPushNotification.a */; };
 		8858807B1DC3C00F00DF1484 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8858807A1DC3C00F00DF1484 /* FBSDKCoreKit.framework */; };
+		887C41A91DCA3E890004FB49 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 887C41A81DCA3E890004FB49 /* main.jsbundle */; };
+		887C41D31DCA3F3D0004FB49 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = 887C41D21DCA3F3D0004FB49 /* assets */; };
 		889C5A601DBE006A00BCC89D /* launch-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 889C5A5F1DBE006A00BCC89D /* launch-logo.png */; };
 		88A1F3DF1DB282FE00D6B404 /* libRNBackgroundGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 88A1F3DC1DB282CB00D6B404 /* libRNBackgroundGeolocation.a */; };
 		88A1F3E11DB2834300D6B404 /* TSLocationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88A1F3E01DB2834300D6B404 /* TSLocationManager.framework */; };
@@ -144,7 +146,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTActionSheet.xcodeproj; path = "../node_modules/react-native/Libraries/ActionSheetIOS/RCTActionSheet.xcodeproj"; sourceTree = "<group>"; };
 		00C302B51ABCB90400DB3ED1 /* RCTGeolocation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTGeolocation.xcodeproj; path = "../node_modules/react-native/Libraries/Geolocation/RCTGeolocation.xcodeproj"; sourceTree = "<group>"; };
 		00C302BB1ABCB91800DB3ED1 /* RCTImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTImage.xcodeproj; path = "../node_modules/react-native/Libraries/Image/RCTImage.xcodeproj"; sourceTree = "<group>"; };
@@ -170,6 +171,8 @@
 		8822D30D1DB3BC5900204433 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
 		8858807A1DC3C00F00DF1484 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = ../../../../../FacebookSDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		885A889FD89A4470BA55222F /* RCTFBSDK.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTFBSDK.xcodeproj; path = "../node_modules/react-native-fbsdk/ios/RCTFBSDK.xcodeproj"; sourceTree = "<group>"; };
+		887C41A81DCA3E890004FB49 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.jsbundle; path = SpaceboomV1/main.jsbundle; sourceTree = "<group>"; };
+		887C41D21DCA3F3D0004FB49 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = assets; sourceTree = "<group>"; };
 		889C5A5F1DBE006A00BCC89D /* launch-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "launch-logo.png"; path = "../img/launch-logo.png"; sourceTree = "<group>"; };
 		88A1F3CB1DB282CB00D6B404 /* RNBackgroundGeolocation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNBackgroundGeolocation.xcodeproj; path = "../node_modules/react-native-background-geolocation/ios/RNBackgroundGeolocation.xcodeproj"; sourceTree = "<group>"; };
 		88A1F3E01DB2834300D6B404 /* TSLocationManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TSLocationManager.framework; path = "../node_modules/react-native-background-geolocation/ios/RNBackgroundGeolocation/TSLocationManager.framework"; sourceTree = "<group>"; };
@@ -294,8 +297,9 @@
 		13B07FAE1A68108700A75B9A /* SpaceboomV1 */ = {
 			isa = PBXGroup;
 			children = (
+				887C41D21DCA3F3D0004FB49 /* assets */,
+				887C41A81DCA3E890004FB49 /* main.jsbundle */,
 				88B73EA31D68DD4A00E39147 /* SpaceboomV1.entitlements */,
-				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -654,6 +658,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				887C41A91DCA3E890004FB49 /* main.jsbundle in Resources */,
+				887C41D31DCA3F3D0004FB49 /* assets in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				889C5A601DBE006A00BCC89D /* launch-logo.png in Resources */,
 			);

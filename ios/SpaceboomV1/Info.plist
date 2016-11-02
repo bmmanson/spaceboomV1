@@ -55,17 +55,7 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSExceptionDomains</key>
-		<dict>
-			<key>localhost</key>
-			<dict>
-				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
-			</dict>
-		</dict>
-	</dict>
+	
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Spaceboom requires background location tracking.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
