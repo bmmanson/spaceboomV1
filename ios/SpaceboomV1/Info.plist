@@ -55,7 +55,6 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Spaceboom requires background location tracking.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

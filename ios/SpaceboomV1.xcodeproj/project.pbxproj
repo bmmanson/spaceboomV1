@@ -461,6 +461,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = F28SA8MMLW;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -759,7 +760,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CODE_SIGN_ENTITLEMENTS = SpaceboomV1/SpaceboomV1.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = F28SA8MMLW;
 				FRAMEWORK_SEARCH_PATHS = (
 					/Users/benjaminmanson/Documents/FacebookSDK,
 					"$(PROJECT_DIR)/../node_modules/react-native-background-geolocation/**",
@@ -783,6 +787,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = SpaceboomV1;
+				PROVISIONING_PROFILE = "284dd5a4-29b7-4d9b-ae72-fabe3a970b50";
+				PROVISIONING_PROFILE_SPECIFIER = "SpaceboomV1 Dev Profile";
 			};
 			name = Debug;
 		};
@@ -793,6 +799,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
 				CODE_SIGN_ENTITLEMENTS = SpaceboomV1/SpaceboomV1.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = F28SA8MMLW;
 				FRAMEWORK_SEARCH_PATHS = (
 					/Users/benjaminmanson/Documents/FacebookSDK,
 					"$(PROJECT_DIR)/../node_modules/react-native-background-geolocation/**",
@@ -815,6 +824,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = SpaceboomV1;
+				PROVISIONING_PROFILE = "b2964832-1900-487c-a447-398400cebedb";
+				PROVISIONING_PROFILE_SPECIFIER = "Spaceboom V1 App Store Profile";
 			};
 			name = Release;
 		};
@@ -893,7 +904,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;

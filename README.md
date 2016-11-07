@@ -19,9 +19,9 @@ I have been building Spaceboom by myself. It's built using React Native and Redu
 
 ![User Profile](/img/screenshots/user-view.png?raw=true “User Profile”)
 
-## Progress
+## Features
 
-Spaceboom is nearly complete, and I'm now preparing to submit it to the App Store. Here is a list of features that I’ve finished:
+Version 1.0 of the app is complete. I have submitted it to the Apple App Store and it is currently under review. Here is a list of features that will be included in the first rollout of the app:
 
 - All views complete (the login view, the root view, newUsername, newMessage, messageMasterView, MessageDetailView, userProfile, settings).
 - All routes and SQL models are complete.
@@ -38,10 +38,19 @@ Spaceboom is nearly complete, and I'm now preparing to submit it to the App Stor
 - Notifications work.
 - The final remaining known bugs have been fixed.
 - Assets (icons and launch screen) have been added to xCode.
-- An instance of the server has been deployed using Heroku, and I have successfully run the app on my phone.
+- An instance of the server has been deployed using Heroku, and I have successfully run the app on several devices.
 
-### Features to be implemented
-- Submit to the App Store for review
+### Features that I might implement in future versions:
+
+- When a user comments on a message, the app moves to the top of the collection/message list, and it is marked as unread, for all other users who've discovered it.
+- Users can submit photos with or instead of text.
+- The map on the opening screen of the app is scrollable and zoomable. Pins on the map indicate where undiscovered messages are, but their content cannot be seen until the user has gone to the location of the message.
+- Users can chat with each other.
+- Users can select a profile picture from all of their Facebook photos.
+- Be able to add discovered users to a list ("following" users).
+
+
+
 
 
 
