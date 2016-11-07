@@ -20,7 +20,7 @@ export let currentUserId;
 //1 - see below one route which does not use rootUrl const (around line 60/70)
 //2 - component in launch-page.js uses rootUrl const
 
-export const rootUrl = "http://localhost:1337/"; //'https://dry-savannah-68177.herokuapp.com/'; //
+export const rootUrl = 'https://dry-savannah-68177.herokuapp.com/'; //"http://localhost:1337/";
 
 const httpRequestToPostNewMessage = (text, latitude, longitude) => {
 	let message = {
