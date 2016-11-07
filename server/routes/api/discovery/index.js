@@ -3,6 +3,7 @@ var Message = require('./../../../models/message');
 var Discovery = require('./../../../models/discovery');
 var Comment = require('./../../../models/comment');
 var User = require('./../../../models/user');
+var Promise = require('bluebird');
 var _db = require('./../../../models/_db');
 
 var router = express.Router();
@@ -19,7 +20,7 @@ router.post('/new/', function (req, res, next) {
 
 	console.log("Request received from user with id:", userId, "User Latitude:", rawLatitude, "User Longitude:", rawLongitude);
 
-	Message.findOne({where:
+	Message.findAll({where:
 		{
 			latitude: {
 				$gte: discoveredLatitude - .0005,
@@ -33,51 +34,64 @@ router.post('/new/', function (req, res, next) {
 			}, deletedByUser: false
 		}
 	})
-	.then(function(message){
-		if (message === null) {
-			console.log("No matching message for user with id:", userId);
+	.then(function(messages){
+		if (messages === null) {
+			//if no message is discovered
+			console.log("No message at that location");
+			return null;
+		} else {
+			var promisesForEachDiscoveredMessage = [];
+			messages.forEach(function (message) {
+				promisesForEachDiscoveredMessage.push(
+					//search for a discovery with the id of the message discovered
+					//purpose is to make sure user hasn't already discovered the message
+					Discovery.findOne({where:
+						{
+							messageId: message.id
+						}
+					})
+					.then(function(discovery){
+						if (discovery !== null) {
+							//user has already discovered this message
+							console.log(`There was a matching message for user with id: ${userId}, but the user had already discovered it.`);
+							return null;
+						} else {
+							console.log("New discovery created for request from user with id:", userId);
+							return Discovery.create({
+								discovererId: userId,
+								messageId: message.id
+							})
+							.then(function(newDiscovery){
+								return Discovery.findOne({where:
+									{
+										id: newDiscovery.id
+									},
+									include: 
+									{
+										model: Message,
+										as: "message",
+										include: 
+										[	
+											{
+											model: User,
+											as: "author"
+											},
+										]
+									}	
+								})
+							})
+						}
+					})
+				)
+			});
+			return Promise.all(promisesForEachDiscoveredMessage);
+		}
+	})
+	.then(function(discoveredMessages){
+		if (discoveredMessages === null) {
 			return res.json({id: null});
 		} else {
-			Discovery.findOne({where:
-				{
-					messageId: message.id
-				}
-			})
-			.then(function(discovery){
-				if (discovery !== null) {
-					console.log(`There was a matching message for user with id: ${userId}, but the user had already discovered it.`);
-					return res.json({id: null});
-				} else {
-					Discovery.create({
-						discovererId: userId,
-						messageId: message.id
-					})
-					.then(function(newDiscovery){
-						return Discovery.findOne({where:
-							{
-								id: newDiscovery.id
-							},
-							include: 
-							{
-								model: Message,
-								as: "message",
-								include: 
-								[	
-									{
-									model: User,
-									as: "author"
-									},
-								]
-							}	
-						})
-					})
-					.then(function(sentDiscovery){
-					console.log("New discovery created for request from user with id:", userId);
-					res.json(sentDiscovery);
-					})
-
-				}
-			})
+			return res.json(discoveredMessages);
 		}
 	}).catch(next);
 });
@@ -171,7 +185,9 @@ router.put('/hide/:messageId', function (req, res, next) {
 router.put('/report/:id', function (req, res, next) {
 	var reportedMessageId = req.params.id;
 	Discovery.findOne({where: 
-		{id: reportedMessageId}
+		{
+			id: reportedMessageId
+		}
 	})
 	.then(function (message) {
 		return message.update({reported: true})

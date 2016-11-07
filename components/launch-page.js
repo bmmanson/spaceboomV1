@@ -8,6 +8,8 @@ import { styles } from './../styles/main';
 import BackgroundGeolocation from 'react-native-background-geolocation';
 import { addDiscoveredMessageToCollection, rootUrl } from './../async';
 
+import { addDiscoveredMessagesToCollectionIfValid } from './../utils/add-discovered-messages';
+
 export var LaunchPage = React.createClass({
 
 getInitialState() {
@@ -68,13 +70,7 @@ getInitialState() {
 			console.log('- Returned http post request response:', res);
 			console.log('APP STATE', AppState.currentState);
 			if (res.id !== null) {
-				addDiscoveredMessageToCollection(res);
-				PushNotificationIOS.presentLocalNotification(
-					{
-						alertBody: "You discovered a new message! It was written by " + res.message.author.name + ". Check it out!"
-					}
-				);
-				AlertIOS.alert("", "You discovered a new message! It was written by " + res.message.author.name + ".");
+				addDiscoveredMessagesToCollectionIfValid(res);
 			}
 		})
 
