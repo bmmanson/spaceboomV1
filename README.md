@@ -2,7 +2,7 @@
 
 ## App Available on the App Store
 
-Download it here: https://itunes.apple.com/us/app/spaceboom-location-based-messaging/id1170833678?ls=1&mt=8
+Download the app: https://itunes.apple.com/us/app/spaceboom-location-based-messaging/id1170833678?ls=1&mt=8
 
 ## Introduction
 Spaceboom is a location-based messaging app for iOS. The idea for the app is similar to geo-caching: it allows you to leave messages at specific locations for others to find. If another user goes to a location where were when you posted a message, the user will receive a notification telling them they’ve discovered a new message. It will then be added to their collection of messages, and they will be able to read it. The app has been described as “Pokémon Go for people”.
@@ -25,10 +25,8 @@ I have been building Spaceboom by myself. It's built using React Native and Redu
 
 ## Features
 
-Version 1.0 of the app is complete. I have submitted it to the Apple App Store and it is currently available on the App Store [(download)](https://itunes.apple.com/us/app/spaceboom-location-based-messaging/id1170833678?ls=1&mt=8). Here is a list of features included in the current rollout of the app:
+Version 1.0 of Spaceboom is complete. I have submitted it to the Apple App Store, and it is currently available for [download](https://itunes.apple.com/us/app/spaceboom-location-based-messaging/id1170833678?ls=1&mt=8). Here are some features included in the current rollout:
 
-- All views complete (the login view, the root view, newUsername, newMessage, messageMasterView, MessageDetailView, userProfile, settings).
-- All routes and SQL models are complete.
 - Users can “like” messages, comment on messages and profiles, and "like" comments on messages and profiles.
 - Users can delete messages they've created so they're no longer discoverable. Users can also remove discovered messages from their collection without making them undiscoverable.
 - Users can flag messages as inappropriate.
