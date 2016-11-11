@@ -1,5 +1,9 @@
 #Spaceboom
 
+## App Available on the App Store
+
+Download it here: https://itunes.apple.com/us/app/spaceboom-location-based-messaging/id1170833678?ls=1&mt=8
+
 ## Introduction
 Spaceboom is a location-based messaging app for iOS. The idea for the app is similar to geo-caching: it allows you to leave messages at specific locations for others to find. If another user goes to a location where were when you posted a message, the user will receive a notification telling them they’ve discovered a new message. It will then be added to their collection of messages, and they will be able to read it. The app has been described as “Pokémon Go for people”.
 
@@ -21,7 +25,7 @@ I have been building Spaceboom by myself. It's built using React Native and Redu
 
 ## Features
 
-Version 1.0 of the app is complete. I have submitted it to the Apple App Store and it is currently under review. Here is a list of features that will be included in the first rollout of the app:
+Version 1.0 of the app is complete. I have submitted it to the Apple App Store and it is currently available on the App Store [(download)](https://itunes.apple.com/us/app/spaceboom-location-based-messaging/id1170833678?ls=1&mt=8). Here is a list of features included in the current rollout of the app:
 
 - All views complete (the login view, the root view, newUsername, newMessage, messageMasterView, MessageDetailView, userProfile, settings).
 - All routes and SQL models are complete.
@@ -40,7 +44,7 @@ Version 1.0 of the app is complete. I have submitted it to the Apple App Store a
 - Assets (icons and launch screen) have been added to xCode.
 - An instance of the server has been deployed using Heroku, and I have successfully run the app on several devices.
 
-### Features that I might implement in future versions:
+### Features for future versions of the app
 
 - When a user comments on a message, the app moves to the top of the collection/message list, and it is marked as unread, for all other users who've discovered it.
 - Users can submit photos with or instead of text.
