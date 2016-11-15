@@ -18,7 +18,7 @@ router.post('/:id', function (req, res, next) {
 		return sendStatus(401);
 	}
 
-	//should make sure that the like doesn't already exist?
+	//should make sure that the like doesn't already exist
 	CommentLike.create({
 		userId: userId,
 		commentId: commentId

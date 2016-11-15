@@ -30,16 +30,13 @@ function findLocationName (body) {
 
 function findCity (body) {
 
-	if (body.results[0] === undefined || body.results[0].formatted_address === undefined) {
-		return "Somewhere on Planet Earth";
-	}
-
-	if (body.results[3].formatted_address === undefined) {
-		return "Somewhere on Planet Earth";
-	} else {
+	if (body.results[3] && body.results[3].formatted_address) {
 		return body.results[3].formatted_address;
+	} else if (body.results[2] && body.results[2].formatted_address) {
+		return body.results[2].formatted_address;
+	} else {
+		return "";
 	}
-	
 }
 
 module.exports = {
